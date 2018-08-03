@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/d3.js"></script>
+    <script src="lib/binner.js"></script>
+    <script src="lib/delaunator.js"></script>
+    <script src="lib/concaveHull.js"></script>
+    <script src="lib/disjoint-set.js"></script>
+    <script src="lib/kruskal-mst.js"></script>
+    <style>
+        .hexagon {
+            stroke: #000;
+            stroke-width: 0.5px;
+        }
+        .triangles {
+            fill: none;
+            stroke: black;
+            stroke-width: 0.5px;
+        }
+
+        .links {
+            stroke: #000;
+        }
+
+        .sites {
+            fill: #000;
+            stroke: #fff;
+        }
+
+        .triangles .primary {
+            stroke: #fff;
+        }
+
+        .sites :first-child {
+            fill: #fff;
+        }
+    </style>
+</head>
+<body>
+<svg width="960" height="500"></svg>
+<script>
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var randomX = d3.randomNormal(width / 2, 80),
+        randomY = d3.randomNormal(height / 2, 80),
+        points = d3.range(2000).map(function () {
+            return [randomX(), randomY()];
+        });
+
+    var binner = new Binner().radius(20).extent([[0, 0], [width, height]]);
+    var bins = binner.hexbin(points);
+    var sites = bins.map(d => [d.x, d.y]);
+    var delaunay = Delaunator.from(sites);
+    var triangles = delaunay.triangles;
+    let coordinates = [];
+    for (let i = 0; i < triangles.length; i += 3) {
+        coordinates.push([
+            sites[triangles[i]],
+            sites[triangles[i + 1]],
+            sites[triangles[i + 2]]
+        ]);
+    }
+    let allVertices = [];
+    for (let i = 0; i < triangles.length; i++) {
+        allVertices.push(sites[triangles[i]]);
+    }
+
+    //Main container
+    let g = svg.append("g").attr("transform", `translate(${0}, ${0})`);
+    g.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+
+    //Binning
+    var color = d3.scaleSequential(d3.interpolateLab("white", "steelblue"))
+        .domain([0, 20]);
+    g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll("path")
+        .data(binner.hexbin(points))
+        .enter().append("path")
+        .attr("d", binner.hexagon())
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .attr("fill", function(d) { return color(d.length); });
+
+    //Triangulation
+    var triangle = g.append("g")
+        .attr("class", "triangles")
+        .selectAll("path")
+        .data(coordinates)
+        .enter()
+        .append("path")
+        .call(redrawTriangle);
+    function redrawTriangle(triangle) {
+        triangle.attr("d", d => "M" + d.join("L") + "Z");
+    }
+
+    //Convex hull
+    //Calculating the hull (convex hull)
+    let hull = delaunay.hull;
+    let hulldata = [];
+    let e = hull;
+    do {
+        hulldata.push([e.x, e.y]);
+        e = e.next;
+    } while (e != hull);
+
+
+    var hullbounds = g.append("g").selectAll("path")
+        .data([hulldata])
+        .enter()
+        .append("path")
+        .attr("d", d=>"M" + d.join("L") + "Z")
+        .attr("stroke-width", 3)
+        .attr("stroke", "blue")
+        .attr("fill", "none");
+
+    //Conave hull
+    let concaveHull = new ConcaveHull().distance(100);//Fixed 100 here but should be a way to find hull with smallest distance but vertice is left out.
+    var mesh = concaveHull.concaveHull(coordinates);
+
+    g.append("g")
+        .selectAll("path")
+        .data(mesh)
+        .enter()
+        .append("path")
+        .attr("d", d=>"M" + d.join("L") + "Z")
+        .attr("stroke-width", 1)
+        .attr("stroke", "red")
+        .attr("fill", "none");
+
+    //Test minimum spanning tree
+    let graph = createGraph(coordinates);
+    let mstree = mst(graph);
+    g.append("g").selectAll("path")
+        .data(mstree.links)
+        .enter()
+        .append("line")
+        .attr("x1", d=>d.source[0])
+        .attr("y1", d=>d.source[1])
+        .attr("x2", d=>d.target[0])
+        .attr("y2", d=>d.target[1])
+        .attr("stroke", "purple")
+        .attr("stroke-width", 2);
+
+    //Calculating areas.
+    let convexArea = d3.polygonArea(hulldata);
+    console.log(convexArea);
+    let allPointsArea = d3.polygonArea(d3.polygonHull(allVertices));
+    console.log(allPointsArea);
+
+
+</script>
+</body>
+</html>
