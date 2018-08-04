@@ -1,0 +1,16 @@
+{
+  "name": "scagnostics",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^0.63.5"
+  },
+  "main": "build/js/scagnostics.min.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:iDataVisualizationLab/Scagnostics2018.git"
+  },
+  "author": "Tommy Dang, Vung Pham",
+  "license": "ISC",
+  "description": "This is a library to calculate scagnostics"
+}

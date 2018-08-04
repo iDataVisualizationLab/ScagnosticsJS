@@ -1,5 +1,5 @@
 //from: https://github.com/mapbox/delaunator/blob/master/index.js
-class Delaunator {
+export class Delaunator {
 
     static from(points, getX, getY) {
         if (!getX) getX = defaultGetX;

@@ -1,5 +1,5 @@
 //Inspired from https://github.com/d3/d3-hexbin/blob/master/src/hexbin.js
-function Binner(){
+export function Binner(){
     var thirdPi = Math.PI/3,
     angles = [0, thirdPi, 2*thirdPi, 3*thirdPi, 4*thirdPi, 5*thirdPi];
 

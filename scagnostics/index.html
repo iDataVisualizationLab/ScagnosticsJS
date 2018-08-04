@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../lib/d3.js"></script>
+    <script src="build/js/scagnostics.min.js"></script>
+    <title>Title</title>
+    <style>
+        .hexagon {
+            stroke: #000;
+            stroke-width: 0.5px;
+        }
+
+        .triangles {
+            fill: none;
+            stroke: black;
+            stroke-width: 0.5px;
+        }
+
+        .links {
+            stroke: #000;
+        }
+
+        .sites {
+            fill: #000;
+            stroke: #fff;
+        }
+
+        .triangles .primary {
+            stroke: #fff;
+        }
+
+        .sites :first-child {
+            fill: #fff;
+        }
+
+        path{
+            opacity: 0.8
+        }
+    </style>
+</head>
+<body>
+<svg width="960" height="500"></svg>
+<script>
+    let svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    let randomX = d3.randomNormal(width / 2, 50),
+        randomY = d3.randomNormal(height / 2, 50),
+        points = d3.range(2000).map(function () {
+            return [randomX(), randomY()];
+        });
+
+    let scag = scagnostics(points, width, height, 20);
+
+    //Main container
+    let g = svg.append("g").attr("transform", `translate(${0}, ${0})`);
+    g.append("clipPath")
+        .attr("id", "clip")
+        .append("rect")
+        .attr("width", width)
+        .attr("height", height);
+    //Binning
+    var color = d3.scaleSequential(d3.interpolateLab("white", "steelblue"))
+        .domain([0, 50]);
+    g.append("g")
+        .attr("class", "hexagon")
+        .attr("clip-path", "url(#clip)")
+        .selectAll("path")
+        .data(scag.bins)
+        .enter().append("path")
+        .attr("d", scag.binner.hexagon())
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .attr("fill", function(d) { return color(d.length); });
+
+    //Triangulating
+    g.append("g")
+        .attr("class", "triangles")
+        .selectAll("path")
+        .data(scag.triangleCoordinates)
+        .enter()
+        .append("path")
+        .call(redrawTriangle);
+    function redrawTriangle(triangle) {
+        triangle.attr("d", d => "M" + d.join("L") + "Z");
+        triangle.attr("opacity", 0.5);
+    }
+
+    //Minimum spanning tree.
+    g.append("g").selectAll("path")
+        .data(scag.mst.links)
+        .enter()
+        .append("line")
+        .attr("x1", d=>d.source[0])
+        .attr("y1", d=>d.source[1])
+        .attr("x2", d=>d.target[0])
+        .attr("y2", d=>d.target[1])
+        .attr("stroke", "purple")
+        .attr("stroke-width", 2);
+    //Convex hull
+    g.append("g").selectAll("path")
+        .data([scag.convexHull])
+        .enter()
+        .append("path")
+        .attr("d", d=>"M" + d.join("L") + "Z")
+        .attr("stroke-width", 3)
+        .attr("stroke", "blue")
+        .attr("fill", "none");
+
+    //Concave hull
+    g.append("g")
+        .selectAll("path")
+        .data(scag.concaveHull)
+        .enter()
+        .append("path")
+        .attr("d", d=>"M" + d.join("L") + "Z")
+        .attr("stroke-width", 2)
+        .attr("stroke", "green")
+        .attr("fill", "none");
+</script>
+</body>
+</html>
