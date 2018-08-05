@@ -1,5 +1,5 @@
 import statistics from "./statistics";
-
+import _ from 'underscore';
 export class Outlying{
     constructor(tree){
         this.tree = tree;
@@ -39,6 +39,6 @@ export class Outlying{
         // this.links().forEach(outlyingLink =>{
         //     this.tree.links.splice(this.tree.links.indexOf(outlyingLink), 1);
         // });
-
+        console.log(_.filter);
     }
 }
