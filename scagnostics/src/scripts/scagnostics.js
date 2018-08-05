@@ -3,7 +3,7 @@ import {Delaunator} from "./modules/delaunator";
 import {createGraph} from "./modules/kruskal-mst";
 import {mst} from "./modules/kruskal-mst";
 import {ConcaveHull} from "./modules/concaveHull";
-import statistics from "./modules/statistics";
+import {Outlying} from "./modules/outlying";
 
 (function(window){
     /**
@@ -66,6 +66,15 @@ import statistics from "./modules/statistics";
             //TODO: Need to change the fixed value as 100 here by an algorithm to calculate it
         let concaveHullResult = new ConcaveHull(100).concaveHull(triangleCoordinates);
         outputValue("concaveHull", concaveHullResult);
+
+        /******This section is about the outlying score tree and outlying score results******/
+        let outlying = new Outlying(mstree);
+        let outlyingScore = outlying.score();
+        let outlyingLinks = outlying.links();
+        outlying.removeOutlying();
+        outputValue("outlyingScore", outlyingScore);
+        outputValue("outlyingLinks", outlyingLinks);
+
 
         return window.scagnostics;
         function outputValue(name, value){

@@ -8,7 +8,7 @@
     <style>
         .hexagon {
             stroke: #000;
-            stroke-width: 0.5px;
+            strokels-width: 0.5px;
         }
 
         .triangles {
@@ -41,6 +41,7 @@
 </head>
 <body>
 <svg width="960" height="500"></svg>
+<div id="msg"></div>
 <script>
     let svg = d3.select("svg"),
         width = +svg.attr("width"),
@@ -118,6 +119,26 @@
         .attr("stroke-width", 2)
         .attr("stroke", "green")
         .attr("fill", "none");
+
+
+    //Scagnostics
+    let msg = "Scagnostics";
+    //Minimum spanning tree.
+    g.append("g").selectAll("path")
+        .data(scag.outlyingLinks)
+        .enter()
+        .append("line")
+        .attr("x1", d=>d.source[0])
+        .attr("y1", d=>d.source[1])
+        .attr("x2", d=>d.target[0])
+        .attr("y2", d=>d.target[1])
+        .attr("stroke", "red")
+        .attr("stroke-width", 2);
+    //Outlying
+    msg +="<br/>Outlying: " + scag.outlyingScore;
+    //Set the scagnostics message
+    d3.select("#msg").html(msg);
 </script>
+
 </body>
 </html>

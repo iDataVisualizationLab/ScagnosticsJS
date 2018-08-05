@@ -64,7 +64,9 @@ export function createGraph (triangles) {
     function distance(a, b) {
         var dx = a[0] - b[0],
             dy = a[1] - b[1];
-        return Math.sqrt((dx * dx) + (dy * dy));
+        //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
+        //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
+        return Math.round(Math.sqrt((dx * dx) + (dy * dy))*Math.pow(10, 10))/Math.pow(10, 10);
     }
 
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.

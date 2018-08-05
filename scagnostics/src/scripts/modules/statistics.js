@@ -20,8 +20,6 @@ const statistics = {
         return q3;
     },
     normalBound: function (values) {
-        if (values.length < 4)
-            return [d3.min(values), d3.max(values)];
         let q1 = this.firstQuartile(values),
             q3 = this.thirdQuartile(values),
             iqr = q3 - q1,
@@ -29,10 +27,6 @@ const statistics = {
             minValue = q1 - iqr * 1.5;
 
         return [minValue, maxValue];
-    },
-    pearsonCorcoef: function (u, v) {
-        let us = standardise(u), vs = standardise(v), n = u.length;
-        return (1 / (n - 1)) * d3.sum(us.mult(vs));
     }
 }
 export default statistics;
