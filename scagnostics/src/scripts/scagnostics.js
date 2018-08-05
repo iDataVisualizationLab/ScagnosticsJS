@@ -4,6 +4,7 @@ import {createGraph} from "./modules/kruskal-mst";
 import {mst} from "./modules/kruskal-mst";
 import {ConcaveHull} from "./modules/concaveHull";
 import {Outlying} from "./modules/outlying";
+import {Skewed} from "./modules/skewed";
 
 (function(window){
     /**
@@ -71,10 +72,14 @@ import {Outlying} from "./modules/outlying";
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
         let outlyingLinks = outlying.links();
-        outlying.removeOutlying();
+        let noOutlyingTree = outlying.removeOutlying();
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingLinks", outlyingLinks);
+        outputValue("noOutlyingTree", noOutlyingTree);
 
+        /******This section is about the skewed score tree and skewed score results******/
+        let skewed = new Skewed(noOutlyingTree);
+        outputValue("skewedScore", skewed.score());
 
         return window.scagnostics;
         function outputValue(name, value){

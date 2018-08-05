@@ -1,44 +1,58 @@
-import statistics from "./statistics";
 import _ from 'underscore';
-export class Outlying{
-    constructor(tree){
-        this.tree = tree;
+import {quantile} from 'simple-statistics';
+
+export class Outlying {
+    constructor(tree) {
+        //Clone the tree to avoid modifying it
+        this.tree = JSON.parse(JSON.stringify(tree));
     }
 
     /**
      * Returns outlying score
      * @returns {number}
      */
-    score(){
-        let tree = this.tree;
-        let totalLengths = 0;
-        let totalOutlyingLengths = 0;
-        let upperBound = statistics.normalBound(tree.links.map(l=>l.weight))[1];
-        tree.links.forEach(l=>{
+    score() {
+        let tree = this.tree,
+            totalLengths = 0,
+            totalOutlyingLengths = 0,
+            allLengths = tree.links.map(l => l.weight),
+            q1 = quantile(allLengths, 0.25),
+            q3 = quantile(allLengths, 0.75),
+            iqr = q3 - q1;
+        let upperBound = q3+1.5*iqr;
+        tree.links.forEach(l => {
             totalLengths += l.weight;
-            if(l.weight>upperBound){
+            if (l.weight > upperBound) {
                 totalOutlyingLengths += l.weight;
                 l.isOutlying = true;
             }
         });
-        return totalOutlyingLengths/totalLengths;
+        return totalOutlyingLengths / totalLengths;
     }
 
     /**
      * Returns outlying links
      */
-    links(){
-        return this.tree.links.filter(l=>l.isOutlying);
+    links() {
+        console.log(quantile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1));
+        return this.tree.links.filter(l => l.isOutlying);
     }
 
     /**
      * Remove outlying links and nodes
      */
-    removeOutlying(){
-        // //Remove the links.
-        // this.links().forEach(outlyingLink =>{
-        //     this.tree.links.splice(this.tree.links.indexOf(outlyingLink), 1);
-        // });
-        console.log(_.filter);
+    removeOutlying() {
+        var newTree = JSON.parse(JSON.stringify(this.tree));
+        //Remove outlying links
+        newTree.links = newTree.links.filter(l => !l.isOutlying);
+        //Remove outlying nodes (nodes are not in any none-outlying links
+        let allNodesWithLinks = [];
+        newTree.links.forEach(l => {
+            allNodesWithLinks.push(l.source);
+            allNodesWithLinks.push(l.target);
+        });
+        allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
+        newTree.nodes = allNodesWithLinks;
+        return newTree;
     }
 }

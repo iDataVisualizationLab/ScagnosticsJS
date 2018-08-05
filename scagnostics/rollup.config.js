@@ -8,7 +8,7 @@ export default {
     plugins: [
         resolve(),
         commonJS({
-            include: 'node_modules/**'
+            include: ['node_modules/**']
         })
     ]
 };
