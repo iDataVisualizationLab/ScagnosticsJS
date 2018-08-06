@@ -7,6 +7,7 @@ import {Outlying} from "./modules/outlying";
 import {Skewed} from "./modules/skewed";
 import {Sparse} from "./modules/sparse";
 import {Clumpy} from "./modules/clumpy";
+import {Striated} from "./modules/striated";
 
 (function(window){
     /**
@@ -90,6 +91,16 @@ import {Clumpy} from "./modules/clumpy";
         /******This section is about the clumpy score and clumpy score results******/
         let clumpy = new Clumpy(noOutlyingTree);
         outputValue("clumpyScore", clumpy.score());
+
+        /******This section is about the striated score and striated score results******/
+        let striated = new Striated(noOutlyingTree);
+        let v2Corners = striated.getAllV2Corners();
+        let obtuseV2Corners = striated.getAllObtuseV2Corners();
+        outputValue("striatedScore", striated.score());
+        outputValue("v2Corners", v2Corners);
+        outputValue("obtuseV2Corners", obtuseV2Corners);
+
+
 
         return window.scagnostics;
         function outputValue(name, value){
