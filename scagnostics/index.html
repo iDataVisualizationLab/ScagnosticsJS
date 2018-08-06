@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <script src="../lib/d3.js"></script>
     <script src="build/js/scagnostics.min.js"></script>
-    <title>Title</title>
+    <title>Scagnostics</title>
     <style>
         .hexagon {
             stroke: #000;
@@ -149,6 +149,10 @@
     msg +="<br/>Outlying: " + scag.outlyingScore;
     //Skewed
     msg +="<br/>Skewed: " + scag.skewedScore;
+    //Sparse
+    msg +="<br/>Sparse: " + scag.sparseScore;
+    //Clumpy
+    msg +="<br/>Clumpy: " + scag.clumpyScore;
     //Set the scagnostics message
     d3.select("#msg").html(msg);
 </script>

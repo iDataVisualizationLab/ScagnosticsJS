@@ -5,6 +5,8 @@ import {mst} from "./modules/kruskal-mst";
 import {ConcaveHull} from "./modules/concaveHull";
 import {Outlying} from "./modules/outlying";
 import {Skewed} from "./modules/skewed";
+import {Sparse} from "./modules/sparse";
+import {Clumpy} from "./modules/clumpy";
 
 (function(window){
     /**
@@ -51,7 +53,7 @@ import {Skewed} from "./modules/skewed";
         outputValue("graph", graph);
         outputValue("mst", mstree);
 
-        /******This section is about the convex hull tree and convex hull results******/
+        /******This section is about the convex hull and convex hull results******/
         //Calculating the hull (convex hull)
         let hull = delaunay.hull;
         let hulldata = [];
@@ -63,12 +65,12 @@ import {Skewed} from "./modules/skewed";
         //Assigning the output values
         outputValue("convexHull", hulldata);
 
-        /******This section is about the concave hull tree and concave hull results******/
+        /******This section is about the concave hull and concave hull results******/
             //TODO: Need to change the fixed value as 100 here by an algorithm to calculate it
         let concaveHullResult = new ConcaveHull(100).concaveHull(triangleCoordinates);
         outputValue("concaveHull", concaveHullResult);
 
-        /******This section is about the outlying score tree and outlying score results******/
+        /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
         let outlyingLinks = outlying.links();
@@ -77,9 +79,17 @@ import {Skewed} from "./modules/skewed";
         outputValue("outlyingLinks", outlyingLinks);
         outputValue("noOutlyingTree", noOutlyingTree);
 
-        /******This section is about the skewed score tree and skewed score results******/
+        /******This section is about the skewed score and skewed score results******/
         let skewed = new Skewed(noOutlyingTree);
         outputValue("skewedScore", skewed.score());
+
+        /******This section is about the sparse score and sparse score results******/
+        let sparse = new Sparse(noOutlyingTree);
+        outputValue("sparseScore", sparse.score());
+
+        /******This section is about the clumpy score and clumpy score results******/
+        let clumpy = new Clumpy(noOutlyingTree);
+        outputValue("clumpyScore", clumpy.score());
 
         return window.scagnostics;
         function outputValue(name, value){

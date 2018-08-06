@@ -7,9 +7,6 @@
  * @param triangles is inform of set of triangles as the result from delaunay triangulations
  */
 export function createGraph (triangles) {
-    function makeNode(id) {
-        return {"id": id};
-    }
 
     function makeLink(sourceId, targetId, weight) {
         return {"source": sourceId, "target": targetId, "weight": weight};
@@ -27,24 +24,6 @@ export function createGraph (triangles) {
             }
         }
     });
-
-    function equalIds(id1, id2) {
-        if (id1[0] === id2[0] && id1[1] === id2[1]) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function idExists(nodes, id) {
-        for (let i = 0; i < nodes.length; i++) {
-            let node = nodes[i];
-            if (equalIds(node.id, id)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     //Creating links
     triangles.forEach(t => {
@@ -83,7 +62,27 @@ export function createGraph (triangles) {
     return graph;
 }
 
+export function equalIds(id1, id2) {
+    if (id1[0] === id2[0] && id1[1] === id2[1]) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
+export function idExists(nodes, id) {
+
+    for (let i = 0; i < nodes.length; i++) {
+        let node = nodes[i];
+        if (equalIds(node.id, id)) {
+            return true;
+        }
+    }
+    return false;
+}
+export function makeNode(id) {
+    return {"id": id};
+}
 /**
  * create the mst
  * @param graph: in form of nodes and links

@@ -34,7 +34,6 @@ export class Outlying {
      * Returns outlying links
      */
     links() {
-        console.log(quantile([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1));
         return this.tree.links.filter(l => l.isOutlying);
     }
 
