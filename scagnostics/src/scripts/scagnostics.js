@@ -10,6 +10,7 @@ import {Striated} from "./modules/striated";
 import {Convex} from "./modules/convex";
 import {Skinny} from "./modules/skinny";
 import {Stringy} from "./modules/stringy";
+import {Monotonic} from "./modules/monotonic";
 
 (function(window){
     /**
@@ -104,6 +105,11 @@ import {Stringy} from "./modules/stringy";
         let stringyScore = stringy.score();
         outputValue("v1s", v1s);
         outputValue("stringyScore", stringyScore);
+
+        /******This section is about the monotonic score and monotonic score results******/
+        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
+        let monotonicScore = monotonic.score();
+        outputValue("monotonicScore", monotonicScore);
 
         return window.scagnostics;
         function outputValue(name, value){
