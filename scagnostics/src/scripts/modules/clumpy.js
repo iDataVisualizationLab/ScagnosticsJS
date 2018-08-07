@@ -1,5 +1,5 @@
 import {max} from 'simple-statistics';
-import {equalIds} from "./kruskal-mst";
+import {equalPoints} from "./kruskal-mst";
 
 export class Clumpy {
     constructor(tree) {
@@ -22,36 +22,35 @@ export class Clumpy {
             let targetConnectedLinks = [];
             greaterLinks.forEach(link=>{
                 //Either source or target in the sourceConnectedNodes then it is connected
-                if(idExists(sourceConnectedNodes, link.source)){
+                if(pointExists(sourceConnectedNodes, link.source)){
                     sourceConnectedNodes.push(link.target);
                     sourceConnectedLinks.push(link);
-                }else if(idExists(sourceConnectedNodes, link.target)){
+                }else if(pointExists(sourceConnectedNodes, link.target)){
                     sourceConnectedNodes.push(link.source);
                     sourceConnectedLinks.push(link);
                 }
 
-                if(idExists(targetConnectedNodes, link.source)){
+                if(pointExists(targetConnectedNodes, link.source)){
                     targetConnectedNodes.push(link.target);
                     targetConnectedLinks.push(link);
-                }else if(idExists(targetConnectedNodes, link.target)){
+                }else if(pointExists(targetConnectedNodes, link.target)){
                     targetConnectedNodes.push(link.source);
                     targetConnectedLinks.push(link);
                 }
             });
             return sourceConnectedLinks.length < targetConnectedLinks.length?sourceConnectedLinks:targetConnectedLinks;
-            function idExists(ids, id){
-                for (let i = 0; i < ids.length; i++) {
-                    let id1 = ids[i];
-                    if (equalIds(id1, id)) {
-
-                        return true;
-                    }
-                }
-                return false;
-            }
         }
         function maxLength(runtGraph){
             return max(runtGraph.map(l=>l.weight));
         }
     }
+}
+export function pointExists(points, point){
+    for (let i = 0; i < points.length; i++) {
+        let point1 = points[i];
+        if (equalPoints(point1, point)) {
+            return true;
+        }
+    }
+    return false;
 }

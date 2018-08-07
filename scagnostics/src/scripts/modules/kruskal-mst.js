@@ -51,8 +51,8 @@ export function createGraph (triangles) {
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.
     function linkExists(links, link) {
         for (let i = 0; i < links.length; i++) {
-            if ((equalIds(link.source, links[i].source) && equalIds(link.target, links[i].target)) ||
-                (equalIds(link.source, links[i].target) && equalIds(link.target, links[i].source))) {
+            if ((equalPoints(link.source, links[i].source) && equalPoints(link.target, links[i].target)) ||
+                (equalPoints(link.source, links[i].target) && equalPoints(link.target, links[i].source))) {
                 return true;
             }
         }
@@ -70,7 +70,7 @@ export function distance(a, b) {
     return Math.round(Math.sqrt((dx * dx) + (dy * dy))*Math.pow(10, 10))/Math.pow(10, 10);
 }
 
-export function equalIds(id1, id2) {
+export function equalPoints(id1, id2) {
     if (id1[0] === id2[0] && id1[1] === id2[1]) {
         return true;
     } else {
@@ -82,7 +82,7 @@ export function idExists(nodes, id) {
 
     for (let i = 0; i < nodes.length; i++) {
         let node = nodes[i];
-        if (equalIds(node.id, id)) {
+        if (equalPoints(node.id, id)) {
             return true;
         }
     }

@@ -1,5 +1,8 @@
 import _ from 'underscore';
 import {quantile} from 'simple-statistics';
+import {pointExists} from "./clumpy";
+import {makeNode} from "./kruskal-mst";
+
 
 export class Outlying {
     constructor(tree) {
@@ -38,7 +41,7 @@ export class Outlying {
     }
 
     /**
-     * Remove outlying links and nodes
+     * Remove outlying links and nodes and return a new tree without outlying points/edges
      */
     removeOutlying() {
         var newTree = JSON.parse(JSON.stringify(this.tree));
@@ -51,7 +54,27 @@ export class Outlying {
             allNodesWithLinks.push(l.target);
         });
         allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
-        newTree.nodes = allNodesWithLinks;
+        newTree.nodes = allNodesWithLinks.map(n=>{
+            return makeNode(n);
+        });
         return newTree;
+    }
+
+    /**
+     * Returns the outlying points (in form of points, not node object).
+     * @returns {Array}
+     */
+    points(){
+        let newTree = this.removeOutlying();
+        let newNodes = newTree.nodes;
+        let oldNodes = this.tree.nodes;
+        let ops = [];
+        oldNodes.forEach(n=>{
+            //.id since we are accessing to points and the node is in form of {id: thePoint}
+            if(!pointExists(newNodes.map(n=>n.id), n.id)){
+                ops.push(n.id);
+            }
+        });
+        return ops;
     }
 }

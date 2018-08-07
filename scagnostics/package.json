@@ -2,6 +2,7 @@
   "name": "scagnostics",
   "version": "1.0.0",
   "dependencies": {
+    "d3-polygon": "^1.0.3",
     "lodash": "^4.17.10",
     "simple-statistics": "^6.1.0",
     "underscore": "^1.9.1"

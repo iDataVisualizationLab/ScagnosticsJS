@@ -104,31 +104,9 @@
         .attr("y2", d => d.target[1])
         .attr("stroke", "purple")
         .attr("stroke-width", 2);
-    //Convex hull
-    g.append("g").selectAll("path")
-        .data([scag.convexHull])
-        .enter()
-        .append("path")
-        .attr("d", d => "M" + d.join("L") + "Z")
-        .attr("stroke-width", 3)
-        .attr("stroke", "blue")
-        .attr("fill", "none");
 
-    //Concave hull
-    g.append("g")
-        .selectAll("path")
-        .data(scag.concaveHull)
-        .enter()
-        .append("path")
-        .attr("d", d => "M" + d.join("L") + "Z")
-        .attr("stroke-width", 2)
-        .attr("stroke", "green")
-        .attr("fill", "none");
-
-
-    //Scagnostics
-    let msg = "Scagnostics";
     //Minimum spanning tree.
+    //Outlying links
     g.append("g").selectAll("path")
         .data(scag.outlyingLinks)
         .enter()
@@ -150,6 +128,17 @@
         .attr("y2", d => d.target[1])
         .attr("stroke", "black")
         .attr("stroke-width", 2);
+    //Outlying points
+    g.append("g").selectAll("circle")
+        .data(scag.outlyingPoints)
+        .enter()
+        .append("circle")
+        .attr("cx", d=>d[0])
+        .attr("cy", d=>d[1])
+        .attr("r", 3)
+        .attr("fill", "red")
+        .attr("stroke", "none");
+
     //Striated
     g.append("g").selectAll("circle")
         .data(scag.v2Corners)
@@ -176,16 +165,42 @@
         .attr("fill", "none")
         .attr("stroke", "pink")
         .attr("stroke-width", 1);
+
+    //Convex hull
+    g.append("g").selectAll("path")
+        .data([scag.convexHull])
+        .enter()
+        .append("path")
+        .attr("d", d => "M" + d.join("L") + "Z")
+        .attr("stroke-width", 3)
+        .attr("stroke", "blue")
+        .attr("fill", "none");
+
+    //Concave hull
+    g.append("g")
+        .selectAll("path")
+        .data([scag.concaveHull])
+        .enter()
+        .append("path")
+        .attr("d", d => "M" + d.join("L") + "Z")
+        .attr("stroke-width", 2)
+        .attr("stroke", "green")
+        .attr("fill", "none");
+
+    //Scagnostics messages
+    let msg = "Scagnostics";
     //Outlying
-    msg += "<br/>Outlying: " + scag.outlyingScore;
+    msg += "<br/>Outlying score: " + scag.outlyingScore;
     //Skewed
-    msg += "<br/>Skewed: " + scag.skewedScore;
+    msg += "<br/>Skewed score: " + scag.skewedScore;
     //Sparse
-    msg += "<br/>Sparse: " + scag.sparseScore;
+    msg += "<br/>Sparse score: " + scag.sparseScore;
     //Clumpy
-    msg += "<br/>Clumpy: " + scag.clumpyScore;
+    msg += "<br/>Clumpy score: " + scag.clumpyScore;
     //Striated
-    msg += "<br/>Striated: " + scag.striatedScore;
+    msg += "<br/>Striated score: " + scag.striatedScore;
+    //Convex
+    msg += "<br/>Convex score: " + scag.convexScore;
     //Set the scagnostics message
     d3.select("#msg").html(msg);
 </script>

@@ -1,3 +1,5 @@
+import _ from "underscore";
+
 export class ConcaveHull{
     constructor(distance){
         if(!distance){
@@ -10,9 +12,10 @@ export class ConcaveHull{
         }
         this.padding = 0;
     }
+
     /**
      * generate the concave hull.
-     * @param delaunay is inform of coordinates of triangulated triangles (3 pairs per triangle)
+     * @param delaunay is inform of coordinates of triangulated triangles (3 points per triangle)
      * @returns {Array}
      */
     concaveHull(delaunay) {
@@ -68,9 +71,35 @@ export class ConcaveHull{
         if (this.padding !== 0) {
             result = pad(result, this.padding);
         }
-
-        return result;
-
+        //TODO: May need to reconsider this case
+        //If it returns in more than one set of data => we combine them and return the unique result.
+        result = _.flatten(result, true);
+        result = _.uniq(result, false, d => d.join(','));
+        return sortVerticies(result);
+        function sortVerticies(points) {
+            let center = findCentroid(points);
+            points.sort((a, b) => {
+                let a1 = (toDegrees(Math.atan2(a[0] - center[0], a[1] - center[1])) + 360) % 360;
+                let a2 = (toDegrees(Math.atan2(b[0] - center[0], b[1] - center[1])) + 360) % 360;
+                return Math.round(a1 - a2);
+            });
+            return points;
+            function toDegrees (angle) {
+                return angle * (180 / Math.PI);
+            }
+            function findCentroid(points) {
+                let x = 0;
+                let y = 0;
+                points.forEach(p=>{
+                    x += p[0];
+                    y += p[1];
+                });
+                let center = [];
+                center.push(x / points.length);
+                center.push(y / points.length);
+                return center;
+            }
+        }
         function distance(a, b) {
             var dx = a[0] - b[0],
                 dy = a[1] - b[1];
@@ -147,6 +176,9 @@ export class ConcaveHull{
         var mean = d3.mean(sides);
 
         return mean + dev;
+    }
+    q90Distance(delaunay){
+
     }
 }
 

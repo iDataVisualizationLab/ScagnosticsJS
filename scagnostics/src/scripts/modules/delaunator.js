@@ -1,4 +1,4 @@
-//from: https://github.com/mapbox/delaunator/blob/master/index.js
+//Adapted from: https://github.com/mapbox/delaunator/blob/master/index.js
 export class Delaunator {
 
     static from(points, getX, getY) {
@@ -14,10 +14,22 @@ export class Delaunator {
             coords[2 * i + 1] = getY(p);
         }
 
-        return new Delaunator(coords);
+        return new Delaunator(coords, points);
     }
-
-    constructor(coords) {
+    triangleCoordinates(){
+        let triangles = this.triangles;
+        let triangleCoordinates = [];
+        for (let i = 0; i < triangles.length; i += 3) {
+            triangleCoordinates.push([
+                this.points[triangles[i]],
+                this.points[triangles[i + 1]],
+                this.points[triangles[i + 2]]
+            ]);
+        }
+        return triangleCoordinates;
+    }
+    constructor(coords, points) {
+        this.points = points;
         let minX = Infinity;
         let minY = Infinity;
         let maxX = -Infinity;
