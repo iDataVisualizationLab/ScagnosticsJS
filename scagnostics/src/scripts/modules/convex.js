@@ -16,7 +16,6 @@ export class Convex {
     score() {
         return polygon.polygonArea(this.concaveHull())/polygon.polygonArea(this.convexHull());
     }
-
     concaveHull() {
         //Use q90 as the cutoff distance.
         let allLengths = this.tree.links.map(l => l.weight),

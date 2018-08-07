@@ -1,7 +1,65 @@
 // https://gist.github.com/bmershon/25a74f7b1c7cbd07e7456af1d2c07da1
 // See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm\
 // Depends on DisjointSet.
+import _ from "underscore";
 
+function pairNodeLinks(tree) {
+    let nestedByNodes = {};
+    tree.links.forEach(l => {
+        let sourceKey = l.source.join(',');
+        if (!nestedByNodes[sourceKey]) {
+            nestedByNodes[sourceKey] = [];
+        }
+        nestedByNodes[sourceKey].push(l);
+        let targetKey = l.target.join(',');
+        if (!nestedByNodes[targetKey]) {
+            nestedByNodes[targetKey] = [];
+        }
+        nestedByNodes[targetKey].push(l);
+    });
+    //Pair the results
+    let pairedResults = _.pairs(nestedByNodes);
+    return pairedResults;
+}
+
+/**
+ * This function returns corners (three vertices) of vertices of degree two in the for mat of
+ * point1, point2, point3 => point1 is the the vertex with degree two (two edges connected to it are [point1, point2] and [point1, point3] (order of the points in each edge is not important)).
+ * @param tree
+ * @returns {*}
+ */
+export function getAllV2CornersFromTree(tree) {
+    let pairedResults = pairNodeLinks(tree);
+    //Get all pairs with length = 2 (V2)
+    let allV2 = pairedResults.filter(p => p[1].length == 2);
+
+    let allCorners = allV2.map(v2 => {
+        let corner = [];
+        //First point is the common vertice
+        corner.push(v2[0].split(',').map(d => +d));//map(d=>+d) is to convert the strings into digits
+        //Push the source or target if they are not the common vertices of the two edges
+        v2[1].forEach(link => {
+            if (link.source.join(',') != v2[0]) {
+                corner.push(link.source);
+            } else {
+                corner.push(link.target);
+            }
+        });
+        return corner;
+    });
+    return allCorners;
+}
+
+/**
+ * This function returns all single degree vertices from a tree
+ * @param tree
+ */
+export function getAllV1sFromTree(tree){
+    let pairedResults = pairNodeLinks(tree);
+    //Get all pairs with length = 2 (V2)
+    let allV1 = pairedResults.filter(p => p[1].length == 1);
+    return allV1.map(v1=>v1[0].split(',').map(Number));
+}
 /**
  * Create a graph from mesh
  * @param triangles is inform of set of triangles as the result from delaunay triangulations

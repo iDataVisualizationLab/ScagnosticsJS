@@ -46,163 +46,194 @@
     let svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
-
+    /***********RANDOM DATA*******************/
     let randomX = d3.randomNormal(width / 2, 50),
         randomY = d3.randomNormal(height / 2, 50),
         points = d3.range(2000).map(function () {
             return [randomX(), randomY()];
         });
+    draw(points);
 
-    let scag = scagnostics(points, width, height, 20);
+    /***********FAITHFUL DATA*******************/
+    // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
+    //     if(error) throw error;
+    //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]])
+    //     draw(points);
+    // });
+    /***********FLOWER DATA*******************/
+    // d3.csv("../data/flowers.csv", (error, rawData)=>{
+    //     if(error) throw error;
+    //     let points = rawData.map(d=>[+d["sepal width"], +d["sepal width"]])
+    //     draw(points);
+    // });
 
-    //Main container
-    let g = svg.append("g").attr("transform", `translate(${0}, ${0})`);
-    g.append("clipPath")
-        .attr("id", "clip")
-        .append("rect")
-        .attr("width", width)
-        .attr("height", height);
-    //Binning
-    var color = d3.scaleSequential(d3.interpolateLab("white", "steelblue"))
-        .domain([0, 50]);
-    g.append("g")
-        .attr("class", "hexagon")
-        .attr("clip-path", "url(#clip)")
-        .selectAll("path")
-        .data(scag.bins)
-        .enter().append("path")
-        .attr("d", scag.binner.hexagon())
-        .attr("transform", function (d) {
-            return "translate(" + d.x + "," + d.y + ")";
-        })
-        .attr("fill", function (d) {
-            return color(d.length);
-        });
+    function draw(points){
+        let scag = scagnostics(points, width, height, 20);
 
-    //Triangulating
-    g.append("g")
-        .attr("class", "triangles")
-        .selectAll("path")
-        .data(scag.triangleCoordinates)
-        .enter()
-        .append("path")
-        .call(redrawTriangle);
+        //Main container
+        let g = svg.append("g").attr("transform", `translate(${0}, ${0})`);
+        g.append("clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("width", width)
+            .attr("height", height);
+        //Binning
+        var color = d3.scaleSequential(d3.interpolateLab("white", "steelblue"))
+            .domain([0, 50]);
+        g.append("g")
+            .attr("class", "hexagon")
+            .attr("clip-path", "url(#clip)")
+            .selectAll("path")
+            .data(scag.bins)
+            .enter().append("path")
+            .attr("d", scag.binner.hexagon())
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            })
+            .attr("fill", function (d) {
+                return color(d.length);
+            });
 
-    function redrawTriangle(triangle) {
-        triangle.attr("d", d => "M" + d.join("L") + "Z");
-        triangle.attr("opacity", 0.5);
+        //Triangulating
+        g.append("g")
+            .attr("class", "triangles")
+            .selectAll("path")
+            .data(scag.triangleCoordinates)
+            .enter()
+            .append("path")
+            .call(redrawTriangle);
+
+        function redrawTriangle(triangle) {
+            triangle.attr("d", d => "M" + d.join("L") + "Z");
+            triangle.attr("opacity", 0.5);
+        }
+
+        //Minimum spanning tree.
+        g.append("g").selectAll("path")
+            .data(scag.mst.links)
+            .enter()
+            .append("line")
+            .attr("x1", d => d.source[0])
+            .attr("y1", d => d.source[1])
+            .attr("x2", d => d.target[0])
+            .attr("y2", d => d.target[1])
+            .attr("stroke", "purple")
+            .attr("stroke-width", 2);
+
+        //Minimum spanning tree.
+        //Outlying links
+        g.append("g").selectAll("path")
+            .data(scag.outlyingLinks)
+            .enter()
+            .append("line")
+            .attr("x1", d => d.source[0])
+            .attr("y1", d => d.source[1])
+            .attr("x2", d => d.target[0])
+            .attr("y2", d => d.target[1])
+            .attr("stroke", "red")
+            .attr("stroke-width", 2);
+        //No outlying tree
+        g.append("g").selectAll("path")
+            .data(scag.noOutlyingTree.links)
+            .enter()
+            .append("line")
+            .attr("x1", d => d.source[0])
+            .attr("y1", d => d.source[1])
+            .attr("x2", d => d.target[0])
+            .attr("y2", d => d.target[1])
+            .attr("stroke", "black")
+            .attr("stroke-width", 2);
+        //Outlying points
+        g.append("g").selectAll("circle")
+            .data(scag.outlyingPoints)
+            .enter()
+            .append("circle")
+            .attr("cx", d=>d[0])
+            .attr("cy", d=>d[1])
+            .attr("r", 3)
+            .attr("fill", "red")
+            .attr("stroke", "none");
+
+        //Striated
+        g.append("g").selectAll("circle")
+            .data(scag.v2Corners)
+            .enter()
+            .append("circle")
+            .attr("cx", d => d[0][0])
+            .attr("cy", d => d[0][1])
+            .attr("r", 3)
+            .attr("stroke", "none")
+            .attr("fill", "yellow");
+        g.append("g").selectAll("path")
+            .data(scag.obtuseV2Corners)
+            .enter()
+            .append("path")
+            .attr("d", d => {
+                //Clone the data to avoid changing it
+                let d1 = d.splice(0);
+                //swap since we need to start drawing from the point which is not the vertex of the corner (first point).
+                let temp = d1[0];
+                d1[0] = d1[1];
+                d1[1] = temp;
+                return "M" + d1.join("L");
+            })
+            .attr("fill", "none")
+            .attr("stroke", "pink")
+            .attr("stroke-width", 1);
+
+        //Convex hull
+        g.append("g").selectAll("path")
+            .data([scag.convexHull])
+            .enter()
+            .append("path")
+            .attr("d", d => "M" + d.join("L") + "Z")
+            .attr("stroke-width", 3)
+            .attr("stroke", "blue")
+            .attr("fill", "none");
+
+        //Concave hull
+        g.append("g")
+            .selectAll("path")
+            .data([scag.concaveHull])
+            .enter()
+            .append("path")
+            .attr("d", d => "M" + d.join("L") + "Z")
+            .attr("stroke-width", 2)
+            .attr("stroke", "green")
+            .attr("fill", "none");
+
+        //Stringy => single degree vertices
+        g.append("g")
+            .selectAll("circle")
+            .data(scag.v1s)
+            .enter()
+            .append("circle")
+            .attr("cx", d=>d[0])
+            .attr("cy", d=>d[1])
+            .attr("r", 3)
+            .attr("stroke", "none")
+            .attr("fill", "green");
+        //Scagnostics messages
+        let msg = "Scagnostics";
+        //Outlying
+        msg += "<br/>1. Outlying score: " + scag.outlyingScore;
+        //Skewed
+        msg += "<br/>2. Skewed score: " + scag.skewedScore;
+        //Sparse
+        msg += "<br/>3. Sparse score: " + scag.sparseScore;
+        //Clumpy
+        msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
+        //Striated
+        msg += "<br/>5. Striated score: " + scag.striatedScore;
+        //Convex
+        msg += "<br/>6. Convex score: " + scag.convexScore;
+        //Skinny
+        msg += "<br/>7. Skinny score: " + scag.skinnyScore;
+        //Stringy
+        msg += "<br/>8. Stringy score: " + scag.stringyScore;
+        //Set the scagnostics message
+        d3.select("#msg").html(msg);
     }
-
-    //Minimum spanning tree.
-    g.append("g").selectAll("path")
-        .data(scag.mst.links)
-        .enter()
-        .append("line")
-        .attr("x1", d => d.source[0])
-        .attr("y1", d => d.source[1])
-        .attr("x2", d => d.target[0])
-        .attr("y2", d => d.target[1])
-        .attr("stroke", "purple")
-        .attr("stroke-width", 2);
-
-    //Minimum spanning tree.
-    //Outlying links
-    g.append("g").selectAll("path")
-        .data(scag.outlyingLinks)
-        .enter()
-        .append("line")
-        .attr("x1", d => d.source[0])
-        .attr("y1", d => d.source[1])
-        .attr("x2", d => d.target[0])
-        .attr("y2", d => d.target[1])
-        .attr("stroke", "red")
-        .attr("stroke-width", 2);
-    //No outlying tree
-    g.append("g").selectAll("path")
-        .data(scag.noOutlyingTree.links)
-        .enter()
-        .append("line")
-        .attr("x1", d => d.source[0])
-        .attr("y1", d => d.source[1])
-        .attr("x2", d => d.target[0])
-        .attr("y2", d => d.target[1])
-        .attr("stroke", "black")
-        .attr("stroke-width", 2);
-    //Outlying points
-    g.append("g").selectAll("circle")
-        .data(scag.outlyingPoints)
-        .enter()
-        .append("circle")
-        .attr("cx", d=>d[0])
-        .attr("cy", d=>d[1])
-        .attr("r", 3)
-        .attr("fill", "red")
-        .attr("stroke", "none");
-
-    //Striated
-    g.append("g").selectAll("circle")
-        .data(scag.v2Corners)
-        .enter()
-        .append("circle")
-        .attr("cx", d => d[0][0])
-        .attr("cy", d => d[0][1])
-        .attr("stroke", "none")
-        .attr("r", 3)
-        .attr("fill", "yellow");
-    g.append("g").selectAll("path")
-        .data(scag.obtuseV2Corners)
-        .enter()
-        .append("path")
-        .attr("d", d => {
-            //Clone the data to avoid changing it
-            let d1 = d.splice(0);
-            //swap since we need to start drawing from the point which is not the vertex of the corner (first point).
-            let temp = d1[0];
-            d1[0] = d1[1];
-            d1[1] = temp;
-            return "M" + d1.join("L");
-        })
-        .attr("fill", "none")
-        .attr("stroke", "pink")
-        .attr("stroke-width", 1);
-
-    //Convex hull
-    g.append("g").selectAll("path")
-        .data([scag.convexHull])
-        .enter()
-        .append("path")
-        .attr("d", d => "M" + d.join("L") + "Z")
-        .attr("stroke-width", 3)
-        .attr("stroke", "blue")
-        .attr("fill", "none");
-
-    //Concave hull
-    g.append("g")
-        .selectAll("path")
-        .data([scag.concaveHull])
-        .enter()
-        .append("path")
-        .attr("d", d => "M" + d.join("L") + "Z")
-        .attr("stroke-width", 2)
-        .attr("stroke", "green")
-        .attr("fill", "none");
-
-    //Scagnostics messages
-    let msg = "Scagnostics";
-    //Outlying
-    msg += "<br/>Outlying score: " + scag.outlyingScore;
-    //Skewed
-    msg += "<br/>Skewed score: " + scag.skewedScore;
-    //Sparse
-    msg += "<br/>Sparse score: " + scag.sparseScore;
-    //Clumpy
-    msg += "<br/>Clumpy score: " + scag.clumpyScore;
-    //Striated
-    msg += "<br/>Striated score: " + scag.striatedScore;
-    //Convex
-    msg += "<br/>Convex score: " + scag.convexScore;
-    //Set the scagnostics message
-    d3.select("#msg").html(msg);
 </script>
 
 </body>
