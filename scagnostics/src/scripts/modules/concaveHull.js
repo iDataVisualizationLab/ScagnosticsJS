@@ -1,4 +1,5 @@
 import _ from "underscore";
+import {distance} from "./kruskal-mst";
 
 export class ConcaveHull{
     constructor(distance){
@@ -99,11 +100,6 @@ export class ConcaveHull{
                 center.push(y / points.length);
                 return center;
             }
-        }
-        function distance(a, b) {
-            var dx = a[0] - b[0],
-                dy = a[1] - b[1];
-            return Math.sqrt((dx * dx) + (dy * dy));
         }
 
         function pad(bounds, amount) {

@@ -8,7 +8,6 @@ export class Convex {
         this.tree = JSON.parse(JSON.stringify(tree));
         this.delaunay = Delaunator.from(this.tree.nodes.map(d => d.id));
     }
-
     /**
      * Returns convex score
      * @returns {number}
@@ -16,14 +15,15 @@ export class Convex {
     score() {
         return polygon.polygonArea(this.concaveHull())/polygon.polygonArea(this.convexHull());
     }
+    noOutlyingTriangleCoordinates(){
+        return this.delaunay.triangleCoordinates();
+    }
     concaveHull() {
         //Use q90 as the cutoff distance.
         let allLengths = this.tree.links.map(l => l.weight),
-            q90 = quantile(allLengths, 0.9),
-            concaveHull = new ConcaveHull(q90).concaveHull(this.delaunay.triangleCoordinates());
+            concaveHull = new ConcaveHull(quantile(allLengths, 0.9)).concaveHull(this.noOutlyingTriangleCoordinates());
         return concaveHull;
     }
-
     convexHull() {
         let hull = this.delaunay.hull;
         let convexHull = [];

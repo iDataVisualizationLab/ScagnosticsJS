@@ -72,23 +72,25 @@
     //         return [randomX(), randomY()];
     //     });
     // let scag = scagnostics(points);
+    // drawNormalizedData(scag);
     // draw(points);
 
-    // /***********FAITHFUL DATA*******************/
-    // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
-    //     if(error) throw error;
-    //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
-    //     let scag = scagnostics(points);
-    //     draw(scag);
-    // });
-    /***********FLOWER DATA*******************/
-    d3.csv("../data/flowers.csv", (error, rawData) => {
-        if (error) throw error;
-        let points = rawData.map(d => [+d["sepal width"], +d["sepal length"]]);
+    /***********FAITHFUL DATA*******************/
+    d3.tsv("../data/faithful.tsv", (error, rawData)=>{
+        if(error) throw error;
+        let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
         let scag = scagnostics(points);
         drawNormalizedData(scag);
         draw(scag);
     });
+    // /***********FLOWER DATA*******************/
+    // d3.csv("../data/flowers.csv", (error, rawData) => {
+    //     if (error) throw error;
+    //     let points = rawData.map(d => [+d["sepal width"], +d["sepal length"]]);
+    //     let scag = scagnostics(points);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    // });
 
     function drawNormalizedData(scag) {
         //Main container
