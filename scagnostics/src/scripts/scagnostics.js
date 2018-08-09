@@ -11,25 +11,41 @@ import {Convex} from "./modules/convex";
 import {Skinny} from "./modules/skinny";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
+import {Normalizer} from "./modules/normalizer";
 
 (function(window){
     /**
      * initialize a scagnostic object
-     * @param points
-     * @param width
-     * @param height
-     * @param binningRadius
+     * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.scagnostics = function(points, width, height, binningRadius) {
-        /******This section is about the binner and binning results******/
-        let binner = new Binner().radius(binningRadius).extent([[0, 0], [width, height]]);
-        //Calculation
-        let bins = binner.hexbin(points);
+    window.scagnostics = function(inputPoints) {
+        //Clone it to avoid modifying it.
+        let points = inputPoints.slice(0);
+        /******This section is about normalizing the data******/
+        let normalizer = new Normalizer(points);
+        let normalizedPoints = normalizer.normalizedPoints;
+        outputValue("normalizer", normalizer);
+        outputValue("normalizedPoints", normalizedPoints);
+        /******This section is about finding number of bins and binners******/
+        let binSize = null;
+        let bins = [];
+        let binner = null;
+        let binRadius = 0;
+        do{
+            //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
+            binSize = (binSize===null)?40: binSize/2;
+            let shortDiagonal = 1/binSize;
+            binRadius = Math.sqrt(3)*shortDiagonal/2;
+            binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+            bins = binner.hexbin(normalizedPoints);
+        }while(bins.length > 250);
         let sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
         //Assigning output results
         outputValue("binner", binner);
         outputValue("bins", bins);
+        outputValue("binSize", binSize);
+        outputValue("binRadius", binRadius)
         outputValue("binnedSites", sites);
 
         /******This section is about the triangulating and triangulating results******/
@@ -43,7 +59,7 @@ import {Monotonic} from "./modules/monotonic";
         outputValue("triangleCoordinates", triangleCoordinates);
 
         /******This section is about the spanning tree and spanning tree results******/
-            //Spanning tree calculation
+        //Spanning tree calculation
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
         //Assigning the output values
@@ -71,6 +87,7 @@ import {Monotonic} from "./modules/monotonic";
 
         /******This section is about the clumpy score and clumpy score results******/
         let clumpy = new Clumpy(noOutlyingTree);
+        outputValue("clumpy", clumpy);
         outputValue("clumpyScore", clumpy.score());
 
         /******This section is about the striated score and striated score results******/

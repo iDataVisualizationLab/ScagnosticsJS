@@ -1,5 +1,6 @@
 import {max} from 'simple-statistics';
-import {equalPoints} from "./kruskal-mst";
+import {equalPoints, pairNodeLinks, equalLinks} from "./kruskal-mst";
+import _ from 'underscore';
 
 export class Clumpy {
     constructor(tree) {
@@ -12,37 +13,87 @@ export class Clumpy {
      * @returns {number}
      */
     score() {
-        let self = this;
-        return max(this.tree.links.map(link=>1-maxLength(runtGraph(link))/link.weight));
-        function runtGraph(link){
-            let greaterLinks = self.tree.links.filter(l=>l.weight >= link.weight);
-            let sourceConnectedNodes = [link.source];
-            let sourceConnectedLinks = [];
-            let targetConnectedNodes = [link.target];
-            let targetConnectedLinks = [];
-            greaterLinks.forEach(link=>{
-                //Either source or target in the sourceConnectedNodes then it is connected
-                if(pointExists(sourceConnectedNodes, link.source)){
-                    sourceConnectedNodes.push(link.target);
-                    sourceConnectedLinks.push(link);
-                }else if(pointExists(sourceConnectedNodes, link.target)){
-                    sourceConnectedNodes.push(link.source);
-                    sourceConnectedLinks.push(link);
-                }
+        let allRuntRatios = [];
+        this.tree.links.forEach(link =>{
+            let rg = this.runtGraph(link);
+            if(rg.length>0){
+                allRuntRatios.push(this.maxLength(rg)/link.weight);
+            }
+        });
 
-                if(pointExists(targetConnectedNodes, link.source)){
-                    targetConnectedNodes.push(link.target);
-                    targetConnectedLinks.push(link);
-                }else if(pointExists(targetConnectedNodes, link.target)){
-                    targetConnectedNodes.push(link.source);
-                    targetConnectedLinks.push(link);
+        return max(allRuntRatios.map(rr=>1-rr));
+    }
+    // score() {
+    //     return max(this.tree.links.map(link=>1-this.maxLength(this.runtGraph(link))/link.weight));
+    // }
+    // runtGraph(link){
+    //     let greaterOrEqualLinks = this.tree.links.filter(l=>l.weight >= link.weight);
+    //     //Remove the currently checking link.
+    //     greaterOrEqualLinks = greaterOrEqualLinks.filter(l=>!equalLinks(l, link));
+    //     let pairedResults = pairNodeLinks(greaterOrEqualLinks);
+    //
+    //     //Process the source side.
+    //     let sourceConnectedNodes = [link.source];
+    //     let sourceConnectedLinks = this.getConnectedLinks(sourceConnectedNodes, pairedResults);
+    //
+    //     let targetConnectedNodes = [link.target];
+    //     let targetConnectedLinks = this.getConnectedLinks(targetConnectedNodes, pairedResults);
+    //
+    //     return sourceConnectedLinks.length < targetConnectedLinks.length?sourceConnectedLinks:targetConnectedLinks;
+    // }
+    runtGraph(link){
+        let greaterOrEqualLinks = this.tree.links.filter(l=>l.weight < link.weight);
+        //Remove the currently checking link.
+        greaterOrEqualLinks = greaterOrEqualLinks.filter(l=>!equalLinks(l, link));
+        let pairedResults = pairNodeLinks(greaterOrEqualLinks);
+
+        //Process the source side.
+        let sourceConnectedNodes = [link.source];
+        let sourceConnectedLinks = this.getConnectedLinks(sourceConnectedNodes, pairedResults);
+
+        let targetConnectedNodes = [link.target];
+        let targetConnectedLinks = this.getConnectedLinks(targetConnectedNodes, pairedResults);
+
+        return sourceConnectedLinks.length < targetConnectedLinks.length?sourceConnectedLinks:targetConnectedLinks;
+    }
+
+
+    getConnectedLinks(connectedNodes, pairedResults) {
+        let processedNodes = [];
+        let connectedLinks = [];
+        while (connectedNodes.length > 0) {
+            //Can stop earlier if this is having more than half of the links in the whole tree.
+            if(connectedLinks.length > this.tree.links.length + 1){
+                break;
+            }
+            let firstNode = _.first(connectedNodes);
+            //Removed the processed nodes
+            connectedNodes = _.without(connectedNodes, firstNode);
+            //Add it to the processed node
+            processedNodes.push(firstNode);
+            //Find the edges connected to that node.
+            let result = pairedResults.find(p => p[0] === firstNode.join(","));
+            let links = result?result[1]:[];
+            connectedLinks = connectedLinks.concat(links);
+            //Add new nodes to be processed
+            links.forEach(l => {
+                //If the node in the connected link is not processed => then add it to be processed (to expand later on).
+                if (!pointExists(processedNodes, l.source)) {
+                    connectedNodes.push(l.source);
+                }
+                if(!pointExists(processedNodes, l.target)) {
+                    connectedNodes.push(l.target);
                 }
             });
-            return sourceConnectedLinks.length < targetConnectedLinks.length?sourceConnectedLinks:targetConnectedLinks;
         }
-        function maxLength(runtGraph){
-            return max(runtGraph.map(l=>l.weight));
+        return connectedLinks;
+    }
+
+    maxLength(runtGraph){
+        if(runtGraph.length===0){
+            return 0;
         }
+        return max(runtGraph.map(l=>l.weight));
     }
 }
 export function pointExists(points, point){

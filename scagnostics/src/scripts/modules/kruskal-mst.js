@@ -3,9 +3,15 @@
 // Depends on DisjointSet.
 import _ from "underscore";
 
-function pairNodeLinks(tree) {
+/**
+ * This function create the pairs between node and its links.
+ *
+ * @param links
+ * @returns [["nodeX,nodeY", Array(numberOfLinksRelatedToTheNodes)]]
+ */
+export function pairNodeLinks(links) {
     let nestedByNodes = {};
-    tree.links.forEach(l => {
+    links.forEach(l => {
         let sourceKey = l.source.join(',');
         if (!nestedByNodes[sourceKey]) {
             nestedByNodes[sourceKey] = [];
@@ -29,7 +35,7 @@ function pairNodeLinks(tree) {
  * @returns {*}
  */
 export function getAllV2CornersFromTree(tree) {
-    let pairedResults = pairNodeLinks(tree);
+    let pairedResults = pairNodeLinks(tree.links);
     //Get all pairs with length = 2 (V2)
     let allV2 = pairedResults.filter(p => p[1].length == 2);
 
@@ -55,7 +61,7 @@ export function getAllV2CornersFromTree(tree) {
  * @param tree
  */
 export function getAllV1sFromTree(tree){
-    let pairedResults = pairNodeLinks(tree);
+    let pairedResults = pairNodeLinks(tree.links);
     //Get all pairs with length = 2 (V2)
     let allV1 = pairedResults.filter(p => p[1].length == 1);
     return allV1.map(v1=>v1[0].split(',').map(Number));
@@ -109,8 +115,7 @@ export function createGraph (triangles) {
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.
     function linkExists(links, link) {
         for (let i = 0; i < links.length; i++) {
-            if ((equalPoints(link.source, links[i].source) && equalPoints(link.target, links[i].target)) ||
-                (equalPoints(link.source, links[i].target) && equalPoints(link.target, links[i].source))) {
+            if (equalLinks(link, links[i])) {
                 return true;
             }
         }
@@ -135,7 +140,14 @@ export function equalPoints(id1, id2) {
         return false;
     }
 }
-
+export function equalLinks(l1, l2) {
+    if ((equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
+        (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source))) {
+        return true;
+    }else{
+        return false;
+    }
+}
 export function idExists(nodes, id) {
 
     for (let i = 0; i < nodes.length; i++) {

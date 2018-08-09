@@ -18,7 +18,6 @@ export class Monotonic {
         return Math.pow(r, 2);
 
         /**Adopted from: https://bl.ocks.org/nkullman/f65d5619843dc22e061d957249121408**/
-
         function computeSpearmans(arrX, arrY) {
             // simple error handling for input arrays of nonequal lengths
             if (arrX.length !== arrY.length) { return null; }

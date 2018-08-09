@@ -1,6 +1,6 @@
 //Inspired from https://github.com/d3/d3-hexbin/blob/master/src/hexbin.js
 export function Binner(){
-    var thirdPi = Math.PI/3,
+    let thirdPi = Math.PI/3,
     angles = [0, thirdPi, 2*thirdPi, 3*thirdPi, 4*thirdPi, 5*thirdPi];
 
     function pointX(d){
@@ -9,6 +9,7 @@ export function Binner(){
     function pointY(d){
         return d[1];
     }
+
     var x0 = 0,
         y0 = 0,
         x1 = 1,
@@ -61,6 +62,7 @@ export function Binner(){
                 dx = x1 - x0,
                 dy = y1 - y0;
             x0 = x1, y0 = y1;
+
             return [dx, dy];
         });
     }
