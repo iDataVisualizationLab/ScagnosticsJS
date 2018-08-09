@@ -21,7 +21,7 @@ export class Convex {
     concaveHull() {
         //Use q90 as the cutoff distance.
         let allLengths = this.tree.links.map(l => l.weight),
-            concaveHull = new ConcaveHull(quantile(allLengths, 0.9)).concaveHull(this.noOutlyingTriangleCoordinates());
+            concaveHull = new ConcaveHull(quantile(allLengths, 0.99)).concaveHull(this.noOutlyingTriangleCoordinates());
         return concaveHull;
     }
     convexHull() {
