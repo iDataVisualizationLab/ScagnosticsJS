@@ -1,5 +1,6 @@
 import _ from "underscore";
 import {distance} from "./kruskal-mst";
+import * as polygon from "d3-polygon";
 
 export class ConcaveHull{
     constructor(distance){
@@ -72,35 +73,8 @@ export class ConcaveHull{
         if (this.padding !== 0) {
             result = pad(result, this.padding);
         }
-        //TODO: May need to reconsider this case
-        //If it returns in more than one set of data => we combine them and return the unique result.
-        result = _.flatten(result, true);
-        result = _.uniq(result, false, d => d.join(','));
-        return sortVerticies(result);
-        function sortVerticies(points) {
-            let center = findCentroid(points);
-            points.sort((a, b) => {
-                let a1 = (toDegrees(Math.atan2(a[0] - center[0], a[1] - center[1])) + 360) % 360;
-                let a2 = (toDegrees(Math.atan2(b[0] - center[0], b[1] - center[1])) + 360) % 360;
-                return Math.round(a1 - a2);
-            });
-            return points;
-            function toDegrees (angle) {
-                return angle * (180 / Math.PI);
-            }
-            function findCentroid(points) {
-                let x = 0;
-                let y = 0;
-                points.forEach(p=>{
-                    x += p[0];
-                    y += p[1];
-                });
-                let center = [];
-                center.push(x / points.length);
-                center.push(y / points.length);
-                return center;
-            }
-        }
+
+        return result;
 
         function pad(bounds, amount) {
             var result = [];
@@ -177,4 +151,17 @@ export class ConcaveHull{
 
     }
 }
-
+export function concaveHullArea(concaveHull) {
+    let concaveArea = 0;
+    concaveHull.forEach(hull => {
+        concaveArea += polygon.polygonArea(hull);
+    });
+    return concaveArea;
+}
+export function concaveHullLength(concaveHull) {
+    let concaveLength = 0;
+    concaveHull.forEach(hull => {
+        concaveLength += polygon.polygonLength(hull);
+    });
+    return concaveLength;
+}

@@ -20,8 +20,13 @@ export class Clumpy {
                 allRuntRatios.push(this.maxLength(rg)/link.weight);
             }
         });
-
-        return max(allRuntRatios.map(rr=>1-rr));
+        if(allRuntRatios.length>0){
+            //Only if there are some runt graphs
+            return max(allRuntRatios.map(rr=>1-rr));
+        }else{
+            //In case all lengths are equal => then the score is 0
+            return 0;
+        }
     }
     // score() {
     //     return max(this.tree.links.map(link=>1-this.maxLength(this.runtGraph(link))/link.weight));

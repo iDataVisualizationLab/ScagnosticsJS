@@ -1,4 +1,5 @@
-import * as polygon from 'd3-polygon';
+import {concaveHullLength, concaveHullArea} from "./concaveHull";
+
 export class Skinny {
     constructor(alphaHull) {
         //Clone it in order to avoid modifying it.
@@ -9,6 +10,6 @@ export class Skinny {
      * @returns {number}
      */
     score() {
-        return 1 - Math.sqrt(4*Math.PI*polygon.polygonArea(this.alphaHull))/polygon.polygonLength(this.alphaHull);
+        return 1 - Math.sqrt(4*Math.PI*concaveHullArea(this.alphaHull))/concaveHullLength(this.alphaHull);
     }
 }

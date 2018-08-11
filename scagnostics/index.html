@@ -43,7 +43,8 @@
 <svg id="normalizedsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
 <svg id="scagsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
 <div>
-    <button onclick="toggleDisplay(binHexagons)">Toggle binHexagons</button>
+    <!--<button onclick="toggleDisplay(binHexagons)">Toggle binHexagons</button>-->
+    <button onclick="toggleDisplay(binLeaders)">Toggle binLeaders</button>
     <button onclick="toggleDisplay(triangulations)">Toggle triangulations</button>
     <button onclick="toggleDisplay(mst)">Toggle mst</button>
     <button onclick="toggleDisplay(outlyingLinks)">Toggle outlyingLinks</button>
@@ -52,6 +53,7 @@
     <button onclick="toggleDisplay(noOutlyingPoints)">Toggle noOutlyingPoints</button>
     <button onclick="toggleDisplay(v2Corners)">Toggle v2Corners</button>
     <button onclick="toggleDisplay(obtuseV2Corners)">Toggle obtuseV2Corners</button>
+    <button onclick="toggleDisplay(noOutlyingTriangulations)">Toggle noOutlyingTriangulations</button>
     <button onclick="toggleDisplay(convexHull)">Toggle convexHull</button>
     <button onclick="toggleDisplay(concaveHull)">Toggle concaveHull</button>
     <button onclick="toggleDisplay(v1s)">Toggle v1s</button>
@@ -65,7 +67,7 @@
         height = +scagsvg.attr("height") - margins.top - margins.bottom,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
-    // /***********RANDOM DATA*******************/
+    /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(width / 2, 50),
     //     randomY = d3.randomNormal(height / 2, 50),
     //     points = d3.range(2000).map(function () {
@@ -73,7 +75,8 @@
     //     });
     // let scag = scagnostics(points);
     // drawNormalizedData(scag);
-    // draw(points);
+    // draw(scag);
+
 
     /***********FAITHFUL DATA*******************/
     d3.tsv("../data/faithful.tsv", (error, rawData)=>{
@@ -83,6 +86,7 @@
         drawNormalizedData(scag);
         draw(scag);
     });
+
     // /***********FLOWER DATA*******************/
     // d3.csv("../data/flowers.csv", (error, rawData) => {
     //     if (error) throw error;
@@ -106,7 +110,8 @@
             .attr("stroke", "none");
     }
 
-    let binHexagons = null;
+    // let binHexagons = null;
+    let binLeaders = null;
     let triangulations = null;//path
     let mst = null;//path
     let outlyingLinks = null;//path
@@ -116,6 +121,7 @@
     let runtGraph = null;
     let v2Corners = null;//circle
     let obtuseV2Corners = null;//path
+    let noOutlyingTriangulations = null;//path
     let convexHull = null;//path
     let concaveHull = null;//path
     let v1s = null;//circle
@@ -136,18 +142,30 @@
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
         //Binning
-        var color = d3.scaleSequential(d3.interpolateLab("white", "steelblue"))
+        var color = d3.scaleSequential(d3.interpolateLab("grey", "steelblue"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
-        binHexagons = g.append("g")
-            .attr("class", "hexagon")
-            .selectAll("path")
+        // binHexagons = g.append("g")
+        //     .attr("class", "hexagon")
+        //     .selectAll("path")
+        //     .data(scag.bins)
+        //     .enter().append("path")
+        //     .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
+        //     .attr("transform", function (d) {
+        //         return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
+        //     })
+        //     .attr("fill", function (d) {
+        //         return color(d.length);
+        //     });
+
+        binLeaders = g.append("g")
+            .attr("class", "leader")
+            .selectAll("circle")
             .data(scag.bins)
-            .enter().append("path")
-            .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
-            .attr("transform", function (d) {
-                return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
-            })
+            .enter().append("circle")
+            .attr("r", scaleX(scag.binRadius))
+            .attr("cx", d=>scaleX(d.x))
+            .attr("cy", d=>scaleY(d.y))
             .attr("fill", function (d) {
                 return color(d.length);
             });
@@ -159,9 +177,9 @@
             .data(scag.triangleCoordinates)
             .enter()
             .append("path")
-            .call(redrawTriangle);
+            .call(drawTriangle);
 
-        function redrawTriangle(triangle) {
+        function drawTriangle(triangle) {
             triangle.attr("d", d => "M" + d.map(p => [scaleX(p[0]), scaleY(p[1])]).join("L") + "Z");
         }
 
@@ -264,6 +282,15 @@
             .attr("stroke", "pink")
             .attr("stroke-width", 1);
 
+        //Triangulating
+        noOutlyingTriangulations = g.append("g")
+            .attr("class", "triangles")
+            .selectAll("path")
+            .data(scag.noOutlyingTriangleCoordinates)
+            .enter()
+            .append("path")
+            .call(drawTriangle);
+
         //Convex hull
         convexHull = g.append("g").selectAll("path")
             .data([scag.convexHull.map(d => [scaleX(d[0]), scaleY(d[1])])])
@@ -277,10 +304,10 @@
         //Concave hull
         concaveHull = g.append("g")
             .selectAll("path")
-            .data([scag.concaveHull.map(d => [scaleX(d[0]), scaleY(d[1])])])
+            .data(scag.concaveHull)
             .enter()
             .append("path")
-            .attr("d", d => "M" + d.join("L") + "Z")
+            .attr("d", d => "M" + d.map(p => [scaleX(p[0]), scaleY(p[1])]).join("L") + "Z")
             .attr("stroke-width", 2)
             .attr("stroke", "green")
             .attr("fill", "none");

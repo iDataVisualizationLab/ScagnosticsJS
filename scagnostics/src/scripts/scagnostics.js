@@ -12,6 +12,7 @@ import {Skinny} from "./modules/skinny";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
 import {Normalizer} from "./modules/normalizer";
+import {LeaderBinner} from "./modules/leaderbinner";
 
 (function(window){
     /**
@@ -35,10 +36,15 @@ import {Normalizer} from "./modules/normalizer";
         do{
             //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
             binSize = (binSize===null)?40: binSize/2;
-            let shortDiagonal = 1/binSize;
-            binRadius = Math.sqrt(3)*shortDiagonal/2;
-            binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-            bins = binner.hexbin(normalizedPoints);
+            //// This section uses hexagon binning
+            // let shortDiagonal = 1/binSize;
+            // binRadius = Math.sqrt(3)*shortDiagonal/2;
+            // binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+            // bins = binner.hexbin(normalizedPoints);
+            // This section uses leader binner
+            binRadius = 1/(binSize*2);
+            binner = new LeaderBinner(normalizedPoints, binRadius);
+            bins = binner.leaders;
         }while(bins.length > 250);
         let sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
         //Assigning output results
@@ -101,6 +107,8 @@ import {Normalizer} from "./modules/normalizer";
         /******This section is about the convex hull and convex hull results******/
         let convex = new Convex(noOutlyingTree);
         let convexHull = convex.convexHull();
+        let noOutlyingTriangleCoordinates = convex.noOutlyingTriangleCoordinates();
+        outputValue("noOutlyingTriangleCoordinates", noOutlyingTriangleCoordinates);
         outputValue("convexHull", convexHull);
 
         /******This section is about the concave hull and concave hull results******/
