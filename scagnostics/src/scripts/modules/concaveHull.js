@@ -1,6 +1,8 @@
-import _ from "underscore";
+import {quantile} from 'simple-statistics';
 import {distance} from "./kruskal-mst";
 import * as polygon from "d3-polygon";
+import {createGraph, mst} from "./kruskal-mst";
+
 
 export class ConcaveHull{
     constructor(distance){
@@ -14,16 +16,48 @@ export class ConcaveHull{
         }
         this.padding = 0;
     }
+    coveringConcaveHull(delaunay){
+        let theMst = mst(createGraph(delaunay));
+        let allLengths = theMst.links.map(l=>l.weight);
+        let allPoints = theMst.nodes.map(n=>n.id);
+        //We will start with q7
+        let qx = 0.5,
+            increment = 0.01;
+        let theHull = null;
+        do{
+            qx = qx + increment;
+            let longEdge = quantile(allLengths, qx);
+            theHull = this.concaveHull(delaunay, longEdge);
+        }while(!coverAllPoints(theHull, allPoints));
 
+        return theHull;
+
+        function coverAllPoints(hull, points) {
+            for (let i = 0; i < points.length; i++) {
+                let point = points[i];
+                let pointIsCovered = false;
+                for (let j = 0; j < hull.length; j++) {
+                    if(polygon.polygonContains(hull[j], point)){
+                        pointIsCovered = true;
+                        break;
+                    }
+                }
+                if(!pointIsCovered){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
     /**
      * generate the concave hull.
      * @param delaunay is inform of coordinates of triangulated triangles (3 points per triangle)
      * @returns {Array}
      */
-    concaveHull(delaunay) {
-
-        let longEdge = this.calculateDistance(delaunay);
-
+    concaveHull(delaunay, longEdge) {
+        if(!longEdge){
+            longEdge = this.calculateDistance(delaunay);
+        }
         let mesh = delaunay.filter(function (d) {
             return distance(d[0], d[1]) < longEdge && distance(d[0], d[2]) < longEdge && distance(d[1], d[2]) < longEdge
         })
@@ -147,7 +181,7 @@ export class ConcaveHull{
 
         return mean + dev;
     }
-    q90Distance(delaunay){
+    qDistance(delaunay){
 
     }
 }

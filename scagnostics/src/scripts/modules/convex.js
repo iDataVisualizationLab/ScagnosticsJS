@@ -3,7 +3,6 @@ import {ConcaveHull, concaveHullArea} from "./concaveHull";
 import {quantile} from 'simple-statistics';
 import * as polygon from 'd3-polygon';
 
-
 export class Convex {
     constructor(tree) {
         //Clone the tree to avoid modifying it
@@ -49,6 +48,7 @@ export class Convex {
         //Use quantile as cutoff values.
         let allLengths = this.tree.links.map(l => l.weight),
             concaveHull = new ConcaveHull(quantile(allLengths, 0.999)).concaveHull(this.noOutlyingTriangleCoordinates());
+            // concaveHull = new ConcaveHull().coveringConcaveHull(this.noOutlyingTriangleCoordinates());
         return concaveHull;
     }
     convexHull() {

@@ -60,6 +60,22 @@
 </div>
 <div id="msg"></div>
 <script>
+    // let binHexagons = null;
+    let binLeaders = null;
+    let triangulations = null;//path
+    let mst = null;//path
+    let outlyingLinks = null;//path
+    let outlyingPoints = null;//circle
+    let noOutlyingTree = null;//path
+    let noOutlyingPoints = null;//circle
+    let runtGraph = null;
+    let v2Corners = null;//circle
+    let obtuseV2Corners = null;//path
+    let noOutlyingTriangulations = null;//path
+    let convexHull = null;//path
+    let concaveHull = null;//path
+    let v1s = null;//circle
+
     let scagsvg = d3.select("#scagsvg"),
         normalizedsvg = d3.select("#normalizedsvg"),
         margins = {left: 20, top: 20, right: 20, bottom: 20},
@@ -68,24 +84,24 @@
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
     /***********RANDOM DATA*******************/
-    // let randomX = d3.randomNormal(width / 2, 50),
-    //     randomY = d3.randomNormal(height / 2, 50),
-    //     points = d3.range(2000).map(function () {
-    //         return [randomX(), randomY()];
-    //     });
-    // let scag = scagnostics(points);
-    // drawNormalizedData(scag);
-    // draw(scag);
+    let randomX = d3.randomNormal(width / 2, 50),
+        randomY = d3.randomNormal(height / 2, 50),
+        points = d3.range(2000).map(function () {
+            return [randomX(), randomY()];
+        });
+    let scag = scagnostics(points);
+    drawNormalizedData(scag);
+    draw(scag);
 
 
-    /***********FAITHFUL DATA*******************/
-    d3.tsv("../data/faithful.tsv", (error, rawData)=>{
-        if(error) throw error;
-        let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
-        let scag = scagnostics(points);
-        drawNormalizedData(scag);
-        draw(scag);
-    });
+    // /***********FAITHFUL DATA*******************/
+    // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
+    //     if(error) throw error;
+    //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
+    //     let scag = scagnostics(points);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    // });
 
     // /***********FLOWER DATA*******************/
     // d3.csv("../data/flowers.csv", (error, rawData) => {
@@ -109,23 +125,6 @@
             .attr("fill", "black")
             .attr("stroke", "none");
     }
-
-    // let binHexagons = null;
-    let binLeaders = null;
-    let triangulations = null;//path
-    let mst = null;//path
-    let outlyingLinks = null;//path
-    let outlyingPoints = null;//circle
-    let noOutlyingTree = null;//path
-    let noOutlyingPoints = null;//circle
-    let runtGraph = null;
-    let v2Corners = null;//circle
-    let obtuseV2Corners = null;//path
-    let noOutlyingTriangulations = null;//path
-    let convexHull = null;//path
-    let concaveHull = null;//path
-    let v1s = null;//circle
-
 
     function toggleDisplay(g) {
         if (+d3.select(g.node()).style("opacity") != 10e-6) {
