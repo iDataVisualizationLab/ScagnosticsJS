@@ -83,25 +83,25 @@
         height = +scagsvg.attr("height") - margins.top - margins.bottom,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
-    /***********RANDOM DATA*******************/
-    let randomX = d3.randomNormal(width / 2, 50),
-        randomY = d3.randomNormal(height / 2, 50),
-        points = d3.range(2000).map(function () {
-            return [randomX(), randomY()];
-        });
-    let scag = scagnostics(points);
-    drawNormalizedData(scag);
-    draw(scag);
+    // /***********RANDOM DATA*******************/
+    // let randomX = d3.randomNormal(width / 2, 50),
+    //     randomY = d3.randomNormal(height / 2, 50),
+    //     points = d3.range(2000).map(function () {
+    //         return [randomX(), randomY()];
+    //     });
+    // let scag = scagnostics(points);
+    // drawNormalizedData(scag);
+    // draw(scag);
 
 
-    // /***********FAITHFUL DATA*******************/
-    // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
-    //     if(error) throw error;
-    //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
-    //     let scag = scagnostics(points);
-    //     drawNormalizedData(scag);
-    //     draw(scag);
-    // });
+    /***********FAITHFUL DATA*******************/
+    d3.tsv("../data/faithful.tsv", (error, rawData)=>{
+        if(error) throw error;
+        let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
+        let scag = scagnostics(points);
+        drawNormalizedData(scag);
+        draw(scag);
+    });
 
     // /***********FLOWER DATA*******************/
     // d3.csv("../data/flowers.csv", (error, rawData) => {
