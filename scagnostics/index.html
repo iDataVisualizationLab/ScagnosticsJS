@@ -45,6 +45,7 @@
 <div>
     <!--<button onclick="toggleDisplay(binHexagons)">Toggle binHexagons</button>-->
     <button onclick="toggleDisplay(binLeaders)">Toggle binLeaders</button>
+    <button onclick="toggleDisplay(binLeaderCoverages)">Toggle binLeaderCoverages</button>
     <button onclick="toggleDisplay(triangulations)">Toggle triangulations</button>
     <button onclick="toggleDisplay(mst)">Toggle mst</button>
     <button onclick="toggleDisplay(outlyingLinks)">Toggle outlyingLinks</button>
@@ -60,8 +61,11 @@
 </div>
 <div id="msg"></div>
 <script>
+    //Display variables
+    let dataPointRadius = 2;
     // let binHexagons = null;
     let binLeaders = null;
+    let binLeaderCoverages = null;
     let triangulations = null;//path
     let mst = null;//path
     let outlyingLinks = null;//path
@@ -121,7 +125,7 @@
             .append("circle")
             .attr("cx", d => scaleX(d[0]))
             .attr("cy", d => scaleY(d[1]))
-            .attr("r", 3)
+            .attr("r", dataPointRadius)
             .attr("fill", "black")
             .attr("stroke", "none");
     }
@@ -168,6 +172,19 @@
             .attr("fill", function (d) {
                 return color(d.length);
             });
+
+        binLeaderCoverages = g.append("g")
+            .attr("class", "leader")
+            .selectAll("circle")
+            .data(scag.bins)
+            .enter().append("circle")
+            .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
+            .attr("cx", d=>scaleX(d.x))
+            .attr("cy", d=>scaleY(d.y))
+            .attr("fill", function (d) {
+                return color(d.length)
+            })
+            .attr("stroke-width", 0.5);
 
         //Triangulating
         triangulations = g.append("g")

@@ -17,6 +17,7 @@ export class LeaderBinner{
                 let newLeader = [];
                 newLeader.x = point[0];
                 newLeader.y = point[1];
+                newLeader.radius = 0;
                 theLeaders.push(newLeader);
             }
         });
@@ -33,7 +34,11 @@ export class LeaderBinner{
             if(distances.length===0){
                 return null;
             }
-            return leaders[distances.indexOf(_.min(distances))];
+            let theDistance = _.min(distances);
+            let theLeader = leaders[distances.indexOf(theDistance)];
+            //Update the radius of the leader if needed.
+            if(theLeader.radius < theDistance) theLeader.radius = theDistance;
+            return theLeader;
         }
     }
 
