@@ -42,30 +42,25 @@
 <body>
 <svg id="normalizedsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
 <svg id="scagsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
-<div>
-    <!--<button onclick="toggleDisplay(binHexagons)">Toggle binHexagons</button>-->
-    <button onclick="toggleDisplay(binLeaders)">Toggle binLeaders</button>
-    <button onclick="toggleDisplay(binLeaderCoverages)">Toggle binLeaderCoverages</button>
-    <button onclick="toggleDisplay(triangulations)">Toggle triangulations</button>
-    <button onclick="toggleDisplay(mst)">Toggle mst</button>
-    <button onclick="toggleDisplay(outlyingLinks)">Toggle outlyingLinks</button>
-    <button onclick="toggleDisplay(outlyingPoints)">Toggle outlyingPoints</button>
-    <button onclick="toggleDisplay(noOutlyingTree)">Toggle noOutlyingTree</button>
-    <button onclick="toggleDisplay(noOutlyingPoints)">Toggle noOutlyingPoints</button>
-    <button onclick="toggleDisplay(v2Corners)">Toggle v2Corners</button>
-    <button onclick="toggleDisplay(obtuseV2Corners)">Toggle obtuseV2Corners</button>
-    <button onclick="toggleDisplay(noOutlyingTriangulations)">Toggle noOutlyingTriangulations</button>
-    <button onclick="toggleDisplay(convexHull)">Toggle convexHull</button>
-    <button onclick="toggleDisplay(concaveHull)">Toggle concaveHull</button>
-    <button onclick="toggleDisplay(v1s)">Toggle v1s</button>
+<div id="controlButtons">
 </div>
 <div id="msg"></div>
 <script>
+    let optionsBinLeader = ["bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"];
+    function createControlButtons(theContainer, theOptions){
+        let controlButtons = d3.select("#"+theContainer);
+        theOptions.forEach(option=>{
+            controlButtons.append("button")
+                .attr("onclick", `toggleDisplay(${option})`)
+                .html("Toggle " + option);
+
+        });
+    }
+    createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
     let dataPointRadius = 2;
     // let binHexagons = null;
-    let binLeaders = null;
-    let binLeaderCoverages = null;
+    let bins = null;
     let triangulations = null;//path
     let mst = null;//path
     let outlyingLinks = null;//path
@@ -87,6 +82,7 @@
         height = +scagsvg.attr("height") - margins.top - margins.bottom,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
+
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(width / 2, 50),
     //     randomY = d3.randomNormal(height / 2, 50),
@@ -130,6 +126,7 @@
             .attr("stroke", "none");
     }
 
+    //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
     function toggleDisplay(g) {
         if (+d3.select(g.node()).style("opacity") != 10e-6) {
             g.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
@@ -139,16 +136,40 @@
     }
 
 
+    function displayScagScores(scag, msgContainer) {
+        let msg = "Scagnostics";
+        //Binning
+        msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins";
+        //Outlying
+        msg += "<br/>1. Outlying score: " + scag.outlyingScore;
+        //Skewed
+        msg += "<br/>2. Skewed score: " + scag.skewedScore;
+        //Sparse
+        msg += "<br/>3. Sparse score: " + scag.sparseScore;
+        //Clumpy
+        msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
+        //Striated
+        msg += "<br/>5. Striated score: " + scag.striatedScore;
+        //Convex
+        msg += "<br/>6. Convex score: " + scag.convexScore;
+        //Skinny
+        msg += "<br/>7. Skinny score: " + scag.skinnyScore;
+        //Stringy
+        msg += "<br/>8. Stringy score: " + scag.stringyScore;
+        //Monotonic
+        msg += "<br/>9. Monotonic score: " + scag.monotonicScore;
+        //Set the scagnostics message
+        d3.select("#" + msgContainer).html(msg);
+    }
+
     function draw(scag) {
-
-
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
         //Binning
         var color = d3.scaleSequential(d3.interpolateLab("grey", "steelblue"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
-        // binHexagons = g.append("g")
+        // bins = g.append("g")
         //     .attr("class", "hexagon")
         //     .selectAll("path")
         //     .data(scag.bins)
@@ -161,19 +182,7 @@
         //         return color(d.length);
         //     });
 
-        binLeaders = g.append("g")
-            .attr("class", "leader")
-            .selectAll("circle")
-            .data(scag.bins)
-            .enter().append("circle")
-            .attr("r", scaleX(scag.binRadius))
-            .attr("cx", d=>scaleX(d.x))
-            .attr("cy", d=>scaleY(d.y))
-            .attr("fill", function (d) {
-                return color(d.length);
-            });
-
-        binLeaderCoverages = g.append("g")
+        bins = g.append("g")
             .attr("class", "leader")
             .selectAll("circle")
             .data(scag.bins)
@@ -340,29 +349,8 @@
             .attr("stroke", "none")
             .attr("fill", "orange");
         //Scagnostics messages
-        let msg = "Scagnostics";
-        //Binning
-        msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins";
-        //Outlying
-        msg += "<br/>1. Outlying score: " + scag.outlyingScore;
-        //Skewed
-        msg += "<br/>2. Skewed score: " + scag.skewedScore;
-        //Sparse
-        msg += "<br/>3. Sparse score: " + scag.sparseScore;
-        //Clumpy
-        msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
-        //Striated
-        msg += "<br/>5. Striated score: " + scag.striatedScore;
-        //Convex
-        msg += "<br/>6. Convex score: " + scag.convexScore;
-        //Skinny
-        msg += "<br/>7. Skinny score: " + scag.skinnyScore;
-        //Stringy
-        msg += "<br/>8. Stringy score: " + scag.stringyScore;
-        //Monotonic
-        msg += "<br/>9. Monotonic score: " + scag.monotonicScore;
-        //Set the scagnostics message
-        d3.select("#msg").html(msg);
+        let msgContainer = "msg";
+        displayScagScores(scag, msgContainer);
     }
 </script>
 

@@ -2,14 +2,6 @@ import {Delaunator} from "./modules/delaunator";
 import {createGraph} from "./modules/kruskal-mst";
 import {mst} from "./modules/kruskal-mst";
 import {Outlying} from "./modules/outlying";
-import {Skewed} from "./modules/skewed";
-import {Sparse} from "./modules/sparse";
-import {Clumpy} from "./modules/clumpy";
-import {Striated} from "./modules/striated";
-import {Convex} from "./modules/convex";
-import {Skinny} from "./modules/skinny";
-import {Stringy} from "./modules/stringy";
-import {Monotonic} from "./modules/monotonic";
 import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
 // import {Binner} from './modules/binner';
@@ -19,7 +11,7 @@ import {LeaderBinner} from "./modules/leaderbinner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.scagnostics = function(inputPoints) {
+    window.outliagnostics = function(inputPoints) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         /******This section is about normalizing the data******/
@@ -82,62 +74,9 @@ import {LeaderBinner} from "./modules/leaderbinner";
         outputValue("outlyingPoints", outlyingPoints);
         outputValue("noOutlyingTree", noOutlyingTree);
 
-        /******This section is about the skewed score and skewed score results******/
-        let skewed = new Skewed(noOutlyingTree);
-        outputValue("skewedScore", skewed.score());
-
-        /******This section is about the sparse score and sparse score results******/
-        let sparse = new Sparse(noOutlyingTree);
-        outputValue("sparseScore", sparse.score());
-
-        /******This section is about the clumpy score and clumpy score results******/
-        let clumpy = new Clumpy(noOutlyingTree);
-        outputValue("clumpy", clumpy);
-        outputValue("clumpyScore", clumpy.score());
-
-        /******This section is about the striated score and striated score results******/
-        let striated = new Striated(noOutlyingTree);
-        let v2Corners = striated.getAllV2Corners();
-        let obtuseV2Corners = striated.getAllObtuseV2Corners();
-        outputValue("striatedScore", striated.score());
-        outputValue("v2Corners", v2Corners);
-        outputValue("obtuseV2Corners", obtuseV2Corners);
-
-        /******This section is about the convex hull and convex hull results******/
-        let convex = new Convex(noOutlyingTree);
-        let convexHull = convex.convexHull();
-        let noOutlyingTriangleCoordinates = convex.noOutlyingTriangleCoordinates();
-        outputValue("noOutlyingTriangleCoordinates", noOutlyingTriangleCoordinates);
-        outputValue("convexHull", convexHull);
-
-        /******This section is about the concave hull and concave hull results******/
-        let concaveHull = convex.concaveHull();
-        outputValue("concaveHull", concaveHull);
-
-        /******This section is about the convex score and convex score results******/
-        let convexScore = convex.score();
-        outputValue("convexScore", convexScore);
-
-        /******This section is about the skinny score and skinny score results******/
-        let skinny = new Skinny(concaveHull);
-        let skinnyScore = skinny.score();
-        outputValue("skinnyScore", skinnyScore);
-
-        /******This section is about the stringy score and stringy score results******/
-        let stringy = new Stringy(noOutlyingTree);
-        let v1s = stringy.getAllV1s();
-        let stringyScore = stringy.score();
-        outputValue("v1s", v1s);
-        outputValue("stringyScore", stringyScore);
-
-        /******This section is about the monotonic score and monotonic score results******/
-        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
-        let monotonicScore = monotonic.score();
-        outputValue("monotonicScore", monotonicScore);
-
-        return window.scagnostics;
+        return window.outliagnostics;
         function outputValue(name, value){
-            window.scagnostics[name] = value;
+            window.outliagnostics[name] = value;
         }
     };
 
