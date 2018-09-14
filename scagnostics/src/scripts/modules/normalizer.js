@@ -8,8 +8,8 @@ export class Normalizer {
             minX = this.minX = _.min(xArr),
             maxY = this.maxY = _.max(yArr),
             minY = this.minY = _.min(yArr),
-            rangeX = this.rangeX = maxX - minX,
-            rangeY = this.rangeY = maxY - minY,
+            rangeX = this.rangeX = (maxX!=minX) ? maxX - minX: 1,
+            rangeY = this.rangeY = (maxY!=minY) ? maxY - minY: 1,
             normalizedXArr = this.normalizedXArr = xArr.map(x => (x - minX) / rangeX),
             normalizedYArr = this.normalizedYArr = yArr.map(y => (y - minY) / rangeY);
         this.normalizedPoints = _.zip(normalizedXArr, normalizedYArr);

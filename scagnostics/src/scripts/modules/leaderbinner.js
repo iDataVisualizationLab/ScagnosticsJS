@@ -3,6 +3,7 @@ import _ from "underscore";
 
 export class LeaderBinner{
     constructor(points, radius){
+        //TODO: Should check if there are more than 3 unique values here or even after the binning.
         //Clone these to avoid modifying them
         this.points = points.map(p=>p.slice(0));
         this.radius = radius;
@@ -11,6 +12,7 @@ export class LeaderBinner{
         let self = this;
         let theLeaders = [];
         //find all the leaders
+
         this.points.forEach(point=>{
             let leader = closestLeader(theLeaders, point);
             if(!leader){
@@ -41,5 +43,4 @@ export class LeaderBinner{
             return theLeader;
         }
     }
-
 }

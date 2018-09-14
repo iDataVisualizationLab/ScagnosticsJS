@@ -4,6 +4,7 @@ import {mst} from "./modules/kruskal-mst";
 import {Outlying} from "./modules/outlying";
 import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
+import {Binner} from "./modules/binner";
 // import {Binner} from './modules/binner';
 (function(window){
     /**
@@ -11,14 +12,15 @@ import {LeaderBinner} from "./modules/leaderbinner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints) {
+    window.outliagnostics = function(inputPoints, binType, isNormalized) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
+        let normalizedPoints = points;
         /******This section is about normalizing the data******/
-        let normalizer = new Normalizer(points);
-        let normalizedPoints = normalizer.normalizedPoints;
-        outputValue("normalizer", normalizer);
-        outputValue("normalizedPoints", normalizedPoints);
+        if(!isNormalized){
+            let normalizer = new Normalizer(points);
+                normalizedPoints = normalizer.normalizedPoints;
+        }
         /******This section is about finding number of bins and binners******/
         let binSize = null;
         let bins = [];
@@ -27,53 +29,32 @@ import {LeaderBinner} from "./modules/leaderbinner";
         do{
             //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
             binSize = (binSize===null)?40: binSize/2;
-            //// This section uses hexagon binning
-            // let shortDiagonal = 1/binSize;
-            // binRadius = Math.sqrt(3)*shortDiagonal/2;
-            // binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-            // bins = binner.hexbin(normalizedPoints);
-            // This section uses leader binner
-            binRadius = 1/(binSize*2);
-            binner = new LeaderBinner(normalizedPoints, binRadius);
-            bins = binner.leaders;
+            if(binType==="hexagon"){
+                // This section uses hexagon binning
+                let shortDiagonal = 1/binSize;
+                binRadius = Math.sqrt(3)*shortDiagonal/2;
+                binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+                bins = binner.hexbin(normalizedPoints);
+            }else if(!binType || binType==="leader"){
+                // This section uses leader binner
+                binRadius = 1/(binSize*2);
+                binner = new LeaderBinner(normalizedPoints, binRadius);
+                bins = binner.leaders;
+            }
         }while(bins.length > 250);
         let sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
-        //Assigning output results
-        outputValue("binner", binner);
-        outputValue("bins", bins);
-        outputValue("binSize", binSize);
-        outputValue("binRadius", binRadius)
-        outputValue("binnedSites", sites);
-
         /******This section is about the triangulating and triangulating results******/
         //Triangulation calculation
         let delaunay = Delaunator.from(sites);
-        let triangles = delaunay.triangles;
         let triangleCoordinates = delaunay.triangleCoordinates();
-        //Assigning output values
-        outputValue("delaunay", delaunay);
-        outputValue("triangles", triangles);
-        outputValue("triangleCoordinates", triangleCoordinates);
-
         /******This section is about the spanning tree and spanning tree results******/
         //Spanning tree calculation
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
-        //Assigning the output values
-        outputValue("graph", graph);
-        outputValue("mst", mstree);
-
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
-        let outlyingLinks = outlying.links();
-        let outlyingPoints = outlying.points();
-        let noOutlyingTree = outlying.removeOutlying();
         outputValue("outlyingScore", outlyingScore);
-        outputValue("outlyingLinks", outlyingLinks);
-        outputValue("outlyingPoints", outlyingPoints);
-        outputValue("noOutlyingTree", noOutlyingTree);
-
         return window.outliagnostics;
         function outputValue(name, value){
             window.outliagnostics[name] = value;

@@ -4,6 +4,7 @@ export default {
     // input: 'src/scripts/scagnostics.js',
     input: 'src/scripts/outliagnostics.js',
     output:{
+        // file:'build/js/scagnostics.min.js',
         file:'build/js/outliagnostics.min.js',
         format: 'iife',
         sourcemap: 'inline',

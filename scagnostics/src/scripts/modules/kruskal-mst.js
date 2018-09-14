@@ -104,17 +104,11 @@ export function createGraph (triangles) {
         }
     });
 
-    function distance(a, b) {
-        var dx = a[0] - b[0],
-            dy = a[1] - b[1];
-        //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
-        //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
-        return +Math.sqrt((dx * dx) + (dy * dy)).toFixed(10);
-    }
 
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.
     function linkExists(links, link) {
-        for (let i = 0; i < links.length; i++) {
+        let length = links.length;
+        for (let i = length-1; i >= 0; --i) {
             if (equalLinks(link, links[i])) {
                 return true;
             }
@@ -134,23 +128,15 @@ export function distance(a, b) {
 }
 
 export function equalPoints(id1, id2) {
-    if (id1[0] === id2[0] && id1[1] === id2[1]) {
-        return true;
-    } else {
-        return false;
-    }
+    return (id1[0] === id2[0] && id1[1] === id2[1]);
 }
 export function equalLinks(l1, l2) {
-    if ((equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
-        (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source))) {
-        return true;
-    }else{
-        return false;
-    }
+    return (equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
+        (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source));
 }
 export function idExists(nodes, id) {
-
-    for (let i = 0; i < nodes.length; i++) {
+    let length = nodes.length;
+    for (let i = length-1; i >= 0; --i) {
         let node = nodes[i];
         if (equalPoints(node.id, id)) {
             return true;
@@ -252,12 +238,8 @@ DisjointSet.prototype.union = function (x, y) {
 // Returns the current number of disjoint sets.
 DisjointSet.prototype.size = function () {
     let uniqueIndices = {};
-
     Object.keys(this.index_).forEach((id) => {
-        let representative = this.find(id);
-
         uniqueIndices[id] = true;
     });
-
     return Object.keys(uniqueIndices).length;
 }

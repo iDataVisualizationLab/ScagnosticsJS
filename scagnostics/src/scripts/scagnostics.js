@@ -12,6 +12,7 @@ import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
 import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
+import {Binner} from "./modules/binner";
 // import {Binner} from './modules/binner';
 (function(window){
     /**
@@ -19,7 +20,8 @@ import {LeaderBinner} from "./modules/leaderbinner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.scagnostics = function(inputPoints) {
+    window.scagnostics = function(inputPoints, binType) {
+        //TODO: If the input points have less than 3 unique values => it is pointless to do all scagnostics => should check this. We leave this for the user to check to improve performance.
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         /******This section is about normalizing the data******/
@@ -35,15 +37,18 @@ import {LeaderBinner} from "./modules/leaderbinner";
         do{
             //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
             binSize = (binSize===null)?40: binSize/2;
-            //// This section uses hexagon binning
-            // let shortDiagonal = 1/binSize;
-            // binRadius = Math.sqrt(3)*shortDiagonal/2;
-            // binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-            // bins = binner.hexbin(normalizedPoints);
-            // This section uses leader binner
-            binRadius = 1/(binSize*2);
-            binner = new LeaderBinner(normalizedPoints, binRadius);
-            bins = binner.leaders;
+            if(binType==="hexagon"){
+                // This section uses hexagon binning
+                let shortDiagonal = 1/binSize;
+                binRadius = Math.sqrt(3)*shortDiagonal/2;
+                binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+                bins = binner.hexbin(normalizedPoints);
+            }else if(!binType || binType==="leader"){
+                // This section uses leader binner
+                binRadius = 1/(binSize*2);
+                binner = new LeaderBinner(normalizedPoints, binRadius);
+                bins = binner.leaders;
+            }
         }while(bins.length > 250);
         let sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
         //Assigning output results
