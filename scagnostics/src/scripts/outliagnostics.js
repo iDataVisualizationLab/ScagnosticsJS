@@ -12,7 +12,7 @@ import {Binner} from "./modules/binner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, binType, isNormalized) {
+    window.outliagnostics = function(inputPoints, binType, isNormalized, isBinned) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
@@ -22,27 +22,34 @@ import {Binner} from "./modules/binner";
                 normalizedPoints = normalizer.normalizedPoints;
         }
         /******This section is about finding number of bins and binners******/
-        let binSize = null;
-        let bins = [];
-        let binner = null;
-        let binRadius = 0;
-        do{
-            //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
-            binSize = (binSize===null)?40: binSize/2;
-            if(binType==="hexagon"){
-                // This section uses hexagon binning
-                let shortDiagonal = 1/binSize;
-                binRadius = Math.sqrt(3)*shortDiagonal/2;
-                binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-                bins = binner.hexbin(normalizedPoints);
-            }else if(!binType || binType==="leader"){
-                // This section uses leader binner
-                binRadius = 1/(binSize*2);
-                binner = new LeaderBinner(normalizedPoints, binRadius);
-                bins = binner.leaders;
-            }
-        }while(bins.length > 250);
-        let sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
+        let sites = null;
+        let bins = null;
+        if(!isBinned){//Only do the binning if needed.
+            let binSize = null;
+            let binner = null;
+            let binRadius = 0;
+            bins = [];
+            do{
+                //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
+                binSize = (binSize===null)?40: binSize/2;
+                if(binType==="hexagon"){
+                    // This section uses hexagon binning
+                    let shortDiagonal = 1/binSize;
+                    binRadius = Math.sqrt(3)*shortDiagonal/2;
+                    binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+                    bins = binner.hexbin(normalizedPoints);
+                }else if(!binType || binType==="leader"){
+                    // This section uses leader binner
+                    binRadius = 1/(binSize*2);
+                    binner = new LeaderBinner(normalizedPoints, binRadius);
+                    bins = binner.leaders;
+                }
+            }while(bins.length > 250);
+            sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
+        }else{
+            sites = normalizedPoints;
+        }
+
         /******This section is about the triangulating and triangulating results******/
         //Triangulation calculation
         let delaunay = Delaunator.from(sites);
@@ -54,6 +61,7 @@ import {Binner} from "./modules/binner";
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
+        outputValue("bins", bins);
         outputValue("outlyingScore", outlyingScore);
         return window.outliagnostics;
         function outputValue(name, value){

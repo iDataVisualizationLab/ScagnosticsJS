@@ -13,6 +13,11 @@ export class Normalizer {
             normalizedXArr = this.normalizedXArr = xArr.map(x => (x - minX) / rangeX),
             normalizedYArr = this.normalizedYArr = yArr.map(y => (y - minY) / rangeY);
         this.normalizedPoints = _.zip(normalizedXArr, normalizedYArr);
+        //Add one step to pass the data over if there is.
+        let length = this.points.length;
+        for (let i = 0; i < length; i++) {
+            this.normalizedPoints[i].data = this.points[i].data;
+        }
     }
 
     /**

@@ -4,8 +4,10 @@ import _ from "underscore";
 export class LeaderBinner{
     constructor(points, radius){
         //TODO: Should check if there are more than 3 unique values here or even after the binning.
-        //Clone these to avoid modifying them
-        this.points = points.map(p=>p.slice(0));
+        //TODO: May need to clone the points to avoid modifying it, but we don't do to reserve other data or to make the process faster
+        // //Clone these to avoid modifying them
+        // this.points = points.map(p=>p.slice(0));
+        this.points = points;
         this.radius = radius;
     }
     get leaders(){
@@ -20,6 +22,7 @@ export class LeaderBinner{
                 newLeader.x = point[0];
                 newLeader.y = point[1];
                 newLeader.radius = 0;
+                newLeader.push(point);//push itself to the set of members
                 theLeaders.push(newLeader);
             }
         });
