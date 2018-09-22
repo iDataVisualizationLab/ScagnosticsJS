@@ -31,7 +31,7 @@ import {Binner} from "./modules/binner";
             bins = [];
             do{
                 //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
-                binSize = (binSize===null)?40: binSize/2;
+                binSize = (binSize===null)?15: binSize/2;
                 if(binType==="hexagon"){
                     // This section uses hexagon binning
                     let shortDiagonal = 1/binSize;

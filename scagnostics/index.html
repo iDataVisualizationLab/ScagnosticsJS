@@ -59,7 +59,6 @@
     createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
     let dataPointRadius = 2;
-    // let binHexagons = null;
     let bins = null;
     let triangulations = null;//path
     let mst = null;//path
@@ -81,7 +80,7 @@
         width = +scagsvg.attr("width") - margins.left - margins.right,
         height = +scagsvg.attr("height") - margins.top - margins.bottom,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
-        scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
+        scaleY = d3.scaleLinear().domain([0, 1]).range([height, 0]);
 
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(width / 2, 50),
@@ -94,23 +93,46 @@
     // draw(scag);
 
 
-    /***********FAITHFUL DATA*******************/
-    d3.tsv("../data/faithful.tsv", (error, rawData)=>{
-        if(error) throw error;
-        let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
-        let scag = scagnostics(points);
-        drawNormalizedData(scag);
-        draw(scag);
-    });
+    // /***********FAITHFUL DATA*******************/
+    // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
+    //     if(error) throw error;
+    //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
+    //     let scag = scagnostics(points, "hexagon");
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    // });
 
     // /***********FLOWER DATA*******************/
     // d3.csv("../data/flowers.csv", (error, rawData) => {
     //     if (error) throw error;
     //     let points = rawData.map(d => [+d["sepal width"], +d["sepal length"]]);
-    //     let scag = scagnostics(points);
+    //     let scag = scagnostics(points, "hexagon");
     //     drawNormalizedData(scag);
     //     draw(scag);
     // });
+
+    /***********NYSE DATA*******************/
+    d3.json("../data/prices.json", (error, rawData) => {
+        if (error) throw error;
+        let dataS = rawData;
+        let points = getYearData(33);
+        //Filter NaN points
+        points = points.filter(x => x[0]!=='NaN' && x[1] !== 'NaN');
+        let scag = scagnostics(points, "hexagon");
+        drawNormalizedData(scag);
+        draw(scag);
+        function getYearData(year) {
+            let cd = dataS["CountriesData"];
+            //convert to points
+            let y = [];
+            d3.keys(cd).forEach(country => {
+                let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+                point.data = country;
+                y.push(point);
+            });
+            return y;
+        }
+    });
 
     function drawNormalizedData(scag) {
         //Main container
@@ -169,31 +191,31 @@
         var color = d3.scaleSequential(d3.interpolateLab("grey", "steelblue"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
-        // bins = g.append("g")
-        //     .attr("class", "hexagon")
-        //     .selectAll("path")
-        //     .data(scag.bins)
-        //     .enter().append("path")
-        //     .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
-        //     .attr("transform", function (d) {
-        //         return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
-        //     })
-        //     .attr("fill", function (d) {
-        //         return color(d.length);
-        //     });
-
         bins = g.append("g")
-            .attr("class", "leader")
-            .selectAll("circle")
+            .attr("class", "hexagon")
+            .selectAll("path")
             .data(scag.bins)
-            .enter().append("circle")
-            .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
-            .attr("cx", d=>scaleX(d.x))
-            .attr("cy", d=>scaleY(d.y))
-            .attr("fill", function (d) {
-                return color(d.length)
+            .enter().append("path")
+            .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
+            .attr("transform", function (d) {
+                return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
             })
-            .attr("stroke-width", 0.5);
+            .attr("fill", function (d) {
+                return color(d.length);
+            });
+
+        // bins = g.append("g")
+        //     .attr("class", "leader")
+        //     .selectAll("circle")
+        //     .data(scag.bins)
+        //     .enter().append("circle")
+        //     .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
+        //     .attr("cx", d=>scaleX(d.x))
+        //     .attr("cy", d=>scaleY(d.y))
+        //     .attr("fill", function (d) {
+        //         return color(d.length)
+        //     })
+        //     .attr("stroke-width", 0.5);
 
         //Triangulating
         triangulations = g.append("g")
