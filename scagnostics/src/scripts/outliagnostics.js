@@ -12,7 +12,7 @@ import {Binner} from "./modules/binner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, binType, isNormalized, isBinned) {
+    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
@@ -24,10 +24,14 @@ import {Binner} from "./modules/binner";
         /******This section is about finding number of bins and binners******/
         let sites = null;
         let bins = null;
+
         if(!isBinned){//Only do the binning if needed.
             let binSize = null;
             let binner = null;
             let binRadius = 0;
+            if(!startBinGridSize){
+                startBinGridSize = 40;
+            }
             bins = [];
             do{
                 //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells

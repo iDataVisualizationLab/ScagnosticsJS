@@ -20,7 +20,7 @@ import {Binner} from "./modules/binner";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.scagnostics = function(inputPoints, binType) {
+    window.scagnostics = function(inputPoints, binType, startBinGridSize) {
         //TODO: If the input points have less than 3 unique values => it is pointless to do all scagnostics => should check this. We leave this for the user to check to improve performance.
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
@@ -34,9 +34,12 @@ import {Binner} from "./modules/binner";
         let bins = [];
         let binner = null;
         let binRadius = 0;
+        if(!startBinGridSize){
+            startBinGridSize = 40;
+        }
         do{
             //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
-            binSize = (binSize===null)?20: binSize/2;
+            binSize = (binSize===null)?startBinGridSize: binSize/2;
             if(binType==="hexagon"){
                 // This section uses hexagon binning
                 let shortDiagonal = 1/binSize;
