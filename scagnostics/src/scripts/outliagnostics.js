@@ -37,8 +37,8 @@ import _ from "underscore";
             let minNumOfBins = 50;
             let maxNumOfBins = 250;
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
-            let uniqueKeys = _.uniq(points.map(p=>p.join(',')));
-            let groups = _.groupBy(points, p=>p.join(','));
+            let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));
+            let groups = _.groupBy(normalizedPoints, p=>p.join(','));
             if(uniqueKeys.length<minNumOfBins){
                 uniqueKeys.forEach(key=>{
                     let bin = groups[key];

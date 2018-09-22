@@ -115,12 +115,17 @@
     d3.json("../data/prices.json", (error, rawData) => {
         if (error) throw error;
         let dataS = rawData;
-        let points = getYearData(33);
+        let year = 44;
+        let leaveOut = 'None';
+        let points = getYearData(year);
         //Filter NaN points
-        points = points.filter(x => x[0]!=='NaN' && x[1] !== 'NaN');
-        let scag = scagnostics(points, "hexagon", 50);
+        points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+        let scag = scagnostics(points, "hexagon", 40);
         drawNormalizedData(scag);
         draw(scag);
+        function isValidPoint(d) {
+            return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+        }
         function getYearData(year) {
             let cd = dataS["CountriesData"];
             //convert to points
