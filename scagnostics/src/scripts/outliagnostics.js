@@ -5,6 +5,7 @@ import {Outlying} from "./modules/outlying";
 import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
+import _ from "underscore";
 // import {Binner} from './modules/binner';
 (function(window){
     /**
@@ -33,22 +34,44 @@ import {Binner} from "./modules/binner";
                 startBinGridSize = 40;
             }
             bins = [];
-            do{
-                //Start with 40x40 bins, and divided by 2 every time there are more than 250 none empty cells
-                binSize = (binSize===null)?startBinGridSize: binSize/2;
-                if(binType==="hexagon"){
-                    // This section uses hexagon binning
-                    let shortDiagonal = 1/binSize;
-                    binRadius = Math.sqrt(3)*shortDiagonal/2;
-                    binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-                    bins = binner.hexbin(normalizedPoints);
-                }else if(!binType || binType==="leader"){
-                    // This section uses leader binner
-                    binRadius = 1/(binSize*2);
-                    binner = new LeaderBinner(normalizedPoints, binRadius);
-                    bins = binner.leaders;
-                }
-            }while(bins.length > 250);
+            let minNumOfBins = 50;
+            let maxNumOfBins = 250;
+            //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
+            let uniqueKeys = _.uniq(points.map(p=>p.join(',')));
+            let groups = _.groupBy(points, p=>p.join(','));
+            if(uniqueKeys.length<minNumOfBins){
+                uniqueKeys.forEach(key=>{
+                    let bin = groups[key];
+                    //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
+                    bin.x = bin[0][0];
+                    bin.y = bin[0][1];
+                    bin.binRadius = 0;
+                    bins.push(bin);
+                });
+            }else{
+                do{
+                    //Start with 40x40 bins, and divided by 2 every time there are more than maxNumberofBins none empty cells, increase 5 (+5) if less than minNumberOfBins
+                    if(binSize===null){
+                        binSize = startBinGridSize;
+                    }else if(bins.length>maxNumOfBins){
+                        binSize = binSize/2;
+                    }else if(bins.length<minNumOfBins){
+                        binSize = binSize + 5;
+                    }
+                    if(binType==="hexagon"){
+                        // This section uses hexagon binning
+                        let shortDiagonal = 1/binSize;
+                        binRadius = Math.sqrt(3)*shortDiagonal/2;
+                        binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+                        bins = binner.hexbin(normalizedPoints);
+                    }else if(!binType || binType==="leader"){
+                        // This section uses leader binner
+                        binRadius = 1/(binSize*2);
+                        binner = new LeaderBinner(normalizedPoints, binRadius);
+                        bins = binner.leaders;
+                    }
+                }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
+            }
             sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
         }else{
             sites = normalizedPoints;

@@ -118,7 +118,7 @@
         let points = getYearData(33);
         //Filter NaN points
         points = points.filter(x => x[0]!=='NaN' && x[1] !== 'NaN');
-        let scag = scagnostics(points, "hexagon");
+        let scag = scagnostics(points, "hexagon", 50);
         drawNormalizedData(scag);
         draw(scag);
         function getYearData(year) {
@@ -161,7 +161,7 @@
     function displayScagScores(scag, msgContainer) {
         let msg = "Scagnostics";
         //Binning
-        msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins";
+        msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins" + ", num of bins: " + scag.bins.length;
         //Outlying
         msg += "<br/>1. Outlying score: " + scag.outlyingScore;
         //Skewed
