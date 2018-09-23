@@ -13,7 +13,7 @@ import _ from "underscore";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned) {
+    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
@@ -86,10 +86,12 @@ import _ from "underscore";
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
         /******This section is about the outlying score and outlying score results******/
-        let outlying = new Outlying(mstree);
+        let outlying = new Outlying(mstree, outlyingUpperBound);
         let outlyingScore = outlying.score();
         outputValue("bins", bins);
         outputValue("outlyingScore", outlyingScore);
+        outputValue("outlyingUpperBound", outlying.upperBound);
+
         return window.outliagnostics;
         function outputValue(name, value){
             window.outliagnostics[name] = value;

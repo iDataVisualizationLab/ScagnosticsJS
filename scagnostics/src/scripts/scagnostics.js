@@ -105,10 +105,12 @@ import _ from "underscore"
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
+        let outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();
         let outlyingPoints = outlying.points();
         let noOutlyingTree = outlying.removeOutlying();
         outputValue("outlyingScore", outlyingScore);
+        outputValue("outlyingUpperBound", outlyingUpperBound);
         outputValue("outlyingLinks", outlyingLinks);
         outputValue("outlyingPoints", outlyingPoints);
         outputValue("noOutlyingTree", noOutlyingTree);

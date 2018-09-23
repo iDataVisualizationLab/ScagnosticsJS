@@ -116,7 +116,7 @@
         if (error) throw error;
         let dataS = rawData;
         let year = 44;
-        let leaveOut = 'None';
+        let leaveOut = 'AAPL';
         let points = getYearData(year);
         //Filter NaN points
         points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
@@ -168,7 +168,7 @@
         //Binning
         msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins" + ", num of bins: " + scag.bins.length;
         //Outlying
-        msg += "<br/>1. Outlying score: " + scag.outlyingScore;
+        msg += "<br/>1. Outlying score: " + scag.outlyingScore + ", outlying edge cut point: " + scag.outlyingUpperBound;
         //Skewed
         msg += "<br/>2. Skewed score: " + scag.skewedScore;
         //Sparse

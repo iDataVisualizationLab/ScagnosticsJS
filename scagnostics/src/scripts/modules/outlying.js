@@ -6,9 +6,10 @@ import {createGraph, mst} from "./kruskal-mst";
 
 
 export class Outlying {
-    constructor(tree) {
+    constructor(tree, upperBound) {
         //Clone the tree to avoid modifying it
         this.tree = JSON.parse(JSON.stringify(tree));
+        this.upperBound = upperBound;
     }
 
     /**
@@ -18,12 +19,17 @@ export class Outlying {
     score() {
         let tree = this.tree,
             totalLengths = 0,
-            totalOutlyingLengths = 0,
-            allLengths = tree.links.map(l => l.weight),
-            q1 = quantile(allLengths, 0.25),
-            q3 = quantile(allLengths, 0.75),
-            iqr = q3 - q1;
-        let upperBound = q3+1.5*iqr;
+            totalOutlyingLengths = 0;
+        let upperBound = this.upperBound;
+        if(!upperBound){
+            let allLengths = tree.links.map(l => l.weight),
+                q1 = quantile(allLengths, 0.25),
+                q3 = quantile(allLengths, 0.75),
+                iqr = q3 - q1;
+            upperBound = q3+1.5*iqr;
+            //Save it for displaying purpose.
+            this.upperBound = upperBound;
+        }
         tree.links.forEach(l => {
             totalLengths += l.weight;
             if (l.weight > upperBound) {
