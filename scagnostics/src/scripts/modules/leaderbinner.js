@@ -14,14 +14,12 @@ export class LeaderBinner{
         let self = this;
         let theLeaders = [];
         //find all the leaders
-
         this.points.forEach(point=>{
             let leader = closestLeader(theLeaders, point);
             if(!leader){
                 let newLeader = [];
                 newLeader.x = point[0];
                 newLeader.y = point[1];
-                newLeader.radius = 0;
                 newLeader.push(point);//push itself to the set of members
                 theLeaders.push(newLeader);
             }
@@ -35,14 +33,12 @@ export class LeaderBinner{
         function closestLeader(leaders, point){
             let distances = leaders.map(l=>distance([l.x, l.y], point));
             //Filter the distance to be <= the radius
-            distances = distances.filter(d=>d<self.radius);
-            if(distances.length===0){
+            let copiedDistances = distances.filter(d=>d<self.radius);
+            if(copiedDistances.length===0){
                 return null;
             }
             let theDistance = _.min(distances);
             let theLeader = leaders[distances.indexOf(theDistance)];
-            //Update the radius of the leader if needed.
-            if(theLeader.radius < theDistance) theLeader.radius = theDistance;
             return theLeader;
         }
     }

@@ -46,7 +46,9 @@
 </div>
 <div id="msg"></div>
 <script>
-    let optionsBinLeader = ["bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"];
+    let binType = "leader"
+
+    let optionsBinLeader = ["origPoints", "bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"];
     function createControlButtons(theContainer, theOptions){
         let controlButtons = d3.select("#"+theContainer);
         theOptions.forEach(option=>{
@@ -59,6 +61,7 @@
     createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
     let dataPointRadius = 2;
+    let origPoints = null;
     let bins = null;
     let triangulations = null;//path
     let mst = null;//path
@@ -140,15 +143,15 @@
     // });
 
     /***********NYSE DATA*******************/
-    d3.json("../data/HPCC_data (38).json", (error, rawData) => {
+    d3.json("../data/HPCC_scagnostics.json", (error, rawData) => {
         if (error) throw error;
         let dataS = rawData;
-        let year = 0;
+        let year = 10;
         let leaveOut = 'None';
         let points = getYearData(year);
         //Filter NaN points
         points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-        let scag = scagnostics(points, "hexagon", 40);
+        let scag = scagnostics(points, binType, 0);
         drawNormalizedData(scag);
         draw(scag);
         function isValidPoint(d) {
@@ -220,36 +223,70 @@
     function draw(scag) {
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
+        //Original points
+        origPoints = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
+        origPoints.append("g").selectAll("circle")
+            .data(scag.normalizedPoints)
+            .enter()
+            .append("circle")
+            .attr("cx", d => scaleX(d[0]))
+            .attr("cy", d => scaleY(d[1]))
+            .attr("r", dataPointRadius)
+            .attr("fill", "black")
+            .attr("stroke", "none");
+
         //Binning
         var color = d3.scaleSequential(d3.interpolateLab("grey", "steelblue"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
-        bins = g.append("g")
-            .attr("class", "hexagon")
-            .selectAll("path")
-            .data(scag.bins)
-            .enter().append("path")
-            .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
-            .attr("transform", function (d) {
-                return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
-            })
-            .attr("fill", function (d) {
-                return color(d.length);
-            });
+        if(binType==="hexagon"){
+            bins = g.append("g")
+                .attr("class", "hexagon")
+                .selectAll("path")
+                .data(scag.bins)
+                .enter().append("path")
+                .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
+                .attr("transform", function (d) {
+                    return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
+                })
+                .attr("fill", d => color(d.length));
+        }else{
+            // bins = g.append("g")
+            //     .attr("class", "leader")
+            //     .selectAll("circle")
+            //     .data(scag.bins)
+            //     .enter().append("circle")
+            //     // .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
+            //     .attr("r", scaleX(scag.binRadius))
+            //     .attr("cx", d=>scaleX(d.x))
+            //     .attr("cy", d=>scaleY(d.y))
+            //     .attr("fill", "none")
+            //     .attr("stroke", d=>color(d.length))
+            //     .attr("stroke-width", 0.5);
 
-        // bins = g.append("g")
-        //     .attr("class", "leader")
-        //     .selectAll("circle")
-        //     .data(scag.bins)
-        //     .enter().append("circle")
-        //     .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
-        //     .attr("cx", d=>scaleX(d.x))
-        //     .attr("cy", d=>scaleY(d.y))
-        //     .attr("fill", function (d) {
-        //         return color(d.length)
-        //     })
-        //     .attr("stroke-width", 0.5);
-
+            bins = g.append("g")
+                .attr("class", "leader")
+                .selectAll("circle")
+                .data(scag.bins)
+                .enter().append("circle")
+                .attr("r", d=> {
+                    let distances = d.map(p=>distance([d.x, d.y], p));
+                    let radius = d3.max(distances);
+                    return radius === 0 ? dataPointRadius: scaleX(radius);
+                })
+                .attr("cx", d=>scaleX(d.x))
+                .attr("cy", d=>scaleY(d.y))
+                .attr("fill", d=>color(d.length))
+                .attr("stroke", d=>color(d.length))
+                .attr("stroke-width", 0.5);
+            function distance(a, b) {
+                let dx = a[0] - b[0],
+                    dy = a[1] - b[1];
+                //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
+                //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
+                return Math.round(Math.sqrt((dx * dx) + (dy * dy))*Math.pow(10, 10))/Math.pow(10, 10);
+            }
+        }
         //Triangulating
         triangulations = g.append("g")
             .attr("class", "triangles")
