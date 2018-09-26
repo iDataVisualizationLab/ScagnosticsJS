@@ -111,12 +111,40 @@
     //     draw(scag);
     // });
 
+    // /***********NYSE DATA*******************/
+    // d3.json("../data/prices.json", (error, rawData) => {
+    //     if (error) throw error;
+    //     let dataS = rawData;
+    //     let year = 44;
+    //     let leaveOut = 'AAPL';
+    //     let points = getYearData(year);
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+    //     let scag = scagnostics(points, "hexagon", 40);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    //     function isValidPoint(d) {
+    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+    //     }
+    //     function getYearData(year) {
+    //         let cd = dataS["CountriesData"];
+    //         //convert to points
+    //         let y = [];
+    //         d3.keys(cd).forEach(country => {
+    //             let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+    //             point.data = country;
+    //             y.push(point);
+    //         });
+    //         return y;
+    //     }
+    // });
+
     /***********NYSE DATA*******************/
-    d3.json("../data/prices.json", (error, rawData) => {
+    d3.json("../data/HPCC_data (38).json", (error, rawData) => {
         if (error) throw error;
         let dataS = rawData;
-        let year = 44;
-        let leaveOut = 'AAPL';
+        let year = 0;
+        let leaveOut = 'None';
         let points = getYearData(year);
         //Filter NaN points
         points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
