@@ -143,10 +143,10 @@
     // });
 
     /***********NYSE DATA*******************/
-    d3.json("../data/HPCC_scagnostics.json", (error, rawData) => {
+    d3.json("../data/HPCC_scagnostics Overheat.json", (error, rawData) => {
         if (error) throw error;
         let dataS = rawData;
-        let year = 10;
+        let year = 15;
         let leaveOut = 'None';
         let points = getYearData(year);
         //Filter NaN points
@@ -251,34 +251,38 @@
                 })
                 .attr("fill", d => color(d.length));
         }else{
-            // bins = g.append("g")
-            //     .attr("class", "leader")
-            //     .selectAll("circle")
-            //     .data(scag.bins)
-            //     .enter().append("circle")
-            //     // .attr("r", d=> scaleX(d.radius)===0?dataPointRadius:scaleX(d.radius))
-            //     .attr("r", scaleX(scag.binRadius))
-            //     .attr("cx", d=>scaleX(d.x))
-            //     .attr("cy", d=>scaleY(d.y))
-            //     .attr("fill", "none")
-            //     .attr("stroke", d=>color(d.length))
-            //     .attr("stroke-width", 0.5);
-
             bins = g.append("g")
                 .attr("class", "leader")
                 .selectAll("circle")
                 .data(scag.bins)
                 .enter().append("circle")
-                .attr("r", d=> {
-                    let distances = d.map(p=>distance([d.x, d.y], p));
+                // .attr("r", scaleX(scag.binRadius))
+                .attr("r", d => {
+                    let distances = d.map(p => distance([d.x, d.y], p));
                     let radius = d3.max(distances);
-                    return radius === 0 ? dataPointRadius: scaleX(radius);
+                    return radius === 0 ? dataPointRadius : scaleX(radius);
                 })
                 .attr("cx", d=>scaleX(d.x))
                 .attr("cy", d=>scaleY(d.y))
-                .attr("fill", d=>color(d.length))
+                .attr("fill", "none")
                 .attr("stroke", d=>color(d.length))
                 .attr("stroke-width", 0.5);
+
+            // bins = g.append("g")
+            //     .attr("class", "leader")
+            //     .selectAll("circle")
+            //     .data(scag.bins)
+            //     .enter().append("circle")
+            //     .attr("r", d=> {
+            //         let distances = d.map(p=>distance([d.x, d.y], p));
+            //         let radius = d3.max(distances);
+            //         return radius === 0 ? dataPointRadius: scaleX(radius);
+            //     })
+            //     .attr("cx", d=>scaleX(d.x))
+            //     .attr("cy", d=>scaleY(d.y))
+            //     .attr("fill", d=>color(d.length))
+            //     .attr("stroke", d=>color(d.length))
+            //     .attr("stroke-width", 0.5);
             function distance(a, b) {
                 let dx = a[0] - b[0],
                     dy = a[1] - b[1];
