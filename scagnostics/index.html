@@ -143,11 +143,11 @@
     // });
 
     /***********NYSE DATA*******************/
-    d3.json("../data/HPCC_scagnostics Overheat.json", (error, rawData) => {
+    d3.json("../data/prices.json", (error, rawData) => {
         if (error) throw error;
         let dataS = rawData;
-        let year = 15;
-        let leaveOut = 'None';
+        let year = 17;
+        let leaveOut = 'AAPL';
         let points = getYearData(year);
         //Filter NaN points
         points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
