@@ -225,7 +225,7 @@
         });
         //Filter NaN points
         points = points.filter(x => isValidPoint(x));
-        let scag = scagnostics(points, binType, 20);
+        let scag = scagnostics(points, binType, 40);
         drawNormalizedData(scag);
         draw(scag);
         function isValidPoint(d) {

@@ -188,7 +188,8 @@ export class ConcaveHull{
 export function concaveHullArea(concaveHull) {
     let concaveArea = 0;
     concaveHull.forEach(hull => {
-        concaveArea += polygon.polygonArea(hull);
+        let area = polygon.polygonArea(hull);
+        concaveArea += area>0?area:-area;
     });
     return concaveArea;
 }
