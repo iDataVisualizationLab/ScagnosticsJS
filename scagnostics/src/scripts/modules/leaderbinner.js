@@ -20,7 +20,6 @@ export class LeaderBinner{
                 let newLeader = [];
                 newLeader.x = point[0];
                 newLeader.y = point[1];
-                newLeader.push(point);//push itself to the set of members
                 theLeaders.push(newLeader);
             }
         });
