@@ -181,9 +181,6 @@ export class ConcaveHull{
 
         return mean + dev;
     }
-    qDistance(delaunay){
-
-    }
 }
 export function concaveHullArea(concaveHull) {
     let concaveArea = 0;

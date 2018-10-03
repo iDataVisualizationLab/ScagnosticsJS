@@ -73,8 +73,8 @@
     </style>
 </head>
 <body>
-<svg id="normalizedsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
-<svg id="scagsvg" width="500" height="500" style="border: 1px solid black; overflow: visible"></svg>
+<svg id="normalizedsvg" width="500" height="500" style="border: 1px solid black; overflow: visible; margin-top:20px;" ></svg>
+<svg id="scagsvg" width="500" height="500" style="border: 1px solid black; overflow: visible; margin-top:20px;"></svg>
 <div id="controlButtons">
 </div>
 <div id="msg"></div>
@@ -208,34 +208,61 @@
     //         return y;
     //     }
     // });
-    /***********SOIL DATA*******************/
-    d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+    /***********NYSE DATA*******************/
+    d3.json("../data/USEmploymentRateGoodVsService.json", (error, rawData) => {
         if (error) throw error;
-        data = rawData.filter(function (d) {
-            //Valid ID
-            return validGridId(d["Grid ID"]);
-        });
-        let currentColumnNames = ['Al Concentration', 'K Concentration'];
-        let points = data.map(function (d) {
-            var result = [];
-            result.push((d[currentColumnNames[0]].indexOf('<LOD') != -1) ? 0 : +d[currentColumnNames[0]]);
-            result.push((d[currentColumnNames[1]].indexOf('<LOD') != -1) ? 0 : +d[currentColumnNames[1]]);
-            result.data = d['Grid ID'];
-            return result;
-        });
+        let dataS = rawData;
+        let year = 0;
+        let leaveOut = 'None';
+        let points = getYearData(212);
         //Filter NaN points
-        points = points.filter(x => isValidPoint(x));
-        let scag = scagnostics(points, binType, 40);
+        points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+        let scag = scagnostics(points, binType, 20);
         drawNormalizedData(scag);
         draw(scag);
         function isValidPoint(d) {
             return (typeof d[0] === 'number') && (typeof d[1] === 'number');
         }
-        function validGridId(id) {
-            var re = /^[A-Z]\d\d$/g;
-            return id != null && id.match(re) != null;
+        function getYearData(year) {
+            let cd = dataS["CountriesData"];
+            //convert to points
+            let y = [];
+            d3.keys(cd).forEach(country => {
+                let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+                point.data = country;
+                y.push(point);
+            });
+            return y;
         }
     });
+    // /***********SOIL DATA*******************/
+    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+    //     if (error) throw error;
+    //     data = rawData.filter(function (d) {
+    //         //Valid ID
+    //         return validGridId(d["Grid ID"]);
+    //     });
+    //     let currentColumnNames = ['K Concentration', 'Al Concentration'];
+    //     let points = data.map(function (d) {
+    //         var result = [];
+    //         result.push((d[currentColumnNames[0]].indexOf('<LOD') != -1) ? 0 : +d[currentColumnNames[0]]);
+    //         result.push((d[currentColumnNames[1]].indexOf('<LOD') != -1) ? 0 : +d[currentColumnNames[1]]);
+    //         result.data = d['Grid ID'];
+    //         return result;
+    //     });
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x));
+    //     let scag = scagnostics(points, binType, 40);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    //     function isValidPoint(d) {
+    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+    //     }
+    //     function validGridId(id) {
+    //         var re = /^[A-Z]\d\d$/g;
+    //         return id != null && id.match(re) != null;
+    //     }
+    // });
 
     function drawNormalizedDataSvg(scag, theSvg){
         //Main container
