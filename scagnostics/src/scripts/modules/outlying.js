@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import {quantile} from 'simple-statistics';
 import {pointExists} from "./clumpy";
-import {Delaunator} from "./delaunator";
+import {Delaunay} from "d3-delaunay";
 import {createGraph, mst} from "./kruskal-mst";
 
 
@@ -63,7 +63,20 @@ export class Outlying {
         allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
         //TODO: May need to reuse the existing result instead of calculating all again.
         //Triangulate again
-        let delaunay = Delaunator.from(allNodesWithLinks);
+        let delaunay = Delaunay.from(allNodesWithLinks);
+        delaunay.points = allNodesWithLinks;
+        delaunay.triangleCoordinates = function(){
+            let triangles = this.triangles;
+            let tc = [];
+            for (let i = 0; i < triangles.length; i += 3) {
+                tc.push([
+                    this.points[triangles[i]],
+                    this.points[triangles[i + 1]],
+                    this.points[triangles[i + 2]]
+                ]);
+            }
+            return tc;
+        }
         let graph = createGraph(delaunay.triangleCoordinates());
         newTree = mst(graph);
         return newTree;

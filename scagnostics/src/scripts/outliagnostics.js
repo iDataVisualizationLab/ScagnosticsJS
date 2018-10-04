@@ -1,4 +1,4 @@
-import {Delaunator} from "./modules/delaunator";
+import {Delaunay} from "d3-delaunay";
 import {createGraph} from "./modules/kruskal-mst";
 import {mst} from "./modules/kruskal-mst";
 import {Outlying} from "./modules/outlying";
@@ -79,7 +79,20 @@ import _ from "underscore";
 
         /******This section is about the triangulating and triangulating results******/
         //Triangulation calculation
-        let delaunay = Delaunator.from(sites);
+        let delaunay = Delaunay.from(sites);
+        delaunay.points = sites;
+        delaunay.triangleCoordinates = function(){
+            let triangles = this.triangles;
+            let tc = [];
+            for (let i = 0; i < triangles.length; i += 3) {
+                tc.push([
+                    this.points[triangles[i]],
+                    this.points[triangles[i + 1]],
+                    this.points[triangles[i + 2]]
+                ]);
+            }
+            return tc;
+        }
         let triangleCoordinates = delaunay.triangleCoordinates();
         /******This section is about the spanning tree and spanning tree results******/
         //Spanning tree calculation

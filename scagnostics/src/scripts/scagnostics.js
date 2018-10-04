@@ -1,4 +1,3 @@
-import {Delaunator} from "./modules/delaunator";
 import {createGraph} from "./modules/kruskal-mst";
 import {mst} from "./modules/kruskal-mst";
 import {Outlying} from "./modules/outlying";
@@ -14,7 +13,7 @@ import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
 import _ from "underscore";
-// import {Binner} from './modules/binner';
+import {Delaunay} from "d3-delaunay";
 (function(window){
     /**
      * initialize a scagnostic object
@@ -95,8 +94,22 @@ import _ from "underscore";
 
         /******This section is about the triangulating and triangulating results******/
         //Triangulation calculation
-        let delaunay = Delaunator.from(sites);
+        let delaunay = Delaunay.from(sites);
+        //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
+        delaunay.points = sites;
         let triangles = delaunay.triangles;
+        delaunay.triangleCoordinates = function(){
+            let triangles = this.triangles;
+            let tc = [];
+            for (let i = 0; i < triangles.length; i += 3) {
+                tc.push([
+                    this.points[triangles[i]],
+                    this.points[triangles[i + 1]],
+                    this.points[triangles[i + 2]]
+                ]);
+            }
+            return tc;
+        }
         let triangleCoordinates = delaunay.triangleCoordinates();
         //Assigning output values
         outputValue("delaunay", delaunay);

@@ -1,4 +1,4 @@
-import {Delaunator} from "./delaunator";
+import {Delaunay} from "d3-delaunay";
 import {ConcaveHull, concaveHullArea} from "./concaveHull";
 import {quantile} from 'simple-statistics';
 import * as polygon from 'd3-polygon';
@@ -7,7 +7,21 @@ export class Convex {
     constructor(tree) {
         //Clone the tree to avoid modifying it
         this.tree = JSON.parse(JSON.stringify(tree));
-        this.delaunay = Delaunator.from(this.tree.nodes.map(d => d.id));
+        let sites = this.tree.nodes.map(d => d.id);
+        this.delaunay = Delaunay.from(sites);
+        this.delaunay.points = sites;
+        this.delaunay.triangleCoordinates = function(){
+            let triangles = this.triangles;
+            let tc = [];
+            for (let i = 0; i < triangles.length; i += 3) {
+                tc.push([
+                    this.points[triangles[i]],
+                    this.points[triangles[i + 1]],
+                    this.points[triangles[i + 2]]
+                ]);
+            }
+            return tc;
+        }
     }
     /**
      * Returns convex score
@@ -42,6 +56,7 @@ export class Convex {
         }
     }
     noOutlyingTriangleCoordinates(){
+
         return this.delaunay.triangleCoordinates();
     }
     concaveHull() {
