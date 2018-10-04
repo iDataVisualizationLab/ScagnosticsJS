@@ -34,7 +34,7 @@ import _ from "underscore";
                 startBinGridSize = 40;
             }
             bins = [];
-            let minNumOfBins = 50;
+            let minNumOfBins = 20;
             let maxNumOfBins = 250;
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
             let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));

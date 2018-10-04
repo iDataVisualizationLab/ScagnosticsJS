@@ -8,7 +8,7 @@
     <style>
         .hexagon {
             stroke: #000;
-            strokels-width: 0.5px;
+            stroke-width: 0.5px;
         }
 
         .triangles {
@@ -79,14 +79,15 @@
 </div>
 <div id="msg"></div>
 <script>
+    let binType = "hexagon";
+    var startBinGridSize = 40;
     /*This is for the tooltip*/
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
     /*End tooltip section*/
 
-    let binType = "leader";
-
+    //<editor-fold desc="section for display options">
     let optionsBinLeader = ["origPoints", "bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"];
     function createControlButtons(theContainer, theOptions){
         let controlButtons = d3.select("#"+theContainer);
@@ -123,6 +124,7 @@
         height = +scagsvg.attr("height") - margins.top - margins.bottom,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+    //</editor-fold>
 
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(width / 2, 50),
@@ -130,16 +132,15 @@
     //     points = d3.range(2000).map(function () {
     //         return [randomX(), randomY()];
     //     });
-    // let scag = scagnostics(points);
+    // let scag = scagnostics(points, binType, startBinGridSize);
     // drawNormalizedData(scag);
     // draw(scag);
-
 
     // /***********FAITHFUL DATA*******************/
     // d3.tsv("../data/faithful.tsv", (error, rawData)=>{
     //     if(error) throw error;
     //     let points = rawData.map(d=>[+d["eruptions"], +d["waiting"]]);
-    //     let scag = scagnostics(points, "hexagon");
+    //     let scag = scagnostics(points, binType, startBinGridSize);
     //     drawNormalizedData(scag);
     //     draw(scag);
     // });
@@ -148,7 +149,7 @@
     // d3.csv("../data/flowers.csv", (error, rawData) => {
     //     if (error) throw error;
     //     let points = rawData.map(d => [+d["sepal width"], +d["sepal length"]]);
-    //     let scag = scagnostics(points, "hexagon");
+    //     let scag = scagnostics(points, binType, startBinGridSize);
     //     drawNormalizedData(scag);
     //     draw(scag);
     // });
@@ -158,11 +159,11 @@
     //     if (error) throw error;
     //     let dataS = rawData;
     //     let year = 44;
-    //     let leaveOut = 'AAPL';
+    //     let leaveOut = 'None';
     //     let points = getYearData(year);
     //     //Filter NaN points
     //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-    //     let scag = scagnostics(points, "hexagon", 40);
+    //     let scag = scagnostics(points, binType, startBinGridSize);
     //     drawNormalizedData(scag);
     //     draw(scag);
     //     function isValidPoint(d) {
@@ -190,6 +191,94 @@
     //     let points = getYearData(year);
     //     //Filter NaN points
     //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+    //     let scag = scagnostics(points, binType, startBinGridSize);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    //     function isValidPoint(d) {
+    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+    //     }
+    //     function getYearData(year) {
+    //         let cd = dataS["CountriesData"];
+    //         //convert to points
+    //         let y = [];
+    //         d3.keys(cd).forEach(country => {
+    //             let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+    //             point.data = country;
+    //             y.push(point);
+    //         });
+    //         return y;
+    //     }
+    // });
+
+    // /***********HPCC Fan Vs. Temp DATA*******************/
+    // d3.json("../data/HPCC_TemperatureAndFan.json", (error, rawData) => {
+    //     if (error) throw error;
+    //     let dataS = rawData;
+    //     let year = 1;
+    //     let leaveOut = 'none-9-47';
+    //     let points = getYearData(year);
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+    //     let scag = scagnostics(points, binType, startBinGridSize);
+    //     //Do second time + leave out, but keep cut point, do not normalize.
+    //     leaveOut = "compute-9-47";
+    //     let bins = scag.bins;
+    //     let bins1 = bins.filter(bin=>bin[0].data !== leaveOut);
+    //
+    //     let scag1 = scagnostics(bins1.map(b=>[b.x, b.y]), binType, startBinGridSize, true, true, scag.outlyingUpperBound);
+    //     scag1.binner = scag.binner;
+    //     drawNormalizedData(scag1);
+    //     draw(scag1);
+    //
+    //     function isValidPoint(d) {
+    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+    //     }
+    //     function getYearData(year) {
+    //         let cd = dataS["CountriesData"];
+    //         //convert to points
+    //         let y = [];
+    //         d3.keys(cd).forEach(country => {
+    //             let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+    //             point.data = country;
+    //             y.push(point);
+    //         });
+    //         return y;
+    //     }
+    // });
+    /***********CAR DATA*******************/
+    d3.json("../data/cars.json", (error, rawData) => {
+        if (error) throw error;
+        let dataS = rawData;
+        let points = getYearData();
+        //Filter NaN points
+        points = points.filter(x => isValidPoint(x));
+        let scag = scagnostics(points, binType, startBinGridSize);
+        drawNormalizedData(scag);
+        draw(scag);
+
+        function isValidPoint(d) {
+            return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+        }
+
+        function getYearData() {
+            let cd = dataS;
+            //convert to points
+            let y = [];
+            cd.forEach(c=>{
+                y.push([+c["Cylinders"], +c["Displacement"]]);
+            });
+            return y;
+        }
+    });
+    // /***********NYSE DATA*******************/
+    // d3.json("../data/USEmploymentRateGoodVsService.json", (error, rawData) => {
+    //     if (error) throw error;
+    //     let dataS = rawData;
+    //     let year = 212;
+    //     let leaveOut = 'None';
+    //     let points = getYearData(year);
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
     //     let scag = scagnostics(points, binType, 20);
     //     drawNormalizedData(scag);
     //     draw(scag);
@@ -208,33 +297,6 @@
     //         return y;
     //     }
     // });
-    /***********NYSE DATA*******************/
-    d3.json("../data/USEmploymentRateGoodVsService.json", (error, rawData) => {
-        if (error) throw error;
-        let dataS = rawData;
-        let year = 0;
-        let leaveOut = 'None';
-        let points = getYearData(212);
-        //Filter NaN points
-        points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-        let scag = scagnostics(points, binType, 20);
-        drawNormalizedData(scag);
-        draw(scag);
-        function isValidPoint(d) {
-            return (typeof d[0] === 'number') && (typeof d[1] === 'number');
-        }
-        function getYearData(year) {
-            let cd = dataS["CountriesData"];
-            //convert to points
-            let y = [];
-            d3.keys(cd).forEach(country => {
-                let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
-                point.data = country;
-                y.push(point);
-            });
-            return y;
-        }
-    });
     // /***********SOIL DATA*******************/
     // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
     //     if (error) throw error;
@@ -369,8 +431,8 @@
                 })
                 .attr("cx", d=>scaleX(d.x))
                 .attr("cy", d=>scaleY(d.y))
-                .attr("fill", "none")
-                .attr("stroke", d=>color(d.length))
+                .attr("fill", d=>color(d.length))
+                .attr("stroke", "black")
                 .attr("stroke-width", 0.5);
 
             // bins = g.append("g")
