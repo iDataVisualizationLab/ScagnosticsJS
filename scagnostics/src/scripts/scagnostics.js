@@ -20,7 +20,7 @@ import {Delaunay} from "d3-delaunay";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.scagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound) {
+    window.scagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
@@ -42,8 +42,15 @@ import {Delaunay} from "d3-delaunay";
                 startBinGridSize = 40;
             }
             bins = [];
-            let minNumOfBins = 20;
+            //Default number of bins
+            let minNumOfBins = 50;
             let maxNumOfBins = 250;
+            if(minBins){
+                minNumOfBins =minBins;
+            }
+            if(maxBins){
+                maxNumOfBins = maxBins;
+            }
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
             let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));
             let groups = _.groupBy(normalizedPoints, p=>p.join(','));

@@ -50,8 +50,8 @@ export function Binner(){
                 bin.x = (pi + (pj & 1) / 2) * dx;
                 bin.y = pj * dy;
                 //TODO: fix this since there are results with bin.x, bin.y > 1 => we may need to do the rounding.
-                if(bin.x>1){bin.x = 1;}
-                if(bin.y>1){bin.y =1;}
+                // if(bin.x>1){bin.x = 1;}
+                // if(bin.y>1){bin.y =1;}
             }
         }
 

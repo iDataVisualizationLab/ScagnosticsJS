@@ -13,7 +13,7 @@ import _ from "underscore";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound) {
+    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins) {
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
@@ -34,8 +34,16 @@ import _ from "underscore";
                 startBinGridSize = 40;
             }
             bins = [];
+            //Default bin range
             let minNumOfBins = 50;
             let maxNumOfBins = 250;
+            if(minBins){
+                minNumOfBins =minBins;
+            }
+            if(maxBins){
+                maxNumOfBins = maxBins;
+            }
+
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
             let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));
             let groups = _.groupBy(normalizedPoints, p=>p.join(','));
@@ -73,6 +81,8 @@ import _ from "underscore";
                 }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
             }
             sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
+            outputValue("bins", bins);
+            outputValue("binSize", binSize);
         }else{
             sites = normalizedPoints;
         }
@@ -101,7 +111,6 @@ import _ from "underscore";
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree, outlyingUpperBound);
         let outlyingScore = outlying.score();
-        outputValue("bins", bins);
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingUpperBound", outlying.upperBound);
 
