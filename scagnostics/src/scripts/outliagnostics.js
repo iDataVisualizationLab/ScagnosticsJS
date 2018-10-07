@@ -108,16 +108,25 @@ import _ from "underscore";
         //Spanning tree calculation
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
+        outputValue("mst", mstree);
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree, outlyingUpperBound);
         let outlyingScore = outlying.score();
+        outlyingUpperBound = outlying.upperBound;
+        let outlyingLinks = outlying.links();
+        let outlyingPoints = outlying.points();
+        let noOutlyingTree = outlying.removeOutlying();
         outputValue("outlyingScore", outlyingScore);
-        outputValue("outlyingUpperBound", outlying.upperBound);
+        outputValue("outlyingUpperBound", outlyingUpperBound);
+        outputValue("outlyingLinks", outlyingLinks);
+        outputValue("outlyingPoints", outlyingPoints);
+        outputValue("noOutlyingTree", noOutlyingTree);
 
         return window.outliagnostics;
         function outputValue(name, value){
             window.outliagnostics[name] = value;
         }
+
     };
 
 })(window);

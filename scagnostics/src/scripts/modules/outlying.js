@@ -27,6 +27,7 @@ export class Outlying {
                 q3 = quantile(allLengths, 0.75),
                 iqr = q3 - q1;
             upperBound = q3+1.5*iqr;
+            // upperBound = q3+3*iqr;
             //Save it for displaying purpose.
             this.upperBound = upperBound;
         }
