@@ -130,7 +130,8 @@
                     "mst": mst,
                     "outlyingLinks":outlyingLinks,
                     "outlyingPoints":outlyingPoints,
-                    "noOutlyingTree":noOutlyingTree
+                    "noOutlyingTree":noOutlyingTree,
+                    "outlyingScore": scag.outlyingScore
                 }
 
             }
@@ -730,13 +731,21 @@
             .attr("opacity", 10e-6)
             .style("display", "none");
     }
-
+    function drawScores(g, scag){
+        return g.append("g").selectAll("text")
+            .data([{type: 'Outlying score', score: scag.outlyingScore}])
+            .enter()
+            .append("text")
+            .text(d=>d.type + ": " + d.score.toFixed(3))
+            .attr("x", 10)
+            .attr("y", 10);
+    }
     function draw(scag) {
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
         //Original points
         origPoints = drawNormalizedDataSvg(scag, scagsvg);
-
+        drawScores(g, scag);
         var color = d3.scaleSequential(d3.interpolateLab("#EEEEEE", "#000"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
@@ -930,6 +939,7 @@
         let outlyingLinks = drawOutlyingLinks(g, outliag);
         let outlyingPoints = drawOutlyingPoints(g, outliag);
         let noOutlyingPoints = drawNoOutlyingPoints(g, outliag);
+        drawScores(g, outliag);
         mst.style("display", "inline");
         outlyingLinks.style("display", "inline");
         outlyingPoints.style("display", "inline");
