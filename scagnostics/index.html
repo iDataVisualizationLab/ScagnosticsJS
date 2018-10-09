@@ -78,27 +78,33 @@
         }
 
         /*end tooltip section*/
+        /*Section for the plot title style*/
+        .plottitle {
+            position: relative;
+            display: block;
+        }
     </style>
 </head>
 <body>
-<svg id="normalizedsvg" width="500" height="500"
-     style="border: 1px solid black; overflow: visible; margin-top:20px;"></svg>
-<svg id="scagsvg" width="500" height="500" style="border: 1px solid black; overflow: visible; margin-top:20px;"></svg>
-<svg id="leaveoutsvg" width="500" height="500"
-     style="border: 1px solid black; overflow: visible; margin-top:20px;"></svg>
+<svg id="normalizedsvg"
+     style="overflow: visible; margin-top:0px;"></svg>
+<svg id="scagsvg"
+     style="overflow: visible; margin-top:0px;"></svg>
+<svg id="leaveoutsvg"
+     style="overflow: visible; margin-top:0px;"></svg>
 <div id="controlButtons">
 </div>
 <div id="msg"></div>
 <script>
-    class OutliagProcessor {
+    class SingleOutliagProcessor {
         constructor(points) {
             this.points = points;
             //set index for the points
-            points.forEach((p, i)=>{
-                if(!p.data){
+            points.forEach((p, i) => {
+                if (!p.data) {
                     p.data = {};
-                    p.data.index = i;
                 }
+                p.data.index = i;
             });
             this.bins = [];
             this.upperBound = null;
@@ -121,20 +127,22 @@
                     self.outlyingUpperBound = outliag.outlyingUpperBound;
                 }
             }
-            function cloneScag(scag){
+
+            function cloneScag(scag) {
                 let mst = JSON.parse(JSON.stringify(scag.mst));
                 let outlyingLinks = JSON.parse(JSON.stringify(scag.outlyingLinks));
                 let outlyingPoints = JSON.parse(JSON.stringify(scag.outlyingPoints));
                 let noOutlyingTree = JSON.parse(JSON.stringify(scag.noOutlyingTree));
                 return {
                     "mst": mst,
-                    "outlyingLinks":outlyingLinks,
-                    "outlyingPoints":outlyingPoints,
-                    "noOutlyingTree":noOutlyingTree,
+                    "outlyingLinks": outlyingLinks,
+                    "outlyingPoints": outlyingPoints,
+                    "noOutlyingTree": noOutlyingTree,
                     "outlyingScore": scag.outlyingScore
                 }
 
             }
+
             function processLeaveOut() {
                 //Only need to process the bins !=null and each bin with length > 1.
                 let bins = self.bins;
@@ -148,7 +156,7 @@
                             //remove the current bin.
                             bins1.splice(i, 1);
                             let outliag = self.calculateOutliag(bins1.map(b => [b.x, b.y]), true, true, outlyingUpperBound);
-                            if(outliag!=null){
+                            if (outliag != null) {
                                 //calcualte outliag.
                                 let outlyingScore = outliag.outlyingScore;
                                 self.setPointOutliagScore(theBin[0].data.index, outlyingScore);
@@ -182,7 +190,7 @@
 
         setPointOutliagScore(index, outlyingScore) {
             this.points[index].outliagScore = this.outlyingScore - outlyingScore;
-            if(isNaN(this.points[index].outliagScore)){
+            if (isNaN(this.points[index].outliagScore)) {
                 debugger
             }
         }
@@ -232,15 +240,20 @@
     let concaveHull = null;//path
     let v1s = null;//circle
 
-    let scagsvg = d3.select("#scagsvg"),
-        normalizedsvg = d3.select("#normalizedsvg"),
-        leaveoutsvg = d3.select("#leaveoutsvg");
-        margins = {left: 20, top: 20, right: 20, bottom: 20},
-        width = +scagsvg.attr("width") - margins.left - margins.right,
-        height = +scagsvg.attr("height") - margins.top - margins.bottom,
-        scaleX = d3.scaleLinear().domain([0, 1]).range([0, width]),
-        scaleY = d3.scaleLinear().domain([0, 1]).range([height, 0]);
-    // scaleY = d3.scaleLinear().domain([0, 1]).range([0, height]);
+    let svgWidth = 500;
+    let svgHeight = 520;
+    let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
+        normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
+        leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
+        margins = {left: 20, top: 40, right: 20, bottom: 20},
+        padding = 10;
+        contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2*padding,
+        contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2*padding,
+        scaleX = d3.scaleLinear().domain([0, 1]).range([0, contentWidth]),
+        scaleY = d3.scaleLinear().domain([0, 1]).range([contentHeight, 0]);
+
+
+    // scaleY = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
     //</editor-fold>
 
     // /***********RANDOM DATA*******************/
@@ -258,12 +271,33 @@
     d3.tsv("../data/faithful.tsv", (error, rawData) => {
         if (error) throw error;
         let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
+        //Assign original points to the data.
+        points.forEach(p=>{
+            if(!p.data){
+                p.data = {};
+            }
+            p.data.originalPoint = [p[0], p[1]];
+        });
         let scag = scagnostics(points, binType, startBinGridSize);
         //process outliag score
-        outliagProcessor = new OutliagProcessor(scag.normalizedPoints);
+        outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
         outliagProcessor.processOutliagData();
+        //Draw axis
+        let variables = ["one", "two"];
+
+        drawAxis(normalizedsvg, variables);
+        drawAxis(scagsvg, variables);
+        drawAxis(leaveoutsvg, variables);
+        drawTitle(normalizedsvg, "Original scatter plot");
+        drawTitle(scagsvg, "Bins on original");
+        drawTitle(leaveoutsvg, "Bins on leave-one-out");
+        drawContentBound(normalizedsvg);
+        drawContentBound(scagsvg);
+        drawContentBound(leaveoutsvg);
+
         drawNormalizedData(scag);
         draw(scag);
+
         debugger
     });
 
@@ -558,17 +592,17 @@
     function drawNormalizedDataSvg(scag, theSvg) {
         //Add outliag scores as 0 for those doesn't have it
         scag.normalizedPoints.forEach(p => {
-           if(!p.outliagScore){
-               p.outliagScore = 0;
-           }
+            if (!p.outliagScore) {
+                p.outliagScore = 0;
+            }
         });
         let outlierColor = d3.scaleSequential(d3.interpolateLab("#000", "red"))
-            .domain(d3.extent(scag.normalizedPoints.map(p => (p.outliagScore>0?p.outliagScore:0))));
+            .domain(d3.extent(scag.normalizedPoints.map(p => (p.outliagScore > 0 ? p.outliagScore : 0))));
         let inlierColor = d3.scaleSequential(d3.interpolateLab("green", "#000"))
-            .domain(d3.extent(scag.normalizedPoints.map(p => (p.outliagScore < 0?p.outliagScore:0))));
-        theSvg.style("background", "#ddd");
+            .domain(d3.extent(scag.normalizedPoints.map(p => (p.outliagScore < 0 ? p.outliagScore : 0))));
+
         //Main container
-        let g = theSvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
+        let g = theSvg.append("g").attr("transform", `translate(${margins.left + padding}, ${margins.top + padding})`);
 
         g.append("g").selectAll("circle")
             .data(scag.normalizedPoints)
@@ -578,8 +612,8 @@
             .attr("cy", d => scaleY(d[1]))
             .attr("r", dataPointRadius)
             // .attr("fill", "black")
-            .attr("fill", d=>{
-                return d.outliagScore < 0?inlierColor(d.outliagScore):outlierColor(d.outliagScore);
+            .attr("fill", d => {
+                return d.outliagScore < 0 ? inlierColor(d.outliagScore) : outlierColor(d.outliagScore);
             })
             .attr("stroke", "none")
             .attr("opacity", dataPointOpacity)
@@ -588,7 +622,7 @@
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html((d.data ? d.data + ': ' : '') + `[${d[0]}, ${d[1]}]`)
+                div.html((d.data ? (d.data.index ? d.data.index : d.data) + ': ' : '') + `[${(d.data?(d.data.originalPoint?d.data.originalPoint[0]:d[0]):d[0]).toFixed(3)}, ${(d.data?(d.data.originalPoint?d.data.originalPoint[1]:d[1]):d[1]).toFixed(3)}]`)
                     .style("left", (d3.event.pageX - 10) + "px")
                     .style("top", (d3.event.pageY - 52) + "px");
             })
@@ -597,17 +631,16 @@
                     .duration(500)
                     .style("opacity", 0);
             })
-            .on("click", d=>{
+            .on("click", d => {
                 let outliag = outliagProcessor.allOutliags[d.data.index];
-                if(outliagProcessor.allOutliags[d.data.index]){
-                    drawLeaveOut(outliag);
-                }
+                drawLeaveOut(outliag);
             });
         /*End of tooltip section*/
         return g;
     }
 
     function drawNormalizedData(scag) {
+
         drawNormalizedDataSvg(scag, normalizedsvg);
     }
 
@@ -661,8 +694,8 @@
                 setTimeout(() => {
                     recurseDisplay(selection, i, time, fromOpacity, toOpacity, onEnd);
                 }, time);
-            }else{
-                if(onEnd){
+            } else {
+                if (onEnd) {
                     onEnd();
                 }
             }
@@ -731,18 +764,20 @@
             .attr("opacity", 10e-6)
             .style("display", "none");
     }
-    function drawScores(g, scag){
+
+    function drawScores(g, scag) {
         return g.append("g").selectAll("text")
             .data([{type: 'Outlying score', score: scag.outlyingScore}])
             .enter()
             .append("text")
-            .text(d=>d.type + ": " + d.score.toFixed(3))
+            .text(d => d.type + ": " + d.score.toFixed(3))
             .attr("x", 10)
             .attr("y", 10);
     }
+
     function draw(scag) {
         //Main container
-        let g = scagsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
+        let g = scagsvg.append("g").attr("transform", `translate(${margins.left + padding}, ${margins.top + padding})`);
         //Original points
         origPoints = drawNormalizedDataSvg(scag, scagsvg);
         drawScores(g, scag);
@@ -931,27 +966,60 @@
         displayScagScores(scag, msgContainer);
     }
 
-    function drawLeaveOut(outliag){
+    function drawLeaveOut(outliag) {
         leaveoutsvg.selectAll("*").remove();
+        drawTitle(leaveoutsvg);
+        drawAxis(leaveoutsvg, ["one", "two"]);
+        drawContentBound(leaveoutsvg);
         //Main container
-        let g = leaveoutsvg.append("g").attr("transform", `translate(${margins.left}, ${margins.top})`);
-        let mst = drawMst(g, outliag);
-        let outlyingLinks = drawOutlyingLinks(g, outliag);
-        let outlyingPoints = drawOutlyingPoints(g, outliag);
-        let noOutlyingPoints = drawNoOutlyingPoints(g, outliag);
-        drawScores(g, outliag);
-        mst.style("display", "inline");
-        outlyingLinks.style("display", "inline");
-        outlyingPoints.style("display", "inline");
-        noOutlyingPoints.style("display", "inline");
+        let g = leaveoutsvg.append("g").attr("class", "leaveoutg").attr("transform", `translate(${margins.left + padding}, ${margins.top + padding})`);
+        if (!outliag) {
+            g.append("text").text("Skipped this calculation, please see the MST on the left").attr("x", 10).attr("y", 10);
+        } else {
+            let mst = drawMst(g, outliag);
+            let outlyingLinks = drawOutlyingLinks(g, outliag);
+            let outlyingPoints = drawOutlyingPoints(g, outliag);
+            let noOutlyingPoints = drawNoOutlyingPoints(g, outliag);
+            drawScores(g, outliag);
+            mst.style("display", "inline");
+            outlyingLinks.style("display", "inline");
+            outlyingPoints.style("display", "inline");
+            noOutlyingPoints.style("display", "inline");
 
-        animateNodes(mst, animateTime, 10e-6, .8, ()=>{
-            animateNodes(outlyingLinks, animateTime, 10e-6, .8, ()=>{
-                animateNodes(outlyingPoints, animateTime, 10e-6, .8, ()=>{
-                    animateNodes(noOutlyingPoints, animateTime, 10e-6, .8);
+            animateNodes(mst, animateTime, 10e-6, .8, () => {
+                animateNodes(outlyingLinks, animateTime, 10e-6, .8, () => {
+                    animateNodes(outlyingPoints, animateTime, 10e-6, .8, () => {
+                        animateNodes(noOutlyingPoints, animateTime, 10e-6, .8);
+                    });
                 });
             });
-        });
+        }
+
+    }
+
+    function drawAxis(svg, variables) {
+        let v1 = variables[0];
+        let v2 = variables[1];
+        let x1 = +svg.attr("width") / 2;
+        let y1 = +svg.attr("height") - margins.bottom / 2;
+        let x2 = margins.left / 2;
+        let y2 = svgHeight / 2;
+        svg.append("text").text(v1).attr("font-style", "italic").attr("alignment-baseline", "middle").attr("text-anchor", "middle").attr("transform", `translate(${x1}, ${y1}) rotate(0)`);
+        svg.append("text").text(v2).attr("font-style", "italic").attr("alignment-baseline", "middle").attr("text-anchor", "middle").attr("transform", `translate(${x2}, ${y2}) rotate(-90)`);
+    }
+
+    function drawTitle(svg, title) {
+        let x = +svg.attr("width") / 2;
+        let y = margins.top / 2;
+        svg.append('text').text(title).attr("font-weight", "bold").attr("alignment-baseline", "middle").attr("text-anchor", "middle").attr("transform", `translate(${x}, ${y}) rotate(0)`);
+    }
+
+    function drawContentBound(svg) {
+        let x = margins.left;
+        let y = margins.top;
+        let rectWidth = +svg.attr("width") - margins.left - margins.right;
+        let rectHeight = +svg.attr("height") - margins.top - margins.bottom;
+        svg.append("rect").attr("x", x).attr("y", y).attr("width", rectWidth).attr("height", rectHeight).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
     }
 </script>
 
