@@ -3,7 +3,6 @@ import {distance} from "./kruskal-mst";
 import * as polygon from "d3-polygon";
 import {createGraph, mst} from "./kruskal-mst";
 
-
 export class ConcaveHull{
     constructor(distance){
         if(!distance){
