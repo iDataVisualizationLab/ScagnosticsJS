@@ -197,7 +197,7 @@
     }
 </script>
 <script>
-    let binType = "leader";
+    let binType = "hexagon";
     var startBinGridSize = 10;
     let animateTime = 20;
     /*This is for the tooltip*/
@@ -246,7 +246,7 @@
         normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
         leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
         margins = {left: 20, top: 40, right: 20, bottom: 20},
-        padding = 10;
+        padding = 10,
         contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2*padding,
         contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2*padding,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, contentWidth]),
@@ -266,40 +266,40 @@
     // drawNormalizedData(scag);
     // draw(scag);
 
-    /***********FAITHFUL DATA*******************/
-    let outliagProcessor = null;
-    d3.tsv("../data/faithful.tsv", (error, rawData) => {
-        if (error) throw error;
-        let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
-        //Assign original points to the data.
-        points.forEach(p=>{
-            if(!p.data){
-                p.data = {};
-            }
-            p.data.originalPoint = [p[0], p[1]];
-        });
-        let scag = scagnostics(points, binType, startBinGridSize);
-        //process outliag score
-        outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-        outliagProcessor.processOutliagData();
-        //Draw axis
-        let variables = ["one", "two"];
-
-        drawAxis(normalizedsvg, variables);
-        drawAxis(scagsvg, variables);
-        drawAxis(leaveoutsvg, variables);
-        drawTitle(normalizedsvg, "Original scatter plot");
-        drawTitle(scagsvg, "Bins on original");
-        drawTitle(leaveoutsvg, "Bins on leave-one-out");
-        drawContentBound(normalizedsvg);
-        drawContentBound(scagsvg);
-        drawContentBound(leaveoutsvg);
-
-        drawNormalizedData(scag);
-        draw(scag);
-
-        
-    });
+    // /***********FAITHFUL DATA*******************/
+    // let outliagProcessor = null;
+    // d3.tsv("../data/faithful.tsv", (error, rawData) => {
+    //     if (error) throw error;
+    //     let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
+    //     //Assign original points to the data.
+    //     points.forEach(p=>{
+    //         if(!p.data){
+    //             p.data = {};
+    //         }
+    //         p.data.originalPoint = [p[0], p[1]];
+    //     });
+    //     let scag = scagnostics(points, binType, startBinGridSize);
+    //     //process outliag score
+    //     outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    //     outliagProcessor.processOutliagData();
+    //     //Draw axis
+    //     let variables = ["one", "two"];
+    //
+    //     drawAxis(normalizedsvg, variables);
+    //     drawAxis(scagsvg, variables);
+    //     drawAxis(leaveoutsvg, variables);
+    //     drawTitle(normalizedsvg, "Original scatter plot");
+    //     drawTitle(scagsvg, "Bins on original");
+    //     drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    //     drawContentBound(normalizedsvg);
+    //     drawContentBound(scagsvg);
+    //     drawContentBound(leaveoutsvg);
+    //
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    //
+    //
+    // });
 
     // /***********FLOWER DATA*******************/
     // d3.csv("../data/flowers.csv", (error, rawData) => {
@@ -339,33 +339,34 @@
     //     draw(scag);
     // });
 
-    // /***********NYSE DATA*******************/
-    // d3.json("../data/prices.json", (error, rawData) => {
-    //     if (error) throw error;
-    //     let dataS = rawData;
-    //     let year = 44;
-    //     let leaveOut = 'None';
-    //     let points = getYearData(year);
-    //     //Filter NaN points
-    //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-    //     let scag = scagnostics(points, binType, startBinGridSize);
-    //     drawNormalizedData(scag);
-    //     draw(scag);
-    //     function isValidPoint(d) {
-    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
-    //     }
-    //     function getYearData(year) {
-    //         let cd = dataS["CountriesData"];
-    //         //convert to points
-    //         let y = [];
-    //         d3.keys(cd).forEach(country => {
-    //             let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
-    //             point.data = country;
-    //             y.push(point);
-    //         });
-    //         return y;
-    //     }
-    // });
+    /***********NYSE DATA*******************/
+    d3.json("../data/prices.json", (error, rawData) => {
+        if (error) throw error;
+        let dataS = rawData;
+        let year = 44;
+        let leaveOut = 'None';
+        let points = getYearData(year);
+        //Filter NaN points
+        points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+        // let scag = scagnostics(points, binType, startBinGridSize);
+        let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
+        drawNormalizedData(scag);
+        draw(scag);
+        function isValidPoint(d) {
+            return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+        }
+        function getYearData(year) {
+            let cd = dataS["CountriesData"];
+            //convert to points
+            let y = [];
+            d3.keys(cd).forEach(country => {
+                let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+                point.data = country;
+                y.push(point);
+            });
+            return y;
+        }
+    });
     // /***********HIV DATA*******************/
     // d3.json("../data/PrevalenceOfHIV.json", (error, rawData) => {
     //     if (error) throw error;
@@ -514,7 +515,8 @@
     //     let points = getYearData();
     //     //Filter NaN points
     //     points = points.filter(x => isValidPoint(x));
-    //     let scag = scagnostics(points, binType, startBinGridSize);
+    //     // let scag = scagnostics(points, binType, startBinGridSize);
+    //     let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
     //     drawNormalizedData(scag);
     //     draw(scag);
     //
@@ -542,7 +544,7 @@
     //     let points = getYearData(year);
     //     //Filter NaN points
     //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-    //     let scag = scagnostics(points, binType, 20);
+    //     let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
     //     drawNormalizedData(scag);
     //     draw(scag);
     //     function isValidPoint(d) {
@@ -560,6 +562,7 @@
     //         return y;
     //     }
     // });
+
     // /***********SOIL DATA*******************/
     // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
     //     if (error) throw error;
@@ -567,7 +570,7 @@
     //         //Valid ID
     //         return validGridId(d["Grid ID"]);
     //     });
-    //     let currentColumnNames = ['K Concentration', 'Al Concentration'];
+    //     let currentColumnNames = ['As Concentration', 'S Concentration'];
     //     let points = data.map(function (d) {
     //         var result = [];
     //         result.push((d[currentColumnNames[0]].indexOf('<LOD') != -1) ? 0 : +d[currentColumnNames[0]]);
@@ -577,7 +580,8 @@
     //     });
     //     //Filter NaN points
     //     points = points.filter(x => isValidPoint(x));
-    //     let scag = scagnostics(points, binType, 40);
+    //     let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
+    //
     //     drawNormalizedData(scag);
     //     draw(scag);
     //     function isValidPoint(d) {
@@ -994,7 +998,6 @@
                 });
             });
         }
-
     }
 
     function drawAxis(svg, variables) {

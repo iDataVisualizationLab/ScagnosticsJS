@@ -1,0 +1,21 @@
+{
+  "name": "Scagnostics3D",
+  "version": "1.0.0",
+  "dependencies": {
+    "d3-3d": "0.0.9",
+    "delaunay-triangulate": "^1.1.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^1.0.1",
+    "underscore": "^1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:iDataVisualizationLab/Scagnostics2018.git"
+  },
+  "author": "Tommy Dang, Vung Pham",
+  "license": "ISC",
+  "description": "This is a library to calculate scagnostics 3d version"
+}

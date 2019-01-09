@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/d3.js"></script>
+    <script src="lib/d3-3d.min.js"></script>
+</head>
+<body>
+<svg width="960" height="500"></svg>
+<style type="text/css">
+    button{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+</style>
+<button>Update</button>
+<script>
+    var origin = [480, 300], scale = 20, j = 10, cubesData = [], alpha = 0, beta = 0, startAngle = Math.PI/6, yLine = [];
+    var svg = d3.select('svg').call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd)).append('g');
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+    var cubesGroup = svg.append('g').attr('class', 'cubes');
+    var mx, my, mouseX, mouseY;
+    var data = [];
+    var cubes3D = d3._3d()
+    .shape('CUBE')
+    .x(d=>d.x)
+    .y(d=>d.y)
+    .z(d=>d.z)
+    .rotateY(startAngle)
+    .rotateX(-startAngle)
+    .origin(origin)
+    .scale(scale);
+     var yScale3D = d3._3d()
+         .shape('LINE_STRIP')
+         .origin(origin)
+         .rotateY(startAngle)
+         .rotateX(-startAngle)
+         .scale(20);
+
+
+    function processData(data, tt){
+        /*-----------CUBE------------*/
+        var cubes = cubesGroup.selectAll('g.cube').data(data[0], d=>d.id);
+        var ce = cubes
+            .enter()
+            .append('g')
+            .attr('class', 'cube')
+            .attr('fill', d=>color(d.id))
+            .attr('stroke', d=> d3.color(color(d.id)).darker(2))
+            .merge(cubes)
+            .sort(cubes3D.sort);
+        cubes.exit().remove();
+        /*-----------FACES-----------*/
+        var faces = cubes.merge(ce).selectAll('path.face').data(d=>d.faces, d=>d.face);
+        faces.enter()
+            .append('path')
+            .attr('class', 'face')
+            .attr('fill-opacity', 0.95)
+            .classed('_3d', true)
+            .merge(faces)
+            .transition().duration(tt)
+            .attr('d', cubes3D.draw);
+        faces.exit().remove();
+        /*----------TEXT---------*/
+        var texts = cubes.merge(ce).selectAll('text.text').data(function(d){
+            var _t = d.faces.filter(function(d){
+                return d.face === 'top'
+            });
+            return [{height: d.height, centroid: _t[0].centroid}];
+        });
+        texts
+            .enter()
+            .append('text')
+            .attr('class', 'text')
+            .attr('dy', '-.7em')
+            .attr('text-anchor', 'middle')
+            .attr('font-family', 'sans-serif')
+            .attr('font-weight', 'bolder')
+            .attr('x', d=> origin[0]+scale*d.centroid.x)
+            .attr('y', d=>origin[1] + scale*d.centroid.y)
+            .classed('_3d', true)
+            .merge(texts)
+            .transition().duration(tt)
+            .attr('fill', 'black')
+            .attr('stroke', 'none')
+            .attr('x', d=>origin[0]+scale*d.centroid.x)
+            .attr('y', d=>origin[1]+scale*d.centroid.y)
+            .tween('text', function(d){
+                var that = d3.select(this);
+                var i = d3.interpolateNumber(+that.text(), Math.abs(d.height));
+                return function(t){
+                    that.text(i(t).toFixed(1));
+                };
+            });
+        texts.exit().remove();
+        /*----------Y SCALE---------------------*/
+        var yScale = svg.selectAll('path.yScale').data(data[1]);
+        yScale
+            .enter()
+            .append("path")
+            .attr('class', '_3d yScale')
+            .merge(yScale)
+            .attr("stroke", "black")
+            .attr("stroke-width", 0.5)
+            .attr("d", yScale3D.draw);
+        /*----------Y-TEXT----------------------*/
+        var yText = svg.selectAll('text.yText').data(data[1][0]);
+        yText
+            .enter()
+            .append('text')
+            .attr('class', "_3d yText")
+            .attr('dx', '.3em')
+            .merge(yText)
+            .each(d=>{
+                d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z}
+            })
+            .attr('x', d=>d.projected.x)
+            .attr('y', d=>d.projected.y)
+            .text(d=>d[1]<0?d[1]:'');
+        /*----------SORT TEXT & FACES-----------*/
+        ce.selectAll('._3d').sort(d3._3d().sort);
+    }
+    function init(){
+        cubesData = [];
+        yLine = [];
+        var cnt = 0;
+        for(var z = -j/2; z<= j/2; z = z + 5){
+            for(var x = -j; x<= j; x = x + 5){
+                var h = d3.randomUniform(-2, -7)();
+                var _cube = makeCube(h, x, z);
+                _cube.id = 'cube_'+cnt++;
+                _cube.height = h;
+                cubesData.push(_cube);
+            }
+        }
+        d3.range(0, 10, 1).forEach(d=>{
+            yLine.push([-j, -d, -j]);
+        });
+        data = [cubes3D(cubesData),yScale3D([yLine])];
+        processData(data, 1000);
+    }
+    function dragStart(){
+        mx = d3.event.x;
+        my = d3.event.y;
+    }
+    function dragged(){
+        mouseX = mouseX || 0;
+        mouseY = mouseY || 0;
+        beta = (d3.event.x - mx + mouseX) * Math.PI/230;
+        alpha = (d3.event.y - my + mouseY) * Math.PI/230 *(-1);
+        data = [cubes3D.rotateY(beta + startAngle).rotateX(alpha-startAngle)(cubesData),
+            yScale3D.rotateY(beta+startAngle).rotateX(alpha-startAngle)([yLine])];
+        processData(data, 0);
+    }
+    function dragEnd(){
+        mouseX = d3.event.x - mx + mouseX;
+        mouseY = d3.event.y - my + mouseY;
+    }
+    function makeCube(h, x, z){
+        return [
+            {x: x - 1, y: h, z: z + 1},
+            {x: x - 1, y: 0, z: z + 1},
+            {x: x + 1, y: 0, z: z + 1},
+            {x: x + 1, y: h, z: z + 1},
+            {x: x - 1, y: h, z: z - 1},
+            {x: x - 1, y: 0, z: z - 1},
+            {x: x + 1, y: 0, z: z - 1},
+            {x: x + 1, y: h, z: z - 1}
+        ];
+    }
+    d3.selectAll('button').on('click', init);
+    init();
+</script>
+</body>
+</html>
