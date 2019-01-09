@@ -132,7 +132,15 @@ export function distance(a, b) {
 export function equalPoints(id1, id2) {
     return (id1[0] === id2[0] && id1[1] === id2[1] && id1[2] == id2[2]);
 }
-
+export function pointExists(points, point){
+    for (let i = 0; i < points.length; i++) {
+        let point1 = points[i];
+        if (equalPoints(point1, point)) {
+            return true;
+        }
+    }
+    return false;
+}
 export function equalLinks(l1, l2) {
     return (equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
         (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source));

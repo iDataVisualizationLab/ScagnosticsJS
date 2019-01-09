@@ -4,6 +4,7 @@ import {LeaderBinner} from "./modules/leaderBinner";
 import {triangulate} from 'delaunay-triangulate'
 import {_} from 'underscore'
 import {createGraph, mst} from "./modules/kruskal-mst";
+import {Outlying} from "./modules/outlying";
 
 
 (function (window) {
@@ -22,6 +23,8 @@ import {createGraph, mst} from "./modules/kruskal-mst";
             outputValue("normalizedPoints", normalizedPoints);
         }
         let binType = options.binType;
+        /******This section is about the outlying score and outlying score results******/
+        let outlyingUpperBound = options.outlyingUpperBound;
 
         /******This section is about finding number of bins and binners******/
         let sites = null;
@@ -95,7 +98,7 @@ import {createGraph, mst} from "./modules/kruskal-mst";
 
         outputValue("binnedSites", sites);
         /******This section is about the triangulating and triangulating results******/
-            //Triangulation calculation
+        //Triangulation calculation
         let delaunay = {};
         //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
         delaunay.points = sites;
@@ -128,7 +131,19 @@ import {createGraph, mst} from "./modules/kruskal-mst";
         //Assigning the output values
         outputValue("graph", graph);
         outputValue("mst", mstree);
-        debugger
+        /******This section is about the outlying score and outlying score results******/
+        let outlying = new Outlying(mstree);
+        let outlyingScore = outlying.score();
+        outlyingUpperBound = outlying.upperBound;
+        let outlyingLinks = outlying.links();
+        let outlyingPoints = outlying.points();
+        let noOutlyingTree = outlying.removeOutlying();
+        outputValue("outlyingScore", outlyingScore);
+        outputValue("outlyingUpperBound", outlyingUpperBound);
+        outputValue("outlyingLinks", outlyingLinks);
+        outputValue("outlyingPoints", outlyingPoints);
+        outputValue("noOutlyingTree", noOutlyingTree);
+
         return window.scagnostics3d;
         function outputValue(name, value) {
             window.scagnostics3d[name] = value;

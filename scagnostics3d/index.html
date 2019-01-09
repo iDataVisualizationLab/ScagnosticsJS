@@ -173,13 +173,22 @@
         });
         let mstLinesData = line3d(mstLines);
 
+        let outlyingLines = scag.outlyingLinks.map((l, i)=>{
+            let ret = [l.source, l.target];
+            ret.data = {}
+            ret.data.id = 'outlyingLine_' + i;
+            return ret;
+        });
+        let outlyingLinesData = line3d(outlyingLines);
+
         drawAxes(axesData, scagsvg);
         drawPoints(pointsData, scagsvg, duration);
         drawLeaders(leadersData, scagsvg, duration);
         // drawLines(graphLinesData, scagsvg,'graphLines', duration);
-        let mstLineOptions = {'stroke': 'green', 'strokeWidth': 1}
+        let mstLineOptions = {'stroke': 'green', 'strokeWidth': 3}
         drawLines(mstLinesData, scagsvg,'mstLines', duration, mstLineOptions);
-
+        let outlyingLineOptions = {'stroke': 'red', 'strokeWidth': 3}
+        drawLines(outlyingLinesData, scagsvg, 'outlyingLines', duration, outlyingLineOptions);
 
 
         function dragStart() {
@@ -201,12 +210,13 @@
             let leadersData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(leaderPoints);
             let graphLinesData = line3d.rotateY(beta+startAngle).rotateX(alpha-startAngle)(graphLines);
             let mstLinesData = line3d.rotateY(beta+startAngle).rotateX(alpha-startAngle)(mstLines);
-
+            let outlyingLinesData = line3d.rotateY(beta+startAngle).rotateX(alpha-startAngle)(outlyingLines);
             drawAxes(axesData, scagsvg);
             drawPoints(pointsData, scagsvg, 0);
             drawLeaders(leadersData, scagsvg, 0);
             // drawLines(graphLinesData, scagsvg, 'graphLines', 0);
             drawLines(mstLinesData, scagsvg, 'mstLines', 0, mstLineOptions);
+            drawLines(outlyingLinesData, scagsvg, 'outlyingLines', 0, outlyingLineOptions);
         }
 
         function dragEnd() {
