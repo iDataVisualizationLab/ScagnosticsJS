@@ -65,6 +65,7 @@
         mst = scagsvg.selectAll('line.mstLines');//line
         outlyingLinks = scagsvg.selectAll('line.outlyingLines');//line
         v2Corners = scagsvg.selectAll('circle.v2Corners');//circle
+        v1s = scagsvg.selectAll('circle.v1Corners');//circle
     }
 
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
@@ -105,7 +106,7 @@
         // "noOutlyingTriangulations",
         // "convexHull",
         // "concaveHull",
-        // "v1s"
+        "v1s"
     ];
 
     function createControlButtons(theContainer, theOptions) {
