@@ -1,26 +1,37 @@
+import _ from 'underscore'
+
 export class Monotonic {
     constructor(points) {
         //Clone it in order to avoid modifying it.
         this.points = points.slice(0);
     }
+
     /**
      * Returns monotonic score
      * @returns {number}
      */
     score() {
-        let xArr = [];
-        let yArr = [];
-        this.points.forEach(p=>{
-            xArr.push(p[0]);
-            yArr.push(p[1])
-        })
-        let r = computeSpearmans(xArr, yArr);
-        return Math.pow(r, 2);
+        let spearmans = [];
+        let variables = _.unzip(this.points);
+        let length = variables.length;
+
+        //Calculate the spearman for all pairs of variables.
+        for (let i = 0; i < length - 1; i++) {
+            let v1 = variables[i];
+            for (let j = i+1; j < length; j++) {
+                let v2 = variables[j];
+                let r = computeSpearmans(v1, v2);
+                spearmans.push(r*r);
+            }
+        }
+        return _.max(spearmans);
 
         /**Adopted from: https://bl.ocks.org/nkullman/f65d5619843dc22e061d957249121408**/
         function computeSpearmans(arrX, arrY) {
             // simple error handling for input arrays of nonequal lengths
-            if (arrX.length !== arrY.length) { return null; }
+            if (arrX.length !== arrY.length) {
+                return null;
+            }
 
             // number of observations
             let n = arrX.length;
@@ -58,6 +69,7 @@ export class Monotonic {
 
             return rho;
         }
+
         /** Computes the rank array for arr, where each entry in arr is
          * assigned a value 1 thru n, where n is arr.length.
          *
@@ -67,24 +79,33 @@ export class Monotonic {
         function rankArray(arr) {
 
             // ranking without averaging
-            let sorted = arr.slice().sort(function (a, b) { return b - a });
-            let ranks = arr.slice().map(function (v) { return sorted.indexOf(v) + 1 });
+            let sorted = arr.slice().sort(function (a, b) {
+                return b - a
+            });
+            let ranks = arr.slice().map(function (v) {
+                return sorted.indexOf(v) + 1
+            });
 
             // counts of each rank
             let counts = {};
-            ranks.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+            ranks.forEach(function (x) {
+                counts[x] = (counts[x] || 0) + 1;
+            });
 
             // average duplicates
-            ranks = ranks.map(function (x) { return x + 0.5 * ((counts[x] || 0) - 1); });
+            ranks = ranks.map(function (x) {
+                return x + 0.5 * ((counts[x] || 0) - 1);
+            });
 
             return ranks;
         }
+
         /** Counts the number of ties in arr, and returns
          * an object with
          * a key for each tie length (an entry n for each n-way tie) and
          * a value corresponding to the number of key-way (n-way) ties
          */
-         function countTies(arr) {
+        function countTies(arr) {
             let ties = {},
                 arrSorted = arr.slice().sort(),
                 currValue = arrSorted[0],

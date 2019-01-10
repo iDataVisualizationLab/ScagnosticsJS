@@ -201,10 +201,10 @@ import {Monotonic} from "./modules/monotonic";
         outputValue("v1s", v1s);
         outputValue("stringyScore", stringyScore);
 
-        // /******This section is about the monotonic score and monotonic score results******/
-        // let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
-        // let monotonicScore = monotonic.score();
-        // outputValue("monotonicScore", monotonicScore);
+        /******This section is about the monotonic score and monotonic score results******/
+        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
+        let monotonicScore = monotonic.score();
+        outputValue("monotonicScore", monotonicScore);
 
         return window.scagnostics3d;
         function outputValue(name, value) {
