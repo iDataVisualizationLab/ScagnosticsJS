@@ -62,7 +62,7 @@ export function getAllV2CornersFromTree(tree) {
  */
 export function getAllV1sFromTree(tree) {
     let pairedResults = pairNodeLinks(tree.links);
-    //Get all pairs with length = 2 (V2)
+    //Get all pairs with length = 1 (V1)
     let allV1 = pairedResults.filter(p => p[1].length == 1);
     return allV1.map(v1 => v1[0].split(',').map(Number));
 }

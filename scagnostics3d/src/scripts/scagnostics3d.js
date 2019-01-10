@@ -11,7 +11,7 @@ import {Clumpy} from "./modules/clumpy";
 import {Striated} from "./modules/striated";
 // import {Convex} from "../../../scagnostics/src/scripts/modules/convex";
 // import {Skinny} from "../../../scagnostics/src/scripts/modules/skinny";
-// import {Stringy} from "../../../scagnostics/src/scripts/modules/stringy";
+import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
 
 (function (window) {
@@ -194,17 +194,17 @@ import {Monotonic} from "./modules/monotonic";
         // let skinnyScore = skinny.score();
         // outputValue("skinnyScore", skinnyScore);
         //
-        // /******This section is about the stringy score and stringy score results******/
-        // let stringy = new Stringy(noOutlyingTree);
-        // let v1s = stringy.getAllV1s();
-        // let stringyScore = stringy.score();
-        // outputValue("v1s", v1s);
-        // outputValue("stringyScore", stringyScore);
-        //
-        /******This section is about the monotonic score and monotonic score results******/
-        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
-        let monotonicScore = monotonic.score();
-        outputValue("monotonicScore", monotonicScore);
+        /******This section is about the stringy score and stringy score results******/
+        let stringy = new Stringy(noOutlyingTree);
+        let v1s = stringy.getAllV1s();
+        let stringyScore = stringy.score();
+        outputValue("v1s", v1s);
+        outputValue("stringyScore", stringyScore);
+
+        // /******This section is about the monotonic score and monotonic score results******/
+        // let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
+        // let monotonicScore = monotonic.score();
+        // outputValue("monotonicScore", monotonicScore);
 
         return window.scagnostics3d;
         function outputValue(name, value) {
