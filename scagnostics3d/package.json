@@ -8,7 +8,7 @@
     "rollup-plugin-node-resolve": "^4.0.0"
   },
   "devDependencies": {
-    "rollup": "^1.0.2",
+    "rollup": "^1.1.0",
     "simple-statistics": "^7.0.0",
     "underscore": "^1.9.1"
   },

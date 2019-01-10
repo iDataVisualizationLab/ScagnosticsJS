@@ -7,7 +7,7 @@ import _ from "underscore";
  * This function create the pairs between node and its links.
  *
  * @param links
- * @returns [["nodeX,nodeY", Array(numberOfLinksRelatedToTheNodes)]]
+ * @returns [{"nodeX,nodeY": Array(numberOfLinksRelatedToTheNodes)}]
  */
 export function pairNodeLinks(links) {
     let nestedByNodes = {};
@@ -121,16 +121,22 @@ export function createGraph(tetrahedra) {
 }
 
 export function distance(a, b) {
-    let dx = a[0] - b[0],
-        dy = a[1] - b[1],
-        dz = a[2] - b[2];
+    let totalSumSquared = 0;
+    for (let i = 0; i < a.length; i++) {
+        totalSumSquared += (a[i]-b[i])*(a[i]-b[i]);
+    }
     //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
     //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
-    return Math.round(Math.sqrt((dx * dx) + (dy * dy) + (dz*dz)) * Math.pow(10, 10)) / Math.pow(10, 10);
+    return Math.round(Math.sqrt(totalSumSquared) * Math.pow(10, 10)) / Math.pow(10, 10);
 }
 
 export function equalPoints(id1, id2) {
-    return (id1[0] === id2[0] && id1[1] === id2[1] && id1[2] == id2[2]);
+    for (let i = 0; i < id1.length; i++) {
+        if(id1[i] !== id2[i]){
+            return false;
+        }
+    }
+    return true;
 }
 export function pointExists(points, point){
     for (let i = 0; i < points.length; i++) {

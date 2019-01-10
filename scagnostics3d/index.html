@@ -57,13 +57,16 @@
     let concaveHull = null;//path
     let v1s = null;//circle
     let animateTime = 10;
-    function selectElements(){
+
+    function selectElements() {
         origPoints = scagsvg.selectAll('circle.origPoints');
         bins = scagsvg.selectAll('circle.bins');
         triangulations = scagsvg.selectAll('line.graphLines');//line
         mst = scagsvg.selectAll('line.mstLines');//line
         outlyingLinks = scagsvg.selectAll('line.outlyingLines');//line
+        v2Corners = scagsvg.selectAll('circle.v2Corners');//circle
     }
+
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
     function toggleDisplay(selection) {
         if (+d3.select(selection.node()).style("opacity") != 10e-6) {
@@ -96,7 +99,13 @@
     }
 
     let theOptions = ["origPoints", "bins", "triangulations", "mst", "outlyingLinks"
-        //, "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"
+        //, "outlyingPoints", "noOutlyingTree", "noOutlyingPoints"
+        , "v2Corners",
+        //"obtuseV2Corners",
+        // "noOutlyingTriangulations",
+        // "convexHull",
+        // "concaveHull",
+        // "v1s"
     ];
 
     function createControlButtons(theContainer, theOptions) {
@@ -117,7 +126,7 @@
         scaleZ = d3.scaleLinear().domain([0, 1]).range([-contentHeight / 4, contentHeight / 4]),
         scaleR = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
     let origin = [contentWidth / 2, contentHeight / 2], xLine = [], yLine = [], zLine = [], beta = 0, alpha = 0,
-        startAngle = 0;
+        startAngle = Math.PI / 4;
 
     let mx, my, mouseX, mouseY;
     let yScale3d = d3._3d()
@@ -138,6 +147,12 @@
         .scale(contentHeight / 2)
         .rotateY(startAngle)
         .rotateX(-startAngle);
+    var grid3d = d3._3d()
+        .shape('GRID', 11)
+        .origin(origin)
+        .rotateY( startAngle)
+        .rotateX(-startAngle)
+        .scale(contentHeight/2);
     let point3d = d3._3d()
         .x(d => scaleX(d[0]))
         .y(d => scaleY(d[1]))
@@ -156,53 +171,112 @@
         .rotateY(startAngle)
         .rotateX(-startAngle);
 
-    /***********SOIL DATA*******************/
-    d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
-        if (error) throw error;
-        data = rawData.filter(function (d) {
-            //Valid ID
-            return validGridId(d["Grid ID"]);
-        });
-        let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
-        let points = data.map(function (d) {
-            var result = [];
-            currentColumnNames.forEach(c => {
-                result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
-            });
-            result.data = d['Grid ID'];
-            return result;
-        });
-        //Filter NaN points
-        points = points.filter(x => isValidPoint(x));
-        draw(points);
-
-        function isValidPoint(d) {
-            let result = true;
-            for (let i = 0; i < d.length; i++) {
-                if (typeof d[i] !== 'number') {
-                    result = false;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function validGridId(id) {
-            let re = /^[A-Z]\d\d$/g;
-            return id != null && id.match(re) != null;
-        }
-
-    });
+    // /***********SOIL DATA*******************/
+    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+    //     if (error) throw error;
+    //     data = rawData.filter(function (d) {
+    //         //Valid ID
+    //         return validGridId(d["Grid ID"]);
+    //     });
+    //     let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
+    //     let points = data.map(function (d) {
+    //         var result = [];
+    //         currentColumnNames.forEach(c => {
+    //             if (d[c] !== "") {
+    //                 result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
+    //             } else {
+    //                 result.push('NaN');
+    //             }
+    //         });
+    //         result.data = d['Grid ID'];
+    //         return result;
+    //     });
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x));
+    //     draw(points);
+    //
+    //     function isValidPoint(d) {
+    //         let result = true;
+    //         for (let i = 0; i < d.length; i++) {
+    //             if (typeof d[i] !== 'number') {
+    //                 result = false;
+    //                 break;
+    //             }
+    //         }
+    //         return result;
+    //     }
+    //
+    //     function validGridId(id) {
+    //         let re = /^[A-Z]\d\d$/g;
+    //         return id != null && id.match(re) != null;
+    //     }
+    //
+    // });
 
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(contentWidth / 2, 50),
     //     randomY = d3.randomNormal(contentHeight / 2, 50),
     //     randomZ = d3.randomNormal(contentHeight / 2, 50),
-    //     points = d3.range(10).map(function () {
+    //     points = d3.range(100).map(function () {
     //         return [randomX(), randomY(), randomZ()];
     //     });
     // draw(points);
 
+    // /***********CLUMPY 2 CLUSTERS*******************/
+    // let randomX = muy => d3.randomNormal(muy, 50),
+    //     randomY = muy => d3.randomNormal(muy, 50),
+    //     randomZ = muy => d3.randomNormal(muy, 50),
+    //     clusters1 = d3.range(70).map(function () {
+    //         return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
+    //     }),
+    //     clusters2 = d3.range(30).map(function () {
+    //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
+    //     }),
+    //     points = clusters1.concat(clusters2);
+    // draw(points);
+
+    // /***********CLUMPY 2 CLUSTERS CLOSER DISTANCE*******************/
+    // let randomX = muy => d3.randomNormal(muy, 25),
+    //     randomY = muy => d3.randomNormal(muy, 25),
+    //     randomZ = muy => d3.randomNormal(muy, 25),
+    //     clusters1 = d3.range(70).map(function () {
+    //         return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
+    //     }),
+    //     clusters2 = d3.range(30).map(function () {
+    //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
+    //     }),
+    //     points = clusters1.concat(clusters2);
+    // draw(points);
+
+    /***********STRIATED 2 LINES with noise (-0.1, 0.1)*******************/
+    let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
+    let x2 = s=>-100-s, y2 = s=>-100+1.3*s, z2 = s=>-10+s;
+    let noise = d3.randomUniform(-0.1, 0.1);
+    let line1 = d3.range(50).map(()=>{
+       let t = d3.randomUniform(10, 50)();
+       return [x1(t)+noise(), y1(t)+noise(), z1(t)+noise()];
+    });
+    let line2 = d3.range(50).map(()=>{
+        let s = d3.randomUniform(10, 50)();
+        return [x2(s)+noise(), y2(s)+noise(), z2(s)+noise()];
+    });
+    let points = line1.concat(line2);
+    draw(points);
+
+    // /***********STRIATED 2 LINES with noise (-5, 5)*******************/
+    // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
+    // let x2 = s=>-100-s, y2 = s=>-100+1.3*s, z2 = s=>-10+s;
+    // let noise = d3.randomUniform(-5, 5);
+    // let line1 = d3.range(50).map(()=>{
+    //     let t = d3.randomUniform(10, 50)();
+    //     return [x1(t)+noise(), y1(t)+noise(), z1(t)+noise()];
+    // });
+    // let line2 = d3.range(50).map(()=>{
+    //     let s = d3.randomUniform(10, 50)();
+    //     return [x2(s)+noise(), y2(s)+noise(), z2(s)+noise()];
+    // });
+    // let points = line1.concat(line2);
+    // draw(points);
 
     function draw(points) {
         // let scagOptions ={
@@ -221,22 +295,29 @@
             yLine.push([-0.5, -d * 0.1, -0.5]);
             zLine.push([-0.5, -0.5, d * 0.1]);
         });
+        let grid = [];
+        xLine.forEach(xVal=>{
+            zLine.forEach(zVal=>{
+                grid.push([xVal[0], 0.5, zVal[2]]);
+            });
+        });
+
         let binColor = d3.scaleSequential(d3.interpolateLab("#fff", "steelblue"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
         let normalizedPoints = scag.normalizedPoints.map((d, i) => {
-            if (d.id===undefined) {
-                d.id = 'origPoints_' + i;;
+            if (d.id === undefined) {
+                d.id = 'origPoints_' + i;
             }
             return d;
         });
 
         let leaderPoints = scag.bins.map((d, i) => {
             let ret = [d.x, d.y, d.z];
-            if(ret.id===undefined){
+            if (ret.id === undefined) {
                 ret.id = "leader_" + i;
             }
-            if (ret.data===undefined) {
+            if (ret.data === undefined) {
                 ret.data = {};
             }
             ret.data.size = d.length;
@@ -246,7 +327,7 @@
 
         let graphLines = scag.graph.links.map((l, i) => {
             let ret = [l.source, l.target];
-            if (ret.id===undefined) {
+            if (ret.id === undefined) {
                 ret.id = 'graphLine_' + i;
             }
             return ret;
@@ -254,7 +335,7 @@
 
         let mstLines = scag.mst.links.map((l, i) => {
             let ret = [l.source, l.target];
-            if (ret.id===undefined) {
+            if (ret.id === undefined) {
                 ret.id = 'mstLine_' + i;
             }
             return ret;
@@ -262,17 +343,36 @@
 
         let outlyingLines = scag.outlyingLinks.map((l, i) => {
             let ret = [l.source, l.target];
-            if (ret.id===undefined) {
+            if (ret.id === undefined) {
                 ret.id = 'outlyingLine_' + i;
             }
             return ret;
         });
 
+        let v2CornersPoints = scag.v2Corners.map((d, i) => {
+            let ret = d[0];
+            if (ret.id === undefined) {
+                ret.id = 'v2Corners_' + i;
+            }
+            return ret;
+        });
+
         let origPointsOptions = {'stroke': 'black', 'fill': 'grey', 'opacity': dataPointOpacity, 'r': dataPointRadius};
-        let binsOptions = {'stroke': 'black', 'fill': d => binColor(d.data.size), 'opacity': binOpacity, 'r': d => scaleR(d.data.binRadius)};
+        let binsOptions = {
+            'stroke': 'black',
+            'fill': d => binColor(d.data.size),
+            'opacity': binOpacity,
+            'r': d => scaleR(d.data.binRadius)
+        };
         let graphLineOptions = {'stroke': 'black', 'stroke-width': 1, 'opacity': 1.0};
         let mstLineOptions = {'stroke': 'green', 'stroke-width': 3};
         let outlyingLineOptions = {'stroke': 'red', 'stroke-width': 3};
+        let v2CornersOptions = {
+            'stroke': 'black',
+            'fill': 'yellow',
+            'opacity': dataPointOpacity,
+            'r': dataPointRadius + 2
+        };
 
         rotateAndDraw(alpha, beta, duration);
         //Select elements after drawing
@@ -284,6 +384,7 @@
 
 
         function rotateAndDraw(alpha, beta, duration) {
+            let xGridData = grid3d.rotateY(beta+startAngle).rotateX(alpha-startAngle)(grid);
             let axesData = [
                 yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
                 xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
@@ -294,13 +395,15 @@
             let graphLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(graphLines);
             let mstLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(mstLines);
             let outlyingLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(outlyingLines);
-
+            let v2CornersPointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(v2CornersPoints);
             drawAxes(axesData, scagsvg);
+            drawXGrid(xGridData, scagsvg);
             drawCircles(pointsData, scagsvg, 'origPoints', duration, origPointsOptions);
             drawCircles(leadersData, scagsvg, 'bins', duration, binsOptions);
             drawLines(graphLinesData, scagsvg, 'graphLines', duration, graphLineOptions);
             drawLines(mstLinesData, scagsvg, 'mstLines', duration, mstLineOptions);
             drawLines(outlyingLinesData, scagsvg, 'outlyingLines', duration, outlyingLineOptions);
+            drawCircles(v2CornersPointsData, scagsvg, 'v2Corners', duration, v2CornersOptions);
         }
 
         //<editor-fold desc="This section is drag processing">
@@ -353,7 +456,21 @@
             //Resort all the 3d elements
             svg.selectAll('._3d').sort(d3._3d().sort);
         }
-
+        function drawXGrid(data, svg){
+            /*x-Grid*/
+            let xGrid = svg.selectAll('path.grid').data(data);
+            xGrid
+                .enter()
+                .append('path')
+                .attr('class', '_3d grid')
+                .merge(xGrid)
+                .attr('stroke', 'black')
+                .attr('stroke-width', 0.3)
+                .attr('fill', function(d){ return d.ccw ? 'lightgrey' : '#717171'; })
+                .attr('fill-opacity', 0.9)
+                .attr('d', grid3d.draw);
+            xGrid.exit().remove();
+        }
         function drawAxes(data, svg) {
             /*y-Scale*/
             let yScale = svg.selectAll('path.yScale').data(data[0]);
@@ -500,6 +617,7 @@
             svg.selectAll('._3d').sort(d3._3d().sort);
         }
     }
+
     function displayScagScores(scag, msgContainer) {
         let msg = "Scagnostics";
         //Binning
@@ -507,13 +625,13 @@
         //Outlying
         msg += "<br/>1. Outlying score: " + scag.outlyingScore + ", outlying edge cut point: " + scag.outlyingUpperBound;
         //Skewed
-        // msg += "<br/>2. Skewed score: " + scag.skewedScore;
-        // //Sparse
-        // msg += "<br/>3. Sparse score: " + scag.sparseScore;
-        // //Clumpy
-        // msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
-        // //Striated
-        // msg += "<br/>5. Striated score: " + scag.striatedScore;
+        msg += "<br/>2. Skewed score: " + scag.skewedScore;
+        //Sparse
+        msg += "<br/>3. Sparse score: " + scag.sparseScore;
+        //Clumpy
+        msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
+        //Striated
+        msg += "<br/>5. Striated score: " + scag.striatedScore;
         // //Convex
         // msg += "<br/>6. Convex score: " + scag.convexScore;
         // //Skinny
