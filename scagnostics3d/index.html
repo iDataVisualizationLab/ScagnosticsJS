@@ -25,7 +25,6 @@
     let dataPointOpacity = 0.9;
     let binOpacity = 0.8;
     let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
-        // normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
         margins = {left: 20, top: 20, right: 20, bottom: 20},
         padding = 10,
         contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
@@ -66,6 +65,8 @@
         outlyingLinks = scagsvg.selectAll('line.outlyingLines');//line
         v2Corners = scagsvg.selectAll('circle.v2Corners');//circle
         v1s = scagsvg.selectAll('circle.v1Corners');//circle
+        convexHull = scagsvg.selectAll('line.convexHullLines');
+        concaveHull = scagsvg.selectAll('path.concaveHullFaces');
     }
 
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
@@ -104,8 +105,8 @@
         , "v2Corners",
         //"obtuseV2Corners",
         // "noOutlyingTriangulations",
-        // "convexHull",
-        // "concaveHull",
+        "convexHull",
+        "concaveHull",
         "v1s"
     ];
 
@@ -151,9 +152,9 @@
     var grid3d = d3._3d()
         .shape('GRID', 11)
         .origin(origin)
-        .rotateY( startAngle)
+        .rotateY(startAngle)
         .rotateX(-startAngle)
-        .scale(contentHeight/2);
+        .scale(contentHeight / 2);
     let point3d = d3._3d()
         .x(d => scaleX(d[0]))
         .y(d => scaleY(d[1]))
@@ -171,48 +172,57 @@
         .scale(1)
         .rotateY(startAngle)
         .rotateX(-startAngle);
+    let triangle3d = d3._3d()
+        .shape('TRIANGLE')
+        .x(d => scaleX(d[0]))
+        .y(d => scaleY(d[1]))
+        .z(d => scaleZ(d[2]))
+        .origin(origin)
+        .scale(1)
+        .rotateY(startAngle)
+        .rotateX(-startAngle);
 
-    // /***********SOIL DATA*******************/
-    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
-    //     if (error) throw error;
-    //     data = rawData.filter(function (d) {
-    //         //Valid ID
-    //         return validGridId(d["Grid ID"]);
-    //     });
-    //     let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
-    //     let points = data.map(function (d) {
-    //         var result = [];
-    //         currentColumnNames.forEach(c => {
-    //             if (d[c] !== "") {
-    //                 result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
-    //             } else {
-    //                 result.push('NaN');
-    //             }
-    //         });
-    //         result.data = d['Grid ID'];
-    //         return result;
-    //     });
-    //     //Filter NaN points
-    //     points = points.filter(x => isValidPoint(x));
-    //     draw(points);
-    //
-    //     function isValidPoint(d) {
-    //         let result = true;
-    //         for (let i = 0; i < d.length; i++) {
-    //             if (typeof d[i] !== 'number') {
-    //                 result = false;
-    //                 break;
-    //             }
-    //         }
-    //         return result;
-    //     }
-    //
-    //     function validGridId(id) {
-    //         let re = /^[A-Z]\d\d$/g;
-    //         return id != null && id.match(re) != null;
-    //     }
-    //
-    // });
+    /***********SOIL DATA*******************/
+    d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+        if (error) throw error;
+        data = rawData.filter(function (d) {
+            //Valid ID
+            return validGridId(d["Grid ID"]);
+        });
+        let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
+        let points = data.map(function (d) {
+            var result = [];
+            currentColumnNames.forEach(c => {
+                if (d[c] !== "") {
+                    result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
+                } else {
+                    result.push('NaN');
+                }
+            });
+            result.data = d['Grid ID'];
+            return result;
+        });
+        //Filter NaN points
+        points = points.filter(x => isValidPoint(x));
+        draw(points);
+
+        function isValidPoint(d) {
+            let result = true;
+            for (let i = 0; i < d.length; i++) {
+                if (typeof d[i] !== 'number') {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function validGridId(id) {
+            let re = /^[A-Z]\d\d$/g;
+            return id != null && id.match(re) != null;
+        }
+
+    });
 
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(contentWidth / 2, 50),
@@ -279,12 +289,12 @@
     // let points = line1.concat(line2);
     // draw(points);
 
-    /***********Stringy LINE with noise (-0.1, 0.1)*******************/
-    let noise = d3.randomUniform(-0.1, 0.1);
-    let points = d3.range(100).map((x)=>{
-        return [x+noise(), Math.sin(x*Math.PI/25)+noise(), x];
-    });
-    draw(points);
+    // /***********Stringy LINE with noise (-0.1, 0.1)*******************/
+    // let noise = d3.randomUniform(-0.1, 0.1);
+    // let points = d3.range(100).map((x)=>{
+    //     return [x+noise(), Math.sin(x*Math.PI/25)+noise(), x];
+    // });
+    // draw(points);
 
     function draw(points) {
         // let scagOptions ={
@@ -304,8 +314,8 @@
             zLine.push([-0.5, -0.5, d * 0.1]);
         });
         let grid = [];
-        xLine.forEach(xVal=>{
-            zLine.forEach(zVal=>{
+        xLine.forEach(xVal => {
+            zLine.forEach(zVal => {
                 grid.push([xVal[0], 0.5, zVal[2]]);
             });
         });
@@ -373,6 +383,35 @@
             return ret;
         });
 
+        let convexHullLines = [];
+        scag.convexHull.map((t, i) => {
+            let l1 = [t[0], t[1]];
+            l1.id = 'convexHull_l1_' + i;
+
+            let l2 = [t[1], t[2]];
+            l2.id = 'convexHull_l2_' + i;
+
+            let l3 = [t[2], t[0]];
+            l3.id = 'convexHull_l3_' + i;
+
+            convexHullLines.push(l1);
+            convexHullLines.push(l2);
+            convexHullLines.push(l3);
+        });
+
+
+        let concaveHullFaces = scag.concaveHull.map((d, i) => {
+            let ret = d;
+            if (ret.id === undefined) {
+                ret.id = 'concaveHullFace_' + i;
+            }
+            return ret;
+        });
+
+        let convexHullLinesOptions = {'stroke': 'blue', 'stroke-width': 2, 'opacity': 1.0}
+        let concaveHullFacesOptions = {'stroke': 'purple', 'stroke-width': 0.3, 'fill-opacity': 0.9, 'fill': function (d) {
+                return d.ccw ? 'lightgrey' : '#717171';
+            }};
         let origPointsOptions = {'stroke': 'black', 'fill': 'grey', 'opacity': dataPointOpacity, 'r': dataPointRadius};
         let binsOptions = {
             'stroke': 'black',
@@ -405,7 +444,7 @@
 
 
         function rotateAndDraw(alpha, beta, duration) {
-            let xGridData = grid3d.rotateY(beta+startAngle).rotateX(alpha-startAngle)(grid);
+            let xGridData = grid3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(grid);
             let axesData = [
                 yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
                 xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
@@ -418,6 +457,8 @@
             let outlyingLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(outlyingLines);
             let v2CornersPointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(v2CornersPoints);
             let v1CornersPointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(v1CornersPoints);
+            let convexHullLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(convexHullLines);
+            let concaveHullFacesData = triangle3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(concaveHullFaces);
             drawAxes(axesData, scagsvg);
             drawXGrid(xGridData, scagsvg);
             drawCircles(pointsData, scagsvg, 'origPoints', duration, origPointsOptions);
@@ -427,6 +468,8 @@
             drawLines(outlyingLinesData, scagsvg, 'outlyingLines', duration, outlyingLineOptions);
             drawCircles(v2CornersPointsData, scagsvg, 'v2Corners', duration, v2CornersOptions);
             drawCircles(v1CornersPointsData, scagsvg, 'v1Corners', duration, v1CornersOptions);
+            drawLines(convexHullLinesData, scagsvg, 'convexHullLines', duration, convexHullLinesOptions);
+            drawTriangles(concaveHullFacesData, scagsvg, 'concaveHullFaces', duration, concaveHullFacesOptions);
         }
 
         //<editor-fold desc="This section is drag processing">
@@ -479,7 +522,8 @@
             //Resort all the 3d elements
             svg.selectAll('._3d').sort(d3._3d().sort);
         }
-        function drawXGrid(data, svg){
+
+        function drawXGrid(data, svg) {
             /*x-Grid*/
             let xGrid = svg.selectAll('path.grid').data(data);
             xGrid
@@ -489,13 +533,45 @@
                 .merge(xGrid)
                 .attr('stroke', 'black')
                 .attr('stroke-width', 0.3)
-                .attr('fill', function(d){ return d.ccw ? 'lightgrey' : '#717171'; })
+                .attr('fill', function (d) {
+                    // return d.ccw ? 'lightgrey' : '#717171';
+                    return 'lightgrey';
+                })
                 .attr('fill-opacity', 0.9)
                 .attr('d', grid3d.draw);
             xGrid.exit().remove();
             //Resort all the 3d elements
             svg.selectAll('._3d').sort(d3._3d().sort);
         }
+
+        function drawTriangles(data, svg, classType, duration, triangleOptions = {}) {
+            let stroke = triangleOptions.stroke;
+            let strokeWidth = triangleOptions['stroke-width'];
+            let fill = triangleOptions.fill;
+            let fillOpacity = triangleOptions['fill-opacity'];
+            if(stroke===undefined) stroke = 'black';
+            if(strokeWidth === undefined) strokeWidth = 0.3;
+            if(fill===undefined) fill = 'lightgrey';
+            if(fillOpacity===undefined) fillOpacity = 0.9;
+            /*Triangle*/
+            let triangles = svg.selectAll(`path.${classType}`).data(data, d => d.id);
+
+            triangles
+                .enter()
+                .append('path')
+                .attr('class', `_3d ${classType}`)
+                .merge(triangles)
+                .attr('stroke', stroke)
+                .attr('stroke-width', strokeWidth)
+                .transition().duration(duration)
+                .attr('fill', fill)
+                .attr('fill-opacity', fillOpacity)
+                .attr('d', triangle3d.draw);
+            triangles.exit().remove();
+            //Resort all the 3d elements
+            svg.selectAll('._3d').sort(d3._3d().sort);
+        }
+
         function drawAxes(data, svg) {
             /*y-Scale*/
             let yScale = svg.selectAll('path.yScale').data(data[0]);

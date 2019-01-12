@@ -9,7 +9,7 @@ import {Skewed} from "./modules/skewed";
 import {Sparse} from "./modules/sparse";
 import {Clumpy} from "./modules/clumpy";
 import {Striated} from "./modules/striated";
-// import {Convex} from "../../../scagnostics/src/scripts/modules/convex";
+import {Convex} from "./modules/convex";
 // import {Skinny} from "../../../scagnostics/src/scripts/modules/skinny";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
@@ -174,16 +174,17 @@ import {Monotonic} from "./modules/monotonic";
         outputValue("v2Corners", v2Corners);
         outputValue("obtuseV2Corners", obtuseV2Corners);
 
-        // /******This section is about the convex hull and convex hull results******/
-        // let convex = new Convex(noOutlyingTree);
-        // let convexHull = convex.convexHull();
-        // let noOutlyingTriangleCoordinates = convex.noOutlyingTriangleCoordinates();
-        // outputValue("noOutlyingTriangleCoordinates", noOutlyingTriangleCoordinates);
-        // outputValue("convexHull", convexHull);
-        //
-        // /******This section is about the concave hull and concave hull results******/
-        // let concaveHull = convex.concaveHull();
-        // outputValue("concaveHull", concaveHull);
+
+        /******This section is about the convex hull and convex hull results******/
+        let convex = new Convex(noOutlyingTree, 1/outlying.upperBound);
+        let convexHull = convex.convexHull();
+        outputValue("convexHull", convexHull);
+
+
+        /******This section is about the concave hull and concave hull results******/
+        let concaveHull = convex.concaveHull();
+        outputValue("concaveHull", concaveHull);
+
         //
         // /******This section is about the convex score and convex score results******/
         // let convexScore = convex.score();
