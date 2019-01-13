@@ -182,47 +182,47 @@
         .rotateY(startAngle)
         .rotateX(-startAngle);
 
-    /***********SOIL DATA*******************/
-    d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
-        if (error) throw error;
-        data = rawData.filter(function (d) {
-            //Valid ID
-            return validGridId(d["Grid ID"]);
-        });
-        let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
-        let points = data.map(function (d) {
-            var result = [];
-            currentColumnNames.forEach(c => {
-                if (d[c] !== "") {
-                    result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
-                } else {
-                    result.push('NaN');
-                }
-            });
-            result.data = d['Grid ID'];
-            return result;
-        });
-        //Filter NaN points
-        points = points.filter(x => isValidPoint(x));
-        draw(points);
-
-        function isValidPoint(d) {
-            let result = true;
-            for (let i = 0; i < d.length; i++) {
-                if (typeof d[i] !== 'number') {
-                    result = false;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function validGridId(id) {
-            let re = /^[A-Z]\d\d$/g;
-            return id != null && id.match(re) != null;
-        }
-
-    });
+    // /***********SOIL DATA*******************/
+    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+    //     if (error) throw error;
+    //     data = rawData.filter(function (d) {
+    //         //Valid ID
+    //         return validGridId(d["Grid ID"]);
+    //     });
+    //     let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
+    //     let points = data.map(function (d) {
+    //         var result = [];
+    //         currentColumnNames.forEach(c => {
+    //             if (d[c] !== "") {
+    //                 result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
+    //             } else {
+    //                 result.push('NaN');
+    //             }
+    //         });
+    //         result.data = d['Grid ID'];
+    //         return result;
+    //     });
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x));
+    //     draw(points);
+    //
+    //     function isValidPoint(d) {
+    //         let result = true;
+    //         for (let i = 0; i < d.length; i++) {
+    //             if (typeof d[i] !== 'number') {
+    //                 result = false;
+    //                 break;
+    //             }
+    //         }
+    //         return result;
+    //     }
+    //
+    //     function validGridId(id) {
+    //         let re = /^[A-Z]\d\d$/g;
+    //         return id != null && id.match(re) != null;
+    //     }
+    //
+    // });
 
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(contentWidth / 2, 50),
@@ -289,12 +289,12 @@
     // let points = line1.concat(line2);
     // draw(points);
 
-    // /***********Stringy LINE with noise (-0.1, 0.1)*******************/
-    // let noise = d3.randomUniform(-0.1, 0.1);
-    // let points = d3.range(100).map((x)=>{
-    //     return [x+noise(), Math.sin(x*Math.PI/25)+noise(), x];
-    // });
-    // draw(points);
+    /***********Stringy LINE with noise (-0.1, 0.1)*******************/
+    let noise = d3.randomUniform(-0.1, 0.1);
+    let points = d3.range(100).map((x)=>{
+        return [x+noise(), Math.sin(x*Math.PI/25)+noise(), x];
+    });
+    draw(points);
 
     function draw(points) {
         // let scagOptions ={
@@ -733,10 +733,10 @@
         msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
         //Striated
         msg += "<br/>5. Striated score: " + scag.striatedScore;
-        // //Convex
-        // msg += "<br/>6. Convex score: " + scag.convexScore;
-        // //Skinny
-        // msg += "<br/>7. Skinny score: " + scag.skinnyScore;
+        //Convex
+        msg += "<br/>6. Convex score: " + scag.convexScore;
+        //Skinny
+        msg += "<br/>7. Skinny score: " + scag.skinnyScore;
         //Stringy
         msg += "<br/>8. Stringy score: " + scag.stringyScore;
         //Monotonic

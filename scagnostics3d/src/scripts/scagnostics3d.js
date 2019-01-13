@@ -10,7 +10,7 @@ import {Sparse} from "./modules/sparse";
 import {Clumpy} from "./modules/clumpy";
 import {Striated} from "./modules/striated";
 import {Convex} from "./modules/convex";
-// import {Skinny} from "../../../scagnostics/src/scripts/modules/skinny";
+import {Skinny} from "./modules/skinny";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
 
@@ -185,16 +185,17 @@ import {Monotonic} from "./modules/monotonic";
         let concaveHull = convex.concaveHull();
         outputValue("concaveHull", concaveHull);
 
-        //
-        // /******This section is about the convex score and convex score results******/
-        // let convexScore = convex.score();
-        // outputValue("convexScore", convexScore);
-        //
-        // /******This section is about the skinny score and skinny score results******/
-        // let skinny = new Skinny(concaveHull);
-        // let skinnyScore = skinny.score();
-        // outputValue("skinnyScore", skinnyScore);
-        //
+
+        /******This section is about the convex score and convex score results******/
+        let convexScore = convex.score();
+        outputValue("convexScore", convexScore);
+
+
+        /******This section is about the skinny score and skinny score results******/
+        let skinny = new Skinny(concaveHull);
+        let skinnyScore = skinny.score();
+        outputValue("skinnyScore", skinnyScore);
+
         /******This section is about the stringy score and stringy score results******/
         let stringy = new Stringy(noOutlyingTree);
         let v1s = stringy.getAllV1s();
