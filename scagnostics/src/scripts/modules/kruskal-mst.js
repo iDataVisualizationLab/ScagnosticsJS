@@ -28,6 +28,7 @@ export function pairNodeLinks(links) {
     return pairedResults;
 }
 
+
 /**
  * This function returns corners (three vertices) of vertices of degree two in the for mat of
  * point1, point2, point3 => point1 is the the vertex with degree two (two edges connected to it are [point1, point2] and [point1, point3] (order of the points in each edge is not important)).
@@ -60,17 +61,18 @@ export function getAllV2CornersFromTree(tree) {
  * This function returns all single degree vertices from a tree
  * @param tree
  */
-export function getAllV1sFromTree(tree){
+export function getAllV1sFromTree(tree) {
     let pairedResults = pairNodeLinks(tree.links);
     //Get all pairs with length = 2 (V2)
     let allV1 = pairedResults.filter(p => p[1].length == 1);
-    return allV1.map(v1=>v1[0].split(',').map(Number));
+    return allV1.map(v1 => v1[0].split(',').map(Number));
 }
+
 /**
  * Create a graph from mesh
  * @param triangles is inform of set of triangles as the result from delaunay triangulations
  */
-export function createGraph (triangles) {
+export function createGraph(triangles) {
 
     function makeLink(sourceId, targetId, weight) {
         return {"source": sourceId, "target": targetId, "weight": weight};
@@ -108,7 +110,7 @@ export function createGraph (triangles) {
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.
     function linkExists(links, link) {
         let length = links.length;
-        for (let i = length-1; i >= 0; --i) {
+        for (let i = length - 1; i >= 0; --i) {
             if (equalLinks(link, links[i])) {
                 return true;
             }
@@ -124,19 +126,21 @@ export function distance(a, b) {
         dy = a[1] - b[1];
     //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
     //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
-    return Math.round(Math.sqrt((dx * dx) + (dy * dy))*Math.pow(10, 10))/Math.pow(10, 10);
+    return Math.round(Math.sqrt((dx * dx) + (dy * dy)) * Math.pow(10, 10)) / Math.pow(10, 10);
 }
 
 export function equalPoints(id1, id2) {
     return (id1[0] === id2[0] && id1[1] === id2[1]);
 }
+
 export function equalLinks(l1, l2) {
     return (equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
         (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source));
 }
+
 export function idExists(nodes, id) {
     let length = nodes.length;
-    for (let i = length-1; i >= 0; --i) {
+    for (let i = length - 1; i >= 0; --i) {
         let node = nodes[i];
         if (equalPoints(node.id, id)) {
             return true;
@@ -144,15 +148,17 @@ export function idExists(nodes, id) {
     }
     return false;
 }
+
 export function makeNode(id) {
     return {"id": id};
 }
+
 /**
  * create the mst
  * @param graph: in form of nodes and links
  * @returns {{nodes: (selection_nodes|nodes), links: Array}}
  */
-export function mst (graph) {
+export function mst(graph) {
     let vertices = graph.nodes,
         edges = graph.links.slice(0),
         selectedEdges = [],

@@ -130,6 +130,7 @@
     let origin = [contentWidth / 2, contentHeight / 2], xLine = [], yLine = [], zLine = [], beta = 0, alpha = 0,
         startAngle = Math.PI / 4;
 
+    //<editor-fold desc="Section about 3d objects">
     let mx, my, mouseX, mouseY;
     let yScale3d = d3._3d()
         .shape('LINE_STRIP')
@@ -181,6 +182,8 @@
         .scale(1)
         .rotateY(startAngle)
         .rotateX(-startAngle);
+    //</editor-fold>
+
 
     // /***********SOIL DATA*******************/
     // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
@@ -259,17 +262,17 @@
     //     points = clusters1.concat(clusters2);
     // draw(points);
 
-    // /***********STRIATED 2 LINES with noise (-0.1, 0.1)*******************/
+    // /***********STRIATED 2 LINES with noise (-1, 1)*******************/
     // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
     // let x2 = s=>-100-s, y2 = s=>-100+1.3*s, z2 = s=>-10+s;
-    // let noise = d3.randomUniform(-0.1, 0.1);
+    // let noise = d3.randomUniform(-2, 2);
     // let line1 = d3.range(50).map(()=>{
     //    let t = d3.randomUniform(10, 50)();
-    //    return [x1(t)+noise(), y1(t)+noise(), z1(t)+noise()];
+    //    return [x1(t), y1(t)+noise(), z1(t)];
     // });
     // let line2 = d3.range(50).map(()=>{
     //     let s = d3.randomUniform(10, 50)();
-    //     return [x2(s)+noise(), y2(s)+noise(), z2(s)+noise()];
+    //     return [x2(s), y2(s)+noise(), z2(s)];
     // });
     // let points = line1.concat(line2);
     // draw(points);
@@ -284,21 +287,47 @@
     // });
     // let line2 = d3.range(50).map(()=>{
     //     let s = d3.randomUniform(10, 50)();
-    //     return [x2(s)+noise(), y2(s)+noise(), z2(s)+noise()];
+    //     return [x2(s), y2(s)+noise(), z2(s)];
     // });
     // let points = line1.concat(line2);
     // draw(points);
 
+    // /************STRIATED 2 PLANES***********************/
+    // let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
+    // let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
+    // let noise = d3.randomUniform(-0.001, 0.001);
+    // // let noise = ()=>0;
+    // let plane1 = d3.range(50).map(() => {
+    //     let yr = d3.randomUniform(0, 1);
+    //     let zr = d3.randomUniform(0, 1);
+    //     let y = yr();
+    //     let z = zr();
+    //     let x = x1(y, z);
+    //     return [x, y, z];
+    // });
+    // let plane2 = d3.range(50).map(() => {
+    //     let yr = d3.randomUniform(0, 1);
+    //     let zr = d3.randomUniform(0, 1);
+    //     let y = yr();
+    //     let z = zr();
+    //     let x = x2(y, z);
+    //     return [x+noise(), y+noise(), z+noise()];
+    // });
+    // let points = plane1.concat(plane2);
+    // draw(points);
+
     /***********Stringy LINE with noise (-0.1, 0.1)*******************/
-    let noise = d3.randomUniform(-0.1, 0.1);
-    let points = d3.range(100).map((x)=>{
-        return [x+noise(), Math.sin(x*Math.PI/25)+noise(), x];
+    let noise = d3.randomUniform(-0.05, 0.05);
+    // let noise = () => 0;
+    let points = d3.range(100).map((x) => {
+        return [x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()];
     });
     draw(points);
 
+
     function draw(points) {
         // let scagOptions ={
-        //     startBinGridSize: 20,
+        //     startBinGridSize: 10,
         //     minBins: 10,
         //     maxBins: 200
         // }
@@ -359,6 +388,14 @@
             return ret;
         });
 
+        // let mstLines = scag.mst.links.map((l, i) => {
+        //     let ret = [l.source, l.target];
+        //     if (ret.id === undefined) {
+        //         ret.id = 'mstLine_' + i;
+        //     }
+        //     return ret;
+        // });
+
         let outlyingLines = scag.outlyingLinks.map((l, i) => {
             let ret = [l.source, l.target];
             if (ret.id === undefined) {
@@ -409,18 +446,22 @@
         });
 
         let convexHullLinesOptions = {'stroke': 'blue', 'stroke-width': 2, 'opacity': 1.0}
-        let concaveHullFacesOptions = {'stroke': 'purple', 'stroke-width': 0.3, 'fill-opacity': 0.9, 'fill': function (d) {
+        let concaveHullFacesOptions = {
+            'stroke': 'purple', 'stroke-width': 0.3, 'fill-opacity': 0.9, 'fill': function (d) {
                 return d.ccw ? 'lightgrey' : '#717171';
-            }};
+            }
+        };
         let origPointsOptions = {'stroke': 'black', 'fill': 'grey', 'opacity': dataPointOpacity, 'r': dataPointRadius};
         let binsOptions = {
             'stroke': 'black',
             'fill': d => binColor(d.data.size),
             'opacity': binOpacity,
-            'r': d => scaleR(d.data.binRadius)
+            // 'r': d => scaleR(d.data.binRadius)
+            'r': 3
         };
         let graphLineOptions = {'stroke': 'black', 'stroke-width': 1, 'opacity': 1.0};
-        let mstLineOptions = {'stroke': 'green', 'stroke-width': 3};
+        let mstLineOptions = {'stroke': 'black', 'stroke-width': 3};
+        let noOutlyingMstLineOptions = {'stroke': 'green', 'stroke-width': 3};
         let outlyingLineOptions = {'stroke': 'red', 'stroke-width': 3};
         let v2CornersOptions = {
             'stroke': 'black',
@@ -549,10 +590,10 @@
             let strokeWidth = triangleOptions['stroke-width'];
             let fill = triangleOptions.fill;
             let fillOpacity = triangleOptions['fill-opacity'];
-            if(stroke===undefined) stroke = 'black';
-            if(strokeWidth === undefined) strokeWidth = 0.3;
-            if(fill===undefined) fill = 'lightgrey';
-            if(fillOpacity===undefined) fillOpacity = 0.9;
+            if (stroke === undefined) stroke = 'black';
+            if (strokeWidth === undefined) strokeWidth = 0.3;
+            if (fill === undefined) fill = 'lightgrey';
+            if (fillOpacity === undefined) fillOpacity = 0.9;
             /*Triangle*/
             let triangles = svg.selectAll(`path.${classType}`).data(data, d => d.id);
 

@@ -168,11 +168,7 @@ import {Monotonic} from "./modules/monotonic";
 
         /******This section is about the striated score and striated score results******/
         let striated = new Striated(noOutlyingTree);
-        let v2Corners = striated.getAllV2Corners();
-        let obtuseV2Corners = striated.getAllObtuseV2Corners();
         outputValue("striatedScore", striated.score());
-        outputValue("v2Corners", v2Corners);
-        outputValue("obtuseV2Corners", obtuseV2Corners);
 
 
         /******This section is about the convex hull and convex hull results******/
@@ -199,9 +195,14 @@ import {Monotonic} from "./modules/monotonic";
         /******This section is about the stringy score and stringy score results******/
         let stringy = new Stringy(noOutlyingTree);
         let v1s = stringy.getAllV1s();
+        let v2Corners = stringy.getAllV2Corners();
+        // let obtuseV2Corners = striated.getAllObtuseV2Corners();
         let stringyScore = stringy.score();
         outputValue("v1s", v1s);
         outputValue("stringyScore", stringyScore);
+        outputValue("v2Corners", v2Corners);
+        // outputValue("obtuseV2Corners", obtuseV2Corners);
+
 
         /******This section is about the monotonic score and monotonic score results******/
         let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));

@@ -7,7 +7,7 @@ import _ from "underscore";
  * This function create the pairs between node and its links.
  *
  * @param links
- * @returns [{"nodeX,nodeY": Array(numberOfLinksRelatedToTheNodes)}]
+ * @returns [["nodeX,nodeY": Array(numberOfLinksRelatedToTheNodes)]]
  */
 export function pairNodeLinks(links) {
     let nestedByNodes = {};

@@ -20,7 +20,7 @@ export function getPolyhedronArea(triangles){
     }
     return result;
 }
-function dotProduct(p1, p2) {
+export function dotProduct(p1, p2) {
     let length = p1.length;
     let result = 0;
     for (let i = 0; i < length; i++) {
@@ -46,7 +46,7 @@ function substract(v1, v2) {
     return result;
 }
 
-function normalVector(triangle) {
+export function normalVector(triangle) {
     let a = triangle[0];
     let b = triangle[1];
     let c = triangle[2];
@@ -56,7 +56,7 @@ function normalVector(triangle) {
     return nHati;
 }
 
-function magnitude(vector){
+export function magnitude(vector){
     let result = 0;
     for (let i = 0; i <vector.length; i++) {
         result += vector[i]*vector[i];
