@@ -1,0 +1,20 @@
+{
+  "name": "ScagnosticsND",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "delaunay-triangulate": "^1.1.6",
+    "rollup": "^1.1.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "simple-statistics": "^7.0.0",
+    "underscore": "^1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:iDataVisualizationLab/Scagnostics2018.git"
+  },
+  "author": "Tommy Dang, Vung Pham",
+  "license": "ISC",
+  "description": "This is a library to calculate scagnostics n-d version"
+}
