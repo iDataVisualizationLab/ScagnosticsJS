@@ -25,18 +25,18 @@ import {Outlying} from "./modules/outlying";
         //Clone it to avoid modifying it.
         let points = inputPoints.map(e=>e.slice());
         let normalizedPoints = points;
-        debugger
+
         if(options.isNormalized === undefined){
             let normalizer = new Normalizer(points);
             normalizedPoints = normalizer.normalizedPoints;
             outputValue("normalizedPoints", normalizedPoints);
             outputValue("normalizer", normalizer);
         }
-        debugger
+
         let binType = options.binType;
         /******This section is about the outlying score and outlying score results******/
         let outlyingUpperBound = options.outlyingUpperBound;
-        debugger
+
         /******This section is about finding number of bins and binners******/
         let sites = null;
         let bins = null;
@@ -105,7 +105,7 @@ import {Outlying} from "./modules/outlying";
         }
 
         outputValue("binnedSites", sites);
-        debugger
+
         // /******This section is about the triangulating and triangulating results******/
         // //Triangulation calculation
         // let delaunay = {};
