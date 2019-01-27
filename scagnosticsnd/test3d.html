@@ -499,7 +499,7 @@
             ];
             let pointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(normalizedPoints);
             let leadersData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(leaderPoints);
-            let graphLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(graphLines);
+            // let graphLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(graphLines);
             let mstLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(mstLines);
             let outlyingLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(outlyingLines);
             // let v2CornersPointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(v2CornersPoints);
@@ -510,7 +510,7 @@
             drawXGrid(xGridData, scagsvg);
             drawCircles(pointsData, scagsvg, 'origPoints', duration, origPointsOptions);
             drawCircles(leadersData, scagsvg, 'bins', duration, binsOptions);
-            drawLines(graphLinesData, scagsvg, 'graphLines', duration, graphLineOptions);
+            // drawLines(graphLinesData, scagsvg, 'graphLines', duration, graphLineOptions);
             drawLines(mstLinesData, scagsvg, 'mstLines', duration, mstLineOptions);
             drawLines(outlyingLinesData, scagsvg, 'outlyingLines', duration, outlyingLineOptions);
             // drawCircles(v2CornersPointsData, scagsvg, 'v2Corners', duration, v2CornersOptions);

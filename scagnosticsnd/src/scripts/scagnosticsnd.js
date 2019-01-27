@@ -21,19 +21,22 @@ import {Outlying} from "./modules/outlying";
      * @returns {*[][]}
      */
     window.scagnosticsnd = function (inputPoints, options={}) {
+        let dims = inputPoints[0].length;
         //Clone it to avoid modifying it.
         let points = inputPoints.map(e=>e.slice());
         let normalizedPoints = points;
+        debugger
         if(options.isNormalized === undefined){
             let normalizer = new Normalizer(points);
             normalizedPoints = normalizer.normalizedPoints;
             outputValue("normalizedPoints", normalizedPoints);
             outputValue("normalizer", normalizer);
         }
+        debugger
         let binType = options.binType;
         /******This section is about the outlying score and outlying score results******/
         let outlyingUpperBound = options.outlyingUpperBound;
-
+        debugger
         /******This section is about finding number of bins and binners******/
         let sites = null;
         let bins = null;
@@ -75,7 +78,7 @@ import {Outlying} from "./modules/outlying";
                     }else if(bins.length>maxNumOfBins){
                         binSize = binSize/2;
                     }else if(bins.length<minNumOfBins){
-                        binSize = binSize + 5;
+                        binSize = 2*binSize;
                     }
                     if(binType==="hexagon"){
                         // // This section uses hexagon binning
@@ -85,7 +88,7 @@ import {Outlying} from "./modules/outlying";
                         // bins = binner.hexbin(normalizedPoints);
                     }else if(!binType || binType==="leader"){
                         // This section uses leader binner
-                        binRadius = 1/(binSize*2);
+                        binRadius = Math.sqrt(dims*Math.pow(1/(binSize*2), 2));
                         binner = new LeaderBinner(normalizedPoints, binRadius);
                         bins = binner.leaders;
                     }
@@ -102,32 +105,33 @@ import {Outlying} from "./modules/outlying";
         }
 
         outputValue("binnedSites", sites);
-
-        /******This section is about the triangulating and triangulating results******/
-            //Triangulation calculation
-        let delaunay = {};
-        //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
-        delaunay.points = sites;
-        let tetrahedra = triangulate(sites);
-
-        delaunay.tetrahedra = tetrahedra;
-        delaunay.tetrahedraCoordinates = function(){
-            let tetrahedra = this.tetrahedra;
-            let tc = [];
-            for (let i = 0; i < tetrahedra.length; i ++) {
-                let t = tetrahedra[i];
-                tc.push(t.map(tv=>this.points[tv]));
-            }
-            return tc;
-        }
-        let tetrahedraCoordinates = delaunay.tetrahedraCoordinates();
-        //Assigning output values
-        outputValue("delaunay", delaunay);
-        outputValue("tetrahedra", tetrahedra);
-        outputValue("tetrahedraCoordinates", tetrahedraCoordinates);
+        debugger
+        // /******This section is about the triangulating and triangulating results******/
+        // //Triangulation calculation
+        // let delaunay = {};
+        // //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
+        // delaunay.points = sites;
+        // let tetrahedra = triangulate(sites);
+        //
+        // delaunay.tetrahedra = tetrahedra;
+        // delaunay.tetrahedraCoordinates = function(){
+        //     let tetrahedra = this.tetrahedra;
+        //     let tc = [];
+        //     for (let i = 0; i < tetrahedra.length; i ++) {
+        //         let t = tetrahedra[i];
+        //         tc.push(t.map(tv=>this.points[tv]));
+        //     }
+        //     return tc;
+        // }
+        // let tetrahedraCoordinates = delaunay.tetrahedraCoordinates();
+        // //Assigning output values
+        // outputValue("delaunay", delaunay);
+        // outputValue("tetrahedra", tetrahedra);
+        // outputValue("tetrahedraCoordinates", tetrahedraCoordinates);
 
         /******This section is about the spanning tree and spanning tree results******/
-            //Spanning tree calculation
+        //Spanning tree calculation
+        let tetrahedraCoordinates = [sites];
         let graph = createGraph(tetrahedraCoordinates);
         let mstree = mst(graph);
         //Assigning the output values
@@ -140,12 +144,12 @@ import {Outlying} from "./modules/outlying";
         outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();
         let outlyingPoints = outlying.points();
-        let noOutlyingTree = outlying.removeOutlying();
+
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingUpperBound", outlyingUpperBound);
         outputValue("outlyingLinks", outlyingLinks);
         outputValue("outlyingPoints", outlyingPoints);
-        outputValue("noOutlyingTree", noOutlyingTree);
+
 
         // /******This section is about the skewed score and skewed score results******/
         // let skewed = new Skewed(noOutlyingTree);

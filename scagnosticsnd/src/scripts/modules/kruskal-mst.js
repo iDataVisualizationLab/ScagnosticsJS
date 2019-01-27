@@ -82,25 +82,26 @@ export function createGraph(tetrahedra) {
     graph.links = [];
     //Creating nodes
     tetrahedra.forEach(t => {
-        for (let i = 0; i < 4; i++) {
-            let id = t[i];
-            if (!idExists(graph.nodes, id)) {
+        t.forEach(id =>{
+            if(!idExists(graph.nodes, id)){
                 graph.nodes.push(makeNode(id));
             }
-        }
+        });
     });
 
     //Creating links
     tetrahedra.forEach(t => {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < t.length-1; i++) {
             let p1 = t[i];
-            let p2 = t[(i + 1) % 4];
-            let id1 = p1;
-            let id2 = p2;
-            let dist = distance(p1, p2);
-            let link = makeLink(id1, id2, dist);
-            if (!linkExists(graph.links, link)) {
-                graph.links.push(link);
+            for (let j = i+1; j < t.length; j++) {
+                let p2 = t[j];
+                let id1 = p1;
+                let id2 = p2;
+                let dist = distance(p1, p2);
+                let link = makeLink(id1, id2, dist);
+                if (!linkExists(graph.links, link)) {
+                    graph.links.push(link);
+                }
             }
         }
     });

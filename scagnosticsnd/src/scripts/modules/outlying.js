@@ -61,26 +61,7 @@ export class Outlying {
             allNodesWithLinks.push(l.target);
         });
         allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
-        //TODO: May need to reuse the existing result instead of calculating all again.
-        //Triangulation calculation
-        let delaunay = {};
-        //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
-        delaunay.points = allNodesWithLinks;
-        let tetrahedra = triangulate(allNodesWithLinks);
-        delaunay.tetrahedra = tetrahedra;
-        delaunay.tetrahedraCoordinates = function(){
-            let tetrahedra = this.tetrahedra;
-            let tc = [];
-            for (let i = 0; i < tetrahedra.length; i ++) {
-                let t = tetrahedra[i];
-                tc.push(t.map(tv=>this.points[tv]));
-            }
-            return tc;
-        }
-        //Triangulate again
-        let graph = createGraph(delaunay.tetrahedraCoordinates());
-        newTree = mst(graph);
-        return newTree;
+        return allNodesWithLinks;
     }
 
     /**
@@ -88,13 +69,12 @@ export class Outlying {
      * @returns {Array}
      */
     points(){
-        let newTree = this.removeOutlying();
-        let newNodes = newTree.nodes;
+        let newNodes = this.removeOutlying();
         let oldNodes = this.tree.nodes;
         let ops = [];
         oldNodes.forEach(n=>{
             //.id since we are accessing to points and the node is in form of {id: thePoint}
-            if(!pointExists(newNodes.map(n=>n.id), n.id)){
+            if(!pointExists(newNodes, n.id)){
                 ops.push(n.id);
             }
         });

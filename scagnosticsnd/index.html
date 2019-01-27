@@ -51,13 +51,9 @@
     let binOpacity = 0.8;
     let size = 500;
     /***********RANDOM DATA*******************/
-    let randomX = d3.randomNormal(size / 2, 50),
-        randomY = d3.randomNormal(size / 2, 50),
-        randomZ = d3.randomNormal(size / 2, 50),
-        randomU = d3.randomNormal(size / 2, 50),
-        randomV = d3.randomNormal(size / 2, 50),
+    let random = d3.randomNormal(size / 2, 50),
         points = d3.range(100).map(function () {
-            return [randomX(), randomY(), randomZ(), randomU(), randomV()];
+            return d3.range(10).map(()=>random());
         });
     draw(points);
 
@@ -88,9 +84,9 @@
     // ];
     function draw(points) {
         let scagOptions ={
-            startBinGridSize: 10,
-            minBins: 10,
-            maxBins: 50
+            startBinGridSize: 30,
+            minBins: 1,
+            maxBins: 20
         }
         //let scagOptions = {};
         scag = scagnosticsnd(points, scagOptions);
