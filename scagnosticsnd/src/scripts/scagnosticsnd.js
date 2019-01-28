@@ -36,6 +36,7 @@ import {Outlying} from "./modules/outlying";
         let binType = options.binType;
         /******This section is about the outlying score and outlying score results******/
         let outlyingUpperBound = options.outlyingUpperBound;
+        let outlyingCoefficient = options.outlyingCoefficient;
 
         /******This section is about finding number of bins and binners******/
         let sites = null;
@@ -139,7 +140,7 @@ import {Outlying} from "./modules/outlying";
         outputValue("mst", mstree);
 
         /******This section is about the outlying score and outlying score results******/
-        let outlying = new Outlying(mstree);
+        let outlying = new Outlying(mstree, outlyingUpperBound,outlyingCoefficient);
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();

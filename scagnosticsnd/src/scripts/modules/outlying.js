@@ -5,10 +5,11 @@ import {createGraph, mst, pointExists} from "./kruskal-mst";
 
 
 export class Outlying {
-    constructor(tree, upperBound) {
+    constructor(tree, upperBound, outlyingCoefficient) {
         //Clone the tree to avoid modifying it
         this.tree = JSON.parse(JSON.stringify(tree));
         this.upperBound = upperBound;
+        this.outlyingCoefficient = outlyingCoefficient;
     }
 
     /**
@@ -26,7 +27,10 @@ export class Outlying {
                 q3 = quantile(allLengths, 0.75),
                 iqr = q3 - q1;
             // upperBound = q3+1.5*iqr;
-            upperBound = q3+3*iqr;
+            if(!this.outlyingCoefficient){
+                this.outlyingCoefficient = 3;
+            }
+            upperBound = q3+this.outlyingCoefficient*iqr;
             //Save it for displaying purpose.
             this.upperBound = upperBound;
         }
