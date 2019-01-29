@@ -50,7 +50,13 @@ import {Outlying} from "./modules/outlying";
         let binSize = null;
         let binRadius = 0;
         let startBinGridSize = options.startBinGridSize;
+
         if(options.isBinned===undefined){//Only do the binning if needed.
+            let incrementA = options.incrementA?options.incrementA: 2;
+            let incrementB = options.incrementB?options.incrementB: 0;
+            let decrementA = options.decrementA?options.decrementA: 1/2;
+            let decrementB = options.decrementB?options.decrementB: 0;
+
             if(startBinGridSize===undefined){
                 startBinGridSize = 40;
             }
@@ -82,9 +88,9 @@ import {Outlying} from "./modules/outlying";
                     if(binSize===null){
                         binSize = startBinGridSize;
                     }else if(bins.length>maxNumOfBins){
-                        binSize = binSize/2;
+                        binSize = binSize*decrementA+decrementB;
                     }else if(bins.length<minNumOfBins){
-                        binSize = 2*binSize;
+                        binSize = binSize*incrementA + incrementB;
                     }
                     if(binType==="hexagon"){
                         // // This section uses hexagon binning
