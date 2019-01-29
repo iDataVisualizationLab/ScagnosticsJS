@@ -144,7 +144,8 @@ import {Outlying} from "./modules/outlying";
         /******This section is about the spanning tree and spanning tree results******/
         //Spanning tree calculation
         let tetrahedraCoordinates = [sites];
-        let graph = createGraph(tetrahedraCoordinates);
+        let weights = options.distanceWeights;
+        let graph = createGraph(tetrahedraCoordinates, weights);
         let mstree = mst(graph);
         //Assigning the output values
         outputValue("graph", graph);

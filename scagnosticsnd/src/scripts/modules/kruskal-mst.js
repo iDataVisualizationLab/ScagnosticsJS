@@ -71,7 +71,7 @@ export function getAllV1sFromTree(tree) {
  * Create a graph from mesh
  * @param triangles is inform of set of triangles as the result from delaunay triangulations
  */
-export function createGraph(tetrahedra) {
+export function createGraph(tetrahedra, weights) {
 
     function makeLink(sourceId, targetId, weight) {
         return {"source": sourceId, "target": targetId, "weight": weight};
@@ -97,7 +97,7 @@ export function createGraph(tetrahedra) {
                 let p2 = t[j];
                 let id1 = p1;
                 let id2 = p2;
-                let dist = distance(p1, p2);
+                let dist = distance(p1, p2, weights);
                 let link = makeLink(id1, id2, dist);
                 if (!linkExists(graph.links, link)) {
                     graph.links.push(link);
@@ -121,10 +121,16 @@ export function createGraph(tetrahedra) {
     return graph;
 }
 
-export function distance(a, b) {
+export function distance(a, b, weights) {
+    if(!weights){
+        weights = new Array(a.length);
+        for (let i = 0; i < weights.length; i++) {
+            weights = 1;
+        }
+    }
     let totalSumSquared = 0;
     for (let i = 0; i < a.length; i++) {
-        totalSumSquared += (a[i]-b[i])*(a[i]-b[i]);
+        totalSumSquared += (a[i]-b[i])*(a[i]-b[i])*weights[i];
     }
     //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
     //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
