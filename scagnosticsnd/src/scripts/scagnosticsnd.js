@@ -25,6 +25,10 @@ import {Outlying} from "./modules/outlying";
         let dims = inputPoints[0].length;
         //Clone it to avoid modifying it.
         let points = inputPoints.map(e=>e.slice());
+        //Add one step to pass the data over if there is.
+        for (let i = 0; i < points.length; i++) {
+            points[i].data = inputPoints[i].data;
+        }
         let normalizedPoints = points;
 
         if(options.isNormalized === undefined){
