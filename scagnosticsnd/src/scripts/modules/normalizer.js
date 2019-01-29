@@ -3,6 +3,10 @@ import _ from 'underscore';
 export class Normalizer {
     constructor(points) {
         this.points = points.map(e=>e.slice());
+        //pass the data over
+        this.points.forEach((p, i)=>{
+            p.data = points[i].data;
+        });
         let nds = this.nds = _.unzip(this.points);
         let maxD = this.maxD = [];
         let minD = this.minD = [];
