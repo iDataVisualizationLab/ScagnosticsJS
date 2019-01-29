@@ -3,7 +3,8 @@ import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderBinner";
 import {_} from 'underscore'
 import {triangulate} from 'delaunay-triangulate'
-import {createGraph, mst} from "./modules/kruskal-mst";
+import {createGraph, mst, equalPoints} from "./modules/kruskal-mst";
+
 import {Outlying} from "./modules/outlying";
 // import {Skewed} from "./modules/skewed";
 // import {Sparse} from "./modules/sparse";
@@ -95,10 +96,7 @@ import {Outlying} from "./modules/outlying";
                     }
                 }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
             }
-            sites = bins.map((d, i) => {
-                d.site.id = i;
-                return d.site;
-            }); //=>sites are the set of centers of all bins
+            sites = bins.map(d=>d.site); //=>sites are the set of centers of all bins
             /******This section is about the binning and binning results******/
             outputValue("binner", binner);
             outputValue("bins", bins);
@@ -150,7 +148,12 @@ import {Outlying} from "./modules/outlying";
         //Add outlying points from the bin to it.
         let outlyingPoints = [];
         outlying.points().forEach(p=>{
-            outlyingPoints = outlyingPoints.concat(bins[p.id]);
+            bins.forEach(b=>{
+                if(equalPoints(p, b.site)){
+                    outlyingPoints = outlyingPoints.concat(b);
+                }
+            });
+
         });
 
         outputValue("outlyingScore", outlyingScore);
