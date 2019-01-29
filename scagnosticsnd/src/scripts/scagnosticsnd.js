@@ -95,7 +95,10 @@ import {Outlying} from "./modules/outlying";
                     }
                 }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
             }
-            sites = bins.map(d => d.site); //=>sites are the set of centers of all bins
+            sites = bins.map((d, i) => {
+                d.site.id = i;
+                return d.site;
+            }); //=>sites are the set of centers of all bins
             /******This section is about the binning and binning results******/
             outputValue("binner", binner);
             outputValue("bins", bins);
@@ -144,7 +147,11 @@ import {Outlying} from "./modules/outlying";
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();
-        let outlyingPoints = outlying.points();
+        //Add outlying points from the bin to it.
+        let outlyingPoints = [];
+        outlying.points().forEach(p=>{
+            outlyingPoints = outlyingPoints.concat(bins[p.id]);
+        });
 
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingUpperBound", outlyingUpperBound);
