@@ -122,16 +122,17 @@ export function createGraph(tetrahedra, weights) {
 }
 
 export function distance(a, b, weights) {
+    let totalSumSquared = 0;
     if(!weights){
-        weights = new Array(a.length);
-        for (let i = 0; i < weights.length; i++) {
-            weights = 1;
+        for (let i = 0; i < a.length; i++) {
+            totalSumSquared += (a[i]-b[i])*(a[i]-b[i]);
+        }
+    }else{
+        for (let i = 0; i < a.length; i++) {
+            totalSumSquared += (a[i]-b[i])*(a[i]-b[i])*weights[i];
         }
     }
-    let totalSumSquared = 0;
-    for (let i = 0; i < a.length; i++) {
-        totalSumSquared += (a[i]-b[i])*(a[i]-b[i])*weights[i];
-    }
+
     //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
     //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
     return Math.round(Math.sqrt(totalSumSquared) * Math.pow(10, 10)) / Math.pow(10, 10);
