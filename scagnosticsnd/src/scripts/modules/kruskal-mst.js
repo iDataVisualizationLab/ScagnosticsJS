@@ -82,8 +82,8 @@ export function createGraph(tetrahedra, weights) {
     graph.links = [];
     //Creating nodes
     tetrahedra.forEach(t => {
-        t.forEach(id =>{
-            if(!idExists(graph.nodes, id)){
+        t.forEach(id => {
+            if (!idExists(graph.nodes, id)) {
                 graph.nodes.push(makeNode(id));
             }
         });
@@ -91,9 +91,9 @@ export function createGraph(tetrahedra, weights) {
 
     //Creating links
     tetrahedra.forEach(t => {
-        for (let i = 0; i < t.length-1; i++) {
+        for (let i = 0; i < t.length - 1; i++) {
             let p1 = t[i];
-            for (let j = i+1; j < t.length; j++) {
+            for (let j = i + 1; j < t.length; j++) {
                 let p2 = t[j];
                 let id1 = p1;
                 let id2 = p2;
@@ -123,30 +123,36 @@ export function createGraph(tetrahedra, weights) {
 
 export function distance(a, b, weights) {
     let totalSumSquared = 0;
-    if(!weights){
+    if (!weights) {
         for (let i = 0; i < a.length; i++) {
-            totalSumSquared += (a[i]-b[i])*(a[i]-b[i]);
+            let diff = (a[i] - b[i]) * (a[i] - b[i]);
+            if (!Number.isNaN(diff)) {
+                totalSumSquared += diff;
+            }
         }
-    }else{
+    } else {
         for (let i = 0; i < a.length; i++) {
-            totalSumSquared += (a[i]-b[i])*(a[i]-b[i])*weights[i];
+            let diff = (a[i] - b[i]) * (a[i] - b[i]);
+            if (!Number.isNaN(diff)) {
+                totalSumSquared += diff * weights[i];
+            }
         }
     }
-
-    //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
-    //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
+//For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
+//So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
     return Math.round(Math.sqrt(totalSumSquared) * Math.pow(10, 10)) / Math.pow(10, 10);
 }
 
 export function equalPoints(id1, id2) {
     for (let i = 0; i < id1.length; i++) {
-        if(id1[i] !== id2[i]){
+        if (id1[i] !== id2[i]) {
             return false;
         }
     }
     return true;
 }
-export function pointExists(points, point){
+
+export function pointExists(points, point) {
     for (let i = 0; i < points.length; i++) {
         let point1 = points[i];
         if (equalPoints(point1, point)) {
@@ -155,6 +161,7 @@ export function pointExists(points, point){
     }
     return false;
 }
+
 export function equalLinks(l1, l2) {
     return (equalPoints(l1.source, l2.source) && equalPoints(l1.target, l2.target)) ||
         (equalPoints(l1.source, l2.target) && equalPoints(l1.target, l2.source));
