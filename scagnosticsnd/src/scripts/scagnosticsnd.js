@@ -156,6 +156,9 @@ import {Outlying} from "./modules/outlying";
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();
+        let outlyingSites = outlying.points().map(p=>p.join(','));
+        let outlyingBins = bins.filter(b=> outlyingSites.indexOf(b.site.join(','))>=0) ;
+
         //Add outlying points from the bin to it.
         let outlyingPoints = [];
         outlying.points().forEach(p=>{
@@ -166,7 +169,7 @@ import {Outlying} from "./modules/outlying";
             });
 
         });
-
+        outputValue("outlyingBins", outlyingBins);
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingUpperBound", outlyingUpperBound);
         outputValue("outlyingLinks", outlyingLinks);
