@@ -196,7 +196,10 @@
         .rotateX(-startAngle);
 
     //</editor-fold>
-
+    const random = Math.random;
+    const pi = Math.PI;
+    const sin = Math.sin;
+    const cos = Math.cos;
 
     // /***********SOIL DATA*******************/
     // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
@@ -252,7 +255,7 @@
     // points.push([contentWidth/2 - 5*50, contentHeight/2 + 5*50, contentHeight/2 + 5*50]);
     // points.push([contentWidth/2 + 5*50, contentHeight/2 - 5*50, contentHeight/2 + 5*50]);
     // points.push([contentWidth/2 + 3*50, contentHeight/2 + 3*50, contentHeight/2 + 3*50]);
-    // draw(points);
+
 
     // /***********SKEWED DATA*******************/
     // let points = [];
@@ -294,7 +297,7 @@
     //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
     //     }),
     //     points = clusters1.concat(clusters2);
-    // draw(points);
+
 
     // /***********CLUMPY 2 CLUSTERS CLOSER DISTANCE*******************/
     // let randomX = muy => d3.randomNormal(muy, 25),
@@ -307,7 +310,7 @@
     //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
     //     }),
     //     points = clusters1.concat(clusters2);
-    // draw(points);
+
 
     // /***********STRIATED 2 LINES with noise (-1, 1)*******************/
     // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
@@ -322,7 +325,7 @@
     //     return [x2(s), y2(s)+noise(), z2(s)];
     // });
     // let points = line1.concat(line2);
-    // draw(points);
+
 
     // /***********STRIATED 2 LINES with noise (-5, 5)*******************/
     // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
@@ -337,14 +340,14 @@
     //     return [x2(s), y2(s)+noise(), z2(s)];
     // });
     // let points = line1.concat(line2);
-    // draw(points);
+
 
     /************STRIATED 2 PLANES***********************/
     let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
     let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
     let noise = d3.randomUniform(-0.001, 0.001);
     // let noise = ()=>0;
-    let plane1 = d3.range(50).map(() => {
+    let plane1 = d3.range(200).map(() => {
         let yr = d3.randomUniform(0, 1);
         let zr = d3.randomUniform(0, 1);
         let y = yr();
@@ -352,7 +355,7 @@
         let x = x1(y, z);
         return [x, y, z];
     });
-    let plane2 = d3.range(50).map(() => {
+    let plane2 = d3.range(200).map(() => {
         let yr = d3.randomUniform(0, 1);
         let zr = d3.randomUniform(0, 1);
         let y = yr();
@@ -361,16 +364,50 @@
         return [x+noise(), y+noise(), z+noise()];
     });
     let points = plane1.concat(plane2);
-    draw(points);
 
-    // /***********Stringy LINE with noise (-0.1, 0.1)*******************/
-    // let noise = d3.randomUniform(-0.05, 0.05);
+
+    // /***********CONVEX DATA*******************/
+    // let randomX = d3.randomNormal(svgWidth / 2, 50),
+    //     randomY = d3.randomNormal(svgHeight / 2, 50),
+    //     randomZ = d3.randomNormal(svgHeight / 2, 50),
+    //     points = d3.range(2000).map(function () {
+    //         return [randomX(), randomY(), randomZ()];
+    //     });
+
+
+    // /***********SKINNY DATA*******************/
+    // let x1 = t => 1 + t, y1 = t => 3 - 1.3 * t, z1 = t => 1 - t;
+    // let x2 = t => 1 - 3*t, y2 = t => 3 + 3 * t, z2 = t => 1 + t;
+    // let noise = d3.randomUniform(-1, 1);
+    // let line1 = d3.range(100).map(() => {
+    //     let t = d3.randomUniform(-30, 30)();
+    //     return [x1(t) + noise(), y1(t) + noise(), z1(t) + noise()];
+    // });
+    // // let line2 = d3.range(50).map(() => {
+    // //     let s = d3.randomUniform(10, 50)();
+    // //     return [x2(s), y2(s) + noise(), z2(s)];
+    // // });
+    // let points = line1;//.concat(line2);
+    // points.push([0, 0, 0]);
+    // points.push([40, 40, 40]);
+
+
+    // /***********Stringy Data*******************/
+    // let noise = d3.randomUniform(-0.01, 0.01);
     // // let noise = () => 0;
-    // let points = d3.range(100).map((x) => {
+    // let points = d3.range(150).map((x) => {
     //     return [x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()];
     // });
-    // draw(points);
 
+    // /***********Monotonic Data*******************/
+    // let noise = d3.randomUniform(-2, 2);
+    // // let noise = () => 0;
+    // let points = d3.range(150).map((x) => {
+    //     return [x + noise(), 150-x + noise(), x + noise()];
+    // });
+
+
+    draw(points);
 
     function draw(points) {
         let scagOptions = {
@@ -623,20 +660,8 @@
 
         function drawCube(data, svg) {
 
-            var cubes = svg.selectAll('g.cube').data(data, d=>d.id);
-
-            var ce = cubes
-                .enter()
-                .append('g')
-                .attr('class', 'cube')
-                .attr('fill', "none")
-                .merge(cubes)
-                .sort(cube3d.sort);
-
-            cubes.exit().remove();
-
             /* --------- FACES ---------*/
-            var faces = cubes.merge(ce).selectAll('path.face').data(d=>d.faces, d=>d.face);
+            var faces = svg.selectAll('path.face').data(data[0].faces, d => d.face);
 
             faces.enter()
                 .append('path')
