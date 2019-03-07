@@ -62,7 +62,7 @@ export class Convex {
     concaveHull() {
         //Use quantile as cutoff values.
         let allLengths = this.tree.links.map(l => l.weight),
-            concaveHull = new ConcaveHull(quantile(allLengths, 0.999)).concaveHull(this.noOutlyingTriangleCoordinates());
+            concaveHull = new ConcaveHull(quantile(allLengths, 0.9999)).concaveHull(this.noOutlyingTriangleCoordinates());
             // concaveHull = new ConcaveHull().coveringConcaveHull(this.noOutlyingTriangleCoordinates());
         return concaveHull;
     }

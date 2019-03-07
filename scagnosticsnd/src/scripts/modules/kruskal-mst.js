@@ -106,7 +106,6 @@ export function createGraph(tetrahedra, weights) {
         }
     });
 
-
     //TODO: may sort the id alphabetically => when creating => so we can just check 1 condition only.
     function linkExists(links, link) {
         let length = links.length;
@@ -117,7 +116,6 @@ export function createGraph(tetrahedra, weights) {
         }
         return false;
     }
-
     return graph;
 }
 

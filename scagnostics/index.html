@@ -162,6 +162,7 @@
                                 self.setPointOutliagScore(theBin[0].data.index, outlyingScore);
                                 let copiedOutliag = cloneScag(outliag);
                                 self.allOutliags[theBin[0].data.index] = copiedOutliag;
+                                self.allOutliags[theBin[0].data.index] = copiedOutliag;
                             }
                         }
                     }
@@ -197,8 +198,8 @@
     }
 </script>
 <script>
-    let binType = "hexagon";
-    var startBinGridSize = 10;
+    let binType = "leader";
+    var startBinGridSize = 20;
     let animateTime = 20;
     /*This is for the tooltip*/
     var div = d3.select("body").append("div")
@@ -221,7 +222,7 @@
 
     createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
-    let dataPointRadius = 4;
+    let dataPointRadius = 6;
     let dataPointOpacity = 0.9;
     let binOpacity = 0.8;
     let origPoints = null;
@@ -247,18 +248,342 @@
         leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
         margins = {left: 20, top: 40, right: 20, bottom: 20},
         padding = 10,
-        contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2*padding,
-        contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2*padding,
-        scaleX = d3.scaleLinear().domain([0, 1]).range([0, contentWidth]),
-        scaleY = d3.scaleLinear().domain([0, 1]).range([contentHeight, 0]);
+        contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
+        contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2 * padding,
+        scaleX = d3.scaleLinear().domain([0, 1]).range([0, contentWidth - 2 * padding]),
+        scaleY = d3.scaleLinear().domain([0, 1]).range([contentHeight - 2 * padding, 0]);
 
 
     // scaleY = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
     //</editor-fold>
 
+    const random = Math.random;
+    const pi = Math.PI;
+    const cos = Math.cos;
+    const sin = Math.sin;
+
+    // /***********OUTLYING DATA*******************/
+    // let outliagProcessor = null;
+    //
+    // let randomX = d3.randomNormal(svgWidth / 2, 50),
+    //     randomY = d3.randomNormal(svgHeight / 2, 50),
+    //     points = d3.range(300).map(function () {
+    //         return [randomX(), randomY()];
+    //     });
+    // //Push 3 more outlying points.
+    // points.push([svgWidth/2 + 5*50, svgHeight/2 + 5*50]);
+    // points.push([svgWidth/2 - 5*50, svgHeight/2 + 5*50]);
+    // points.push([svgWidth/2 + 5*50, svgHeight/2 - 5*50]);
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+    // /***********SKWED DATA*******************/
+    // let outliagProcessor = null;
+    // let points = [];
+    // for (let i = 0; i < svgWidth;  i = i + svgWidth / 5) {
+    //     for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
+    //         const randomX = d3.randomNormal(i, svgWidth / 60),
+    //             randomY = d3.randomNormal(j, svgHeight / 60);
+    //         d3.range(20).forEach(d=>{
+    //             points.push([randomX(), randomY()]);
+    //         });
+    //     }
+    // }
+    //
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+    // /***********SPARSED DATA*******************/
+    // let outliagProcessor = null;
+    // let points = [];
+    // //Top left points
+    // let randomX = d3.randomNormal(svgWidth / 4, 10),
+    //     randomY = d3.randomNormal(svgHeight / 4, 10);
+    // d3.range(20).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    // //Top right
+    // randomX = d3.randomNormal(3 * svgWidth / 4, 10),
+    //     randomY = d3.randomNormal(svgHeight / 4, 10);
+    // d3.range(20).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    // //Bottom left
+    // randomX = d3.randomNormal(svgWidth / 4, 10);
+    // randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+    // d3.range(20).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    //
+    // //Bottom right
+    // randomX = d3.randomNormal(3 * svgWidth / 4, 10);
+    // randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+    // d3.range(20).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    //
+    // //inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins
+    // let scag = scagnostics(points, binType, startBinGridSize, false, false, null, 10, 30);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+
+    // /***********CLUMPY DATA*******************/
+    // let outliagProcessor = null;
+    // let points = [];
+    // //Top CENTER points
+    // let randomX = d3.randomNormal(svgWidth / 2, 10),
+    //     randomY = d3.randomNormal(svgHeight / 4, 10);
+    // d3.range(30).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    //
+    // //Bottom left
+    // randomX = d3.randomNormal(svgWidth / 4, 15);
+    // randomY = d3.randomNormal(3 * svgHeight / 4, 15);
+    // d3.range(40).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    //
+    // //Bottom right
+    // randomX = d3.randomNormal(3 * svgWidth / 4, 20);
+    // randomY = d3.randomNormal(3 * svgHeight / 4, 20);
+    // d3.range(100).map(function () {
+    //     points.push([randomX(), randomY()]);
+    // });
+    //
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+
+    // /***********STRIATED DATA*******************/
+    // let outliagProcessor = null;
+    // let points = [];
+    // for (let i = 0; i < 4; i++) {
+    //     let randomX = d3.randomNormal(i*svgWidth/4, 0.01),
+    //         randomY = d3.randomUniform(0, svgHeight);
+    //         d3.range(100).map(function () {
+    //             points.push([randomX(), randomY()]);
+    //         });
+    // }
+    //
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+
+    // /***********CONVEX DATA*******************/
+    // // Sphere
+    // // const points = [];
+    // // d3.range(1000).forEach(()=>{
+    // //     let t = 2*pi*random();
+    // //     let u = random()+random();
+    // //     let r = (u>1) ? 2-u : u;
+    // //     points.push([r*cos(t), r*sin(t)]);
+    // // });
+    // let randomX = d3.randomNormal(svgWidth / 2, 50),
+    //     randomY = d3.randomNormal(svgHeight / 2, 50),
+    //     points = d3.range(2000).map(function () {
+    //         return [randomX(), randomY()];
+    //     });
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+    // /***********SKINNY DATA*******************/
+    // let randomX = d3.randomUniform(0, svgWidth);
+    // let points = [];
+    // d3.range(100).forEach(()=>{
+    //     const val = randomX();
+    //     points.push([val + random(), val + random()]);
+    // });
+    // //Add a branch
+    // let randomY = d3.randomUniform(svgHeight/3, svgHeight/2);
+    //
+    // d3.range(30).forEach(()=>{
+    //     points.push([svgWidth/3+random(), randomY()]);
+    // });
+    //
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+
+    // /***********STRINGY DATA*******************/
+    // let points = [];
+    // for (let i = 0; i < 100; i++) {
+    //     let x = i* (3*pi/100);
+    //     let y = sin(x);
+    //     points.push([x+random()/100, y+random()/100]);
+    // }
+    //
+    // let scag = scagnostics(points, binType, startBinGridSize);
+    // //process outliag score
+    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    // outliagProcessor.processOutliagData();
+    // //Draw axis
+    // let variables = ["eruptions", "waiting"];
+    //
+    // // drawAxis(normalizedsvg, variables);
+    // // drawAxis(scagsvg, variables);
+    // // drawAxis(leaveoutsvg, variables);
+    // drawTitle(normalizedsvg, "Original scatter plot");
+    // drawTitle(scagsvg, "Bins on original");
+    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    // drawContentBound(normalizedsvg);
+    // drawContentBound(scagsvg);
+    // drawContentBound(leaveoutsvg);
+    //
+    // drawNormalizedData(scag);
+    // draw(scag);
+
+    /***********MONOTONIC DATA*******************/
+    let randomX = d3.randomUniform(0, svgWidth);
+    let points = [];
+    d3.range(100).forEach(()=>{
+        const val = randomX();
+        points.push([val + random(), val + random()]);
+    });
+
+    let scag = scagnostics(points, binType, startBinGridSize);
+    //process outliag score
+    outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+    outliagProcessor.processOutliagData();
+    //Draw axis
+    let variables = ["eruptions", "waiting"];
+
+    // drawAxis(normalizedsvg, variables);
+    // drawAxis(scagsvg, variables);
+    // drawAxis(leaveoutsvg, variables);
+    drawTitle(normalizedsvg, "Original scatter plot");
+    drawTitle(scagsvg, "Bins on original");
+    drawTitle(leaveoutsvg, "Bins on leave-one-out");
+    drawContentBound(normalizedsvg);
+    drawContentBound(scagsvg);
+    drawContentBound(leaveoutsvg);
+
+    drawNormalizedData(scag);
+    draw(scag);
+
+
     // /***********RANDOM DATA*******************/
-    // let randomX = d3.randomNormal(width / 2, 50),
-    //     randomY = d3.randomNormal(height / 2, 50),
+    // let randomX = d3.randomNormal(svgWidth / 2, 50),
+    //     randomY = d3.randomNormal(svgHeight / 2, 50),
     //     points = d3.range(2000).map(function () {
     //         return [randomX(), randomY()];
     //     });
@@ -283,7 +608,7 @@
     //     outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
     //     outliagProcessor.processOutliagData();
     //     //Draw axis
-    //     let variables = ["one", "two"];
+    //     let variables = ["eruptions", "waiting"];
     //
     //     drawAxis(normalizedsvg, variables);
     //     drawAxis(scagsvg, variables);
@@ -339,34 +664,34 @@
     //     draw(scag);
     // });
 
-    /***********NYSE DATA*******************/
-    d3.json("../data/prices.json", (error, rawData) => {
-        if (error) throw error;
-        let dataS = rawData;
-        let year = 44;
-        let leaveOut = 'None';
-        let points = getYearData(year);
-        //Filter NaN points
-        points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
-        // let scag = scagnostics(points, binType, startBinGridSize);
-        let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
-        drawNormalizedData(scag);
-        draw(scag);
-        function isValidPoint(d) {
-            return (typeof d[0] === 'number') && (typeof d[1] === 'number');
-        }
-        function getYearData(year) {
-            let cd = dataS["CountriesData"];
-            //convert to points
-            let y = [];
-            d3.keys(cd).forEach(country => {
-                let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
-                point.data = country;
-                y.push(point);
-            });
-            return y;
-        }
-    });
+    // /***********NYSE DATA*******************/
+    // d3.json("../data/prices.json", (error, rawData) => {
+    //     if (error) throw error;
+    //     let dataS = rawData;
+    //     let year = 44;
+    //     let leaveOut = 'None';
+    //     let points = getYearData(year);
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x) && x.data!==leaveOut);
+    //     // let scag = scagnostics(points, binType, startBinGridSize);
+    //     let scag = scagnostics(points, binType, 40, false, false, undefined, 1, 10000);
+    //     drawNormalizedData(scag);
+    //     draw(scag);
+    //     function isValidPoint(d) {
+    //         return (typeof d[0] === 'number') && (typeof d[1] === 'number');
+    //     }
+    //     function getYearData(year) {
+    //         let cd = dataS["CountriesData"];
+    //         //convert to points
+    //         let y = [];
+    //         d3.keys(cd).forEach(country => {
+    //             let point = [cd[country][year]["v0"], cd[country][year]["v1"]];
+    //             point.data = country;
+    //             y.push(point);
+    //         });
+    //         return y;
+    //     }
+    // });
     // /***********HIV DATA*******************/
     // d3.json("../data/PrevalenceOfHIV.json", (error, rawData) => {
     //     if (error) throw error;
@@ -606,7 +931,7 @@
             .domain(d3.extent(scag.normalizedPoints.map(p => (p.outliagScore < 0 ? p.outliagScore : 0))));
 
         //Main container
-        let g = theSvg.append("g").attr("transform", `translate(${margins.left + padding}, ${margins.top + padding})`);
+        let g = theSvg.append("g").attr("transform", `translate(${margins.left + 2 * padding}, ${margins.top + padding})`);
 
         g.append("g").selectAll("circle")
             .data(scag.normalizedPoints)
@@ -615,10 +940,10 @@
             .attr("cx", d => scaleX(d[0]))
             .attr("cy", d => scaleY(d[1]))
             .attr("r", dataPointRadius)
-            // .attr("fill", "black")
-            .attr("fill", d => {
-                return d.outliagScore < 0 ? inlierColor(d.outliagScore) : outlierColor(d.outliagScore);
-            })
+            .attr("fill", "black")
+            // .attr("fill", d => {
+            //     return d.outliagScore < 0 ? inlierColor(d.outliagScore) : outlierColor(d.outliagScore);
+            // })
             .attr("stroke", "none")
             .attr("opacity", dataPointOpacity)
             /*This is for the tooltip section*/
@@ -626,7 +951,7 @@
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html((d.data ? (d.data.index ? d.data.index : d.data) + ': ' : '') + `[${(d.data?(d.data.originalPoint?d.data.originalPoint[0]:d[0]):d[0]).toFixed(3)}, ${(d.data?(d.data.originalPoint?d.data.originalPoint[1]:d[1]):d[1]).toFixed(3)}]`)
+                div.html((d.data ? (d.data.index ? d.data.index : d.data) + ': ' : '') + `[${(d.data ? (d.data.originalPoint ? d.data.originalPoint[0] : d[0]) : d[0]).toFixed(3)}, ${(d.data ? (d.data.originalPoint ? d.data.originalPoint[1] : d[1]) : d[1]).toFixed(3)}]`)
                     .style("left", (d3.event.pageX - 10) + "px")
                     .style("top", (d3.event.pageY - 52) + "px");
             })
@@ -653,7 +978,7 @@
         if (+d3.select(g.node()).style("opacity") != 10e-6) {
             g.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
         } else {
-            animateNodes(g, animateTime, 10e-6, .8);
+            animateNodes(g, animateTime, 10e-6, .99);
             g.style("display", "inline");
         }
     }
@@ -781,10 +1106,10 @@
 
     function draw(scag) {
         //Main container
-        let g = scagsvg.append("g").attr("transform", `translate(${margins.left + padding}, ${margins.top + padding})`);
+        let g = scagsvg.append("g").attr("transform", `translate(${margins.left + 2 * padding}, ${margins.top + padding})`);
         //Original points
         origPoints = drawNormalizedDataSvg(scag, scagsvg);
-        drawScores(g, scag);
+        // drawScores(g, scag);
         var color = d3.scaleSequential(d3.interpolateLab("#EEEEEE", "#000"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
@@ -864,7 +1189,7 @@
             .attr("y1", d => scaleY(d.source[1]))
             .attr("x2", d => scaleX(d.target[0]))
             .attr("y2", d => scaleY(d.target[1]))
-            .attr("stroke", "black")
+            .attr("stroke", "green")
             .attr("stroke-width", 4).on("click", l => {
                 if (runtGraph) runtGraph.remove();
                 let rg = scag.clumpy.runtGraph(l);
@@ -883,18 +1208,6 @@
             .style("display", "none");
         noOutlyingPoints = drawNoOutlyingPoints(g, scag);
         //Striated
-        //V2 corners
-        v2Corners = g.append("g").selectAll("circle")
-            .data(scag.v2Corners)
-            .enter()
-            .append("circle")
-            .attr("cx", d => scaleX(d[0][0]))
-            .attr("cy", d => scaleY(d[0][1]))
-            .attr("r", 3)
-            .attr("stroke", "none")
-            .attr("fill", "yellow")
-            .attr("opacity", 10e-6)
-            .style("display", "none");
         //ObtuseV2Corners
         obtuseV2Corners = g.append("g").selectAll("path")
             .data(scag.obtuseV2Corners)
@@ -911,10 +1224,24 @@
                 return "M" + d1.join("L");
             })
             .attr("fill", "none")
-            .attr("stroke", "pink")
-            .attr("stroke-width", 1)
+            .attr("stroke", "orange")
+            .attr("stroke-width", 2)
             .attr("opacity", 10e-6)
             .style("display", "none");
+
+        //V2 corners
+        v2Corners = g.append("g").selectAll("circle")
+            .data(scag.v2Corners)
+            .enter()
+            .append("circle")
+            .attr("cx", d => scaleX(d[0][0]))
+            .attr("cy", d => scaleY(d[0][1]))
+            .attr("r", 3)
+            .attr("stroke", "none")
+            .attr("fill", "violet")
+            .attr("opacity", 10e-6)
+            .style("display", "none");
+
 
         //Triangulating
         noOutlyingTriangulations = g.append("g")
@@ -962,7 +1289,7 @@
             .attr("cy", d => scaleY(d[1]))
             .attr("r", 3)
             .attr("stroke", "none")
-            .attr("fill", "orange")
+            .attr("fill", "yellow")
             .attr("opacity", 10e-6)
             .style("display", "none");
         //Scagnostics messages
