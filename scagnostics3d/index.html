@@ -19,15 +19,15 @@
 <script>
     let scag = null;
     let data = null;
-    let svgWidth = 1000;
-    let svgHeight = 1000;
+    let svgWidth = 500;
+    let svgHeight = 500;
     let duration = 1000;
-    let dataPointRadius = 2;
+    let dataPointRadius = 4;
     let dataPointOpacity = 0.9;
     let binOpacity = 0.8;
     let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
-        margins = {left: 20, top: 20, right: 20, bottom: 20},
-        padding = 10,
+        margins = {left: 5, top: 5, right: 5, bottom: 5},
+        padding = 5,
         contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
         contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2 * padding;
     drawContentBound(scagsvg);
@@ -38,6 +38,7 @@
         let rectWidth = +svg.attr("width") - margins.left - margins.right;
         let rectHeight = +svg.attr("height") - margins.top - margins.bottom;
         svg.append("rect").attr("x", x).attr("y", y).attr("width", rectWidth).attr("height", rectHeight).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
+        svg.append("rect").attr("x", x + 90).attr("y", y + 90).attr("width", 300).attr("height", 300).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
     }
 
     //<editor-fold desc="section about animating the display">
@@ -127,9 +128,10 @@
     let scaleX = d3.scaleLinear().domain([0, 1]).range([-contentWidth / 4, contentWidth / 4]),
         scaleY = d3.scaleLinear().domain([0, 1]).range([-contentHeight / 4, contentHeight / 4]),
         scaleZ = d3.scaleLinear().domain([0, 1]).range([-contentHeight / 4, contentHeight / 4]),
-        scaleR = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
+        scaleR = d3.scaleLinear().domain([0, 1]).range([0, contentHeight / 4]);
     let origin = [contentWidth / 2, contentHeight / 2], xLine = [], yLine = [], zLine = [], beta = 0, alpha = 0,
-        startAngle = Math.PI / 4;
+        // startAngle =0;
+        startAngle = Math.PI / 20;
 
     //<editor-fold desc="Section about 3d objects">
     let mx, my, mouseX, mouseY;
@@ -183,68 +185,112 @@
         .scale(1)
         .rotateY(startAngle)
         .rotateX(-startAngle);
+    let cube3d = d3._3d()
+        .shape('CUBE')
+        .x(d => scaleX(d[0]))
+        .y(d => scaleY(d[1]))
+        .z(d => scaleZ(d[2]))
+        .origin(origin)
+        .scale(1)
+        .rotateY(startAngle)
+        .rotateX(-startAngle);
+
     //</editor-fold>
 
 
-    /***********SOIL DATA*******************/
-    d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
-        if (error) throw error;
-        data = rawData.filter(function (d) {
-            //Valid ID
-            return validGridId(d["Grid ID"]);
-        });
-        let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
-        let points = data.map(function (d) {
-            var result = [];
-            currentColumnNames.forEach(c => {
-                if (d[c] !== "") {
-                    result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
-                } else {
-                    result.push('NaN');
-                }
-            });
-            result.data = d['Grid ID'];
-            return result;
-        });
-        //Filter NaN points
-        points = points.filter(x => isValidPoint(x));
-        draw(points);
+    // /***********SOIL DATA*******************/
+    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
+    //     if (error) throw error;
+    //     data = rawData.filter(function (d) {
+    //         //Valid ID
+    //         return validGridId(d["Grid ID"]);
+    //     });
+    //     let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
+    //     let points = data.map(function (d) {
+    //         var result = [];
+    //         currentColumnNames.forEach(c => {
+    //             if (d[c] !== "") {
+    //                 result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
+    //             } else {
+    //                 result.push('NaN');
+    //             }
+    //         });
+    //         result.data = d['Grid ID'];
+    //         return result;
+    //     });
+    //     //Filter NaN points
+    //     points = points.filter(x => isValidPoint(x));
+    //     draw(points);
+    //
+    //     function isValidPoint(d) {
+    //         let result = true;
+    //         for (let i = 0; i < d.length; i++) {
+    //             if (typeof d[i] !== 'number') {
+    //                 result = false;
+    //                 break;
+    //             }
+    //         }
+    //         return result;
+    //     }
+    //
+    //     function validGridId(id) {
+    //         let re = /^[A-Z]\d\d$/g;
+    //         return id != null && id.match(re) != null;
+    //     }
+    //
+    // });
 
-        function isValidPoint(d) {
-            let result = true;
-            for (let i = 0; i < d.length; i++) {
-                if (typeof d[i] !== 'number') {
-                    result = false;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function validGridId(id) {
-            let re = /^[A-Z]\d\d$/g;
-            return id != null && id.match(re) != null;
-        }
-
-    });
-
-    // /***********RANDOM DATA*******************/
-    // let randomX = d3.randomNormal(contentWidth / 2, 50),
-    //     randomY = d3.randomNormal(contentHeight / 2, 50),
-    //     randomZ = d3.randomNormal(contentHeight / 2, 50),
+    // /***********OUTLYING DATA*******************/
+    // let randomX = d3.randomNormal(contentWidth / 3, 50),
+    //     randomY = d3.randomNormal(contentHeight / 3, 50),
+    //     randomZ = d3.randomNormal(contentHeight / 3, 50),
     //     points = d3.range(100).map(function () {
     //         return [randomX(), randomY(), randomZ()];
     //     });
+    // //Push 3 more outlying points.
+    // points.push([contentWidth/2 + 5*50, contentHeight/2 + 5*50, contentHeight/2 + 5*50]);
+    // points.push([contentWidth/2 - 5*50, contentHeight/2 + 5*50, contentHeight/2 + 5*50]);
+    // points.push([contentWidth/2 + 5*50, contentHeight/2 - 5*50, contentHeight/2 + 5*50]);
+    // points.push([contentWidth/2 + 3*50, contentHeight/2 + 3*50, contentHeight/2 + 3*50]);
     // draw(points);
+
+    // /***********SKEWED DATA*******************/
+    // let points = [];
+    // for (let i = 0; i < svgWidth; i = i + svgWidth / 5) {
+    //     for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
+    //         for (let k = 0; k < svgHeight; k = k + svgHeight / 5) {
+    //             const randomX = d3.randomNormal(i, svgWidth / 60),
+    //                 randomY = d3.randomNormal(j, svgHeight / 60),
+    //                 randomZ = d3.randomNormal(k, svgHeight / 60);
+    //             d3.range(10).forEach(d => {
+    //                 points.push([randomX(), randomY(), randomZ()]);
+    //             });
+    //         }
+    //     }
+    // }
+
+    // /***********SPARSED DATA*******************/
+    // let cornerPoints = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]];
+    // let points = [];
+    // cornerPoints.forEach(p=>{
+    //     //Top left points
+    //     let randomX = d3.randomNormal(p[0]*svgWidth / 4, 10),
+    //         randomY = d3.randomNormal(p[1]*svgHeight / 4, 10),
+    //         randomZ = d3.randomNormal(p[2]*svgHeight / 4, 10);
+    //     d3.range(20).map(function () {
+    //         points.push([randomX(), randomY(), randomZ()]);
+    //     });
+    // });
+
 
     // /***********CLUMPY 2 CLUSTERS*******************/
     // let randomX = muy => d3.randomNormal(muy, 50),
     //     randomY = muy => d3.randomNormal(muy, 50),
     //     randomZ = muy => d3.randomNormal(muy, 50),
-    //     clusters1 = d3.range(70).map(function () {
+    //     clusters1 = d3.range(60).map(function () {
     //         return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
     //     }),
-    //     clusters2 = d3.range(30).map(function () {
+    //     clusters2 = d3.range(40).map(function () {
     //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
     //     }),
     //     points = clusters1.concat(clusters2);
@@ -293,29 +339,29 @@
     // let points = line1.concat(line2);
     // draw(points);
 
-    // /************STRIATED 2 PLANES***********************/
-    // let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
-    // let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
-    // let noise = d3.randomUniform(-0.001, 0.001);
-    // // let noise = ()=>0;
-    // let plane1 = d3.range(50).map(() => {
-    //     let yr = d3.randomUniform(0, 1);
-    //     let zr = d3.randomUniform(0, 1);
-    //     let y = yr();
-    //     let z = zr();
-    //     let x = x1(y, z);
-    //     return [x, y, z];
-    // });
-    // let plane2 = d3.range(50).map(() => {
-    //     let yr = d3.randomUniform(0, 1);
-    //     let zr = d3.randomUniform(0, 1);
-    //     let y = yr();
-    //     let z = zr();
-    //     let x = x2(y, z);
-    //     return [x+noise(), y+noise(), z+noise()];
-    // });
-    // let points = plane1.concat(plane2);
-    // draw(points);
+    /************STRIATED 2 PLANES***********************/
+    let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
+    let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
+    let noise = d3.randomUniform(-0.001, 0.001);
+    // let noise = ()=>0;
+    let plane1 = d3.range(50).map(() => {
+        let yr = d3.randomUniform(0, 1);
+        let zr = d3.randomUniform(0, 1);
+        let y = yr();
+        let z = zr();
+        let x = x1(y, z);
+        return [x, y, z];
+    });
+    let plane2 = d3.range(50).map(() => {
+        let yr = d3.randomUniform(0, 1);
+        let zr = d3.randomUniform(0, 1);
+        let y = yr();
+        let z = zr();
+        let x = x2(y, z);
+        return [x+noise(), y+noise(), z+noise()];
+    });
+    let points = plane1.concat(plane2);
+    draw(points);
 
     // /***********Stringy LINE with noise (-0.1, 0.1)*******************/
     // let noise = d3.randomUniform(-0.05, 0.05);
@@ -327,12 +373,12 @@
 
 
     function draw(points) {
-        // let scagOptions ={
-        //     startBinGridSize: 10,
-        //     minBins: 10,
-        //     maxBins: 200
-        // }
-        let scagOptions = {};
+        let scagOptions = {
+            startBinGridSize: 10,
+            minBins: 10,
+            maxBins: 50
+        }
+        // let scagOptions = {};
         scag = scagnostics3d(points, scagOptions);
 
         //Process the drag
@@ -342,7 +388,12 @@
             xLine.push([d * 0.1, -0.5, -0.5]);
             yLine.push([-0.5, -d * 0.1, -0.5]);
             zLine.push([-0.5, -0.5, d * 0.1]);
+
         });
+        // let cubeDataPoints = [[-0.5, 0.5, 0.5], [-0.5, -0.5, 0.5], [0.5, -0.5, 0.5], [0.5, 0.5, 0.5], [-0.5, 0.5, -0.5], [-0.5, -0.5, -0.5], [0.5, -0.5, -0.5], [0.5, 0.5, -0.5]];
+        // let cubeDataPoints = [[0, 1, 1], [0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 0], [0, 0, 0], [1, 0, 0], [1, 1, 0]];
+        let cubeDataPoints = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]];
+        cubeDataPoints.id = 0;
         let grid = [];
         xLine.forEach(xVal => {
             zLine.forEach(zVal => {
@@ -452,13 +503,13 @@
                 return d.ccw ? 'lightgrey' : '#717171';
             }
         };
-        let origPointsOptions = {'stroke': 'black', 'fill': 'grey', 'opacity': dataPointOpacity, 'r': dataPointRadius};
+        let origPointsOptions = {'stroke': 'black', 'fill': 'black', 'opacity': dataPointOpacity, 'r': dataPointRadius};
         let binsOptions = {
             'stroke': 'black',
             'fill': d => binColor(d.data.size),
             'opacity': binOpacity,
-            // 'r': d => scaleR(d.data.binRadius)
-            'r': 3
+            'r': d => scaleR(d.data.binRadius)
+            // 'r': 3
         };
         let graphLineOptions = {'stroke': 'black', 'stroke-width': 1, 'opacity': 1.0};
         let mstLineOptions = {'stroke': 'black', 'stroke-width': 3};
@@ -487,11 +538,14 @@
 
         function rotateAndDraw(alpha, beta, duration) {
             let xGridData = grid3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(grid);
-            let axesData = [
-                yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
-                xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
-                zScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([zLine])
-            ];
+            // let axesData = [
+            //     yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
+            //     xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
+            //     zScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([zLine])
+            // ];
+
+            let cubeData = cube3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([cubeDataPoints]);
+
             let pointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(normalizedPoints);
             let leadersData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(leaderPoints);
             let graphLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(graphLines);
@@ -501,7 +555,9 @@
             let v1CornersPointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(v1CornersPoints);
             let convexHullLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(convexHullLines);
             let concaveHullFacesData = triangle3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(concaveHullFaces);
-            drawAxes(axesData, scagsvg);
+
+            drawCube(cubeData, scagsvg);
+            // drawAxes(axesData, scagsvg);
             drawXGrid(xGridData, scagsvg);
             drawCircles(pointsData, scagsvg, 'origPoints', duration, origPointsOptions);
             drawCircles(leadersData, scagsvg, 'bins', duration, binsOptions);
@@ -565,6 +621,37 @@
             svg.selectAll('._3d').sort(d3._3d().sort);
         }
 
+        function drawCube(data, svg) {
+
+            var cubes = svg.selectAll('g.cube').data(data, d=>d.id);
+
+            var ce = cubes
+                .enter()
+                .append('g')
+                .attr('class', 'cube')
+                .attr('fill', "none")
+                .merge(cubes)
+                .sort(cube3d.sort);
+
+            cubes.exit().remove();
+
+            /* --------- FACES ---------*/
+            var faces = cubes.merge(ce).selectAll('path.face').data(d=>d.faces, d=>d.face);
+
+            faces.enter()
+                .append('path')
+                .attr('class', 'face')
+                .attr('fill', "none")
+                .attr('stroke', "black")
+                .attr("stroke-width", 1)
+                .classed('_3d', true)
+                .merge(faces)
+                .attr('d', cube3d.draw);
+
+            faces.exit().remove();
+
+        }
+
         function drawXGrid(data, svg) {
             /*x-Grid*/
             let xGrid = svg.selectAll('path.grid').data(data);
@@ -626,30 +713,30 @@
                 .attr('stroke-width', 0.5)
                 .attr('d', yScale3d.draw);
             yScale.exit().remove();
-            /*y-Scale text*/
-            let yText = svg.selectAll('text.yText').data(data[0][0]);
-            yText
-                .enter()
-                .append('text')
-                .attr('class', "_3d yText")
-                .attr('dx', '.3em')
-                .merge(yText)
-                .each(d => {
-                    d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-                })
-                .attr('x', d => d.projected.x)
-                .attr('y', d => d.projected.y)
-                .text(d => {
-                    let val = d[1] + 0.5
-                    if (val === 0) {
-                        return ''
-                    } else if (val === 1) {
-                        return 'y'
-                    } else {
-                        return (val).toFixed(1);
-                    }
-                });
-            yText.exit().remove();
+            // /*y-Scale text*/
+            // let yText = svg.selectAll('text.yText').data(data[0][0]);
+            // yText
+            //     .enter()
+            //     .append('text')
+            //     .attr('class', "_3d yText")
+            //     .attr('dx', '.3em')
+            //     .merge(yText)
+            //     .each(d => {
+            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+            //     })
+            //     .attr('x', d => d.projected.x)
+            //     .attr('y', d => d.projected.y)
+            //     .text(d => {
+            //         let val = d[1] + 0.5
+            //         if (val === 0) {
+            //             return ''
+            //         } else if (val === 1) {
+            //             return 'y'
+            //         } else {
+            //             return (val).toFixed(1);
+            //         }
+            //     });
+            // yText.exit().remove();
             /*x-Scale*/
             let xScale = svg.selectAll('path.xScale').data(data[1]);
             xScale
@@ -661,30 +748,30 @@
                 .attr('stroke-width', 0.5)
                 .attr('d', xScale3d.draw);
             xScale.exit().remove();
-            /*y-Scale text*/
-            let xText = svg.selectAll('text.xText').data(data[1][0]);
-            xText
-                .enter()
-                .append('text')
-                .attr('class', "_3d xText")
-                .attr('dx', '.3em')
-                .merge(xText)
-                .each(d => {
-                    d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-                })
-                .attr('x', d => d.projected.x)
-                .attr('y', d => d.projected.y)
-                .text(d => {
-                    let val = d[0] + 0.5
-                    if (val === 0) {
-                        return ''
-                    } else if (val === 1) {
-                        return 'x'
-                    } else {
-                        return (val).toFixed(1);
-                    }
-                });
-            xText.exit().remove();
+            // /*y-Scale text*/
+            // let xText = svg.selectAll('text.xText').data(data[1][0]);
+            // xText
+            //     .enter()
+            //     .append('text')
+            //     .attr('class', "_3d xText")
+            //     .attr('dx', '.3em')
+            //     .merge(xText)
+            //     .each(d => {
+            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+            //     })
+            //     .attr('x', d => d.projected.x)
+            //     .attr('y', d => d.projected.y)
+            //     .text(d => {
+            //         let val = d[0] + 0.5
+            //         if (val === 0) {
+            //             return ''
+            //         } else if (val === 1) {
+            //             return 'x'
+            //         } else {
+            //             return (val).toFixed(1);
+            //         }
+            //     });
+            // xText.exit().remove();
             /*z-Scale*/
             let zScale = svg.selectAll('path.zScale').data(data[2]);
             zScale
@@ -696,33 +783,33 @@
                 .attr('stroke-width', 0.5)
                 .attr('d', zScale3d.draw);
             zScale.exit().remove();
-            /*y-Scale text*/
-            var zText = svg.selectAll('text.zText').data(data[2][0]);
-            zText
-                .enter()
-                .append('text')
-                .attr('class', "_3d zText")
-                .attr('dx', '.3em')
-                .merge(zText)
-                .each(d => {
-                    d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-                })
-                .attr('x', d => d.projected.x)
-                .attr('y', d => d.projected.y)
-                .text(d => {
-                    let val = d[2] + 0.5
-                    if (val === 0) {
-                        return ''
-                    } else if (val === 1) {
-                        return 'z'
-                    } else {
-                        return (val).toFixed(1);
-                    }
-                });
-            zText.exit().remove();
-
-            //Resort all the 3d elements
-            svg.selectAll('._3d').sort(d3._3d().sort);
+            // /*y-Scale text*/
+            // var zText = svg.selectAll('text.zText').data(data[2][0]);
+            // zText
+            //     .enter()
+            //     .append('text')
+            //     .attr('class', "_3d zText")
+            //     .attr('dx', '.3em')
+            //     .merge(zText)
+            //     .each(d => {
+            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+            //     })
+            //     .attr('x', d => d.projected.x)
+            //     .attr('y', d => d.projected.y)
+            //     .text(d => {
+            //         let val = d[2] + 0.5
+            //         if (val === 0) {
+            //             return ''
+            //         } else if (val === 1) {
+            //             return 'z'
+            //         } else {
+            //             return (val).toFixed(1);
+            //         }
+            //     });
+            // zText.exit().remove();
+            //
+            // //Resort all the 3d elements
+            // svg.selectAll('._3d').sort(d3._3d().sort);
         }
 
         function drawCircles(data, svg, classType, duration, circleOptions = {}) {
