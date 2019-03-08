@@ -341,29 +341,54 @@
     // });
     // let points = line1.concat(line2);
 
+    /***********STRIATED 4 LINES with noise*******************/
+    let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
+    let x2 = t=>-100-t, y2 = t=>-100+1.3*t, z2 = t=>-10+t;
+    let x3 = t=>-50-t, y3 = t=>-50+1.3*t, z3 = t=>-5+t;
+    let x4 = t=>30+t, y4 = t=>30-1.3*t, z4 = t=>5-t;
+    let noise = d3.randomUniform(-2, 2);
+    let line1 = d3.range(50).map(()=>{
+       let t = d3.randomUniform(10, 50)();
+       return [x1(t), y1(t)+noise(), z1(t)];
+    });
+    let line2 = d3.range(50).map(()=>{
+        let s = d3.randomUniform(10, 50)();
+        return [x2(s), y2(s)+noise(), z2(s)];
+    });
+    let line3 = d3.range(50).map(()=>{
+        let s = d3.randomUniform(10, 50)();
+        return [x3(s), y3(s)+noise(), z3(s)];
+    });
 
-    /************STRIATED 2 PLANES***********************/
-    let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
-    let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
-    let noise = d3.randomUniform(-0.001, 0.001);
-    // let noise = ()=>0;
-    let plane1 = d3.range(200).map(() => {
-        let yr = d3.randomUniform(0, 1);
-        let zr = d3.randomUniform(0, 1);
-        let y = yr();
-        let z = zr();
-        let x = x1(y, z);
-        return [x, y, z];
+    let line4 = d3.range(50).map(()=>{
+        let s = d3.randomUniform(10, 50)();
+        return [x4(s), y4(s)+noise(), z4(s)];
     });
-    let plane2 = d3.range(200).map(() => {
-        let yr = d3.randomUniform(0, 1);
-        let zr = d3.randomUniform(0, 1);
-        let y = yr();
-        let z = zr();
-        let x = x2(y, z);
-        return [x+noise(), y+noise(), z+noise()];
-    });
-    let points = plane1.concat(plane2);
+
+    let points = line1.concat(line2).concat(line3).concat(line4);
+
+    // /************STRIATED 2 PLANES***********************/
+    // let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
+    // let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
+    // let noise = d3.randomUniform(-0.001, 0.001);
+    // // let noise = ()=>0;
+    // let plane1 = d3.range(200).map(() => {
+    //     let yr = d3.randomUniform(0, 1);
+    //     let zr = d3.randomUniform(0, 1);
+    //     let y = yr();
+    //     let z = zr();
+    //     let x = x1(y, z);
+    //     return [x, y, z];
+    // });
+    // let plane2 = d3.range(200).map(() => {
+    //     let yr = d3.randomUniform(0, 1);
+    //     let zr = d3.randomUniform(0, 1);
+    //     let y = yr();
+    //     let z = zr();
+    //     let x = x2(y, z);
+    //     return [x+noise(), y+noise(), z+noise()];
+    // });
+    // let points = plane1.concat(plane2);
 
 
     // /***********CONVEX DATA*******************/
@@ -390,6 +415,14 @@
     // let points = line1;//.concat(line2);
     // points.push([0, 0, 0]);
     // points.push([40, 40, 40]);
+
+    // /***********SKINNY DATA (Y=X^2)*******************/
+    // let randomX = d3.randomUniform(-svgWidth/2, svgWidth/2);
+    // let points = [];
+    // d3.range(300).forEach(()=>{
+    //     const val = randomX();
+    //     points.push([val + 40*random(), val*val + 40*random(), val+40*random()]);
+    // });
 
 
     // /***********Stringy Data*******************/
