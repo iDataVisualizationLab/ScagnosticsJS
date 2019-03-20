@@ -86,6 +86,19 @@
     </style>
 </head>
 <body>
+<div>
+    <select id="scagnostics" onchange="changeDataset(this);">
+        <option value="outlying">Outlying scatter plot</option>
+        <option value="skewed">Skewed scatter plot</option>
+        <option value="clumpy">Clumpy scatter plot</option>
+        <option value="sparse">Sparse scatter plot</option>
+        <option value="striated">Striated scatter plot</option>
+        <option value="convex">Convex scatter plot</option>
+        <option value="skinny">Skinny scatter plot</option>
+        <option value="stringy">Stringy scatter plot</option>
+        <option value="monotonic">Monotonic scatter plot</option>
+    </select>
+</div>
 <svg id="normalizedsvg"
      style="overflow: visible; margin-top:0px;"></svg>
 <svg id="scagsvg"
@@ -222,7 +235,7 @@
 
     createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
-    let dataPointRadius = 6;
+    let dataPointRadius = 2;
     let dataPointOpacity = 0.9;
     let binOpacity = 0.8;
     let origPoints = null;
@@ -245,7 +258,7 @@
     let svgHeight = 520;
     let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
         normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
-        leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
+        // leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
         margins = {left: 20, top: 40, right: 20, bottom: 20},
         padding = 10,
         contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
@@ -257,357 +270,173 @@
     // scaleY = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
     //</editor-fold>
 
+    const datasets = [];
     const random = Math.random;
     const pi = Math.PI;
     const cos = Math.cos;
     const sin = Math.sin;
 
-    // /***********OUTLYING DATA*******************/
-    // let outliagProcessor = null;
-    //
-    // let randomX = d3.randomNormal(svgWidth / 2, 50),
-    //     randomY = d3.randomNormal(svgHeight / 2, 50),
-    //     points = d3.range(300).map(function () {
-    //         return [randomX(), randomY()];
-    //     });
-    // //Push 3 more outlying points.
-    // points.push([svgWidth/2 + 5*50, svgHeight/2 + 5*50]);
-    // points.push([svgWidth/2 - 5*50, svgHeight/2 + 5*50]);
-    // points.push([svgWidth/2 + 5*50, svgHeight/2 - 5*50]);
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
+    /***********OUTLYING DATA*******************/
+    outlyingScatterPlot();
+    function outlyingScatterPlot(){
+        let randomX = d3.randomNormal(svgWidth / 2, 50),
+            randomY = d3.randomNormal(svgHeight / 2, 50),
+            points = d3.range(300).map(function () {
+                return [randomX(), randomY()];
+            });
+        //Push 3 more outlying points.
+        points.push([svgWidth/2 + 5*50, svgHeight/2 + 5*50]);
+        points.push([svgWidth/2 - 5*50, svgHeight/2 + 5*50]);
+        points.push([svgWidth/2 + 5*50, svgHeight/2 - 5*50]);
+        datasets.push(points);
+    }
 
-    // /***********SKWED DATA*******************/
-    // let outliagProcessor = null;
-    // let points = [];
-    // for (let i = 0; i < svgWidth;  i = i + svgWidth / 5) {
-    //     for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
-    //         const randomX = d3.randomNormal(i, svgWidth / 60),
-    //             randomY = d3.randomNormal(j, svgHeight / 60);
-    //         d3.range(20).forEach(d=>{
-    //             points.push([randomX(), randomY()]);
-    //         });
-    //     }
-    // }
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
+    /***********SKWED DATA*******************/
+    skewedScatterPlot();
+    function skewedScatterPlot(){
+        let points = [];
+        for (let i = 0; i < svgWidth;  i = i + svgWidth / 5) {
+            for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
+                const randomX = d3.randomNormal(i, svgWidth / 60),
+                    randomY = d3.randomNormal(j, svgHeight / 60);
+                d3.range(20).forEach(d=>{
+                    points.push([randomX(), randomY()]);
+                });
+            }
+        }
+        datasets.push(points);
+    }
 
-    // /***********SPARSED DATA*******************/
-    // let outliagProcessor = null;
-    // let points = [];
-    // //Top left points
-    // let randomX = d3.randomNormal(svgWidth / 4, 10),
-    //     randomY = d3.randomNormal(svgHeight / 4, 10);
-    // d3.range(20).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    // //Top right
-    // randomX = d3.randomNormal(3 * svgWidth / 4, 10),
-    //     randomY = d3.randomNormal(svgHeight / 4, 10);
-    // d3.range(20).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    // //Bottom left
-    // randomX = d3.randomNormal(svgWidth / 4, 10);
-    // randomY = d3.randomNormal(3 * svgHeight / 4, 10);
-    // d3.range(20).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    //
-    // //Bottom right
-    // randomX = d3.randomNormal(3 * svgWidth / 4, 10);
-    // randomY = d3.randomNormal(3 * svgHeight / 4, 10);
-    // d3.range(20).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    //
-    // //inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins
-    // let scag = scagnostics(points, binType, startBinGridSize, false, false, null, 10, 30);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
+    /***********CLUMPY DATA*******************/
+    clumpyScatterPlot();
+    function clumpyScatterPlot(){
+        let points = [];
+        //Top CENTER points
+        let randomX = d3.randomNormal(svgWidth / 2, 10),
+            randomY = d3.randomNormal(svgHeight / 4, 10);
+        d3.range(30).map(function () {
+            points.push([randomX(), randomY()]);
+        });
 
+        //Bottom left
+        randomX = d3.randomNormal(svgWidth / 4, 15);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 15);
+        d3.range(40).map(function () {
+            points.push([randomX(), randomY()]);
+        });
 
-    // /***********CLUMPY DATA*******************/
-    // let outliagProcessor = null;
-    // let points = [];
-    // //Top CENTER points
-    // let randomX = d3.randomNormal(svgWidth / 2, 10),
-    //     randomY = d3.randomNormal(svgHeight / 4, 10);
-    // d3.range(30).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    //
-    // //Bottom left
-    // randomX = d3.randomNormal(svgWidth / 4, 15);
-    // randomY = d3.randomNormal(3 * svgHeight / 4, 15);
-    // d3.range(40).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    //
-    // //Bottom right
-    // randomX = d3.randomNormal(3 * svgWidth / 4, 20);
-    // randomY = d3.randomNormal(3 * svgHeight / 4, 20);
-    // d3.range(100).map(function () {
-    //     points.push([randomX(), randomY()]);
-    // });
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
+        //Bottom right
+        randomX = d3.randomNormal(3 * svgWidth / 4, 20);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 20);
+        d3.range(100).map(function () {
+            points.push([randomX(), randomY()]);
+        });
+        datasets.push(points);
+    }
 
+    /***********SPARSED DATA*******************/
+    sparsedScatterPlot();
+    function sparsedScatterPlot(){
+        let points = [];
+        //Top left points
+        let randomX = d3.randomNormal(svgWidth / 4, 10),
+            randomY = d3.randomNormal(svgHeight / 4, 10);
+        d3.range(20).map(function () {
+            points.push([randomX(), randomY()]);
+        });
+        //Top right
+        randomX = d3.randomNormal(3 * svgWidth / 4, 10),
+            randomY = d3.randomNormal(svgHeight / 4, 10);
+        d3.range(20).map(function () {
+            points.push([randomX(), randomY()]);
+        });
+        //Bottom left
+        randomX = d3.randomNormal(svgWidth / 4, 10);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+        d3.range(20).map(function () {
+            points.push([randomX(), randomY()]);
+        });
 
-    // /***********STRIATED DATA*******************/
-    // let outliagProcessor = null;
-    // let points = [];
-    // for (let i = 0; i < 4; i++) {
-    //     let randomX = d3.randomNormal(i*svgWidth/4, 0.01),
-    //         randomY = d3.randomUniform(0, svgHeight);
-    //         d3.range(100).map(function () {
-    //             points.push([randomX(), randomY()]);
-    //         });
-    // }
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
+        //Bottom right
+        randomX = d3.randomNormal(3 * svgWidth / 4, 10);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+        d3.range(20).map(function () {
+            points.push([randomX(), randomY()]);
+        });
+        datasets.push(points);
+    }
 
+    /***********STRIATED DATA*******************/
+    striatedScatterPlot();
+    function striatedScatterPlot(){
+        let points = [];
+        for (let i = 0; i < 4; i++) {
+            let randomX = d3.randomNormal(i*svgWidth/4, 0.01),
+                randomY = d3.randomUniform(0, svgHeight);
+            d3.range(100).map(function () {
+                points.push([randomX(), randomY()]);
+            });
+        }
+        datasets.push(points);
+    }
+    
+    /***********CONVEX DATA*******************/
+    convexScatterPlot();
+    function convexScatterPlot(){
+        // Sphere
+        // const points = [];
+        // d3.range(1000).forEach(()=>{
+        //     let t = 2*pi*random();
+        //     let u = random()+random();
+        //     let r = (u>1) ? 2-u : u;
+        //     points.push([r*cos(t), r*sin(t)]);
+        // });
+        let randomX = d3.randomNormal(svgWidth / 2, 50),
+            randomY = d3.randomNormal(svgHeight / 2, 50),
+            points = d3.range(2000).map(function () {
+                return [randomX(), randomY()];
+            });
+        datasets.push(points);
+    }
 
-    // /***********CONVEX DATA*******************/
-    // // Sphere
-    // // const points = [];
-    // // d3.range(1000).forEach(()=>{
-    // //     let t = 2*pi*random();
-    // //     let u = random()+random();
-    // //     let r = (u>1) ? 2-u : u;
-    // //     points.push([r*cos(t), r*sin(t)]);
-    // // });
-    // let randomX = d3.randomNormal(svgWidth / 2, 50),
-    //     randomY = d3.randomNormal(svgHeight / 2, 50),
-    //     points = d3.range(2000).map(function () {
-    //         return [randomX(), randomY()];
-    //     });
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
-
-    // /***********SKINNY DATA*******************/
-    // let randomX = d3.randomUniform(0, svgWidth);
-    // let points = [];
-    // d3.range(100).forEach(()=>{
-    //     const val = randomX();
-    //     points.push([val + random(), val + random()]);
-    // });
-    // //Add a branch
-    // let randomY = d3.randomUniform(svgHeight/3, svgHeight/2);
-    //
-    // d3.range(30).forEach(()=>{
-    //     points.push([svgWidth/3+random(), randomY()]);
-    // });
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
 
     /***********SKINNY DATA (Y=X^2)*******************/
-    let randomX = d3.randomUniform(-svgWidth/2, svgWidth/2);
-    let points = [];
-    d3.range(400).forEach(()=>{
-        const val = randomX();
-        points.push([val + 30*random(), val*val + 30*random()]);
-    });
+    skinnyScatterPlot();
+    function skinnyScatterPlot(){
+        let randomX = d3.randomUniform(-svgWidth/2, svgWidth/2);
+        let points = [];
+        d3.range(400).forEach(()=>{
+            const val = randomX();
+            points.push([val + 30*random(), val*val + 30*random()]);
+        });
+        datasets.push(points);
+    }
 
+    /***********STRINGY DATA*******************/
+    stringyScatterPlot();
+    function stringyScatterPlot(){
+        let points = [];
+        for (let i = 0; i < 100; i++) {
+            let x = i* (3*pi/100);
+            let y = sin(x);
+            points.push([x+random()/100, y+random()/100]);
+        }
+        datasets.push(points);
+    }
 
-    let scag = scagnostics(points, binType, startBinGridSize);
-    //process outliag score
-    outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    outliagProcessor.processOutliagData();
-    //Draw axis
-    let variables = ["eruptions", "waiting"];
+    /***********MONOTONIC DATA*******************/
+    monotonicScatterPlot();
+    function monotonicScatterPlot(){
+        let randomX = d3.randomUniform(0, svgWidth);
+        let points = [];
+        d3.range(100).forEach(()=>{
+            const val = randomX();
+            points.push([val + random(), val + random()]);
+        });
+        datasets.push(points);
+    }
 
-    // drawAxis(normalizedsvg, variables);
-    // drawAxis(scagsvg, variables);
-    // drawAxis(leaveoutsvg, variables);
-    drawTitle(normalizedsvg, "Original scatter plot");
-    drawTitle(scagsvg, "Bins on original");
-    drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    drawContentBound(normalizedsvg);
-    drawContentBound(scagsvg);
-    drawContentBound(leaveoutsvg);
-
-    drawNormalizedData(scag);
-    draw(scag);
-
-    // /***********STRINGY DATA*******************/
-    // let points = [];
-    // for (let i = 0; i < 100; i++) {
-    //     let x = i* (3*pi/100);
-    //     let y = sin(x);
-    //     points.push([x+random()/100, y+random()/100]);
-    // }
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
-
-    // /***********MONOTONIC DATA*******************/
-    // let randomX = d3.randomUniform(0, svgWidth);
-    // let points = [];
-    // d3.range(100).forEach(()=>{
-    //     const val = randomX();
-    //     points.push([val + random(), val + random()]);
-    // });
-    //
-    // let scag = scagnostics(points, binType, startBinGridSize);
-    // //process outliag score
-    // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
-    // outliagProcessor.processOutliagData();
-    // //Draw axis
-    // let variables = ["eruptions", "waiting"];
-    //
-    // // drawAxis(normalizedsvg, variables);
-    // // drawAxis(scagsvg, variables);
-    // // drawAxis(leaveoutsvg, variables);
-    // drawTitle(normalizedsvg, "Original scatter plot");
-    // drawTitle(scagsvg, "Bins on original");
-    // drawTitle(leaveoutsvg, "Bins on leave-one-out");
-    // drawContentBound(normalizedsvg);
-    // drawContentBound(scagsvg);
-    // drawContentBound(leaveoutsvg);
-    //
-    // drawNormalizedData(scag);
-    // draw(scag);
-
+    //<editor-fold desc="Other real datasets">
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(svgWidth / 2, 50),
     //     randomY = d3.randomNormal(svgHeight / 2, 50),
@@ -944,8 +773,44 @@
     //         return id != null && id.match(re) != null;
     //     }
     // });
+    //</editor-fold>
 
-    function drawNormalizedDataSvg(scag, theSvg) {
+    let outliagProcessor = null;
+    changeDataset(document.getElementById("scagnostics"));
+    function changeDataset(evt){
+        let points = datasets[evt.selectedIndex];
+        let options = {
+            binType:binType,
+            startBinGridSize:startBinGridSize
+        }
+        // //process outliag score
+        // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
+        // outliagProcessor.processOutliagData();
+        let scag = scagnostics(points, options);
+        update(scag);
+    }
+
+    function update(scag){
+
+
+        //Clean
+        normalizedsvg.selectAll("*").remove();
+        scagsvg.selectAll("*").remove();
+        // leaveoutsvg.selectAll("*").remove();
+
+        //Drawing results
+        drawTitle(normalizedsvg, "Original scatter plot");
+        drawTitle(scagsvg, "Bins on original");
+        // drawTitle(leaveoutsvg, "Bins on leave-one-out");
+        drawContentBound(normalizedsvg);
+        drawContentBound(scagsvg);
+        // drawContentBound(leaveoutsvg);
+
+        drawNormalizedData(scag);
+        draw(scag);
+    }
+
+    function drawNormalizedDataSvg(scag, theSvg, opacity) {
         //Add outliag scores as 0 for those doesn't have it
         scag.normalizedPoints.forEach(p => {
             if (!p.outliagScore) {
@@ -972,7 +837,7 @@
             //     return d.outliagScore < 0 ? inlierColor(d.outliagScore) : outlierColor(d.outliagScore);
             // })
             .attr("stroke", "none")
-            .attr("opacity", dataPointOpacity)
+            .attr("opacity", opacity)
             /*This is for the tooltip section*/
             .on("mouseover", function (d) {
                 div.transition()
@@ -986,18 +851,18 @@
                 div.transition()
                     .duration(500)
                     .style("opacity", 0);
-            })
-            .on("click", d => {
-                let outliag = outliagProcessor.allOutliags[d.data.index];
-                drawLeaveOut(outliag);
             });
+            // .on("click", d => {
+            //     let outliag = outliagProcessor.allOutliags[d.data.index];
+            //     drawLeaveOut(outliag);
+            // });
         /*End of tooltip section*/
         return g;
     }
 
     function drawNormalizedData(scag) {
 
-        drawNormalizedDataSvg(scag, normalizedsvg);
+        drawNormalizedDataSvg(scag, normalizedsvg, dataPointOpacity);
     }
 
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
@@ -1135,7 +1000,7 @@
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left + 2 * padding}, ${margins.top + padding})`);
         //Original points
-        origPoints = drawNormalizedDataSvg(scag, scagsvg);
+        origPoints = drawNormalizedDataSvg(scag, scagsvg, 10e-6);
         // drawScores(g, scag);
         var color = d3.scaleSequential(d3.interpolateLab("#EEEEEE", "#000"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
@@ -1171,7 +1036,7 @@
                 .attr("fill", d => color(d.length))
                 // .attr("fill", "none")
                 .attr("stroke", "black")
-                .attr("opacity", 10e-6)
+                .attr("opacity", binOpacity)
                 .attr("display", "none")
                 .attr("stroke-width", 0.5);
 

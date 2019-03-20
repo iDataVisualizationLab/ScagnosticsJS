@@ -14,18 +14,27 @@ import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
 import _ from "underscore";
 import {Delaunay} from "d3-delaunay";
-(function(window){
+
+(function (window) {
     /**
      * initialize a scagnostic object
      * @param inputPoints   {*[][]} set of points from the scatter plot
+     * @param options   Scagnostics options {binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins}
      * @returns {*[][]}
      */
-    window.scagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins) {
+    window.scagnostics = function (inputPoints, options = {}) {
+        let binType = options.binType,
+            startBinGridSize = options.startBinGridSize,
+            isNormalized = options.isNormalized,
+            isBinned = options.isBinned,
+            outlyingUpperBound = options.outlyingUpperBound,
+            minBins = options.minBins,
+            maxBins = options.maxBins;
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
         /******This section is about normalizing the data******/
-        if(!isNormalized){
+        if (!isNormalized) {
             let normalizer = new Normalizer(points);
             normalizedPoints = normalizer.normalizedPoints;
         }
@@ -37,25 +46,25 @@ import {Delaunay} from "d3-delaunay";
         let binSize = null;
         let binRadius = 0;
 
-        if(!isBinned){//Only do the binning if needed.
-            if(!startBinGridSize){
+        if (!isBinned) {//Only do the binning if needed.
+            if (!startBinGridSize) {
                 startBinGridSize = 40;
             }
             bins = [];
             //Default number of bins
             let minNumOfBins = 50;
             let maxNumOfBins = 250;
-            if(minBins){
-                minNumOfBins =minBins;
+            if (minBins) {
+                minNumOfBins = minBins;
             }
-            if(maxBins){
+            if (maxBins) {
                 maxNumOfBins = maxBins;
             }
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
-            let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));
-            let groups = _.groupBy(normalizedPoints, p=>p.join(','));
-            if(uniqueKeys.length<minNumOfBins){
-                uniqueKeys.forEach(key=>{
+            let uniqueKeys = _.uniq(normalizedPoints.map(p => p.join(',')));
+            let groups = _.groupBy(normalizedPoints, p => p.join(','));
+            if (uniqueKeys.length < minNumOfBins) {
+                uniqueKeys.forEach(key => {
                     let bin = groups[key];
                     //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
                     bin.x = bin[0][0];
@@ -63,29 +72,29 @@ import {Delaunay} from "d3-delaunay";
                     bin.binRadius = 0;
                     bins.push(bin);
                 });
-            }else{
-                do{
+            } else {
+                do {
                     //Start with 40x40 bins, and divided by 2 every time there are more than maxNumberofBins none empty cells, increase 5 (+5) if less than minNumberOfBins
-                    if(binSize===null){
+                    if (binSize === null) {
                         binSize = startBinGridSize;
-                    }else if(bins.length>maxNumOfBins){
-                        binSize = binSize/2;
-                    }else if(bins.length<minNumOfBins){
+                    } else if (bins.length > maxNumOfBins) {
+                        binSize = binSize / 2;
+                    } else if (bins.length < minNumOfBins) {
                         binSize = binSize + 5;
                     }
-                    if(binType==="hexagon"){
+                    if (binType === "hexagon") {
                         // This section uses hexagon binning
-                        let shortDiagonal = 1/binSize;
-                        binRadius = Math.sqrt(3)*shortDiagonal/2;
+                        let shortDiagonal = 1 / binSize;
+                        binRadius = Math.sqrt(3) * shortDiagonal / 2;
                         binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
                         bins = binner.hexbin(normalizedPoints);
-                    }else if(!binType || binType==="leader"){
+                    } else if (!binType || binType === "leader") {
                         // This section uses leader binner
-                        binRadius = 1/(binSize*2);
+                        binRadius = 1 / (binSize * 2);
                         binner = new LeaderBinner(normalizedPoints, binRadius);
                         bins = binner.leaders;
                     }
-                }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
+                } while (bins.length > maxNumOfBins || bins.length < minNumOfBins);
             }
             sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
             /******This section is about the binning and binning results******/
@@ -93,19 +102,19 @@ import {Delaunay} from "d3-delaunay";
             outputValue("bins", bins);
             outputValue("binSize", binSize);
             outputValue("binRadius", binRadius)
-        }else{
+        } else {
             sites = normalizedPoints;
         }
 
         outputValue("binnedSites", sites);
 
         /******This section is about the triangulating and triangulating results******/
-        //Triangulation calculation
+            //Triangulation calculation
         let delaunay = Delaunay.from(sites);
         //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
         delaunay.points = sites;
         let triangles = delaunay.triangles;
-        delaunay.triangleCoordinates = function(){
+        delaunay.triangleCoordinates = function () {
             let triangles = this.triangles;
             let tc = [];
             for (let i = 0; i < triangles.length; i += 3) {
@@ -124,7 +133,7 @@ import {Delaunay} from "d3-delaunay";
         outputValue("triangleCoordinates", triangleCoordinates);
 
         /******This section is about the spanning tree and spanning tree results******/
-        //Spanning tree calculation
+            //Spanning tree calculation
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
         //Assigning the output values
@@ -134,7 +143,7 @@ import {Delaunay} from "d3-delaunay";
         /******This section is about the outlying score and outlying score results******/
         let outlying = new Outlying(mstree);
         let outlyingScore = outlying.score();
-            outlyingUpperBound = outlying.upperBound;
+        outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();
         let outlyingPoints = outlying.points();
         let noOutlyingTree = outlying.removeOutlying();
@@ -193,12 +202,13 @@ import {Delaunay} from "d3-delaunay";
         outputValue("stringyScore", stringyScore);
 
         /******This section is about the monotonic score and monotonic score results******/
-        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
+        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n => n.id));
         let monotonicScore = monotonic.score();
         outputValue("monotonicScore", monotonicScore);
 
         return window.scagnostics;
-        function outputValue(name, value){
+
+        function outputValue(name, value) {
             window.scagnostics[name] = value;
         }
     };

@@ -13,7 +13,14 @@ import _ from "underscore";
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins) {
+    window.outliagnostics = function(inputPoints, options={}) {
+        let binType = options.binType,
+            startBinGridSize = options.startBinGridSize,
+            isNormalized = options.isNormalized,
+            isBinned = options.isBinned,
+            outlyingUpperBound = options.outlyingUpperBound,
+            minBins = options.minBins,
+            maxBins = options.maxBins;
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
