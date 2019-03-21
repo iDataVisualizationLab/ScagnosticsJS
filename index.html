@@ -5,6 +5,7 @@
     <title>ScagnosticsJS</title>
     <style>
         @import "css/github-markdown.css";
+
         .markdown-body {
             box-sizing: border-box;
             min-width: 200px;
@@ -22,21 +23,27 @@
         .Box--condensed .Box-body, .Box--condensed .Box-footer, .Box--condensed .Box-header {
             padding: 8px 16px;
         }
+
         .d-flex {
-            display: flex!important;
+            display: flex !important;
         }
+
         .px-2 {
-            padding-right: 6px!important;
+            padding-right: 6px !important;
         }
+
         .pl-2, .px-2 {
-            padding-left: 6px!important;
+            padding-left: 6px !important;
         }
+
         .flex-items-center {
-            align-items: center!important;
+            align-items: center !important;
         }
+
         .flex-justify-between {
-            justify-content: space-between!important;
+            justify-content: space-between !important;
         }
+
         .Box-header {
             background-color: #f6f8fa;
             border: 1px solid #d1d5da;
@@ -45,12 +52,15 @@
             margin: -1px -1px 0;
             padding: 16px;
         }
+
         * {
             box-sizing: border-box;
         }
+
         .Box--condensed {
             line-height: 1.25;
         }
+
         .Box {
             background-color: #fff;
             border: 1px solid #d1d5da;
@@ -60,80 +70,80 @@
 </head>
 <body>
 <article class="markdown-body">
-    <div id="readme" class="Box Box--condensed instapaper_body md js-code-block-container">
+    <div class="Box Box--condensed instapaper_body md js-code-block-container" id="readme">
         <div class="Box-header d-flex flex-items-center flex-justify-between px-2">
             <h3 class="Box-title pr-3">
-                <svg class="octicon octicon-book" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                     aria-hidden="true">
-                    <path fill-rule="evenodd"
-                          d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path>
+                <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16"
+                     width="16">
+                    <path d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"
+                          fill-rule="evenodd"></path>
                 </svg>
                 README.md
             </h3>
         </div>
         <div class="Box-body">
             <article class="markdown-body entry-content p-5" itemprop="text">
-                <h1><a id="user-content-scagnosticsjs-api-reference" class="anchor" aria-hidden="true"
-                       href="#scagnosticsjs-api-reference">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h1><a aria-hidden="true" class="anchor" href="#scagnosticsjs-api-reference"
+                       id="user-content-scagnosticsjs-api-reference">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>ScagnosticsJS API Reference
                 </h1>
                 <p>There are <a href="#2d-version">2D</a>, <a href="#3d-version">3D</a>, and <a
                         href="#nd-version">nD</a> versions of the ScagnosticsJS library correspondingly.</p>
-                <h2><a id="user-content-scagnostics-playgrounds-online-demos" class="anchor" aria-hidden="true"
-                       href="#scagnostics-playgrounds-online-demos">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h2><a aria-hidden="true" class="anchor" href="#scagnostics-playgrounds-online-demos"
+                       id="user-content-scagnostics-playgrounds-online-demos">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Scagnostics playgrounds (online demos)
                 </h2>
                 <p>You can use these playground pages to explore the underlying scagnostics calculation processes and
                     the visualizations of their intermediate results. They contain exemplar scatterplots for each of the
                     9 scagnostics (outlying, skewed, clumpy, sparse, striated, convex, skinny, stringy, and monotonic)
-                    scores for you to explore:</p>
+                    features for you to explore:</p>
                 <p>2D: <a href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics" rel="nofollow">https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics</a>
                 </p>
                 <p>3D: <a href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/" rel="nofollow">https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/</a>
                 </p>
                 <p>nD: <a href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/" rel="nofollow">https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/</a>
                 </p>
-                <h2><a id="user-content-2d-version" class="anchor" aria-hidden="true" href="#2d-version">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h2><a aria-hidden="true" class="anchor" href="#2d-version" id="user-content-2d-version">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
-                </a><a name="2d-version">2D Version</a></h2>
-                <h3><a id="user-content-installation" class="anchor" aria-hidden="true" href="#installation">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                </a><a href="#2d-version">2D Version</a></h2>
+                <h3><a aria-hidden="true" class="anchor" href="#installation" id="user-content-installation">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Installation
                 </h3>
-                <h4><a id="user-content-download" class="anchor" aria-hidden="true" href="#download">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#download" id="user-content-download">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Download
                 </h4>
                 <p>You can download <code>scagnostics.js</code> from <a
                         href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js"
                         rel="nofollow">here</a></p>
-                <h4><a id="user-content-cdn" class="anchor" aria-hidden="true" href="#cdn">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#cdn" id="user-content-cdn">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>CDN
                 </h4>
@@ -144,12 +154,12 @@
                             class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js<span
                             class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
                 </div>
-                <h3><a id="user-content-creating-new-scagnostics-object" class="anchor" aria-hidden="true"
-                       href="#creating-new-scagnostics-object">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h3><a aria-hidden="true" class="anchor" href="#creating-new-scagnostics-object"
+                       id="user-content-creating-new-scagnostics-object">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Creating new scagnostics object
                 </h3>
@@ -162,16 +172,18 @@
                     with one or combination of the following fields</p>
                 <ul>
                     <li><code>binType</code>: as <code>'leader'</code> (default) or <code>'hexagon'</code> to use leader
-                        binning or hexagon binning correspondingly
+                        binning or hexagon binning correspondingly.
                     </li>
                     <li><code>startBinGridSize</code>: default is <code>40</code>, an integer to start the binning
                         process with (it starts with 40x40 bins in this case).
                     </li>
-                    <li><code>isNormalized</code>: default is <code>false</code>, if it is <code>true</code> then
-                        ScagnosticsJS will skip the normalizastion step to speed up the calculation time.
+                    <li><code>isNormalized</code>: default is <code>false</code>, if it is <code>true</code> (in case
+                        the data is already normalized) then ScagnosticsJS will skip the normalizastion step to speed up
+                        the calculation time.
                     </li>
-                    <li><code>isBinned</code>: default is <code>false</code>, if it is <code>true</code> then
-                        ScagnosticsJS will skip the binning step to speed up the calculation time.
+                    <li><code>isBinned</code>: default is <code>false</code>, if it is <code>true</code> (in case the
+                        data is already binned) then ScagnosticsJS will skip the binning step to speed up the
+                        calculation time.
                     </li>
                     <li><code>outlyingUpperBound</code>: default is <code>undefined</code>, you may specify this
                         outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the
@@ -184,12 +196,12 @@
                         expect to have after binning process.
                     </li>
                 </ul>
-                <h4><a id="user-content-sample-code-without-options-default-options" class="anchor" aria-hidden="true"
-                       href="#sample-code-without-options-default-options">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-without-options-default-options"
+                       id="user-content-sample-code-without-options-default-options">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sample code without <code>options</code> (default options)
                 </h4>
@@ -211,12 +223,12 @@
     <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span
                             class="pl-en">scagnostics</span>(points); </pre>
                 </div>
-                <h4><a id="user-content-sample-code-with-options" class="anchor" aria-hidden="true"
-                       href="#sample-code-with-options">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-with-options"
+                       id="user-content-sample-code-with-options">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sample code with <code>options</code></h4>
                 <div class="highlight highlight-source-js"><pre>    <span class="pl-c"><span class="pl-c">//</span>Create an array of 2D random points</span>
@@ -246,11 +258,11 @@
     };
     <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span class="pl-en">scagnostics</span>(points, options); </pre>
                 </div>
-                <h4><a id="user-content-normalized-points" class="anchor" aria-hidden="true" href="#normalized-points">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#normalized-points" id="user-content-normalized-points">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Normalized points
                 </h4>
@@ -261,12 +273,12 @@
                         original point.
                     </li>
                 </ul>
-                <h4><a id="user-content-binning-information" class="anchor" aria-hidden="true"
-                       href="#binning-information">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#binning-information"
+                       id="user-content-binning-information">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Binning information
                 </h4>
@@ -276,136 +288,136 @@
                         location (center) of the bin.
                     </li>
                 </ul>
-                <h4><a id="user-content-outlying-score" class="anchor" aria-hidden="true" href="#outlying-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#outlying-score" id="user-content-outlying-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Outlying score
                 </h4>
                 <ul>
                     <li><code>scag.outlyingScore</code> returns the scagnostics outlying score.</li>
                 </ul>
-                <h4><a id="user-content-skewed-score" class="anchor" aria-hidden="true" href="#skewed-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#skewed-score" id="user-content-skewed-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Skewed score
                 </h4>
                 <ul>
                     <li><code>scag.skewedScore</code> returns the scagnostics skewed score.</li>
                 </ul>
-                <h4><a id="user-content-clumpy-score" class="anchor" aria-hidden="true" href="#clumpy-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#clumpy-score" id="user-content-clumpy-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Clumpy score
                 </h4>
                 <ul>
                     <li><code>scag.clumpyScore</code> returns the scagnostics clumpy score.</li>
                 </ul>
-                <h4><a id="user-content-sparse-score" class="anchor" aria-hidden="true" href="#sparse-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sparse-score" id="user-content-sparse-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sparse score
                 </h4>
                 <ul>
                     <li><code>scag.sparseScore</code> returns the scagnostics sparse score.</li>
                 </ul>
-                <h4><a id="user-content-striated-score" class="anchor" aria-hidden="true" href="#striated-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#striated-score" id="user-content-striated-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Striated score
                 </h4>
                 <ul>
                     <li><code>scag.striatedScore</code> returns the scagnostics striated score.</li>
                 </ul>
-                <h4><a id="user-content-convex-score" class="anchor" aria-hidden="true" href="#convex-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#convex-score" id="user-content-convex-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Convex score
                 </h4>
                 <ul>
                     <li><code>scag.convexScore</code> returns the scagnostics convex score.</li>
                 </ul>
-                <h4><a id="user-content-skinny-score" class="anchor" aria-hidden="true" href="#skinny-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#skinny-score" id="user-content-skinny-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Skinny score
                 </h4>
                 <ul>
                     <li><code>scag.skinnyScore</code> returns the scagnostics stringy score.</li>
                 </ul>
-                <h4><a id="user-content-stringy-score" class="anchor" aria-hidden="true" href="#stringy-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#stringy-score" id="user-content-stringy-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Stringy score
                 </h4>
                 <ul>
                     <li><code>scag.stringyScore</code> returns the scagnostics stringy score.</li>
                 </ul>
-                <h4><a id="user-content-monotonic-score" class="anchor" aria-hidden="true" href="#monotonic-score">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#monotonic-score" id="user-content-monotonic-score">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Monotonic score
                 </h4>
                 <ul>
                     <li><code>scag.monotonicScore</code> returns the scagnostics monotonic score.</li>
                 </ul>
-                <h2><a id="user-content-3d-version" class="anchor" aria-hidden="true" href="#3d-version">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h2><a aria-hidden="true" class="anchor" href="#3d-version" id="user-content-3d-version">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
-                </a><a name="3d-version">3D Version</a></h2>
-                <h3><a id="user-content-installation-1" class="anchor" aria-hidden="true" href="#installation-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                </a><a href="#3d-version">3D Version</a></h2>
+                <h3><a aria-hidden="true" class="anchor" href="#installation-1" id="user-content-installation-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Installation
                 </h3>
-                <h4><a id="user-content-download-1" class="anchor" aria-hidden="true" href="#download-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#download-1" id="user-content-download-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Download
                 </h4>
                 <p>You can download <code>scagnostics3d.js</code> from <a
                         href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js"
                         rel="nofollow">here</a></p>
-                <h4><a id="user-content-cdn-1" class="anchor" aria-hidden="true" href="#cdn-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#cdn-1" id="user-content-cdn-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>CDN
                 </h4>
@@ -416,12 +428,12 @@
                             class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js<span
                             class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
                 </div>
-                <h3><a id="user-content-creating-new-scagnostics3d-object" class="anchor" aria-hidden="true"
-                       href="#creating-new-scagnostics3d-object">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h3><a aria-hidden="true" class="anchor" href="#creating-new-scagnostics3d-object"
+                       id="user-content-creating-new-scagnostics3d-object">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Creating new scagnostics3d object
                 </h3>
@@ -433,17 +445,19 @@
                 <p>You may use default scagnostics options or you can optionally pass an <code>options</code> object
                     with one or combination of the following fields</p>
                 <ul>
-                    <li><code>binType</code>: as <code>'leader'</code> (default) or <code>'hexagon'</code> to use leader
-                        binning or hexagon binning correspondingly
+                    <li><code>binType</code>: as <code>'leader'</code> (default), currently only <code>'leader'</code>
+                        binning is supported.
                     </li>
                     <li><code>startBinGridSize</code>: default is <code>40</code>, an integer to start the binning
-                        process with (it starts with 40x40 bins in this case).
+                        process with (it starts with 40x40x40 bins in this case).
                     </li>
-                    <li><code>isNormalized</code>: default is <code>false</code>, if it is <code>true</code> then
-                        ScagnosticsJS will skip the normalizastion step to speed up the calculation time.
+                    <li><code>isNormalized</code>: default is <code>false</code>, if it is <code>true</code> (in case
+                        the data is already normalized) then ScagnosticsJS will skip the normalizastion step to speed up
+                        the calculation time.
                     </li>
-                    <li><code>isBinned</code>: default is <code>false</code>, if it is <code>true</code> then
-                        ScagnosticsJS will skip the binning step to speed up the calculation time.
+                    <li><code>isBinned</code>: default is <code>false</code>, if it is <code>true</code> (in case the
+                        data is already binned) then ScagnosticsJS will skip the binning step to speed up the
+                        calculation time.
                     </li>
                     <li><code>outlyingUpperBound</code>: default is <code>undefined</code>, you may specify this
                         outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the
@@ -456,12 +470,12 @@
                         expect to have after binning process.
                     </li>
                 </ul>
-                <h4><a id="user-content-sample-code-without-options-default-options-1" class="anchor" aria-hidden="true"
-                       href="#sample-code-without-options-default-options-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-without-options-default-options-1"
+                       id="user-content-sample-code-without-options-default-options-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sample code without <code>options</code> (default options)
                 </h4>
@@ -486,12 +500,12 @@
     <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span
                             class="pl-en">scagnostics3d</span>(points); </pre>
                 </div>
-                <h4><a id="user-content-sample-code-with-options-1" class="anchor" aria-hidden="true"
-                       href="#sample-code-with-options-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-with-options-1"
+                       id="user-content-sample-code-with-options-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sample code with <code>options</code></h4>
                 <div class="highlight highlight-source-js"><pre>    <span class="pl-c"><span class="pl-c">//</span>Create an array of random 3D points</span>
@@ -524,12 +538,12 @@
     };
     <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span class="pl-en">scagnostics3d</span>(points, options); </pre>
                 </div>
-                <h4><a id="user-content-normalized-points-1" class="anchor" aria-hidden="true"
-                       href="#normalized-points-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#normalized-points-1"
+                       id="user-content-normalized-points-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Normalized points
                 </h4>
@@ -540,12 +554,12 @@
                         original point.
                     </li>
                 </ul>
-                <h4><a id="user-content-binning-information-1" class="anchor" aria-hidden="true"
-                       href="#binning-information-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#binning-information-1"
+                       id="user-content-binning-information-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Binning information
                 </h4>
@@ -555,104 +569,329 @@
                         attributes for the location (center) of the bin.
                     </li>
                 </ul>
-                <h4><a id="user-content-outlying-score-1" class="anchor" aria-hidden="true" href="#outlying-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#outlying-score-1" id="user-content-outlying-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Outlying score
                 </h4>
                 <ul>
                     <li><code>scag.outlyingScore</code> returns the scagnostics outlying score.</li>
                 </ul>
-                <h4><a id="user-content-skewed-score-1" class="anchor" aria-hidden="true" href="#skewed-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#skewed-score-1" id="user-content-skewed-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Skewed score
                 </h4>
                 <ul>
                     <li><code>scag.skewedScore</code> returns the scagnostics skewed score.</li>
                 </ul>
-                <h4><a id="user-content-clumpy-score-1" class="anchor" aria-hidden="true" href="#clumpy-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#clumpy-score-1" id="user-content-clumpy-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Clumpy score
                 </h4>
                 <ul>
                     <li><code>scag.clumpyScore</code> returns the scagnostics clumpy score.</li>
                 </ul>
-                <h4><a id="user-content-sparse-score-1" class="anchor" aria-hidden="true" href="#sparse-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#sparse-score-1" id="user-content-sparse-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Sparse score
                 </h4>
                 <ul>
                     <li><code>scag.sparseScore</code> returns the scagnostics sparse score.</li>
                 </ul>
-                <h4><a id="user-content-striated-score-1" class="anchor" aria-hidden="true" href="#striated-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#striated-score-1" id="user-content-striated-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Striated score
                 </h4>
                 <ul>
                     <li><code>scag.striatedScore</code> returns the scagnostics striated score.</li>
                 </ul>
-                <h4><a id="user-content-convex-score-1" class="anchor" aria-hidden="true" href="#convex-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#convex-score-1" id="user-content-convex-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Convex score
                 </h4>
                 <ul>
                     <li><code>scag.convexScore</code> returns the scagnostics convex score.</li>
                 </ul>
-                <h4><a id="user-content-skinny-score-1" class="anchor" aria-hidden="true" href="#skinny-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#skinny-score-1" id="user-content-skinny-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Skinny score
                 </h4>
                 <ul>
                     <li><code>scag.skinnyScore</code> returns the scagnostics stringy score.</li>
                 </ul>
-                <h4><a id="user-content-stringy-score-1" class="anchor" aria-hidden="true" href="#stringy-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#stringy-score-1" id="user-content-stringy-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Stringy score
                 </h4>
                 <ul>
                     <li><code>scag.stringyScore</code> returns the scagnostics stringy score.</li>
                 </ul>
-                <h4><a id="user-content-monotonic-score-1" class="anchor" aria-hidden="true" href="#monotonic-score-1">
-                    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"
-                         aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+                <h4><a aria-hidden="true" class="anchor" href="#monotonic-score-1" id="user-content-monotonic-score-1">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
                     </svg>
                 </a>Monotonic score
                 </h4>
                 <ul>
                     <li><code>scag.monotonicScore</code> returns the scagnostics monotonic score.</li>
+                </ul>
+                <h2><a aria-hidden="true" class="anchor" href="#nd-version" id="user-content-nd-version">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a><a href="#nd-version">nD Version</a></h2>
+                <h3><a aria-hidden="true" class="anchor" href="#installation-2" id="user-content-installation-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Installation
+                </h3>
+                <h4><a aria-hidden="true" class="anchor" href="#download-2" id="user-content-download-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Download
+                </h4>
+                <p>You can download <code>scagnosticsnd.js</code> from <a
+                        href="https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/build/js/scagnosticsnd.min.js"
+                        rel="nofollow">here</a></p>
+                <h4><a aria-hidden="true" class="anchor" href="#cdn-2" id="user-content-cdn-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>CDN
+                </h4>
+                <p>You can add <code>scagnosticsnd.js</code> to your web page using this code snippet:</p>
+                <div class="highlight highlight-text-html-basic">
+                    <pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span
+                            class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span
+                            class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/build/js/scagnosticsnd.min.js<span
+                            class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
+                </div>
+                <h3><a aria-hidden="true" class="anchor" href="#creating-new-scagnosticsnd-object"
+                       id="user-content-creating-new-scagnosticsnd-object">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Creating new scagnosticsnd object
+                </h3>
+                <p>You will need to pass an array of nD scatter plot points as <code>[[x1, y1, z1, ...], [x2, y2, z2,
+                    ...], [x3, y3, z3, ...], [x4, y4, z4, ...], ... [xn, yn, zn, ...]]</code>. If you would like to pass
+                    some data (say <code>ids</code> of the points) then you may pass them as <code>data</code> attribute
+                    of the point. This <code>data</code> field will then be passed into the result after normalization
+                    or binning, so you could use this to get back the original point.</p>
+                <p>You may use default scagnostics options or you can optionally pass an <code>options</code> object
+                    with one or combination of the following fields</p>
+                <ul>
+                    <li><code>binType</code>: as <code>'leader'</code> (default), currently only <code>leader</code>
+                        binning is supported.
+                    </li>
+                    <li><code>startBinGridSize</code>: default is <code>20</code>, an integer to start the binning
+                        process with (it starts with 20x20x20... bins in this case). For high number of dimensions, the
+                        number of bins to start with increases exponentially, so consider reducing this number for
+                        better performance.
+                    </li>
+                    <li><code>isNormalized</code>: default is <code>false</code>, if it is <code>true</code> (in case
+                        the data is already normalized) then ScagnosticsJS will skip the normalizastion step to speed up
+                        the calculation time.
+                    </li>
+                    <li><code>isBinned</code>: default is <code>false</code>, if it is <code>true</code> (in case the
+                        data is already binned) then ScagnosticsJS will skip the binning step to speed up the
+                        calculation time.
+                    </li>
+                    <li><code>outlyingUpperBound</code>: default is <code>undefined</code>, you may specify this
+                        outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the
+                        process of scagnostics calculation, is outlying or not.
+                    </li>
+                    <li><code>minBins</code>: default is <code>30</code>, this is the minimum number of bins that you
+                        expect to have after binning process.
+                    </li>
+                    <li><code>maxBins</code>: default is <code>200</code>, this is the maximum number of bins that you
+                        expect to have after binning process.
+                    </li>
+                    <li><code>outlyingCoefficient</code>: default is 3, this is used to calculate the outlying threshold
+                        on the MST lengths using this formula: <code>upperBound = 75th quantile +
+                            outlyingCoefficient*IQR</code>. We provide this option since in high dimensional data the
+                        default formula <code>upperBound = 75th quantile + 1.5*IQR</code> may not work in detecting
+                        outliers.
+                    </li>
+                    <li><code>incrementA</code>: default is 2, in high dimension data, number of bins will change
+                        dramatically if we change the bin grid size, therefore, we can use the formula <code>binSize =
+                            incrementA*binSize + incrementB</code> to control the increment of the <code>binSize</code>.
+                    </li>
+                    <li><code>incrementB</code>: default is 0, explained in <code>incrementA</code> section.</li>
+                    <li><code>decrementA</code>: default is 1/2, in high dimension data, number of bins will change
+                        dramatically if we change the bin grid size, therefore, we can use the formula <code>binSize =
+                            decrementA*binSize + decrementB</code> to control the decrement of the <code>binSize</code>.
+                    </li>
+                    <li><code>decrementB</code>: default is 0, explained in <code>incrementA</code> section.</li>
+                    <li><code>distanceWeights</code>: default is 1 for every dimension. In high dimensional data, we may
+                        need the option to control the weights of each dimension in the contribution to the distance
+                        calculation among points. In this case we can specify this as an array, a value in range [0, 1]
+                        represents the weight of the corresponding dimension in distance calculation. E.g., <code>[0.5,
+                            1, 1, 1, 1, 1, 0.5]</code> means that there are 7 dimensions and the first and last have the
+                        weights of 0.5 in calculating distances.
+                    </li>
+                </ul>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-without-options-default-options-2"
+                       id="user-content-sample-code-without-options-default-options-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Sample code without <code>options</code> (default options)
+                </h4>
+                <div class="highlight highlight-source-js"><pre>    <span class="pl-c"><span class="pl-c">/**</span>*********RANDOM DATA******************<span
+                        class="pl-c">*/</span></span>
+    <span class="pl-k">let</span> random <span class="pl-k">=</span> <span class="pl-c1">Math</span>.<span
+                            class="pl-smi">random</span>,
+        points <span class="pl-k">=</span> [];
+    <span class="pl-c"><span class="pl-c">//</span>100 data points</span>
+    <span class="pl-k">for</span> (<span class="pl-k">let</span> i <span class="pl-k">=</span> <span
+                            class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span
+                            class="pl-c1">100</span>; i<span class="pl-k">++</span>) {
+        <span class="pl-c"><span class="pl-c">//</span>each point of 10 dimensions</span>
+        <span class="pl-k">let</span> point <span class="pl-k">=</span> [];
+        <span class="pl-k">for</span> (<span class="pl-k">let</span> j <span class="pl-k">=</span> <span
+                            class="pl-c1">0</span>; j <span class="pl-k">&lt;</span> <span
+                            class="pl-c1">10</span>; j<span class="pl-k">++</span>) {
+            <span class="pl-smi">point</span>.<span class="pl-c1">push</span>(<span class="pl-en">random</span>());
+        }
+        <span class="pl-smi">points</span>.<span class="pl-c1">push</span>(point);
+    }
+    <span class="pl-c"><span class="pl-c">//</span>Create scagnostics object</span>
+    <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span
+                            class="pl-en">scagnosticsnd</span>(points); </pre>
+                </div>
+                <h4><a aria-hidden="true" class="anchor" href="#sample-code-with-options-2"
+                       id="user-content-sample-code-with-options-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Sample code with <code>options</code></h4>
+                <div class="highlight highlight-source-js"><pre>    <span class="pl-c"><span class="pl-c">/**</span>*********RANDOM DATA******************<span
+                        class="pl-c">*/</span></span>
+    <span class="pl-k">let</span> random <span class="pl-k">=</span> <span class="pl-c1">Math</span>.<span
+                            class="pl-smi">random</span>,
+        points <span class="pl-k">=</span> [];
+    <span class="pl-c"><span class="pl-c">//</span>100 data points</span>
+    <span class="pl-k">for</span> (<span class="pl-k">let</span> i <span class="pl-k">=</span> <span
+                            class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span
+                            class="pl-c1">100</span>; i<span class="pl-k">++</span>) {
+        <span class="pl-c"><span class="pl-c">//</span>each point of 10 dimensions</span>
+        <span class="pl-k">let</span> point <span class="pl-k">=</span> [];
+        <span class="pl-k">for</span> (<span class="pl-k">let</span> j <span class="pl-k">=</span> <span
+                            class="pl-c1">0</span>; j <span class="pl-k">&lt;</span> <span
+                            class="pl-c1">10</span>; j<span class="pl-k">++</span>) {
+            <span class="pl-smi">point</span>.<span class="pl-c1">push</span>(<span class="pl-en">random</span>());
+        }
+        <span class="pl-smi">points</span>.<span class="pl-c1">push</span>(point);
+    }
+    <span class="pl-c"><span class="pl-c">//</span>Create options</span>
+    <span class="pl-k">let</span> options <span class="pl-k">=</span> {
+        startBinGridSize<span class="pl-k">:</span> <span class="pl-c1">30</span>,
+        minBins<span class="pl-k">:</span> <span class="pl-c1">30</span>,
+        maxBins<span class="pl-k">:</span> <span class="pl-c1">100</span>,
+        outlyingCoefficient<span class="pl-k">:</span> <span class="pl-c1">0.5</span>,
+        incrementA<span class="pl-k">:</span> <span class="pl-c1">1</span>,
+        incrementB<span class="pl-k">:</span> <span class="pl-c1">5</span>,
+        decrementA<span class="pl-k">:</span> <span class="pl-c1">0.9</span>,
+        decrementB<span class="pl-k">:</span> <span class="pl-c1">0</span>,
+        distanceWeights<span class="pl-k">:</span> [<span class="pl-c1">0.5</span>, <span
+                            class="pl-c1">0.5</span>, <span class="pl-c1">0.5</span>, <span
+                            class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span
+                            class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span
+                            class="pl-c1">0.5</span>]
+    };
+    <span class="pl-k">let</span> scag <span class="pl-k">=</span> <span class="pl-en">scagnostics3d</span>(points, options); </pre>
+                </div>
+                <h4><a aria-hidden="true" class="anchor" href="#normalized-points-2"
+                       id="user-content-normalized-points-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Normalized points
+                </h4>
+                <ul>
+                    <li><code>scag.normalizedPoints</code> returns an array of nD points after normalized to the range
+                        <code>[0, 1]</code>. Each point will contain a <code>data</code> field that passed from the
+                        original point (if you assigned one), so you could use to get back the information from the
+                        original point.
+                    </li>
+                </ul>
+                <h4><a aria-hidden="true" class="anchor" href="#binning-information-2"
+                       id="user-content-binning-information-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Binning information
+                </h4>
+                <ul>
+                    <li><code>scag.bins</code> will return all the <code>bins</code>. A <code>bin</code> contains an
+                        array of points belonging to that bin and <code>x</code>, <code>y</code>, <code>z</code>, ...
+                        attributes for the location (center) of the bin.
+                    </li>
+                </ul>
+                <h4><a aria-hidden="true" class="anchor" href="#outlying-score-2" id="user-content-outlying-score-2">
+                    <svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16"
+                         width="16">
+                        <path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+                              fill-rule="evenodd"></path>
+                    </svg>
+                </a>Outlying score
+                </h4>
+                <ul>
+                    <li><code>scag.outlyingScore</code> returns the scagnostics outlying score.</li>
                 </ul>
             </article>
         </div>
