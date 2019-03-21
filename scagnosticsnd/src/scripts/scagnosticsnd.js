@@ -17,7 +17,7 @@ import {Outlying} from "./modules/outlying";
 
 (function (window) {
     /**
-     * initialize a scagnostics3d object
+     * initialize a scagnosticsnd object
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
@@ -58,7 +58,7 @@ import {Outlying} from "./modules/outlying";
             let decrementB = options.decrementB?options.decrementB: 0;
 
             if(startBinGridSize===undefined){
-                startBinGridSize = 40;
+                startBinGridSize = 20;
             }
             bins = [];
             //Default number of bins
@@ -84,7 +84,7 @@ import {Outlying} from "./modules/outlying";
                 });
             }else{
                 do{
-                    //Start with binSize x binSize bins, and divided by 2 every time there are more than maxNumberofBins none empty cells, increase 5 (+5) if less than minNumberOfBins
+                    //Start with binSize x binSize x binSize... bins, and then increase it as binSize = binSize * incrementA + incrementB or binSize = binSize * decrementA + decrementB.
                     if(binSize===null){
                         binSize = startBinGridSize;
                     }else if(bins.length>maxNumOfBins){
