@@ -12,7 +12,7 @@ nD: https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/
 ## Research paper
 To cite ScagnosticsJS please cite (will be updated here)
 
-## [2d Version](#2d-version)
+## [2D Version](#2d-version)
 ### Installation
 #### Download
 You can download `scagnostics.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js)
@@ -22,8 +22,10 @@ You can add `scagnostics.js` to your web page using this code snippet:
 <script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js"></script>
 ``` 
 ### Creating new scagnostics object
-You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
-* `binType`: as 'leader' (default) or 'hexagon' to use leader binning or hexagon binning correspondingly
+You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
+
+You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
+* `binType`: as `'leader'` (default) or `'hexagon'` to use leader binning or hexagon binning correspondingly
 * `startBinGridSize`: default is `40`, an integer to start the binning process with (it starts with 40x40 bins in this case).
 * `isNormalized`: default is `false`, if it is `true` then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
 * `isBinned`: default is `false`, if it is `true` then ScagnosticsJS will skip the binning step to speed up the calculation time.
@@ -31,7 +33,7 @@ You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2]
 * `minBins`: default is `50`, this is the minimum number of bins that you expect to have after binning process.
 * `maxBins`: default is `250`, this is the maximum number of bins that you expect to have after binning process.
 
-#### Sample code for the default `options` case
+#### Sample code without `options` (default options)
 ```javascript
     //Create a random sed of 2d points
     let points = [];
@@ -43,7 +45,7 @@ You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2]
     //Create scagnostics object
     let scag = scagnostics(points); 
 ```
-#### Sample code if you use options
+#### Sample code with `options`
 ```javascript
     //Create a random sed of 2d points
     let points = [];
@@ -65,10 +67,11 @@ You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2]
     let scag = scagnostics(points, options); 
 ```
 #### Normalized points
-* `scag.bins` will return all the `bins` 
+* `scag.normalizedPoints` returns an array of 2d points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
 #### Binning information
-
+* `scag.bins` will return all the `bins`. A `bin` contains an array of points belonging to that bin and `x`, `y` attributes for the location (center) of the bin.
 #### Outlying score and related intermediate results
+
 #### Skewed score and related intermediate results
 #### Clumpy score and related intermediate results
 #### Sparse score and related intermediate results
