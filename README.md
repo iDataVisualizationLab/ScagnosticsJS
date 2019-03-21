@@ -36,9 +36,9 @@ You may use default scagnostics options or you can optionally pass an `options` 
     //Create an array of random 2D points
     let points = [];
     for (let i = 0; i < 100; i++) {
-        let x = i* (3*pi/100);
-        let y = sin(x);
-        points.push([x+random()/100, y+random()/100]);
+        let x = i* (3*Math.PI/100);
+        let y = Math.sin(x);
+        points.push([x+Math.random()/100, y+Math.random()/100]);
     }
     //Create scagnostics object
     let scag = scagnostics(points); 
@@ -48,9 +48,9 @@ You may use default scagnostics options or you can optionally pass an `options` 
     //Create an array of 2D random points
     let points = [];
     for (let i = 0; i < 100; i++) {
-        let x = i* (3*pi/100);
-        let y = sin(x);
-        points.push([x+random()/100, y+random()/100]);
+        let x = i* (3*Math.PI/100);
+        let y = Math.sin(x);
+        points.push([x+Math.random()/100, y+Math.random()/100]);
     }
     //Set the scagnostics options
     const options = {
