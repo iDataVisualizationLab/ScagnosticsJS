@@ -9,8 +9,7 @@ You can use these playground pages to explore the underlying scagnostics calcula
 
 nD: https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/
 
-## Research paper
-To cite ScagnosticsJS please cite (will be updated here)
+
 
 ## [2D Version](#2d-version)
 ### Installation
@@ -22,7 +21,7 @@ You can add `scagnostics.js` to your web page using this code snippet:
 <script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js"></script>
 ``` 
 ### Creating new scagnostics object
-You will need to pass an array of 2d scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
+You will need to pass an array of 2D scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
 
 You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
 * `binType`: as `'leader'` (default) or `'hexagon'` to use leader binning or hexagon binning correspondingly
@@ -35,7 +34,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
 
 #### Sample code without `options` (default options)
 ```javascript
-    //Create a random sed of 2d points
+    //Create an array of random 2D points
     let points = [];
     for (let i = 0; i < 100; i++) {
         let x = i* (3*pi/100);
@@ -47,7 +46,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
 ```
 #### Sample code with `options`
 ```javascript
-    //Create a random sed of 2d points
+    //Create an array of 2D random points
     let points = [];
     for (let i = 0; i < 100; i++) {
         let x = i* (3*pi/100);
@@ -67,17 +66,107 @@ You may use default scagnostics options or you can optionally pass an `options` 
     let scag = scagnostics(points, options); 
 ```
 #### Normalized points
-* `scag.normalizedPoints` returns an array of 2d points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
+* `scag.normalizedPoints` returns an array of 2D points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
 #### Binning information
 * `scag.bins` will return all the `bins`. A `bin` contains an array of points belonging to that bin and `x`, `y` attributes for the location (center) of the bin.
-#### Outlying score and related intermediate results
 
-#### Skewed score and related intermediate results
-#### Clumpy score and related intermediate results
-#### Sparse score and related intermediate results
-#### Striated score and related intermediate results
-#### Convex score and related intermediate results
-#### Skinny score and related intermediate results
-#### Stringy score and related intermediate results
-#### Monotonic score and related intermediate results
+#### Outlying score
+* `scag.outlyingScore` returns the scagnostics outlying score.
+#### Skewed score
+* `scag.skewedScore` returns the scagnostics skewed score.
+#### Clumpy score
+* `scag.clumpyScore` returns the scagnostics clumpy score.
+#### Sparse score
+* `scag.sparseScore` returns the scagnostics sparse score.
+#### Striated score
+* `scag.striatedScore` returns the scagnostics striated score.
+#### Convex score
+* `scag.convexScore` returns the scagnostics convex score.
+#### Skinny score
+* `scag.skinnyScore` returns the scagnostics stringy score.
+#### Stringy score
+* `scag.stringyScore` returns the scagnostics stringy score.
+#### Monotonic score
+* `scag.monotonicScore` returns the scagnostics monotonic score.
+
+
+## [3D Version](#3d-version)
+### Installation
+#### Download
+You can download `scagnostics3d.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js)
+#### CDN
+You can add `scagnostics.js` to your web page using this code snippet:
+```html
+<script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js"></script>
+``` 
+### Creating new scagnostics3d object
+You will need to pass an array of 3D scatter plot points as `[[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4],...[xn, yn, zn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
+
+You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
+* `binType`: as `'leader'` (default) or `'hexagon'` to use leader binning or hexagon binning correspondingly
+* `startBinGridSize`: default is `40`, an integer to start the binning process with (it starts with 40x40 bins in this case).
+* `isNormalized`: default is `false`, if it is `true` then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
+* `isBinned`: default is `false`, if it is `true` then ScagnosticsJS will skip the binning step to speed up the calculation time.
+* `outlyingUpperBound`: default is `undefined`, you may specify this outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the process of scagnostics calculation, is outlying or not.
+* `minBins`: default is `30`, this is the minimum number of bins that you expect to have after binning process.
+* `maxBins`: default is `200`, this is the maximum number of bins that you expect to have after binning process.
+
+#### Sample code without `options` (default options)
+```javascript
+    //Create an array of random 3D points
+    let noise = ()=> Math.random()/10;
+        let points = [];
+        for (let x = 0; x < 150; x++) {
+            points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
+        };
+    //Create scagnostics object
+    let scag = scagnostics3d(points); 
+```
+#### Sample code with `options`
+```javascript
+    //Create an array of random 3D points
+    let noise = ()=> Math.random()/10;
+        let points = [];
+        for (let x = 0; x < 150; x++) {
+            points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
+        };
+    //Set the scagnostics options
+    const options = {
+        binType: 'leader',
+        startBinGridSize: 20,
+        isNormalized: false,
+        isBinned: false,
+        outlyingUpperBound: undefined,
+        minBins: 30,
+        maxBins: 200
+    };
+    let scag = scagnostics3d(points, options); 
+```
+#### Normalized points
+* `scag.normalizedPoints` returns an array of 3d points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
+#### Binning information
+* `scag.bins` will return all the `bins`. A `bin` contains an array of points belonging to that bin and `x`, `y`, `z` attributes for the location (center) of the bin.
+
+#### Outlying score
+* `scag.outlyingScore` returns the scagnostics outlying score.
+#### Skewed score
+* `scag.skewedScore` returns the scagnostics skewed score.
+#### Clumpy score
+* `scag.clumpyScore` returns the scagnostics clumpy score.
+#### Sparse score
+* `scag.sparseScore` returns the scagnostics sparse score.
+#### Striated score
+* `scag.striatedScore` returns the scagnostics striated score.
+#### Convex score
+* `scag.convexScore` returns the scagnostics convex score.
+#### Skinny score
+* `scag.skinnyScore` returns the scagnostics stringy score.
+#### Stringy score
+* `scag.stringyScore` returns the scagnostics stringy score.
+#### Monotonic score
+* `scag.monotonicScore` returns the scagnostics monotonic score.
+
+
+
+
 

@@ -427,11 +427,11 @@
     /***********Stringy Data*******************/
     stringyScatterPlot();
     function stringyScatterPlot(){
-        let noise = d3.randomUniform(-0.01, 0.01);
-        // let noise = () => 0;
-        let points = d3.range(150).map((x) => {
-            return [x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()];
-        });
+        let noise = ()=> Math.random()/10;
+        let points = [];
+        for (let x = 0; x < 150; x++) {
+            points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
+        };
         datasets.push(points);
     }
 
@@ -439,7 +439,6 @@
     monotonicScatterPlot();
     function monotonicScatterPlot(){
         let noise = d3.randomUniform(-2, 2);
-        // let noise = () => 0;
         let points = d3.range(150).map((x) => {
             return [x + noise(), 150-x + noise(), x + noise()];
         });
