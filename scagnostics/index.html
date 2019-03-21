@@ -777,6 +777,14 @@
 
     let outliagProcessor = null;
     changeDataset(document.getElementById("scagnostics"));
+    //Toggle some displays
+    toggleDisplay(bins);
+    toggleDisplay(triangulations);
+    toggleDisplay(obtuseV2Corners);
+    toggleDisplay(noOutlyingTriangulations);
+    toggleDisplay(convexHull);
+    toggleDisplay(concaveHull);
+
     function changeDataset(evt){
         let points = datasets[evt.selectedIndex];
         let options = {
@@ -861,7 +869,6 @@
     }
 
     function drawNormalizedData(scag) {
-
         drawNormalizedDataSvg(scag, normalizedsvg, dataPointOpacity);
     }
 
@@ -1000,7 +1007,7 @@
         //Main container
         let g = scagsvg.append("g").attr("transform", `translate(${margins.left + 2 * padding}, ${margins.top + padding})`);
         //Original points
-        origPoints = drawNormalizedDataSvg(scag, scagsvg, 10e-6);
+        origPoints = drawNormalizedDataSvg(scag, scagsvg, 0.9);
         // drawScores(g, scag);
         var color = d3.scaleSequential(d3.interpolateLab("#EEEEEE", "#000"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
