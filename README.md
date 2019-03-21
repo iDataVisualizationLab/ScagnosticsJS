@@ -95,7 +95,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
 #### Download
 You can download `scagnostics3d.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js)
 #### CDN
-You can add `scagnostics.js` to your web page using this code snippet:
+You can add `scagnostics3d.js` to your web page using this code snippet:
 ```html
 <script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js"></script>
 ``` 
