@@ -1,7 +1,7 @@
 # ScagnosticsJS API Reference
 There are [2D](#2d-version), [3D](#3d-version), and [nD](#nd-version) versions of the ScagnosticsJS library correspondingly.
 ## Scagnostics playgrounds (online demos)
-You can use these playground pages to explore the underlying scagnostics calculation processes and the visualizations of their intermediate results. They contain exemplar scatterplots for each of the 9 scagnostics (outlying, skewed, clumpy, sparse, striated, convex, skinny, stringy, and monotonic) scores for you to explore:
+You can use these playground pages to explore the underlying scagnostics calculation processes and the visualizations of their intermediate results. They contain exemplar scatterplots for each of the 9 scagnostics (outlying, skewed, clumpy, sparse, striated, convex, skinny, stringy, and monotonic) features for you to explore:
  
 2D: https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics
 
@@ -23,10 +23,10 @@ You can add `scagnostics.js` to your web page using this code snippet:
 You will need to pass an array of 2D scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
 
 You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
-* `binType`: as `'leader'` (default) or `'hexagon'` to use leader binning or hexagon binning correspondingly
+* `binType`: as `'leader'` (default) or `'hexagon'` to use leader binning or hexagon binning correspondingly.
 * `startBinGridSize`: default is `40`, an integer to start the binning process with (it starts with 40x40 bins in this case).
-* `isNormalized`: default is `false`, if it is `true` then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
-* `isBinned`: default is `false`, if it is `true` then ScagnosticsJS will skip the binning step to speed up the calculation time.
+* `isNormalized`: default is `false`, if it is `true` (in case the data is already normalized) then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
+* `isBinned`: default is `false`, if it is `true` (in case the data is already binned) then ScagnosticsJS will skip the binning step to speed up the calculation time.
 * `outlyingUpperBound`: default is `undefined`, you may specify this outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the process of scagnostics calculation, is outlying or not.
 * `minBins`: default is `50`, this is the minimum number of bins that you expect to have after binning process.
 * `maxBins`: default is `250`, this is the maximum number of bins that you expect to have after binning process.
@@ -103,8 +103,8 @@ You will need to pass an array of 3D scatter plot points as `[[x1, y1, z1], [x2,
 You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
 * `binType`: as `'leader'` (default), currently only `'leader'` binning is supported.
 * `startBinGridSize`: default is `40`, an integer to start the binning process with (it starts with 40x40x40 bins in this case).
-* `isNormalized`: default is `false`, if it is `true` then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
-* `isBinned`: default is `false`, if it is `true` then ScagnosticsJS will skip the binning step to speed up the calculation time.
+* `isNormalized`: default is `false`, if it is `true` (in case the data is already normalized)  then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
+* `isBinned`: default is `false`, if it is `true` (in case the data is already binned) then ScagnosticsJS will skip the binning step to speed up the calculation time.
 * `outlyingUpperBound`: default is `undefined`, you may specify this outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the process of scagnostics calculation, is outlying or not.
 * `minBins`: default is `30`, this is the minimum number of bins that you expect to have after binning process.
 * `maxBins`: default is `200`, this is the maximum number of bins that you expect to have after binning process.
@@ -178,13 +178,13 @@ You will need to pass an array of nD scatter plot points as `[[x1, y1, z1, ...],
 
 You may use default scagnostics options or you can optionally pass an `options` object with one or combination of the following fields
 * `binType`: as `'leader'` (default), currently only `leader` binning is supported.
-* `startBinGridSize`: default is `20`, an integer to start the binning process with (it starts with 40x40x40... bins in this case). For high number of dimensions, the number of bins to start with increases exponentially, so consider reducing this number for better performance.
-* `isNormalized`: default is `false`, if it is `true` then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
-* `isBinned`: default is `false`, if it is `true` then ScagnosticsJS will skip the binning step to speed up the calculation time.
+* `startBinGridSize`: default is `20`, an integer to start the binning process with (it starts with 20x20x20... bins in this case). For high number of dimensions, the number of bins to start with increases exponentially, so consider reducing this number for better performance.
+* `isNormalized`: default is `false`, if it is `true` (in case the data is already normalized) then ScagnosticsJS will skip the normalizastion step to speed up the calculation time.    
+* `isBinned`: default is `false`, if it is `true` (in case the data is already binned) then ScagnosticsJS will skip the binning step to speed up the calculation time.
 * `outlyingUpperBound`: default is `undefined`, you may specify this outlying upper bound value to decide if a length of the Minimum Spanning Tree, built in the process of scagnostics calculation, is outlying or not.
 * `minBins`: default is `30`, this is the minimum number of bins that you expect to have after binning process.
 * `maxBins`: default is `200`, this is the maximum number of bins that you expect to have after binning process.
-* `outlyingCoefficient`: default is 3, this is used to calculate the outlying threshold on the MST lengths using this formula: `upperBound = 75<sup>th</sup> quantile + outlyingCoefficient*IQR`. We provide this option since in high dimensional data the default formula `upperBound = 75<sup>th</sup> quantile + 3*IQR` may not work in detecting outlier.
+* `outlyingCoefficient`: default is 3, this is used to calculate the outlying threshold on the MST lengths using this formula: `upperBound = 75th quantile + outlyingCoefficient*IQR`. We provide this option since in high dimensional data the default formula `upperBound = 75th quantile + 1.5*IQR` may not work in detecting outliers.
 * `incrementA`: default is 2, in high dimension data, number of bins will change dramatically if we change the bin grid size, therefore, we can use the formula `binSize = incrementA*binSize + incrementB` to control the increment of the `binSize`.
 * `incrementB`: default is 0, explained in `incrementA` section.
 * `decrementA`: default is 1/2, in high dimension data, number of bins will change dramatically if we change the bin grid size, therefore, we can use the formula `binSize = decrementA*binSize + decrementB` to control the decrement of the `binSize`.
