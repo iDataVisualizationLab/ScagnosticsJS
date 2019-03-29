@@ -12,6 +12,5 @@ export default {
         commonJS({
             include: ['node_modules/**']
         }),
-
     ]
 };

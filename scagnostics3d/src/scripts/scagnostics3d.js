@@ -21,17 +21,22 @@ import {Monotonic} from "./modules/monotonic";
      * @returns {*[][]}
      */
     window.scagnostics3d = function (inputPoints, options={}) {
+        let binType = options.binType,
+            startBinGridSize = options.startBinGridSize,
+            isNormalized = options.isNormalized,
+            isBinned = options.isBinned,
+            outlyingUpperBound = options.outlyingUpperBound,
+            minBins = options.minBins,
+            maxBins = options.maxBins;
+
         //Clone it to avoid modifying it.
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
-        if(options.isNormalized === undefined){
+        if(!isNormalized){
             let normalizer = new Normalizer(points);
             normalizedPoints = normalizer.normalizedPoints;
             outputValue("normalizedPoints", normalizedPoints);
         }
-        let binType = options.binType;
-        /******This section is about the outlying score and outlying score results******/
-        let outlyingUpperBound = options.outlyingUpperBound;
 
         /******This section is about finding number of bins and binners******/
         let sites = null;
@@ -39,8 +44,8 @@ import {Monotonic} from "./modules/monotonic";
         let binner = null;
         let binSize = null;
         let binRadius = 0;
-        let startBinGridSize = options.startBinGridSize;
-        if(options.isBinned===undefined){//Only do the binning if needed.
+
+        if(!isBinned){//Only do the binning if needed.
             if(startBinGridSize===undefined){
                 startBinGridSize = 40;
             }
@@ -48,8 +53,7 @@ import {Monotonic} from "./modules/monotonic";
             //Default number of bins
             let minNumOfBins = 30;
             let maxNumOfBins = 200;
-            let minBins = options.minBins;
-            let maxBins = options.maxBins;
+
             if(minBins){
                 minNumOfBins =minBins;
             }
