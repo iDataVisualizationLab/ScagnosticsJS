@@ -221,7 +221,9 @@
     /*End tooltip section*/
 
     //<editor-fold desc="section for display options">
-    let optionsBinLeader = ["origPoints", "bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners", "noOutlyingTriangulations", "convexHull", "concaveHull", "v1s"];
+    let optionsBinLeader = ["origPoints", "bins", "triangulations", "mst", "outlyingLinks", "outlyingPoints", "noOutlyingTree", "noOutlyingPoints", "v2Corners", "obtuseV2Corners",
+        // "noOutlyingTriangulations",
+        "convexHull", "concaveHull", "v1s"];
 
     function createControlButtons(theContainer, theOptions) {
         let controlButtons = d3.select("#" + theContainer);
@@ -249,7 +251,7 @@
     let runtGraph = null;
     let v2Corners = null;//circle
     let obtuseV2Corners = null;//path
-    let noOutlyingTriangulations = null;//path
+    // let noOutlyingTriangulations = null;//path
     let convexHull = null;//path
     let concaveHull = null;//path
     let v1s = null;//circle
@@ -278,28 +280,30 @@
 
     /***********OUTLYING DATA*******************/
     outlyingScatterPlot();
-    function outlyingScatterPlot(){
+
+    function outlyingScatterPlot() {
         let randomX = d3.randomNormal(svgWidth / 2, 50),
             randomY = d3.randomNormal(svgHeight / 2, 50),
             points = d3.range(300).map(function () {
                 return [randomX(), randomY()];
             });
         //Push 3 more outlying points.
-        points.push([svgWidth/2 + 5*50, svgHeight/2 + 5*50]);
-        points.push([svgWidth/2 - 5*50, svgHeight/2 + 5*50]);
-        points.push([svgWidth/2 + 5*50, svgHeight/2 - 5*50]);
+        points.push([svgWidth / 2 + 5 * 50, svgHeight / 2 + 5 * 50]);
+        points.push([svgWidth / 2 - 5 * 50, svgHeight / 2 + 5 * 50]);
+        points.push([svgWidth / 2 + 5 * 50, svgHeight / 2 - 5 * 50]);
         datasets.push(points);
     }
 
     /***********SKWED DATA*******************/
     skewedScatterPlot();
-    function skewedScatterPlot(){
+
+    function skewedScatterPlot() {
         let points = [];
-        for (let i = 0; i < svgWidth;  i = i + svgWidth / 5) {
+        for (let i = 0; i < svgWidth; i = i + svgWidth / 5) {
             for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
                 const randomX = d3.randomNormal(i, svgWidth / 60),
                     randomY = d3.randomNormal(j, svgHeight / 60);
-                d3.range(20).forEach(d=>{
+                d3.range(20).forEach(d => {
                     points.push([randomX(), randomY()]);
                 });
             }
@@ -309,7 +313,8 @@
 
     /***********CLUMPY DATA*******************/
     clumpyScatterPlot();
-    function clumpyScatterPlot(){
+
+    function clumpyScatterPlot() {
         let points = [];
         //Top CENTER points
         let randomX = d3.randomNormal(svgWidth / 2, 10),
@@ -336,7 +341,8 @@
 
     /***********SPARSED DATA*******************/
     sparsedScatterPlot();
-    function sparsedScatterPlot(){
+
+    function sparsedScatterPlot() {
         let points = [];
         //Top left points
         let randomX = d3.randomNormal(svgWidth / 4, 10),
@@ -368,10 +374,11 @@
 
     /***********STRIATED DATA*******************/
     striatedScatterPlot();
-    function striatedScatterPlot(){
+
+    function striatedScatterPlot() {
         let points = [];
         for (let i = 0; i < 4; i++) {
-            let randomX = d3.randomNormal(i*svgWidth/4, 0.01),
+            let randomX = d3.randomNormal(i * svgWidth / 4, 0.01),
                 randomY = d3.randomUniform(0, svgHeight);
             d3.range(100).map(function () {
                 points.push([randomX(), randomY()]);
@@ -379,10 +386,11 @@
         }
         datasets.push(points);
     }
-    
+
     /***********CONVEX DATA*******************/
     convexScatterPlot();
-    function convexScatterPlot(){
+
+    function convexScatterPlot() {
         // Sphere
         // const points = [];
         // d3.range(1000).forEach(()=>{
@@ -402,34 +410,37 @@
 
     /***********SKINNY DATA (Y=X^2)*******************/
     skinnyScatterPlot();
-    function skinnyScatterPlot(){
-        let randomX = d3.randomUniform(-svgWidth/2, svgWidth/2);
+
+    function skinnyScatterPlot() {
+        let randomX = d3.randomUniform(-svgWidth / 2, svgWidth / 2);
         let points = [];
-        d3.range(400).forEach(()=>{
+        d3.range(400).forEach(() => {
             const val = randomX();
-            points.push([val + 30*random(), val*val + 30*random()]);
+            points.push([val + 30 * random(), val * val + 30 * random()]);
         });
         datasets.push(points);
     }
 
     /***********STRINGY DATA*******************/
     stringyScatterPlot();
-    function stringyScatterPlot(){
+
+    function stringyScatterPlot() {
         let points = [];
         for (let i = 0; i < 100; i++) {
-            let x = i* (3*pi/100);
+            let x = i * (3 * pi / 100);
             let y = sin(x);
-            points.push([x+random()/100, y+random()/100]);
+            points.push([x + random() / 100, y + random() / 100]);
         }
         datasets.push(points);
     }
 
     /***********MONOTONIC DATA*******************/
     monotonicScatterPlot();
-    function monotonicScatterPlot(){
+
+    function monotonicScatterPlot() {
         let randomX = d3.randomUniform(0, svgWidth);
         let points = [];
-        d3.range(100).forEach(()=>{
+        d3.range(100).forEach(() => {
             const val = randomX();
             points.push([val + random(), val + random()]);
         });
@@ -781,15 +792,15 @@
     toggleDisplay(bins);
     toggleDisplay(triangulations);
     toggleDisplay(obtuseV2Corners);
-    toggleDisplay(noOutlyingTriangulations);
+    // toggleDisplay(noOutlyingTriangulations);
     toggleDisplay(convexHull);
     toggleDisplay(concaveHull);
 
-    function changeDataset(evt){
+    function changeDataset(evt) {
         let points = datasets[evt.selectedIndex];
         let options = {
-            binType:binType,
-            startBinGridSize:startBinGridSize
+            binType: binType,
+            startBinGridSize: startBinGridSize
         }
         // //process outliag score
         // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
@@ -798,7 +809,7 @@
         update(scag);
     }
 
-    function update(scag){
+    function update(scag) {
 
 
         //Clean
@@ -860,10 +871,10 @@
                     .duration(500)
                     .style("opacity", 0);
             });
-            // .on("click", d => {
-            //     let outliag = outliagProcessor.allOutliags[d.data.index];
-            //     drawLeaveOut(outliag);
-            // });
+        // .on("click", d => {
+        //     let outliag = outliagProcessor.allOutliags[d.data.index];
+        //     drawLeaveOut(outliag);
+        // });
         /*End of tooltip section*/
         return g;
     }
@@ -1012,50 +1023,51 @@
         var color = d3.scaleSequential(d3.interpolateLab("#EEEEEE", "#000"))
             .domain(d3.extent(scag.bins.map(b => b.length)));
 
-        if (binType === "hexagon") {
-            bins = g.append("g")
-                .attr("class", "hexagon")
-                .selectAll("path")
-                .data(scag.bins)
-                .enter().append("path")
-                .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
-                .attr("transform", function (d) {
-                    return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
-                })
-                .attr("fill-opacity", 1)
-                .attr("fill", d => color(d.length));
-        } else {
-            //sort the scag bins by x first then by y
-            let scagBins = scag.bins.sort((a, b) => (a.x - b.x != 0) ? a.x - b.x : a.y - b.y);
-            bins = g.append("g")
-                .attr("class", "leader")
-                .selectAll("circle")
-                .data(scagBins)
-                .enter().append("circle")
-                // .attr("r", scaleX(scag.binRadius))
-                .attr("r", d => {
-                    let distances = d.map(p => distance([d.x, d.y], p));
-                    let radius = d3.max(distances);
-                    return radius === 0 ? dataPointRadius : scaleX(radius);
-                })
-                .attr("cx", d => scaleX(d.x))
-                .attr("cy", d => scaleY(d.y))
-                .attr("fill", d => color(d.length))
-                // .attr("fill", "none")
-                .attr("stroke", "black")
-                .attr("opacity", binOpacity)
-                .attr("display", "none")
-                .attr("stroke-width", 0.5);
+        if (scag.binner) {
+            if (binType === "hexagon") {
+                bins = g.append("g")
+                    .attr("class", "hexagon")
+                    .selectAll("path")
+                    .data(scag.bins)
+                    .enter().append("path")
+                    .attr("d", scag.binner.hexagon(scaleX(scag.binRadius)))
+                    .attr("transform", function (d) {
+                        return "translate(" + scaleX(d.x) + "," + scaleY(d.y) + ")";
+                    })
+                    .attr("fill-opacity", 1)
+                    .attr("fill", d => color(d.length));
+            } else {
+                //sort the scag bins by x first then by y
+                let scagBins = scag.bins.sort((a, b) => (a.x - b.x != 0) ? a.x - b.x : a.y - b.y);
+                bins = g.append("g")
+                    .attr("class", "leader")
+                    .selectAll("circle")
+                    .data(scagBins)
+                    .enter().append("circle")
+                    // .attr("r", scaleX(scag.binRadius))
+                    .attr("r", d => {
+                        let distances = d.map(p => distance([d.x, d.y], p));
+                        let radius = d3.max(distances);
+                        return radius === 0 ? dataPointRadius : scaleX(radius);
+                    })
+                    .attr("cx", d => scaleX(d.x))
+                    .attr("cy", d => scaleY(d.y))
+                    .attr("fill", d => color(d.length))
+                    // .attr("fill", "none")
+                    .attr("stroke", "black")
+                    .attr("opacity", binOpacity)
+                    .attr("display", "none")
+                    .attr("stroke-width", 0.5);
 
-            function distance(a, b) {
-                let dx = a[0] - b[0],
-                    dy = a[1] - b[1];
-                //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
-                //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
-                return Math.round(Math.sqrt((dx * dx) + (dy * dy)) * Math.pow(10, 10)) / Math.pow(10, 10);
+                function distance(a, b) {
+                    let dx = a[0] - b[0],
+                        dy = a[1] - b[1];
+                    //For computer storage issue, some coordinates of the same distance may return different distances if we use long floating point
+                    //So take only 10 digits after the floating points=> this is precise enough and still have the same values for two different lines of the same distance
+                    return Math.round(Math.sqrt((dx * dx) + (dy * dy)) * Math.pow(10, 10)) / Math.pow(10, 10);
+                }
             }
         }
-
         //Triangulating
         triangulations = g.append("g")
             .attr("class", "triangles")
@@ -1142,16 +1154,16 @@
             .style("display", "none");
 
 
-        //Triangulating
-        noOutlyingTriangulations = g.append("g")
-            .attr("class", "triangles")
-            .selectAll("path")
-            .data(scag.noOutlyingTriangleCoordinates)
-            .enter()
-            .append("path")
-            .call(drawTriangle)
-            .attr("opacity", 10e-6)
-            .style("display", "none");
+        // //Triangulating
+        // noOutlyingTriangulations = g.append("g")
+        //     .attr("class", "triangles")
+        //     .selectAll("path")
+        //     .data(scag.noOutlyingTriangleCoordinates)
+        //     .enter()
+        //     .append("path")
+        //     .call(drawTriangle)
+        //     .attr("opacity", 10e-6)
+        //     .style("display", "none");
 
         //Convex hull
         convexHull = g.append("g").selectAll("path")

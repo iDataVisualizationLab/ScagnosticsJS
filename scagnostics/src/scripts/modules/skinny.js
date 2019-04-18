@@ -1,9 +1,9 @@
-import {concaveHullLength, concaveHullArea} from "./concaveHull";
+import {concaveHullLength, concaveHullArea} from "./hulls";
 
 export class Skinny {
     constructor(alphaHull) {
         //Clone it in order to avoid modifying it.
-        this.alphaHull = alphaHull.slice(0);
+        this.alphaHull = alphaHull.slice();
     }
     /**
      * Returns skinny score

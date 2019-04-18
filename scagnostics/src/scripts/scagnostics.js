@@ -175,10 +175,8 @@ import {Delaunay} from "d3-delaunay";
         outputValue("obtuseV2Corners", obtuseV2Corners);
 
         /******This section is about the convex hull and convex hull results******/
-        let convex = new Convex(noOutlyingTree);
+        let convex = new Convex(noOutlyingTree, 1/outlyingUpperBound);
         let convexHull = convex.convexHull();
-        let noOutlyingTriangleCoordinates = convex.noOutlyingTriangleCoordinates();
-        outputValue("noOutlyingTriangleCoordinates", noOutlyingTriangleCoordinates);
         outputValue("convexHull", convexHull);
 
         /******This section is about the concave hull and concave hull results******/
