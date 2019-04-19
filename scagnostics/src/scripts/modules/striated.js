@@ -12,9 +12,13 @@ export class Striated {
      */
     score() {
         //Loop through the nodes.
-        let verticesCount = this.tree.nodes.length;
         let allObtuseV2CornersCount = this.getAllObtuseV2Corners().length;
-        return allObtuseV2CornersCount / verticesCount;
+        //TODO: Needs to make sure the divisor is all vertices count or vertices count for degree 2 vertices only.
+        // let verticesCount = this.tree.nodes.length;
+        // return allObtuseV2CornersCount / verticesCount;
+        let v2Count = this.getAllV2Corners().length;
+        return allObtuseV2CornersCount / v2Count;
+
     }
 
     getAllObtuseV2Corners() {

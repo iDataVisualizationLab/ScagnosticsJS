@@ -25,12 +25,14 @@ export class Convex {
 
             while(cch.length == 0 && this.alpha > 10e-6){
                 //Add a random factor to avoid removing all points
-                sites.forEach(p=>{
+                const newSites = sites.map(p=>{
+                    let newP = [];
                     for (let i = 0; i < p.length; i++) {
-                        p[i] = p[i] + (Math.random() - 0.5)*10e-4;
+                        newP[i] = p[i] + (Math.random() - 0.5)*10e-1;
                     }
+                    return newP;
                 });
-                cch = concaveHull(this.alpha, sites);
+                cch = concaveHull(this.alpha, newSites);
             }
             this.cch = cch;
         }

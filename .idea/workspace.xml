@@ -2,717 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nrcdataset/data/nrcdata.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nrcdataset/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/.bin/tape" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/alpha.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/alpha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/example/example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-complex/viewer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/alpha.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/alpha.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/alpha-shape/viewer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/LICENSE.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/test/interleave2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/test/interleave3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/twiddle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/boundary.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/boundary-cells/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/orientation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/cell-orientation/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/circumcenter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumcenter/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/crad.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/circumradius/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/compare.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/test/basic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/test/brute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-cell/test/stability.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/compare.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/test/basic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/test/brute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/compare-oriented-cell/test/stability.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/README.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/example/map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/concat-map/test/map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/example/cmp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/lib/is_arguments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/lib/keys.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/deep-equal/test/cmp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/define-properties/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/example/defined.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/test/def.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/defined/test/falsy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/bench/cases.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/bench/run.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/delaunay3d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/example/example-2d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/example/example-3d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/2d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/3d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/edge-cases.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/fuzz-1d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/fuzz-2d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/fuzz-3d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/fuzz-4d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/fuzz-5d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/util/is-delaunay.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/test/util/normalize.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/delaunay-triangulate/triangulate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/dup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/dup/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/.nycrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/GetIntrinsic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es2016.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es2017.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es2018.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es6.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/es7.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/assertRecord.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/assign.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/forEach.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/isFinite.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/isNaN.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/isPrimitive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/mod.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/helpers/sign.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/2016.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/2017.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/2018.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/operations/getOps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/GetIntrinsic.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/diffOps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es2016.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es2017.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es2018.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es6.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/es7.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/helpers/assertRecord.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/helpers/values.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-abstract/test/tests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/es6.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/helpers/isPrimitive.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/test/es2015.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/test/es5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/test/es6.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/es-to-primitive/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/for-each/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/fs.realpath/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/fs.realpath/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/fs.realpath/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/fs.realpath/old.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/fs.realpath/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/implementation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/function-bind/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/changelog.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/glob.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/glob/sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/shams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/test/shams/core-js.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/test/shams/get-own-property-symbols.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has-symbols/test/tests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has/LICENSE-MIT" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/has/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/example/hull3d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/ich.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/cone.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/cube.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/parabola.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/simplex.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/sphere.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/incremental-convex-hull/test/util/normalize.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inflight/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inflight/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inflight/inflight.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inflight/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inherits/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inherits/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inherits/inherits.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inherits/inherits_browser.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/inherits/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/.istanbul.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-callable/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-date-object/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-regex/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/.nvmrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/is-symbol/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimatch/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimatch/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimatch/minimatch.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimatch/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/example/parse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/all_bool.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/bool.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/dash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/default_bool.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/dotted.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/kv_short.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/long.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/num.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/parse.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/parse_modified.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/short.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/stop_early.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/unknown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/minimist/test/whitespace.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/.nycrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/example/all.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/example/circular.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/example/fn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/example/inspect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test-core-js.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/bigint.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/browser/dom.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/circular.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/deep.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/element.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/err.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/fn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/has.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/holes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/inspect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/lowbyte.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/number.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/quoteStyle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/undef.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/test/values.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-inspect/util.inspect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/implementation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/isArguments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/object-keys/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/once/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/once/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/once/once.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/once/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/path-is-absolute/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/path-is-absolute/license" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/path-is-absolute/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/path-is-absolute/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/reduce.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/reduce-simplicial-complex/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/example/resume.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/test/resume.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/resumer/test/through.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/compress.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-compress/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/robust-determinant.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-determinant/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/linsolve.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-linear-solve/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/orientation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-orientation/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/robust-scale.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-scale/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/robust-diff.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-subtract/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/robust-sum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/robust-sum/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/boundary.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/example/example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex-boundary/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/simplicial-complex/topology.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/.jscs.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/implementation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/polyfill.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/shim.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/test/shimmed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/string.prototype.trim/test/tests.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/bin/tape" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/array.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/fail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/nested.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/nested_fail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/not_enough.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/static/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/static/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/stream/object.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/stream/tap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/stream/test/x.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/stream/test/y.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/throw.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/timing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/too_many.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/example/two.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/lib/default_stream.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/lib/results.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/lib/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/path-parse/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/.eslintignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/appveyor.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/changelog.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/example/async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/example/sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/caller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/core.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/node-modules-paths.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/normalize-options.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/lib/sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/core.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/dotdot.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/dotdot/abc/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/dotdot/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/faulty_basedir.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/filter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/filter_sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/mock.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/mock_sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/module_dir.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/module_dir/xmodules/aaa/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/module_dir/ymodules/aaa/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/module_dir/zmodules/bbb/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/module_dir/zmodules/bbb/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node-modules-paths.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node_path.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node_path/x/aaa/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node_path/x/ccc/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node_path/y/bbb/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/node_path/y/ccc/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/nonstring.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/pathfilter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/pathfilter/deep_ref/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence/aaa.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence/aaa/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence/aaa/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence/bbb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/precedence/bbb/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/baz/doom.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/baz/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/baz/quux.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/browser_field/a.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/browser_field/b.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/browser_field/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/cup.coffee" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/dot_main/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/dot_main/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/dot_slash_main/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/dot_slash_main/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/foo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/incorrect_main/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/incorrect_main/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/invalid_main/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/mug.coffee" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/mug.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/lerna.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/packages/package-a/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/packages/package-a/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/packages/package-b/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/multirepo/packages/package-b/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/other_path/lib/other-lib.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/other_path/root.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/quux/foo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/same_names/foo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/same_names/foo/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/symlinked/_/node_modules/foo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/symlinked/_/symlink_target/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver/without_basedir/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/resolver_sync.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/subdirs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/node_modules/resolve/test/symlinks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/add-subtest-async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/anonymous-fn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/anonymous-fn/test-wrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/array.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/bound.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/browser/asserts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/child_ordering.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/circular-things.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/create_multiple_streams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/deep-equal-failure.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/deep.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/default-messages.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/double_end.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/double_end/double.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/end-as-callback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exit/fail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exit/ok.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exit/second.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exit/too_few.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/exposed-harness.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/fail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/has spaces.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/many.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/max_listeners.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/max_listeners/source.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/messages/defaults.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/nested-async-plan-noend.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/nested-only-tests-noplan-noend.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/nested-sync-noplan-noend.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/nested.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/nested2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/no_callback.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/not-deep-equal-failure.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/not-equal-failure.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/onFailure.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/onFinish.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only-twice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/only5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/plan_optional.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/require.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/require/a.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/require/b.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/require/test-a.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/require/test-b.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/skip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/stackTrace.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/subcount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/subtest_and_async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/subtest_plan.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/throws.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/timeout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/timeoutAfter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/todo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/too_many.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/tape/test/undef.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/LICENSE.APACHE2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/LICENSE.MIT" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/readme.markdown" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/test/async.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/test/auto-destroy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/test/buffering.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/test/end.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/through/test/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-product/two-product.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/two-sum/two-sum.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/example/example.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/union-find/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/.npmignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/uniq/uniq.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/wrappy/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/wrappy/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/wrappy/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/node_modules/wrappy/wrappy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/hulls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/testalphashape.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/build/js/scagnostics.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/build/js/scagnostics.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/concaveHull.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/skinny.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/skinny.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/scagnostics/node_modules/" />
     <ignored path="$PROJECT_DIR$/scagnostics3d/node_modules/" />
@@ -737,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="1023" column="49" selection-start-line="1023" selection-start-column="49" selection-end-line="1023" selection-end-column="49" />
+            <state relative-caret-position="287">
+              <caret line="1070" column="23" lean-forward="true" selection-start-line="1070" selection-start-column="23" selection-end-line="1070" selection-end-column="23" />
               <folding>
                 <element signature="e#42857#43410#0" />
                 <element signature="e#43348#44906#0" />
@@ -751,19 +45,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/skinny.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor>
+                <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/bit-twiddle/twiddle.js">
+        <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/skinny.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="58" column="62" selection-start-line="58" selection-start-column="62" selection-end-line="58" selection-end-column="62" />
+            <state relative-caret-position="95">
+              <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -781,22 +78,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/scagnostics3d.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="178" column="27" lean-forward="true" selection-start-line="178" selection-start-column="27" selection-end-line="178" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/hulls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+            <state relative-caret-position="57">
+              <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
                 <element signature="e#1040#1093#0" />
@@ -811,8 +96,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            <state relative-caret-position="532">
+              <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="513">
+              <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -833,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
+            <state relative-caret-position="1520">
               <caret line="182" column="38" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
@@ -858,9 +152,9 @@
       <find>isBinned</find>
       <find>bins</find>
       <find>binner</find>
-      <find>concaveHull</find>
       <find>noOutlyingTriang</find>
       <find>hexag</find>
+      <find>concaveHull</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -879,8 +173,10 @@
         <option value="$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js" />
         <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/hulls.js" />
         <option value="$PROJECT_DIR$/nrcdataset/index.html" />
-        <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" />
         <option value="$PROJECT_DIR$/scagnostics/index.html" />
+        <option value="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" />
+        <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" />
+        <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" />
       </list>
     </option>
   </component>
@@ -905,13 +201,17 @@
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="nrcdataset" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
               <item name="nrcdataset" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
@@ -943,27 +243,6 @@
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
               <item name="scagnostics3d" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnostics3d" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnostics3d" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnostics3d" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1001,6 +280,9 @@
     <configuration name="index.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/nrcdataset/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/scagnostics/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -1011,10 +293,12 @@
       <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="JavaScript Debug.index.html (1)" />
       <item itemvalue="Node.js.testalphashape.js" />
+      <item itemvalue="JavaScript Debug.index.html (2)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.index.html (1)" />
+        <item itemvalue="JavaScript Debug.index.html (2)" />
         <item itemvalue="Node.js.testalphashape.js" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
@@ -1031,16 +315,30 @@
       <option name="presentableId" value="Default" />
       <updated>1554912668810</updated>
       <workItem from="1554912670337" duration="571000" />
-      <workItem from="1555542854426" duration="22023000" />
+      <workItem from="1555542854426" duration="27324000" />
     </task>
+    <task id="LOCAL-00001" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
+      <created>1555628089560</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1555628089560</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
+      <created>1555633573211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1555633573211</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22594000" />
+    <option name="totallyTimeSpent" value="27895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1417" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25178713" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1055,7 +353,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32925898" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.45989305" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.17723453" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1065,6 +363,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated convex/concave related scores (Convex, Skinny) calculation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated convex/concave related scores (Convex, Skinny) calculation." />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -1207,9 +509,6 @@
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/sparse.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/stringy.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1268,9 +567,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="1070" column="23" lean-forward="true" selection-start-line="1070" selection-start-column="23" selection-end-line="1070" selection-end-column="23" />
+          <folding>
+            <element signature="e#42857#43410#0" />
+            <element signature="e#43348#44906#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
+        <state relative-caret-position="1520">
           <caret line="182" column="38" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -1278,17 +598,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/hulls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        <state relative-caret-position="57">
+          <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
             <element signature="e#1040#1093#0" />
@@ -1299,14 +612,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/index.html">
+    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="1023" column="49" selection-start-line="1023" selection-start-column="49" selection-end-line="1023" selection-end-column="49" />
-          <folding>
-            <element signature="e#42857#43410#0" />
-            <element signature="e#43348#44906#0" />
-          </folding>
+        <state relative-caret-position="532">
+          <caret line="28" column="34" lean-forward="true" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
         </state>
       </provider>
     </entry>
