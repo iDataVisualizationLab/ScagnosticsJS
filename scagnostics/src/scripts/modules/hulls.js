@@ -7,8 +7,8 @@ import {Delaunay} from "d3-delaunay";
 export function concaveHull(alpha, sites) {
     let cells = alphaShape(alpha, sites);
     //Switch to another delaunay + cut long edge algorithms
-    if(cells.length===0){
-        cells = concaveHull1(sites, 1/alpha);
+    if (cells.length === 0) {
+        cells = concaveHull1(sites, 1 / alpha);
     }
     let hulls = [];
     processCells(cells, hulls);
@@ -136,15 +136,26 @@ export function concaveHull1(sites, longEdge) {
         longEdge = longEdge + 10e-3;
         for (let i = 0; i < triangles.length; i += 3) {
             for (let j = 0; j < 3; j++) {
-                let d = distance(points[triangles[i+j]], points[triangles[i+(j+1)%3]]);
-                if(d < longEdge){
-                    cells.push([triangles[i+j], triangles[i+(j+1)%3]]);
+                let d = distance(points[triangles[i + j]], points[triangles[i + (j + 1) % 3]]);
+                if (d < longEdge) {
+                    cells.push([triangles[i + j], triangles[i + (j + 1) % 3]]);
                 }
             }
         }
     }
+    //do the edge count
+    let edgeCount = {};
+    cells.forEach(edge => {
+        let theKey = edge.sort().join(',');
+        edgeCount[theKey] = edgeCount[theKey] ? edgeCount[theKey] : 0 + 1;
+    });
+    //Filter the inner edges (duplicated).
+    cells = cells.filter(edge => {
+        let theKey = edge.sort().join(',');
+        return edgeCount[theKey] === 1;
+    })
     //Next we remove the duplicated edges => only take the unique points.
-    cells = _.uniq(cells, false, d => d.sort().join(','));
+    // cells = _.uniq(cells, false, d => d.sort().join(','));
     return cells;
 }
 
