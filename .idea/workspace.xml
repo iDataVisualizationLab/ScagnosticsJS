@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/build/js/scagnostics.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/build/js/scagnostics.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" afterDir="false" />
-    </list>
+    <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/scagnostics/node_modules/" />
     <ignored path="$PROJECT_DIR$/scagnostics3d/node_modules/" />
     <ignored path="$PROJECT_DIR$/scagnosticsnd/node_modules/" />
@@ -44,12 +38,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor>
-                <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+                <caret column="8" lean-forward="true" selection-start-column="8" selection-end-column="8" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="418">
+                <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
               </first_editor>
               <second_editor />
             </state>
@@ -102,24 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="513">
               <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/testalphashape.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="4578" column="16" lean-forward="true" selection-start-line="4464" selection-end-line="4578" selection-end-column="16" />
-              <folding>
-                <element signature="n#!!doc" />
-                <element signature="n#!!block;n#sortVerticies#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -174,9 +167,10 @@
         <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/hulls.js" />
         <option value="$PROJECT_DIR$/nrcdataset/index.html" />
         <option value="$PROJECT_DIR$/scagnostics/index.html" />
-        <option value="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" />
         <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js" />
         <option value="$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js" />
+        <option value="$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/README.md" />
+        <option value="$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md" />
       </list>
     </option>
   </component>
@@ -217,6 +211,26 @@
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
               <item name="scagnostics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnostics" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnostics" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="balanced-match" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnostics" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="brace-expansion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
@@ -315,7 +329,7 @@
       <option name="presentableId" value="Default" />
       <updated>1554912668810</updated>
       <workItem from="1554912670337" duration="571000" />
-      <workItem from="1555542854426" duration="27324000" />
+      <workItem from="1555542854426" duration="27637000" />
     </task>
     <task id="LOCAL-00001" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
       <created>1555628089560</created>
@@ -331,14 +345,22 @@
       <option name="project" value="LOCAL" />
       <updated>1555633573211</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
+      <created>1555635710126</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1555635710126</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27895000" />
+    <option name="totallyTimeSpent" value="28208000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1417" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25178713" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -365,6 +387,8 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Updated convex/concave related scores (Convex, Skinny) calculation." />
     <option name="LAST_COMMIT_MESSAGE" value="Updated convex/concave related scores (Convex, Skinny) calculation." />
   </component>
@@ -578,16 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1520">
@@ -623,6 +637,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
           <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/brace-expansion/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="418">
+            <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/balanced-match/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor>
+            <caret column="8" lean-forward="true" selection-start-column="8" selection-end-column="8" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
