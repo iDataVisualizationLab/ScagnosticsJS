@@ -22,8 +22,14 @@ export class Convex {
             let tree = JSON.parse(JSON.stringify(this.tree));
             let sites = tree.nodes.map(d => d.id);
             let cch = concaveHull(this.alpha, sites);
+
             while(cch.length == 0 && this.alpha > 10e-6){
-                this.alpha = this.alpha/2;
+                //Add a random factor to avoid removing all points
+                sites.forEach(p=>{
+                    for (let i = 0; i < p.length; i++) {
+                        p[i] = p[i] + (Math.random() - 0.5)*10e-4;
+                    }
+                });
                 cch = concaveHull(this.alpha, sites);
             }
             this.cch = cch;
