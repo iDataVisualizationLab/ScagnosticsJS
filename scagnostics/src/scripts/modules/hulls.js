@@ -79,9 +79,7 @@ function processCells(cells, hulls) {
         hulls.push(hull);
     } else {
         //Remove the processed items and continue.
-        processedIndice.forEach(i => {
-            cells.splice(i, 1);
-        });
+        cells = cells.filter((v, i)=>processedIndice.indexOf(i)<0);
     }
     //Do this recursively
     processCells(cells, hulls);
