@@ -10,6 +10,23 @@ export class Outlying {
         //Clone the tree to avoid modifying it
         this.tree = JSON.parse(JSON.stringify(tree));
         this.upperBound = upperBound;
+        //Mark the outlying links and add total length
+        if (!upperBound) {
+            let allLengths = tree.links.map(l => l.weight),
+                q1 = quantile(allLengths, 0.25),
+                q3 = quantile(allLengths, 0.75),
+                iqr = q3 - q1;
+            upperBound = q3+1.5*iqr;
+            // upperBound = q3 + 3 * iqr;
+            //Save it for displaying purpose.
+            this.upperBound = upperBound;
+        }
+        this.tree.links.forEach(l => {
+            if (l.weight > upperBound) {
+                l.isOutlying = true;
+            }
+        });
+
     }
 
     /**
@@ -17,26 +34,22 @@ export class Outlying {
      * @returns {number}
      */
     score() {
-        let tree = this.tree,
-            totalLengths = 0,
-            totalOutlyingLengths = 0;
-        let upperBound = this.upperBound;
-        if(!upperBound){
-            let allLengths = tree.links.map(l => l.weight),
-                q1 = quantile(allLengths, 0.25),
-                q3 = quantile(allLengths, 0.75),
-                iqr = q3 - q1;
-            // upperBound = q3+1.5*iqr;
-            upperBound = q3+3*iqr;
-            //Save it for displaying purpose.
-            this.upperBound = upperBound;
-        }
-        tree.links.forEach(l => {
+        let totalLengths = 0;
+        let totalOutlyingLengths = 0;
+        //If it is outlying links it must be outlying (long) and also contains at least one outlying points.
+        let outlyingPoints = this.points();
+        this.tree.links.forEach(l => {
             totalLengths += l.weight;
-            if (l.weight > upperBound) {
-                totalOutlyingLengths += l.weight;
-                l.isOutlying = true;
+            //If there are outlying points first.
+            if(outlyingPoints.length>0){
+                if(l.isOutlying){
+                    //Also check if the link contains outlying points.
+                    if(pointExists(outlyingPoints,l.source) ||pointExists(outlyingPoints,l.target)){
+                        totalOutlyingLengths += l.weight;
+                    }
+                }
             }
+
         });
         return totalOutlyingLengths / totalLengths;
     }
@@ -45,7 +58,10 @@ export class Outlying {
      * Returns outlying links
      */
     links() {
-        return this.tree.links.filter(l => l.isOutlying);
+        if (!this.outlyingLinks) {
+            this.outlyingLinks = this.tree.links.filter(l => l.isOutlying);
+        }
+        return this.outlyingLinks;
     }
 
     /**
@@ -62,24 +78,10 @@ export class Outlying {
             allNodesWithLinks.push(l.target);
         });
         allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
-        //TODO: May need to reuse the existing result instead of calculating all again.
-        //Triangulate again
-        let delaunay = Delaunay.from(allNodesWithLinks);
-        delaunay.points = allNodesWithLinks;
-        delaunay.triangleCoordinates = function(){
-            let triangles = this.triangles;
-            let tc = [];
-            for (let i = 0; i < triangles.length; i += 3) {
-                tc.push([
-                    this.points[triangles[i]],
-                    this.points[triangles[i + 1]],
-                    this.points[triangles[i + 2]]
-                ]);
-            }
-            return tc;
-        }
-        let graph = createGraph(delaunay.triangleCoordinates());
-        newTree = mst(graph);
+        newTree.nodes = allNodesWithLinks.map(n => {
+            return {id: n};
+        });
+
         return newTree;
     }
 
@@ -87,17 +89,20 @@ export class Outlying {
      * Returns the outlying points (in form of points, not node object).
      * @returns {Array}
      */
-    points(){
-        let newTree = this.removeOutlying();
-        let newNodes = newTree.nodes;
-        let oldNodes = this.tree.nodes;
-        let ops = [];
-        oldNodes.forEach(n=>{
-            //.id since we are accessing to points and the node is in form of {id: thePoint}
-            if(!pointExists(newNodes.map(n=>n.id), n.id)){
-                ops.push(n.id);
-            }
-        });
-        return ops;
+    points() {
+        if (!this.outlyingPoints) {
+            let newTree = this.removeOutlying();
+            let newNodes = newTree.nodes;
+            let oldNodes = this.tree.nodes;
+            let ops = [];
+            oldNodes.forEach(on => {
+                //.id since we are accessing to points and the node is in form of {id: thePoint}
+                if (!pointExists(newNodes.map(nn => nn.id), on.id)) {
+                    ops.push(on.id);
+                }
+            });
+            this.outlyingPoints = ops;
+        }
+        return this.outlyingPoints;
     }
 }
