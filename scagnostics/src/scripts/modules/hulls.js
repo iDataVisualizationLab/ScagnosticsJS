@@ -1,8 +1,15 @@
 import alphaShape from 'alpha-shape';
 import * as polygon from 'd3-polygon';
+import {distance} from './kruskal-mst';
+import _ from "underscore";
+import {Delaunay} from "d3-delaunay";
 
 export function concaveHull(alpha, sites) {
-    const cells = alphaShape(alpha, sites);
+    let cells = alphaShape(alpha, sites);
+    //Switch to another delaunay + cut long edge algorithms
+    if(cells.length===0){
+        cells = concaveHull1(sites, 1/alpha);
+    }
     let hulls = [];
     processCells(cells, hulls);
     hulls = hulls.map(h => {
@@ -79,7 +86,7 @@ function processCells(cells, hulls) {
         hulls.push(hull);
     } else {
         //Remove the processed items and continue.
-        cells = cells.filter((v, i)=>processedIndice.indexOf(i)<0);
+        cells = cells.filter((v, i) => processedIndice.indexOf(i) < 0);
     }
     //Do this recursively
     processCells(cells, hulls);
@@ -113,3 +120,34 @@ function sortVerticies(points) {
 }
 
 //</editor-fold>
+
+//<editor-fold desc="Another way of calculating concave hull, basing on delaunay and removing long length">
+//Adapted from: https://bl.ocks.org/emeeks/9aa0478cf739164c9005
+export function concaveHull1(sites, longEdge) {
+    //TODO: Consider to reuse the previous delaunay result (but how to pass to this in a proper way)
+    let delaunay = Delaunay.from(sites);
+    //Remove the long distance edges
+    let cells = [];
+    longEdge = longEdge - 10e-3;//Substract it here since it will be added later
+    let triangles = delaunay.triangles;
+    //TODO: May need to check to convert from delaunay.points (x0, y0, x1, y1, ...) or take directly from sites like this.
+    let points = sites;
+    while (cells.length <= 0) {
+        longEdge = longEdge + 10e-3;
+        for (let i = 0; i < triangles.length; i += 3) {
+            for (let j = 0; j < 3; j++) {
+                let d = distance(points[triangles[i+j]], points[triangles[i+(j+1)%3]]);
+                if(d < longEdge){
+                    cells.push([triangles[i+j], triangles[i+(j+1)%3]]);
+                }
+            }
+        }
+    }
+    //Next we remove the duplicated edges => only take the unique points.
+    cells = _.uniq(cells, false, d => d.sort().join(','));
+    return cells;
+}
+
+//</editor-fold>
+
+//

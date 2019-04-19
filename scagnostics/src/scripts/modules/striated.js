@@ -1,4 +1,4 @@
-import {distance, getAllV2CornersFromTree} from "./kruskal-mst";
+import {distance, getAllV2CornersFromTree, getAllV1sFromTree} from "./kruskal-mst";
 
 export class Striated {
     constructor(tree) {
@@ -13,12 +13,12 @@ export class Striated {
     score() {
         //Loop through the nodes.
         let allObtuseV2CornersCount = this.getAllObtuseV2Corners().length;
+        let v1Count = getAllV1sFromTree(this.tree).length;
         //TODO: Needs to make sure the divisor is all vertices count or vertices count for degree 2 vertices only.
         let verticesCount = this.tree.nodes.length;
-        return allObtuseV2CornersCount / verticesCount;
+        return allObtuseV2CornersCount / (verticesCount - v1Count);
         // let v2Count = this.getAllV2Corners().length;
         // return allObtuseV2CornersCount / v2Count;
-
     }
 
     getAllObtuseV2Corners() {
@@ -26,7 +26,7 @@ export class Striated {
         let allObtuseV2Corners = [];
         allV2Corners.forEach(corner => {
             let cs = cosine(corner[0], corner[1], corner[2]);
-            if (cs < -.75) {
+            if (cs <= -.75) {
                 allObtuseV2Corners.push(corner);
             }
         });

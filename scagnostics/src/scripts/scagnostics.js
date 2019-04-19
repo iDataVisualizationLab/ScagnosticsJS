@@ -162,7 +162,9 @@ import {Delaunay} from "d3-delaunay";
         outputValue("sparseScore", sparse.score());
 
         /******This section is about the clumpy score and clumpy score results******/
-        let clumpy = new Clumpy(noOutlyingTree);
+        //TODO: Check this again, we may put in either original or no outlying tree => currently using original since need to keep the long edges which connect the clusters
+        // let clumpy = new Clumpy(noOutlyingTree);
+        let clumpy = new Clumpy(mstree);
         outputValue("clumpy", clumpy);
         outputValue("clumpyScore", clumpy.score());
 
@@ -175,7 +177,7 @@ import {Delaunay} from "d3-delaunay";
         outputValue("obtuseV2Corners", obtuseV2Corners);
 
         /******This section is about the convex hull and convex hull results******/
-        let convex = new Convex(noOutlyingTree, 1/outlyingUpperBound);
+        let convex = new Convex(noOutlyingTree, outlyingUpperBound);
         let convexHull = convex.convexHull();
         outputValue("convexHull", convexHull);
 
