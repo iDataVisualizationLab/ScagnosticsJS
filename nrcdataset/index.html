@@ -384,11 +384,13 @@
 
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
     function toggleDisplay(g) {
-        if (+d3.select(g.node()).style("opacity") != 10e-6) {
-            g.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
-        } else {
-            animateNodes(g, animateTime, 10e-6, .99);
-            g.style("display", "inline");
+        if(g){
+            if (+d3.select(g.node()).style("opacity") != 10e-6) {
+                g.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
+            } else {
+                animateNodes(g, animateTime, 10e-6, .99);
+                g.style("display", "inline");
+            }   
         }
     }
 

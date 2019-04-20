@@ -3,8 +3,14 @@ import * as polygon from 'd3-polygon';
 import {distance} from './kruskal-mst';
 import _ from "underscore";
 import {Delaunay} from "d3-delaunay";
+import {isA2DLine} from "./line";
 
 export function concaveHull(alpha, sites) {
+    //check if the sites are on the same line
+    if (isA2DLine(sites)) {
+        //Just simply returns that sites as concave hull
+        return [sites];
+    }
     let cells = alphaShape(alpha, sites);
     //Switch to another delaunay + cut long edge algorithms
     if (cells.length === 0) {
@@ -39,6 +45,11 @@ export function concaveHullLength(hulls) {
 }
 
 export function convexHull(sites) {
+    //check if the sites are on the same line
+    if (isA2DLine(sites)) {
+        //Just simply returns that sites as concave hull
+        return sites;
+    }
     const cells = alphaShape(0, sites);
     let h = Array.from(new Set(cells.flat()));
     //Get vertices

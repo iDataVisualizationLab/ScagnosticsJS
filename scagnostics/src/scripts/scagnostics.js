@@ -13,7 +13,7 @@ import {Normalizer} from "./modules/normalizer";
 import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
 import _ from "underscore";
-import {Delaunay} from "d3-delaunay";
+import {delaunayFromPoints} from "./modules/delaunay";
 
 (function (window) {
     /**
@@ -109,8 +109,10 @@ import {Delaunay} from "d3-delaunay";
         outputValue("binnedSites", sites);
 
         /******This section is about the triangulating and triangulating results******/
-            //Triangulation calculation
-        let delaunay = Delaunay.from(sites);
+
+        // Triangulation calculation
+        // If it is a line then we don't do the triangulation
+        let delaunay = delaunayFromPoints(sites);
         //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
         delaunay.points = sites;
         let triangles = delaunay.triangles;
@@ -162,8 +164,8 @@ import {Delaunay} from "d3-delaunay";
         outputValue("sparseScore", sparse.score());
 
         /******This section is about the clumpy score and clumpy score results******/
-        //TODO: Check this again, we may put in either original or no outlying tree => currently using original since need to keep the long edges which connect the clusters
-        // let clumpy = new Clumpy(noOutlyingTree);
+            //TODO: Check this again, we may put in either original or no outlying tree => currently using original since need to keep the long edges which connect the clusters
+            // let clumpy = new Clumpy(noOutlyingTree);
         let clumpy = new Clumpy(mstree);
         outputValue("clumpy", clumpy);
         outputValue("clumpyScore", clumpy.score());

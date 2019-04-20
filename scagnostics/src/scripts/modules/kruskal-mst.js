@@ -69,6 +69,19 @@ export function getAllV1sFromTree(tree) {
 }
 
 /**
+ * After removing outlying links (MST may be disconnected, we need to build a new connected tree).
+ * @param points
+ */
+export function connectMSTs(tree){
+    let msts = [];
+    //Take the first edge => add all to one first subtree.
+    let firstNode = tree.links[0].source;
+    while(1){
+        let submst = {};
+
+    }
+}
+/**
  * Create a graph from mesh
  * @param triangles is inform of set of triangles as the result from delaunay triangulations
  */

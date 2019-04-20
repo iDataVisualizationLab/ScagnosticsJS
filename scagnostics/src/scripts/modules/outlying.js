@@ -10,7 +10,7 @@ export class Outlying {
         //Clone the tree to avoid modifying it
         this.tree = JSON.parse(JSON.stringify(tree));
         this.upperBound = upperBound;
-        //Mark the outlying links and add total length
+        //Calculate the upper bound if it is not provided.
         if (!upperBound) {
             let allLengths = tree.links.map(l => l.weight),
                 q1 = quantile(allLengths, 0.25),
@@ -21,12 +21,28 @@ export class Outlying {
             //Save it for displaying purpose.
             this.upperBound = upperBound;
         }
+        //Mark the outlying links
         this.tree.links.forEach(l => {
             if (l.weight > upperBound) {
                 l.isOutlying = true;
             }
         });
-
+        //Building the new tree
+        let newTree = JSON.parse(JSON.stringify(this.tree));
+        //Remove outlying links
+        newTree.links = newTree.links.filter(l => !l.isOutlying);
+        //Remove outlying nodes (nodes are not in any none-outlying links)
+        let allNodesWithLinks = [];
+        newTree.links.forEach(l => {
+            allNodesWithLinks.push(l.source);
+            allNodesWithLinks.push(l.target);
+        });
+        allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
+        newTree.nodes = allNodesWithLinks.map(n => {
+            return {id: n};
+        });
+        this.newTree = newTree;
+        //Get the outlying points
     }
 
     /**
@@ -68,21 +84,8 @@ export class Outlying {
      * Remove outlying links and nodes and return a new tree without outlying points/edges
      */
     removeOutlying() {
-        var newTree = JSON.parse(JSON.stringify(this.tree));
-        //Remove outlying links
-        newTree.links = newTree.links.filter(l => !l.isOutlying);
-        //Remove outlying nodes (nodes are not in any none-outlying links
-        let allNodesWithLinks = [];
-        newTree.links.forEach(l => {
-            allNodesWithLinks.push(l.source);
-            allNodesWithLinks.push(l.target);
-        });
-        allNodesWithLinks = _.uniq(allNodesWithLinks, false, d => d.join(','));
-        newTree.nodes = allNodesWithLinks.map(n => {
-            return {id: n};
-        });
-
-        return newTree;
+        //If the outlying nodes has the degree of 2 or greater => it will break the tree into subtrees => so we need to rebuild the tree.
+        return this.newTree;
     }
 
     /**

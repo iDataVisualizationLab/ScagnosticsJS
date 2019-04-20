@@ -13,6 +13,9 @@ export class Convex {
     score() {
         let concaveArea = concaveHullArea(this.concaveHull());
         let convexArea = convexHullArea(this.convexHull());
+        if(convexArea===0){
+            return 0;
+        }
         return concaveArea / convexArea;
     }
 
