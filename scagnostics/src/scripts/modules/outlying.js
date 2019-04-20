@@ -1,9 +1,8 @@
 import _ from 'underscore';
 import {quantile} from 'simple-statistics';
 import {pointExists} from "./clumpy";
-import {Delaunay} from "d3-delaunay";
-import {createGraph, mst} from "./kruskal-mst";
-
+import {createGraph, mst, getAllV2CornersFromTree, getAllV2OrGreaterFromTree} from "./kruskal-mst";
+import {delaunayFromPoints} from "./delaunay";
 
 export class Outlying {
     constructor(tree, upperBound) {
@@ -16,7 +15,7 @@ export class Outlying {
                 q1 = quantile(allLengths, 0.25),
                 q3 = quantile(allLengths, 0.75),
                 iqr = q3 - q1;
-            upperBound = q3+1.5*iqr;
+            upperBound = q3 + 1.5 * iqr;
             // upperBound = q3 + 3 * iqr;
             //Save it for displaying purpose.
             this.upperBound = upperBound;
@@ -43,6 +42,16 @@ export class Outlying {
         });
         this.newTree = newTree;
         //Get the outlying points
+        let newNodes = newTree.nodes;
+        let oldNodes = this.tree.nodes;
+        let ops = [];
+        oldNodes.forEach(on => {
+            //.id since we are accessing to points and the node is in form of {id: thePoint}
+            if (!pointExists(newNodes.map(nn => nn.id), on.id)) {
+                ops.push(on.id);
+            }
+        });
+        this.outlyingPoints = ops;
     }
 
     /**
@@ -57,10 +66,10 @@ export class Outlying {
         this.tree.links.forEach(l => {
             totalLengths += l.weight;
             //If there are outlying points first.
-            if(outlyingPoints.length>0){
-                if(l.isOutlying){
+            if (outlyingPoints.length > 0) {
+                if (l.isOutlying) {
                     //Also check if the link contains outlying points.
-                    if(pointExists(outlyingPoints,l.source) ||pointExists(outlyingPoints,l.target)){
+                    if (pointExists(outlyingPoints, l.source) || pointExists(outlyingPoints, l.target)) {
                         totalOutlyingLengths += l.weight;
                     }
                 }
@@ -85,6 +94,17 @@ export class Outlying {
      */
     removeOutlying() {
         //If the outlying nodes has the degree of 2 or greater => it will break the tree into subtrees => so we need to rebuild the tree.
+        //Take the outlying points
+        let outlyingPoints = this.outlyingPoints.map(p=>p.join(','));
+        let v2OrGreater = getAllV2OrGreaterFromTree(this.tree).map(p=>p.join(','));
+        let diff = _.difference(outlyingPoints, v2OrGreater);
+        if(diff.length<outlyingPoints.length){
+            //Means there is outlying node(s) with degree 2 or higher (so we should rebuild the tree)
+            let delaunay = delaunayFromPoints(this.newTree.nodes.map(n=>n.id));
+            let graph = createGraph(delaunay.triangleCoordinates())
+            this.newTree = mst(graph);
+        }
+        //TODO: Continue from here, need to put back the long edges which are not outlying links.
         return this.newTree;
     }
 
@@ -93,19 +113,6 @@ export class Outlying {
      * @returns {Array}
      */
     points() {
-        if (!this.outlyingPoints) {
-            let newTree = this.removeOutlying();
-            let newNodes = newTree.nodes;
-            let oldNodes = this.tree.nodes;
-            let ops = [];
-            oldNodes.forEach(on => {
-                //.id since we are accessing to points and the node is in form of {id: thePoint}
-                if (!pointExists(newNodes.map(nn => nn.id), on.id)) {
-                    ops.push(on.id);
-                }
-            });
-            this.outlyingPoints = ops;
-        }
         return this.outlyingPoints;
     }
 }

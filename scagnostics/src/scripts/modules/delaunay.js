@@ -22,5 +22,20 @@ export function delaunayFromPoints(sites) {
     } else {
         delaunay = Delaunay.from(sites);
     }
+
+    //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
+    delaunay.points = sites;
+    delaunay.triangleCoordinates = function () {
+        let triangles = this.triangles;
+        let tc = [];
+        for (let i = 0; i < triangles.length; i += 3) {
+            tc.push([
+                this.points[triangles[i]],
+                this.points[triangles[i + 1]],
+                this.points[triangles[i + 2]]
+            ]);
+        }
+        return tc;
+    }
     return delaunay;
 }
