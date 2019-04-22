@@ -345,27 +345,27 @@
     function sparsedScatterPlot() {
         let points = [];
         //Top left points
-        let randomX = d3.randomNormal(svgWidth / 4, 10),
-            randomY = d3.randomNormal(svgHeight / 4, 10);
+        let randomX = d3.randomNormal(svgWidth / 4, 3),
+            randomY = d3.randomNormal(svgHeight / 4, 3);
         d3.range(20).map(function () {
             points.push([randomX(), randomY()]);
         });
         //Top right
-        randomX = d3.randomNormal(3 * svgWidth / 4, 10),
-            randomY = d3.randomNormal(svgHeight / 4, 10);
+        randomX = d3.randomNormal(3 * svgWidth / 4, 3),
+            randomY = d3.randomNormal(svgHeight / 4, 3);
         d3.range(20).map(function () {
             points.push([randomX(), randomY()]);
         });
         //Bottom left
-        randomX = d3.randomNormal(svgWidth / 4, 10);
-        randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+        randomX = d3.randomNormal(svgWidth / 4, 3);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 3);
         d3.range(20).map(function () {
             points.push([randomX(), randomY()]);
         });
 
         //Bottom right
-        randomX = d3.randomNormal(3 * svgWidth / 4, 10);
-        randomY = d3.randomNormal(3 * svgHeight / 4, 10);
+        randomX = d3.randomNormal(3 * svgWidth / 4, 3);
+        randomY = d3.randomNormal(3 * svgHeight / 4, 3);
         d3.range(20).map(function () {
             points.push([randomX(), randomY()]);
         });
@@ -800,7 +800,8 @@
         let points = datasets[evt.selectedIndex];
         let options = {
             binType: binType,
-            startBinGridSize: startBinGridSize
+            startBinGridSize: startBinGridSize,
+            minBins: 4
         }
         // //process outliag score
         // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
@@ -810,8 +811,6 @@
     }
 
     function update(scag) {
-
-
         //Clean
         normalizedsvg.selectAll("*").remove();
         scagsvg.selectAll("*").remove();

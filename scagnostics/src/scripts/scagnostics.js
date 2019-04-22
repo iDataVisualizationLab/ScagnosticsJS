@@ -113,21 +113,7 @@ import {delaunayFromPoints} from "./modules/delaunay";
         // Triangulation calculation
         // If it is a line then we don't do the triangulation
         let delaunay = delaunayFromPoints(sites);
-        //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
-        delaunay.points = sites;
         let triangles = delaunay.triangles;
-        delaunay.triangleCoordinates = function () {
-            let triangles = this.triangles;
-            let tc = [];
-            for (let i = 0; i < triangles.length; i += 3) {
-                tc.push([
-                    this.points[triangles[i]],
-                    this.points[triangles[i + 1]],
-                    this.points[triangles[i + 2]]
-                ]);
-            }
-            return tc;
-        }
         let triangleCoordinates = delaunay.triangleCoordinates();
         //Assigning output values
         outputValue("delaunay", delaunay);

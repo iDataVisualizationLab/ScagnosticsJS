@@ -261,7 +261,7 @@
         scaleY = d3.scaleLinear().domain([0, 1]).range([contentHeight - 2 * padding, 0]);
 
     //</editor-fold>
-    const variables = Object.keys(nrcdata[0]);
+    const variables = Object.keys(nrcdata[0]).sort();
 
     function createOptions(selId, options, selectedIndex) {
         d3.select("#" + selId).selectAll("option").data(options).enter().append('option').each(function (d) {
@@ -461,6 +461,7 @@
     }
 
     function drawOutlyingLinks(g, scag) {
+
         return g.append("g").selectAll("path")
             .data(scag.outlyingLinks)
             .enter()
