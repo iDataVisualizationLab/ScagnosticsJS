@@ -3,10 +3,16 @@ import {Delaunay} from "d3-delaunay";
 
 export function delaunayFromPoints(sites) {
     let delaunay = {};
-    //If it is a straight line => simulate as triangles of three consecutive points (with connection of a common points between two consecutive triangles)
+
+    //But we need to order the sites
     if (isA2DLine(sites)) {
+        //If it is a straight line => simulate as triangles of three consecutive points (with connection of a common points between two consecutive triangles)
+        let copiedSites = sites.slice();
+        //We need to sort points so that the mst will be sequential.
+        copiedSites.sort((a, b)=> a[0]>b[0] ? a[0]-b[0]: a[1]-b[1]);
+
         let tgs = [];
-        let siteLength = sites.length;
+        let siteLength = copiedSites.length;
         for (let i = 0; i < siteLength; i = i + 2) {
             if (i + 1 < siteLength) {
                 tgs.push(i);
@@ -19,12 +25,13 @@ export function delaunayFromPoints(sites) {
             }
         }
         delaunay.triangles = tgs;
+        delaunay.points = copiedSites;
     } else {
         delaunay = Delaunay.from(sites);
+        delaunay.points = sites;
     }
 
-    //TODO: There are many placed we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
-    delaunay.points = sites;
+    //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
     delaunay.triangleCoordinates = function () {
         let triangles = this.triangles;
         let tc = [];

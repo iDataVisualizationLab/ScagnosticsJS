@@ -97,6 +97,8 @@
         <option value="skinny">Skinny scatter plot</option>
         <option value="stringy">Stringy scatter plot</option>
         <option value="monotonic">Monotonic scatter plot</option>
+        <option value="xLine">X line</option>
+        <option value="yLine">Y line</option>
     </select>
 </div>
 <svg id="normalizedsvg"
@@ -447,6 +449,29 @@
         datasets.push(points);
     }
 
+    /***********X LINE*******************/
+    xLineScatterPlot();
+    function xLineScatterPlot() {
+        let randomY = d3.randomUniform(0, svgWidth);
+        let points = [];
+        d3.range(100).forEach(() => {
+            const val = randomY();
+            points.push([1, val]);
+        });
+        datasets.push(points);
+    }
+
+    /***********Y LINE*******************/
+    yLineScatterPlot();
+    function yLineScatterPlot() {
+        let randomX = d3.randomUniform(0, svgWidth);
+        let points = [];
+        d3.range(100).forEach(() => {
+            const val = randomX();
+            points.push([val, 1]);
+        });
+        datasets.push(points);
+    }
     //<editor-fold desc="Other real datasets">
     // /***********RANDOM DATA*******************/
     // let randomX = d3.randomNormal(svgWidth / 2, 50),
