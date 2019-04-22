@@ -54,7 +54,14 @@ export class Monotonic {
 
             // compute rho
             let rho = denominator - dsq - xCorrection - yCorrection;
-            rho /= Math.sqrt((denominator - 2 * xCorrection) * (denominator - 2 * yCorrection));
+
+            let x = (denominator - 2 * xCorrection) * (denominator - 2 * yCorrection);
+
+            if(x<=0){
+                return 0;
+            }else{
+                rho /= Math.sqrt(x);
+            }
 
             return rho;
         }
