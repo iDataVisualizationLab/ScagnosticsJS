@@ -110,8 +110,8 @@ import {delaunayFromPoints} from "./modules/delaunay";
 
         /******This section is about the triangulating and triangulating results******/
 
-        // Triangulation calculation
-        // If it is a line then we don't do the triangulation
+            // Triangulation calculation
+            // If it is a line then we don't do the triangulation
         let delaunay = delaunayFromPoints(sites);
         let triangles = delaunay.triangles;
         let triangleCoordinates = delaunay.triangleCoordinates();
@@ -151,8 +151,8 @@ import {delaunayFromPoints} from "./modules/delaunay";
 
         /******This section is about the clumpy score and clumpy score results******/
             //TODO: Check this again, we may put in either original or no outlying tree => currently using original since need to keep the long edges which connect the clusters
-            // let clumpy = new Clumpy(noOutlyingTree);
-        let clumpy = new Clumpy(mstree);
+            // let clumpy = new Clumpy(mstree);
+        let clumpy = new Clumpy(noOutlyingTree);
         outputValue("clumpy", clumpy);
         outputValue("clumpyScore", clumpy.score());
 
