@@ -31,7 +31,7 @@ export function concaveHull(alpha, sites) {
 export function concaveHullArea(hulls) {
     let total = 0;
     hulls.forEach(h => {
-        total += polygon.polygonArea(h);
+        total += Math.abs(polygon.polygonArea(h));//Still need to use Math.abs here since for the case of line => the sort vertices may return very small negative values
     });
     return total;
 }
@@ -60,7 +60,7 @@ export function convexHull(sites) {
 }
 
 export function convexHullArea(hull) {
-    return polygon.polygonArea(hull);
+    return Math.abs(polygon.polygonArea(hull));//Still need to use Math.abs here since for the case of line => the sort vertices may return very small negative values
 }
 
 //<editor-fold desc="Util to convert cells to hulls">
