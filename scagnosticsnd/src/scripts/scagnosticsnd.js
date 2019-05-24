@@ -1,19 +1,16 @@
 import {Normalizer} from "./modules/normalizer";
-// import {HexaBinner} from "./modules/hexagonBinner";
 import {LeaderBinner} from "./modules/leaderBinner";
 import {_} from 'underscore'
-import {triangulate} from 'delaunay-triangulate'
 import {createGraph, mst, equalPoints} from "./modules/kruskal-mst";
-
 import {Outlying} from "./modules/outlying";
-// import {Skewed} from "./modules/skewed";
-// import {Sparse} from "./modules/sparse";
-// import {Clumpy} from "./modules/clumpy";
+import {Skewed} from "./modules/skewed";
+import {Sparse} from "./modules/sparse";
+import {Clumpy} from "./modules/clumpy";
 // import {Striated} from "./modules/striated";
 // import {Convex} from "./modules/convex";
 // import {Skinny} from "./modules/skinny";
-// import {Stringy} from "./modules/stringy";
-// import {Monotonic} from "./modules/monotonic";
+import {Stringy} from "./modules/stringy";
+import {Monotonic} from "./modules/monotonic";
 
 (function (window) {
     /**
@@ -118,29 +115,6 @@ import {Outlying} from "./modules/outlying";
 
         outputValue("binnedSites", sites);
 
-        // /******This section is about the triangulating and triangulating results******/
-        // //Triangulation calculation
-        // let delaunay = {};
-        // //TODO: There are many places we need the triangleCoordinates function => we should build it as a prototype instead of copy/paste this function in many different places.
-        // delaunay.points = sites;
-        // let tetrahedra = triangulate(sites);
-        //
-        // delaunay.tetrahedra = tetrahedra;
-        // delaunay.tetrahedraCoordinates = function(){
-        //     let tetrahedra = this.tetrahedra;
-        //     let tc = [];
-        //     for (let i = 0; i < tetrahedra.length; i ++) {
-        //         let t = tetrahedra[i];
-        //         tc.push(t.map(tv=>this.points[tv]));
-        //     }
-        //     return tc;
-        // }
-        // let tetrahedraCoordinates = delaunay.tetrahedraCoordinates();
-        // //Assigning output values
-        // outputValue("delaunay", delaunay);
-        // outputValue("tetrahedra", tetrahedra);
-        // outputValue("tetrahedraCoordinates", tetrahedraCoordinates);
-
         /******This section is about the spanning tree and spanning tree results******/
         //Spanning tree calculation
         let tetrahedraCoordinates = [sites];
@@ -152,6 +126,7 @@ import {Outlying} from "./modules/outlying";
         outputValue("mst", mstree);
 
         /******This section is about the outlying score and outlying score results******/
+            //TODO: Need to check if outlying links are really connected to outlying points
         let outlying = new Outlying(mstree, outlyingUpperBound,outlyingCoefficient);
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
@@ -176,24 +151,24 @@ import {Outlying} from "./modules/outlying";
         outputValue("outlyingPoints", outlyingPoints);
 
 
-        // /******This section is about the skewed score and skewed score results******/
-        // let skewed = new Skewed(noOutlyingTree);
-        // outputValue("skewedScore", skewed.score());
-        //
-        // /******This section is about the sparse score and sparse score results******/
-        // let sparse = new Sparse(noOutlyingTree);
-        // outputValue("sparseScore", sparse.score());
-        //
-        // /******This section is about the clumpy score and clumpy score results******/
-        // let clumpy = new Clumpy(noOutlyingTree);
-        // outputValue("clumpy", clumpy);
-        // outputValue("clumpyScore", clumpy.score());
-        //
-        //
+        /******This section is about the skewed score and skewed score results******/
+        let noOutlyingTree = mstree;
+        let skewed = new Skewed(noOutlyingTree);
+        outputValue("skewedScore", skewed.score());
+
+        /******This section is about the sparse score and sparse score results******/
+        let sparse = new Sparse(noOutlyingTree);
+        outputValue("sparseScore", sparse.score());
+
+        /******This section is about the clumpy score and clumpy score results******/
+        let clumpy = new Clumpy(noOutlyingTree);
+        outputValue("clumpy", clumpy);
+        outputValue("clumpyScore", clumpy.score());
+
+
         // /******This section is about the striated score and striated score results******/
         // let striated = new Striated(noOutlyingTree);
         // outputValue("striatedScore", striated.score());
-        //
         //
         // /******This section is about the convex hull and convex hull results******/
         // let convex = new Convex(noOutlyingTree, 1/outlying.upperBound);
@@ -216,22 +191,22 @@ import {Outlying} from "./modules/outlying";
         // let skinnyScore = skinny.score();
         // outputValue("skinnyScore", skinnyScore);
         //
-        // /******This section is about the stringy score and stringy score results******/
-        // let stringy = new Stringy(noOutlyingTree);
-        // let v1s = stringy.getAllV1s();
-        // let v2Corners = stringy.getAllV2Corners();
-        // // let obtuseV2Corners = striated.getAllObtuseV2Corners();
-        // let stringyScore = stringy.score();
-        // outputValue("v1s", v1s);
-        // outputValue("stringyScore", stringyScore);
-        // outputValue("v2Corners", v2Corners);
-        // // outputValue("obtuseV2Corners", obtuseV2Corners);
-        //
-        //
-        // /******This section is about the monotonic score and monotonic score results******/
-        // let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
-        // let monotonicScore = monotonic.score();
-        // outputValue("monotonicScore", monotonicScore);
+        /******This section is about the stringy score and stringy score results******/
+        let stringy = new Stringy(noOutlyingTree);
+        let v1s = stringy.getAllV1s();
+        let v2Corners = stringy.getAllV2Corners();
+        // let obtuseV2Corners = striated.getAllObtuseV2Corners();
+        let stringyScore = stringy.score();
+        outputValue("v1s", v1s);
+        outputValue("stringyScore", stringyScore);
+        outputValue("v2Corners", v2Corners);
+        // outputValue("obtuseV2Corners", obtuseV2Corners);
+
+
+        /******This section is about the monotonic score and monotonic score results******/
+        let monotonic = new Monotonic(noOutlyingTree.nodes.map(n=>n.id));
+        let monotonicScore = monotonic.score();
+        outputValue("monotonicScore", monotonicScore);
 
         return window.scagnosticsnd;
         function outputValue(name, value) {
