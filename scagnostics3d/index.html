@@ -301,20 +301,9 @@
     clumpyScatterPlot();
 
     function clumpyScatterPlot() {
-        // //Closer distances
-        // let randomX = muy => d3.randomNormal(muy, 25),
-        //     randomY = muy => d3.randomNormal(muy, 25),
-        //     randomZ = muy => d3.randomNormal(muy, 25),
-        //     clusters1 = d3.range(70).map(function () {
-        //         return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
-        //     }),
-        //     clusters2 = d3.range(30).map(function () {
-        //         return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
-        //     }),
-        //     points = clusters1.concat(clusters2);
-        let randomX = muy => d3.randomNormal(muy, 50),
-            randomY = muy => d3.randomNormal(muy, 50),
-            randomZ = muy => d3.randomNormal(muy, 50),
+        let randomX = muy => d3.randomNormal(muy, 10),
+            randomY = muy => d3.randomNormal(muy, 10),
+            randomZ = muy => d3.randomNormal(muy, 10),
             clusters1 = d3.range(60).map(function () {
                 return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
             }),
