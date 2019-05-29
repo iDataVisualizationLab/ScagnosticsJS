@@ -71,7 +71,12 @@
     let concaveHull = null;//path
     let v1s = null;//circle
     let animateTime = 10;
-
+    //Choose one scag options for all data points.
+    let scagOptions = {
+        startBinGridSize: 10,
+        minBins: 10,
+        maxBins: 250
+    }
     function selectElements() {
         origPoints = scagsvg.selectAll('circle.origPoints');
         bins = scagsvg.selectAll('circle.bins');
@@ -240,9 +245,9 @@
 
     function skewedScatterPlot() {
         let points = [];
-        for (let i = 0; i < svgWidth; i = i + svgWidth / 5) {
-            for (let j = 0; j < svgHeight; j = j + svgHeight / 5) {
-                for (let k = 0; k < svgHeight; k = k + svgHeight / 5) {
+        for (let i = 0; i < svgWidth; i = i + svgWidth / 3) {
+            for (let j = 0; j < svgHeight; j = j + svgHeight / 3) {
+                for (let k = 0; k < svgHeight; k = k + svgHeight / 3) {
                     const randomX = d3.randomNormal(i, svgWidth / 60),
                         randomY = d3.randomNormal(j, svgHeight / 60),
                         randomZ = d3.randomNormal(k, svgHeight / 60);
@@ -387,12 +392,7 @@
     function draw(points) {
         //Clean the svg if it has some data
         scagsvg.selectAll("*").remove();
-        let scagOptions = {
-            startBinGridSize: 10,
-            minBins: 10,
-            maxBins: 50
-        }
-        // let scagOptions = {};
+
         scag = scagnostics3d(points, scagOptions);
 
         //Add a g as the svg itself
