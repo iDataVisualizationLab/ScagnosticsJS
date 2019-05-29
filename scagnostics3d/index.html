@@ -37,12 +37,12 @@
     let duration = 1000;
     let dataPointRadius = 4;
     let dataPointOpacity = 0.9;
-    let binOpacity = 0.8;
-    let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
+    let binOpacity = 0.8,
         margins = {left: 5, top: 5, right: 5, bottom: 5},
         padding = 5,
-        contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
-        contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2 * padding;
+        contentWidth = svgWidth - margins.left - margins.right - 2 * padding,
+        contentHeight = svgHeight - margins.top - margins.bottom - 2 * padding;
+    let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight);
     drawContentBound(scagsvg);
 
     function drawContentBound(svg) {
@@ -86,12 +86,15 @@
 
     //This method is called in string (creating the button using JS) so though it is displayed as unused => it is used.
     function toggleDisplay(selection) {
-        if (+d3.select(selection.node()).style("opacity") != 10e-6) {
-            selection.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
-        } else {
-            animateNodes(selection, animateTime, 10e-6, .8);
-            selection.style("display", "inline");
+        if (!selection.empty()) {
+            if (+d3.select(selection.node()).style("opacity") != 10e-6) {
+                selection.transition().duration(1000).style("opacity", 10e-6).style("display", "none");
+            } else {
+                animateNodes(selection, animateTime, 10e-6, .8);
+                selection.style("display", "inline");
+            }
         }
+
     }
 
     function animateNodes(selection, time, fromOpacity, toOpacity, onEnd) {
@@ -214,50 +217,6 @@
     const sin = Math.sin;
     const cos = Math.cos;
 
-    //<editor-fold desc="other datasets">
-    // /***********SOIL DATA*******************/
-    // d3.csv("../data/Soil_Profile1.csv", function (error, rawData) {
-    //     if (error) throw error;
-    //     data = rawData.filter(function (d) {
-    //         //Valid ID
-    //         return validGridId(d["Grid ID"]);
-    //     });
-    //     let currentColumnNames = ['Ni Concentration', 'Si Concentration', 'Ca Concentration'];
-    //     let points = data.map(function (d) {
-    //         var result = [];
-    //         currentColumnNames.forEach(c => {
-    //             if (d[c] !== "") {
-    //                 result.push((d[c].indexOf('<LOD') != -1) ? 0 : +d[c]);
-    //             } else {
-    //                 result.push('NaN');
-    //             }
-    //         });
-    //         result.data = d['Grid ID'];
-    //         return result;
-    //     });
-    //     //Filter NaN points
-    //     points = points.filter(x => isValidPoint(x));
-    //     draw(points);
-    //
-    //     function isValidPoint(d) {
-    //         let result = true;
-    //         for (let i = 0; i < d.length; i++) {
-    //             if (typeof d[i] !== 'number') {
-    //                 result = false;
-    //                 break;
-    //             }
-    //         }
-    //         return result;
-    //     }
-    //
-    //     function validGridId(id) {
-    //         let re = /^[A-Z]\d\d$/g;
-    //         return id != null && id.match(re) != null;
-    //     }
-    //
-    // });
-    //</editor-fold>
-
     /***********OUTLYING DATA*******************/
     outlyingScatterPlot();
 
@@ -337,32 +296,6 @@
     striatedScatterPlot();
 
     function striatedScatterPlot() {
-        // /***********STRIATED 4 LINES with noise*******************/
-        // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
-        // let x2 = t=>-100-t, y2 = t=>-100+1.3*t, z2 = t=>-10+t;
-        // let x3 = t=>-50-t, y3 = t=>-50+1.3*t, z3 = t=>-5+t;
-        // let x4 = t=>30+t, y4 = t=>30-1.3*t, z4 = t=>5-t;
-        // let noise = d3.randomUniform(-2, 2);
-        // let line1 = d3.range(50).map(()=>{
-        //    let t = d3.randomUniform(10, 50)();
-        //    return [x1(t), y1(t)+noise(), z1(t)];
-        // });
-        // let line2 = d3.range(50).map(()=>{
-        //     let s = d3.randomUniform(10, 50)();
-        //     return [x2(s), y2(s)+noise(), z2(s)];
-        // });
-        // let line3 = d3.range(50).map(()=>{
-        //     let s = d3.randomUniform(10, 50)();
-        //     return [x3(s), y3(s)+noise(), z3(s)];
-        // });
-        //
-        // let line4 = d3.range(50).map(()=>{
-        //     let s = d3.randomUniform(10, 50)();
-        //     return [x4(s), y4(s)+noise(), z4(s)];
-        // });
-        //
-        // let points = line1.concat(line2).concat(line3).concat(line4);
-
         /************STRIATED 2 PLANES***********************/
         let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
         let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
@@ -391,6 +324,7 @@
 
     /***********CONVEX DATA*******************/
     convexScatterPlot();
+
     function convexScatterPlot() {
         let randomX = d3.randomNormal(svgWidth / 2, 50),
             randomY = d3.randomNormal(svgHeight / 2, 50),
@@ -403,40 +337,49 @@
 
     /***********SKINNY DATA (Y=X^2)*******************/
     skinnyScatterPlot();
-    function skinnyScatterPlot(){
-        let randomX = d3.randomUniform(-svgWidth/2, svgWidth/2);
+
+    function skinnyScatterPlot() {
+        let randomX = d3.randomUniform(-svgWidth / 2, svgWidth / 2);
         let points = [];
-        d3.range(300).forEach(()=>{
+        d3.range(300).forEach(() => {
             const val = randomX();
-            points.push([val + 40*random(), val*val + 40*random(), val+40*random()]);
+            points.push([val + 40 * random(), val * val + 40 * random(), val + 40 * random()]);
         });
         datasets.push(points);
     }
 
     /***********Stringy Data*******************/
     stringyScatterPlot();
-    function stringyScatterPlot(){
-        let noise = ()=> Math.random()/10;
+
+    function stringyScatterPlot() {
+        let noise = () => Math.random() / 10;
         let points = [];
         for (let x = 0; x < 150; x++) {
             points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
-        };
+        }
+        ;
         datasets.push(points);
     }
 
     /***********Monotonic Data*******************/
     monotonicScatterPlot();
-    function monotonicScatterPlot(){
+
+    function monotonicScatterPlot() {
         let noise = d3.randomUniform(-2, 2);
         let points = d3.range(150).map((x) => {
-            return [x + noise(), 150-x + noise(), x + noise()];
+            return [x + noise(), 150 - x + noise(), x + noise()];
         });
         datasets.push(points);
     }
 
     changeDataset(document.getElementById("scagnostics"));
+
     function changeDataset(evt) {
         let points = datasets[evt.selectedIndex];
+        //Reset parameters
+        alpha = 0;
+        beta = 0;
+
         draw(points);
     }
 
@@ -452,8 +395,8 @@
         // let scagOptions = {};
         scag = scagnostics3d(points, scagOptions);
 
-        //Process the drag
-        scagsvg = scagsvg.call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd)).append('g').attr('transform', `translate(${margins.left}, ${margins.top})`);
+        //Add a g as the svg itself
+        mainG = scagsvg.append('g').attr('transform', `translate(${margins.left}, ${margins.top})`);
         //Process yLine
         d3.range(-5, 6, 1).forEach(d => {
             xLine.push([d * 0.1, -0.5, -0.5]);
@@ -508,14 +451,6 @@
             }
             return ret;
         });
-
-        // let mstLines = scag.mst.links.map((l, i) => {
-        //     let ret = [l.source, l.target];
-        //     if (ret.id === undefined) {
-        //         ret.id = 'mstLine_' + i;
-        //     }
-        //     return ret;
-        // });
 
         let outlyingLines = scag.outlyingLinks.map((l, i) => {
             let ret = [l.source, l.target];
@@ -604,17 +539,12 @@
         let msgContainer = "msg";
         displayScagScores(scag, msgContainer);
 
+        //Process the drag
+        d3.select(mainG.node().parentNode).call(d3.drag().on('drag', dragged).on('start', dragStart).on('end', dragEnd))
 
         function rotateAndDraw(alpha, beta, duration) {
             let xGridData = grid3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(grid);
-            // let axesData = [
-            //     yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
-            //     xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
-            //     zScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([zLine])
-            // ];
-
             let cubeData = cube3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([cubeDataPoints]);
-
             let pointsData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(normalizedPoints);
             let leadersData = point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(leaderPoints);
             let graphLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(graphLines);
@@ -625,18 +555,17 @@
             let convexHullLinesData = line3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(convexHullLines);
             let concaveHullFacesData = triangle3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(concaveHullFaces);
 
-            drawCube(cubeData, scagsvg);
-            // drawAxes(axesData, scagsvg);
-            drawXGrid(xGridData, scagsvg);
-            drawCircles(pointsData, scagsvg, 'origPoints', duration, origPointsOptions);
-            drawCircles(leadersData, scagsvg, 'bins', duration, binsOptions);
-            drawLines(graphLinesData, scagsvg, 'graphLines', duration, graphLineOptions);
-            drawLines(mstLinesData, scagsvg, 'mstLines', duration, mstLineOptions);
-            drawLines(outlyingLinesData, scagsvg, 'outlyingLines', duration, outlyingLineOptions);
-            drawCircles(v2CornersPointsData, scagsvg, 'v2Corners', duration, v2CornersOptions);
-            drawCircles(v1CornersPointsData, scagsvg, 'v1Corners', duration, v1CornersOptions);
-            drawLines(convexHullLinesData, scagsvg, 'convexHullLines', duration, convexHullLinesOptions);
-            drawTriangles(concaveHullFacesData, scagsvg, 'concaveHullFaces', duration, concaveHullFacesOptions);
+            drawCube(cubeData, mainG);
+            drawXGrid(xGridData, mainG);
+            drawCircles(pointsData, mainG, 'origPoints', duration, origPointsOptions);
+            drawCircles(leadersData, mainG, 'bins', duration, binsOptions);
+            drawLines(graphLinesData, mainG, 'graphLines', duration, graphLineOptions);
+            drawLines(mstLinesData, mainG, 'mstLines', duration, mstLineOptions);
+            drawLines(outlyingLinesData, mainG, 'outlyingLines', duration, outlyingLineOptions);
+            drawCircles(v2CornersPointsData, mainG, 'v2Corners', duration, v2CornersOptions);
+            drawCircles(v1CornersPointsData, mainG, 'v1Corners', duration, v1CornersOptions);
+            drawLines(convexHullLinesData, mainG, 'convexHullLines', duration, convexHullLinesOptions);
+            drawTriangles(concaveHullFacesData, mainG, 'concaveHullFaces', duration, concaveHullFacesOptions);
         }
 
         //<editor-fold desc="This section is drag processing">
@@ -756,117 +685,6 @@
             triangles.exit().remove();
             //Resort all the 3d elements
             svg.selectAll('._3d').sort(d3._3d().sort);
-        }
-
-        function drawAxes(data, svg) {
-            /*y-Scale*/
-            let yScale = svg.selectAll('path.yScale').data(data[0]);
-            yScale
-                .enter()
-                .append('path')
-                .attr('class', '_3d yScale')
-                .merge(yScale)
-                .attr('stroke', 'black')
-                .attr('stroke-width', 0.5)
-                .attr('d', yScale3d.draw);
-            yScale.exit().remove();
-            // /*y-Scale text*/
-            // let yText = svg.selectAll('text.yText').data(data[0][0]);
-            // yText
-            //     .enter()
-            //     .append('text')
-            //     .attr('class', "_3d yText")
-            //     .attr('dx', '.3em')
-            //     .merge(yText)
-            //     .each(d => {
-            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-            //     })
-            //     .attr('x', d => d.projected.x)
-            //     .attr('y', d => d.projected.y)
-            //     .text(d => {
-            //         let val = d[1] + 0.5
-            //         if (val === 0) {
-            //             return ''
-            //         } else if (val === 1) {
-            //             return 'y'
-            //         } else {
-            //             return (val).toFixed(1);
-            //         }
-            //     });
-            // yText.exit().remove();
-            /*x-Scale*/
-            let xScale = svg.selectAll('path.xScale').data(data[1]);
-            xScale
-                .enter()
-                .append('path')
-                .attr('class', '_3d xScale')
-                .merge(xScale)
-                .attr('stroke', 'black')
-                .attr('stroke-width', 0.5)
-                .attr('d', xScale3d.draw);
-            xScale.exit().remove();
-            // /*y-Scale text*/
-            // let xText = svg.selectAll('text.xText').data(data[1][0]);
-            // xText
-            //     .enter()
-            //     .append('text')
-            //     .attr('class', "_3d xText")
-            //     .attr('dx', '.3em')
-            //     .merge(xText)
-            //     .each(d => {
-            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-            //     })
-            //     .attr('x', d => d.projected.x)
-            //     .attr('y', d => d.projected.y)
-            //     .text(d => {
-            //         let val = d[0] + 0.5
-            //         if (val === 0) {
-            //             return ''
-            //         } else if (val === 1) {
-            //             return 'x'
-            //         } else {
-            //             return (val).toFixed(1);
-            //         }
-            //     });
-            // xText.exit().remove();
-            /*z-Scale*/
-            let zScale = svg.selectAll('path.zScale').data(data[2]);
-            zScale
-                .enter()
-                .append('path')
-                .attr('class', '_3d zScale')
-                .merge(zScale)
-                .attr('stroke', 'black')
-                .attr('stroke-width', 0.5)
-                .attr('d', zScale3d.draw);
-            zScale.exit().remove();
-            // /*y-Scale text*/
-            // var zText = svg.selectAll('text.zText').data(data[2][0]);
-            // zText
-            //     .enter()
-            //     .append('text')
-            //     .attr('class', "_3d zText")
-            //     .attr('dx', '.3em')
-            //     .merge(zText)
-            //     .each(d => {
-            //         d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-            //     })
-            //     .attr('x', d => d.projected.x)
-            //     .attr('y', d => d.projected.y)
-            //     .text(d => {
-            //         let val = d[2] + 0.5
-            //         if (val === 0) {
-            //             return ''
-            //         } else if (val === 1) {
-            //             return 'z'
-            //         } else {
-            //             return (val).toFixed(1);
-            //         }
-            //     });
-            // zText.exit().remove();
-            //
-            // //Resort all the 3d elements
-            // svg.selectAll('._3d').sort(d3._3d().sort);
         }
 
         function drawCircles(data, svg, classType, duration, circleOptions = {}) {
