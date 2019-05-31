@@ -47,10 +47,11 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         labelFactor: 1.25, 	//How much farther than the radius of the outer circle should the labels be placed
         wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
         opacityArea: 0.35, 	//The opacity of the area of the blob
-        dotRadius: 4, 			//The size of the colored circles of each blog
+        dotRadius: 2, 			//The size of the colored circles of each blog
         opacityCircles: 0.1, 	//The opacity of the circles of each blob
-        strokeWidth: 2, 		//The width of the stroke around each blob
-        roundStrokes: false,	//If true the area and stroke will follow a round path (cardinal-closed)
+        strokeWidth: 3, 		//The width of the stroke around each blob
+        strokeOpacity: 0.5,
+        roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
         color: d3.scaleOrdinal(d3.schemeCategory10),	//Color function,
         format: '.2%',
         unit: '',
@@ -200,82 +201,106 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .attr("class", "radarWrapper");
 
     //Append the backgrounds
-    blobWrapper
-        .append("path")
-        .attr("class", "radarArea")
-        .attr("d", d => radarLine(d.axes))
-        .style("fill", (d,i) => cfg.color(i))
-        .style("fill-opacity", cfg.opacityArea)
-        .on('mouseover', function(d, i) {
-            //Dim all blobs
-            parent.selectAll(".radarArea")
-                .transition().duration(200)
-                .style("fill-opacity", 0.1);
-            //Bring back the hovered over blob
-            d3.select(this)
-                .transition().duration(200)
-                .style("fill-opacity", 0.7);
-        })
-        .on('mouseout', () => {
-            //Bring back all blobs
-            parent.selectAll(".radarArea")
-                .transition().duration(200)
-                .style("fill-opacity", cfg.opacityArea);
-        });
+    // blobWrapper
+    //     .append("path")
+    //     .attr("class", "radarArea")
+    //     .attr("d", d => radarLine(d.axes))
+    //     .style("fill", (d,i) => cfg.color(i))
+    //     .style("fill-opacity", cfg.opacityArea)
+    //     .on('mouseover', function(d, i) {
+    //         //Dim all blobs
+    //         parent.selectAll(".radarArea")
+    //             .transition().duration(200)
+    //             .style("fill-opacity", 0.1);
+    //         //Bring back the hovered over blob
+    //         d3.select(this)
+    //             .transition().duration(200)
+    //             .style("fill-opacity", 0.7);
+    //     })
+    //     .on('mouseout', () => {
+    //         //Bring back all blobs
+    //         parent.selectAll(".radarArea")
+    //             .transition().duration(200)
+    //             .style("fill-opacity", cfg.opacityArea);
+    //     });
 
     //Create the outlines
+
     blobWrapper.append("path")
         .attr("class", "radarStroke")
         .attr("d", function(d,i) { return radarLine(d.axes); })
         .style("stroke-width", cfg.strokeWidth + "px")
         .style("stroke", (d,i) => cfg.color(i))
+        .style("opacity", cfg.strokeOpacity)
         .style("fill", "none")
-        .style("filter" , "url(#glow)");
+        // .style("filter" , "url(#glow)")
+        .on('mouseover', function(d, i) {
+            //Dim all blobs
+            parent.selectAll(".radarStroke")
+                .transition().duration(200)
+                .style("opacity", 0.1);
+            //Bring back the hovered over blob
+            d3.select(this)
+                .transition().duration(200)
+                .style("opacity", 1.0)
+                .style("stroke", 'yellow')
+                .style("stroke-width", 2+"px");
+                // .style("filter", "none");
+            d3.select(this).raise();
+        })
+        .on('mouseout', () => {
+            //Bring back all blobs
+            parent.selectAll(".radarStroke")
+                .transition().duration(200)
+                .style("opacity", cfg.strokeOpacity)
+                .style("stroke", (d, i)=>cfg.color(i));
+                // .style('filter', "url(#glow)");
+        });
 
-    //Append the circles
-    blobWrapper.selectAll(".radarCircle")
-        .data(d => d.axes)
-        .enter()
-        .append("circle")
-        .attr("class", "radarCircle")
-        .attr("r", cfg.dotRadius)
-        .attr("cx", (d,i) => rScale(d.value) * cos(angleSlice * i - HALF_PI))
-        .attr("cy", (d,i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
-        .style("fill", (d) => cfg.color(d.id))
-        .style("fill-opacity", 0.8);
+    // //Append the circles
+    // blobWrapper.selectAll(".radarCircle")
+    //     .data(d => d.axes)
+    //     .enter()
+    //     .append("circle")
+    //     .attr("class", "radarCircle")
+    //     .attr("r", cfg.dotRadius)
+    //     .attr("cx", (d,i) => rScale(d.value) * cos(angleSlice * i - HALF_PI))
+    //     .attr("cy", (d,i) => rScale(d.value) * sin(angleSlice * i - HALF_PI))
+    //     .style("fill", (d) => cfg.color(d.id))
+    //     .style("fill-opacity", 0.8);
 
     /////////////////////////////////////////////////////////
     //////// Append invisible circles for tooltip ///////////
     /////////////////////////////////////////////////////////
 
-    //Wrapper for the invisible circles on top
-    const blobCircleWrapper = g.selectAll(".radarCircleWrapper")
-        .data(data)
-        .enter().append("g")
-        .attr("class", "radarCircleWrapper");
-
-    //Append a set of invisible circles on top for the mouseover pop-up
-    blobCircleWrapper.selectAll(".radarInvisibleCircle")
-        .data(d => d.axes)
-        .enter().append("circle")
-        .attr("class", "radarInvisibleCircle")
-        .attr("r", cfg.dotRadius * 1.5)
-        .attr("cx", (d,i) => rScale(d.value) * cos(angleSlice*i - HALF_PI))
-        .attr("cy", (d,i) => rScale(d.value) * sin(angleSlice*i - HALF_PI))
-        .style("fill", "none")
-        .style("pointer-events", "all")
-        .on("mouseover", function(d,i) {
-            tooltip
-                .attr('x', this.cx.baseVal.value - 10)
-                .attr('y', this.cy.baseVal.value - 10)
-                .transition()
-                .style('display', 'block')
-                .text(Format(d.value) + cfg.unit);
-        })
-        .on("mouseout", function(){
-            tooltip.transition()
-                .style('display', 'none').text('');
-        });
+    // //Wrapper for the invisible circles on top
+    // const blobCircleWrapper = g.selectAll(".radarCircleWrapper")
+    //     .data(data)
+    //     .enter().append("g")
+    //     .attr("class", "radarCircleWrapper");
+    //
+    // //Append a set of invisible circles on top for the mouseover pop-up
+    // blobCircleWrapper.selectAll(".radarInvisibleCircle")
+    //     .data(d => d.axes)
+    //     .enter().append("circle")
+    //     .attr("class", "radarInvisibleCircle")
+    //     .attr("r", cfg.dotRadius * 1.5)
+    //     .attr("cx", (d,i) => rScale(d.value) * cos(angleSlice*i - HALF_PI))
+    //     .attr("cy", (d,i) => rScale(d.value) * sin(angleSlice*i - HALF_PI))
+    //     .style("fill", "none")
+    //     .style("pointer-events", "all")
+    //     .on("mouseover", function(d,i) {
+    //         tooltip
+    //             .attr('x', this.cx.baseVal.value - 10)
+    //             .attr('y', this.cy.baseVal.value - 10)
+    //             .transition()
+    //             .style('display', 'block')
+    //             .text(Format(d.value) + cfg.unit);
+    //     })
+    //     .on("mouseout", function(){
+    //         tooltip.transition()
+    //             .style('display', 'none').text('');
+    //     });
 
     const tooltip = g.append("text")
         .attr("class", "tooltip")

@@ -29,7 +29,19 @@
 
 </head>
 <body>
-
+<div>
+    <select id="scagnostics" onchange="changeDataset(this);">
+        <option value="outlying">Outlying scatter plot</option>
+        <option value="skewed">Skewed scatter plot</option>
+        <option value="clumpy">Clumpy scatter plot</option>
+        <option value="sparse">Sparse scatter plot</option>
+        <!--        <option value="striated">Striated scatter plot</option>-->
+        <!--        <option value="convex">Convex scatter plot</option>-->
+        <!--        <option value="skinny">Skinny scatter plot</option>-->
+        <option value="stringy">Stringy scatter plot</option>
+        <option value="monotonic">Monotonic scatter plot</option>
+    </select>
+</div>
 <div class="radarChart" style="display: inline-flex;"></div>
 <div id="controlButtons"></div>
 <div id="msg" style="display: block;"></div>
@@ -39,6 +51,7 @@
 
 </script>
 <script>
+    let datasets = [];
     let scag = null;
     let data = null;
     let svgWidth = 1000;
@@ -49,33 +62,168 @@
     let binOpacity = 0.8;
     let size = 500;
 
-    /***********RANDOM DATA*******************/
-    let random = Math.random,
-        points = [];
-    let dim = 5;
-    //100 data points
-    for (let i = 0; i < 100; i++) {
-        //each point of 10 dimensions
-        let point = [];
-        for (let j = 0; j < dim; j++) {
-            point.push(random());
-        }
-        points.push(point);
-    }
-    //Push one extreme point
-    points.push(d3.range(dim).map(d=>2));
-    draw(points);
+    const random = Math.random;
+    /***********OUTLYING DATA*******************/
+    outlyingScatterPlot();
 
-    //Displaying messages
-    let msgContainer = "msg";
-    displayScagScores(scag, msgContainer);
+    function outlyingScatterPlot() {
+        let points = [];
+        let dim = 10;
+        //100 data points
+        for (let i = 0; i < 85; i++) {
+            //each point of 10 dimensions
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                point.push(random());
+            }
+            points.push(point);
+        }
+        //Push outlying point(s)
+        d3.range(dim).forEach((d, i) => {
+            points.push(d3.range(dim).map((d, j) => i === j ? 15 + random() : 0.5 + random()));
+        });
+        datasets.push(points);
+    }
+
+    /***********SKEWED DATA*******************/
+    skewedScatterPlot();
+
+    function skewedScatterPlot() {
+
+        let dim = 10;
+        let cluster1 = d3.range(60).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(random());
+                }
+                return point;
+            }),
+            cluster2 = d3.range(10).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(5 + 3 * random());
+                }
+                return point;
+            }),
+            cluster3 = d3.range(20).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(10 + 5 * random());
+                }
+                return point;
+            }),
+            points = cluster1.concat(cluster2).concat(cluster3);
+        datasets.push(points);
+    }
+
+    /***********CLUMPY 2 CLUSTERS*******************/
+    clumpyScatterPlot();
+
+    function clumpyScatterPlot() {
+        let dim = 10;
+        let cluster1 = d3.range(50).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(random());
+                }
+                return point;
+            }),
+            cluster2 = d3.range(50).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(10 + random());
+                }
+                return point;
+            }),
+            points = cluster1.concat(cluster2);
+        datasets.push(points);
+    }
+
+    /***********SPARSED DATA*******************/
+    sparseScatterPlot();
+
+    function sparseScatterPlot() {
+        let points = [];
+        let dim = 10;
+        for (let i = 0; i < 100; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (random() > 0.5) {
+                    point.push(30 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            points.push(point);
+        }
+        datasets.push(points);
+    }
+
+    /***********STRINGY DATA*******************/
+    stringyScatterPlot();
+
+    function stringyScatterPlot() {
+        let points = [];
+        let dim = 10;
+        for (let i = 0; i < 100; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                point.push(i % 30);
+            }
+            points.push(point);
+        }
+        datasets.push(points);
+    }
+
+    /***********MONOTONIC DATA*******************/
+    monotonicScatterPlot();
+
+    function monotonicScatterPlot() {
+        let points = [];
+        let dim = 10;
+        //Big odd small even
+        for (let i = 1; i <= 50; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j % 2 === 0) {
+                    point.push(i);
+                } else {
+                    point.push(100 - i)
+                }
+            }
+            points.push(point);
+        }
+
+        for (let i = 1; i <= 50; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (i % 2 === 1) {
+                    point.push(i);
+                } else {
+                    point.push(100 - i)
+                }
+            }
+            points.push(point);
+        }
+
+        datasets.push(points);
+
+    }
+
+    changeDataset(document.getElementById("scagnostics"));
+
+    function changeDataset(evt) {
+        let points = datasets[evt.selectedIndex];
+        draw(points);
+    }
+
 
     function draw(points) {
         let scagOptions = {
             startBinGridSize: 30,
             minBins: 30,
             maxBins: 100,
-            outlyingCoefficient: 0.5,
+            outlyingCoefficient: 1.5,
             incrementA: 1,
             incrementB: 5,
             decrementA: 0.9,
@@ -84,6 +232,10 @@
         };
         // let scagOptions = {};
         scag = scagnosticsnd(points, scagOptions);
+        //Displaying messages
+        let msgContainer = "msg";
+        displayScagScores(scag, msgContainer);
+
         let normalizedPoints = scag.normalizedPoints;
         let radarData = [];
         for (let i = 0; i < normalizedPoints.length; i++) {
@@ -92,10 +244,11 @@
             for (let j = 0; j < normalizedPoints[i].length; j++) {
                 let item = {
                     axis: 'd' + j,
-                    value: normalizedPoints[i][j]
+                    value: normalizedPoints[i][j],
                 }
                 point.axes.push(item);
             }
+            point.data = normalizedPoints[i];
             radarData.push(point);
         }
         drawRadarChart(".radarChart", radarData);
@@ -105,45 +258,57 @@
         let margin = {top: 50, right: 80, bottom: 50, left: 80},
             width = Math.min(700, window.innerWidth / 4) - margin.left - margin.right,
             height = Math.min(width, window.innerHeight - margin.top - margin.bottom);
-        let radarChartOptions = {
-            w: 290,
-            h: 350,
-            margin: margin,
-            maxValue: 1,
-            levels: 5,
-            roundStrokes: false,
-            color: d3.scaleOrdinal(d3.schemeBlues[9]),
-            format: '.0f',
-            // legend: {title: 'Random dataset', translateX: 200, translateY: 40},
-
+        const radarChartOptions = {
+            w: 290,				//Width of the circle
+            h: 350,				//Height of the circle
+            margin: margin, //The margins of the SVG
+            levels: 3,				//How many levels or inner circles should there be drawn
+            maxValue: 1, 			//What is the value that the biggest circle will represent
+            labelFactor: 1.15, 	//How much farther than the radius of the outer circle should the labels be placed
+            wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
+            opacityArea: 0.35, 	//The opacity of the area of the blob
+            dotRadius: 2, 			//The size of the colored circles of each blog
+            opacityCircles: 0.1, 	//The opacity of the circles of each blob
+            strokeWidth: 1, 		//The width of the stroke around each blob
+            strokeOpacity: 0.3,
+            roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
+            color: pointColor,
+            format: '.1',
+            unit: '',
+            legend: false
         };
 
         // Draw the chart, get a reference the created svg element :
         let svg_radar = RadarChart(theDiv, radarData, radarChartOptions);
         return svg_radar;
+
+        function pointColor(d) {
+            return 'steelblue';
+        }
     }
+
     function displayScagScores(scag, msgContainer) {
         let msg = "Scagnostics";
         //Binning
-        msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins" + ", num of bins: " + scag.bins.length;
+        msg += "<br/>0. Bin size: " + scag.binSize.toFixed(0) + "x" + scag.binSize.toFixed(0) + " bins" + ", num of bins: " + scag.bins.length;
         //Outlying
-        msg += "<br/>1. Outlying score: " + scag.outlyingScore + ", outlying edge cut point: " + scag.outlyingUpperBound;
+        msg += "<br/>1. Outlying score: " + scag.outlyingScore.toFixed(2) + ", outlying edge cut point: " + scag.outlyingUpperBound.toFixed(2);
         //Skewed
-        msg += "<br/>2. Skewed score: " + scag.skewedScore;
+        msg += "<br/>2. Skewed score: " + scag.skewedScore.toFixed(2);
         //Sparse
-        msg += "<br/>3. Sparse score: " + scag.sparseScore;
+        msg += "<br/>3. Sparse score: " + scag.sparseScore.toFixed(2);
         //Clumpy
-        msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
+        msg += "<br/>4. Clumpy score: " + scag.clumpyScore.toFixed(2);
         //Striated
-        msg += "<br/>5. Striated score: " + scag.striatedScore;
+        msg += "<br/>5. Striated score: " + (scag.striatedScore !== undefined ? scag.striatedScore.toFixed(2) : 'undefined');
         //Convex
-        msg += "<br/>6. Convex score: " + scag.convexScore;
+        msg += "<br/>6. Convex score: " + (scag.convexScore !== undefined ? scag.convexScore.toFixed(2) : 'undefined');
         //Skinny
-        msg += "<br/>7. Skinny score: " + scag.skinnyScore;
+        msg += "<br/>7. Skinny score: " + (scag.skinnyScore !== undefined ? scag.skinnyScore.toFixed(2) : 'undefined');
         //Stringy
-        msg += "<br/>8. Stringy score: " + scag.stringyScore;
+        msg += "<br/>8. Stringy score: " + scag.stringyScore.toFixed(2);
         //Monotonic
-        msg += "<br/>9. Monotonic score: " + scag.monotonicScore;
+        msg += "<br/>9. Monotonic score: " + scag.monotonicScore.toFixed(2);
         //Set the scagnostics message
         d3.select("#" + msgContainer).html(msg);
     }

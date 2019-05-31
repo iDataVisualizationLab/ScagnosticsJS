@@ -152,7 +152,7 @@ import {Monotonic} from "./modules/monotonic";
 
 
         /******This section is about the skewed score and skewed score results******/
-        let noOutlyingTree = mstree;
+        let noOutlyingTree = outlying.removeOutlying();
         let skewed = new Skewed(noOutlyingTree);
         outputValue("skewedScore", skewed.score());
 
@@ -164,7 +164,6 @@ import {Monotonic} from "./modules/monotonic";
         let clumpy = new Clumpy(noOutlyingTree);
         outputValue("clumpy", clumpy);
         outputValue("clumpyScore", clumpy.score());
-
 
         // /******This section is about the striated score and striated score results******/
         // let striated = new Striated(noOutlyingTree);

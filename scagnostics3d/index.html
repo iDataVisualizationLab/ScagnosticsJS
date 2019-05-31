@@ -268,18 +268,18 @@
         let randomX = muy => d3.randomNormal(muy, 10),
             randomY = muy => d3.randomNormal(muy, 10),
             randomZ = muy => d3.randomNormal(muy, 10),
-            clusters1 = d3.range(60).map(function () {
+            cluster1 = d3.range(60).map(function () {
                 return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
             }),
-            clusters2 = d3.range(40).map(function () {
+            cluster2 = d3.range(40).map(function () {
                 return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
             }),
-            points = clusters1.concat(clusters2);
+            points = cluster1.concat(cluster2);
         datasets.push(points);
     }
 
 
-    // /***********SPARSED DATA*******************/
+    /***********SPARSED DATA*******************/
     sparseScatterPlot();
 
     function sparseScatterPlot() {
@@ -287,9 +287,9 @@
         let points = [];
         cornerPoints.forEach(p => {
             //Top left points
-            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 10),
-                randomY = d3.randomNormal(p[1] * svgHeight / 4, 10),
-                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 10);
+            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 5),
+                randomY = d3.randomNormal(p[1] * svgHeight / 4, 5),
+                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 5);
             d3.range(20).map(function () {
                 points.push([randomX(), randomY(), randomZ()]);
             });
@@ -301,7 +301,6 @@
     striatedScatterPlot();
 
     function striatedScatterPlot() {
-        /************STRIATED 2 PLANES***********************/
         let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
         let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
         let noise = d3.randomUniform(-0.001, 0.001);
