@@ -165,10 +165,10 @@
     function stringyScatterPlot() {
         let points = [];
         let dim = 10;
-        for (let i = 0; i < 100; i++) {
+        for (let i = 1; i <= 100; i++) {
             let point = [];
-            for (let j = 0; j < dim; j++) {
-                point.push(i % 30);
+            for (let j = 1; j <= dim; j++) {
+                point.push(Math.sin(i+j));
             }
             points.push(point);
         }
