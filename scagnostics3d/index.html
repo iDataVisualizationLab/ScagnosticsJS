@@ -37,20 +37,20 @@
     let duration = 1000;
     let dataPointRadius = 4;
     let dataPointOpacity = 0.9;
+    let pointColor = 'steelblue';
     let binOpacity = 0.8,
         margins = {left: 5, top: 5, right: 5, bottom: 5},
         padding = 5,
         contentWidth = svgWidth - margins.left - margins.right - 2 * padding,
         contentHeight = svgHeight - margins.top - margins.bottom - 2 * padding;
     let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight);
-    drawContentBound(scagsvg);
 
     function drawContentBound(svg) {
         let x = margins.left;
         let y = margins.top;
         let rectWidth = +svg.attr("width") - margins.left - margins.right;
         let rectHeight = +svg.attr("height") - margins.top - margins.bottom;
-        svg.append("rect").attr("x", x).attr("y", y).attr("width", rectWidth).attr("height", rectHeight).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
+        // svg.append("rect").attr("x", x).attr("y", y).attr("width", rectWidth).attr("height", rectHeight).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
         svg.append("rect").attr("x", x + 90).attr("y", y + 90).attr("width", 300).attr("height", 300).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
     }
 
@@ -77,6 +77,7 @@
         minBins: 10,
         maxBins: 250
     }
+
     function selectElements() {
         origPoints = scagsvg.selectAll('circle.origPoints');
         bins = scagsvg.selectAll('circle.bins');
@@ -217,6 +218,7 @@
         .rotateX(-startAngle);
 
     //</editor-fold>
+
     const random = Math.random;
     const pi = Math.PI;
     const sin = Math.sin;
@@ -261,25 +263,28 @@
     }
 
 
-    /***********CLUMPY 2 CLUSTERS*******************/
+    /***********CLUMPY DATA*******************/
     clumpyScatterPlot();
 
     function clumpyScatterPlot() {
-        let randomX = muy => d3.randomNormal(muy, 10),
-            randomY = muy => d3.randomNormal(muy, 10),
-            randomZ = muy => d3.randomNormal(muy, 10),
-            cluster1 = d3.range(60).map(function () {
-                return [randomX(contentHeight / 3)(), randomY(contentHeight / 3)(), randomZ(contentHeight / 3)()];
+        let randomX = muy => d3.randomNormal(muy, 7),
+            randomY = muy => d3.randomNormal(muy, 7),
+            randomZ = muy => d3.randomNormal(muy, 7),
+            cluster1 = d3.range(200).map(function () {
+                return [randomX(contentHeight / 3)() + 10 * random(), randomY(contentHeight / 3)() + 10 * random(), randomZ(contentHeight / 3)() + 10 * random()];
             }),
-            cluster2 = d3.range(40).map(function () {
+            cluster2 = d3.range(50).map(function () {
                 return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
             }),
-            points = cluster1.concat(cluster2);
+            cluster3 = d3.range(50).map(function () {
+                return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(contentHeight / 3)()];
+            }),
+            points = cluster1.concat(cluster2).concat(cluster3);
         datasets.push(points);
     }
 
 
-    /***********SPARSED DATA*******************/
+    /***********SPARSE DATA*******************/
     sparseScatterPlot();
 
     function sparseScatterPlot() {
@@ -339,27 +344,72 @@
         datasets.push(points);
     }
 
-    /***********SKINNY DATA (Y=X^2)*******************/
+    /***********SKINNY DATA*******************/
     skinnyScatterPlot();
 
     function skinnyScatterPlot() {
-        let randomX = d3.randomUniform(-svgWidth / 2, svgWidth / 2);
         let points = [];
-        d3.range(300).forEach(() => {
-            const val = randomX();
-            points.push([val + 40 * random(), val * val + 40 * random(), val + 40 * random()]);
-        });
+        let deg_to_rad = Math.PI / 180.0;
+        let depth = 4;
+        let branchAngle = 45;
+        generateTree(300, 300, -90, depth);
+        generateTree(300, 300, 0, depth);
+        generateTree(300, 300, 90, depth);
+        generateTree(300, 300, 180, depth);
+
+        function generateTree(x1, y1, angle, depth) {
+            if (depth !== 0) {
+                let x2 = x1 + (Math.cos(angle * deg_to_rad) * depth * 10.0);
+                let y2 = y1 + (Math.sin(angle * deg_to_rad) * depth * 10.0);
+                points = points.concat(generatePointsOnLine(x1, y1, x2, y2, 10, 165));
+                points = points.concat(generatePointsOnLine(x1, y1, x2, y2, 10, 255));
+                points = points.concat(generatePointsOnLine(x1, y1, x2, y2, 10, 345));
+                points = points.concat(generatePointsOnLine(x1, y1, x2, y2, 10, 435));
+                generateTree(x2, y2, angle - branchAngle, depth - 1);
+                generateTree(x2, y2, angle + branchAngle, depth - 1);
+            }
+        }
+
+
+        function generatePointsOnLine(x1, y1, x2, y2, nPoints, zPlace) {
+            let random = () => Math.random();
+            let pointsOL = [];
+            if (x1 === x2) {
+                let deltaY = (y2 - y1) / nPoints;
+                for (let i = 0; i < nPoints; i++) {
+                    let x = x1;
+                    let y = y1 + i * deltaY;
+                    pointsOL.push([x + random(), y + random(), zPlace + random()]);
+                }
+            } else {
+                let a = (y2 - y1) / (x2 - x1);
+                let b = -a * x1 + y1;
+                let deltaX = (x2 - x1) / nPoints;
+                for (let i = 0; i < nPoints; i++) {
+                    let x = x1 + i * deltaX;
+                    let y = a * x + b;
+                    pointsOL.push([x + random(), y + random(), zPlace + random()]);
+                }
+            }
+            return pointsOL;
+        }
+
+        // for (let i = 0; i < 50; i++) {
+        //     points.push([300 + random(), 300 + random(), i * (600 / 50) + random()])
+        // }
+
         datasets.push(points);
+
     }
 
-    /***********Stringy Data*******************/
+    /***********STRINGY DATA*******************/
     stringyScatterPlot();
 
     function stringyScatterPlot() {
-        let noise = () => Math.random() / 10;
+        let noise = () => Math.random() / 12;
         let points = [];
         for (let x = 0; x < 150; x++) {
-            points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
+            points.push([x + noise(), Math.sin(x * Math.PI / 30) + noise(), Math.cos(x * Math.PI / 30) + noise()])
         }
         ;
         datasets.push(points);
@@ -391,6 +441,7 @@
     function draw(points) {
         //Clean the svg if it has some data
         scagsvg.selectAll("*").remove();
+        drawContentBound(scagsvg);
 
         scag = scagnostics3d(points, scagOptions);
 
@@ -506,7 +557,12 @@
                 return d.ccw ? 'lightgrey' : '#717171';
             }
         };
-        let origPointsOptions = {'stroke': 'black', 'fill': 'black', 'opacity': dataPointOpacity, 'r': dataPointRadius};
+        let origPointsOptions = {
+            'stroke': pointColor,
+            'fill': pointColor,
+            'opacity': dataPointOpacity,
+            'r': dataPointRadius
+        };
         let binsOptions = {
             'stroke': 'black',
             'fill': d => binColor(d.data.size),

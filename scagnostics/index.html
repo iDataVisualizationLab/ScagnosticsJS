@@ -239,7 +239,8 @@
 
     createControlButtons("controlButtons", optionsBinLeader);
     //Display variables
-    let dataPointRadius = 2;
+    let dataPointRadius = 6;
+    let pointColor = 'steelblue';
     let dataPointOpacity = 0.9;
     let binOpacity = 0.8;
     let origPoints = null;
@@ -268,7 +269,7 @@
         contentWidth = +scagsvg.attr("width") - margins.left - margins.right - 2 * padding,
         contentHeight = +scagsvg.attr("height") - margins.top - margins.bottom - 2 * padding,
         scaleX = d3.scaleLinear().domain([0, 1]).range([0, contentWidth - 2 * padding]),
-        scaleY = d3.scaleLinear().domain([0, 1]).range([contentHeight - 2 * padding, 0]);
+        scaleY = d3.scaleLinear().domain([0, 1]).range([0, contentHeight - 2 * padding]);
 
 
     // scaleY = d3.scaleLinear().domain([0, 1]).range([0, contentHeight]);
@@ -317,25 +318,41 @@
     clumpyScatterPlot();
 
     function clumpyScatterPlot() {
+        // let points = [];
+        // //Top CENTER points
+        // let randomX = d3.randomNormal(svgWidth / 2, 10),
+        //     randomY = d3.randomNormal(svgHeight / 4, 10);
+        // d3.range(30).map(function () {
+        //     points.push([randomX(), randomY()]);
+        // });
+        //
+        // //Bottom left
+        // randomX = d3.randomNormal(svgWidth / 4, 15);
+        // randomY = d3.randomNormal(3 * svgHeight / 4, 15);
+        // d3.range(40).map(function () {
+        //     points.push([randomX(), randomY()]);
+        // });
+        //
+        // //Bottom right
+        // randomX = d3.randomNormal(3 * svgWidth / 4, 20);
+        // randomY = d3.randomNormal(3 * svgHeight / 4, 20);
+        // d3.range(100).map(function () {
+        //     points.push([randomX(), randomY()]);
+        // });
+        // datasets.push(points);
+
         let points = [];
-        //Top CENTER points
-        let randomX = d3.randomNormal(svgWidth / 2, 10),
+        //Bottom left points
+        let randomX = d3.randomNormal(svgWidth / 4, 10),
             randomY = d3.randomNormal(svgHeight / 4, 10);
-        d3.range(30).map(function () {
-            points.push([randomX(), randomY()]);
+        d3.range(100).map(function () {
+            points.push([10 * randomX(), 10 * randomY()]);
         });
 
-        //Bottom left
-        randomX = d3.randomNormal(svgWidth / 4, 15);
-        randomY = d3.randomNormal(3 * svgHeight / 4, 15);
-        d3.range(40).map(function () {
-            points.push([randomX(), randomY()]);
-        });
-
-        //Bottom right
+        //Top right
         randomX = d3.randomNormal(3 * svgWidth / 4, 20);
         randomY = d3.randomNormal(3 * svgHeight / 4, 20);
-        d3.range(100).map(function () {
+        d3.range(50).map(function () {
             points.push([randomX(), randomY()]);
         });
         datasets.push(points);
@@ -402,16 +419,49 @@
     }
 
 
-    /***********SKINNY DATA (Y=X^2)*******************/
+    /***********SKINNY DATA*******************/
     skinnyScatterPlot();
 
     function skinnyScatterPlot() {
-        let randomX = d3.randomUniform(-svgWidth / 2, svgWidth / 2);
         let points = [];
-        d3.range(400).forEach(() => {
-            const val = randomX();
-            points.push([val + 30 * random(), val * val + 30 * random()]);
-        });
+        let deg_to_rad = Math.PI / 180.0;
+        let depth = 5;
+        let branchAngle = 30;
+        generateTree(300, 500, -90, depth);
+        generateTree(300, 500, 0, depth);
+        generateTree(300, 500, 90, depth);
+        generateTree(300, 500, 180, depth);
+
+        function generateTree(x1, y1, angle, depth) {
+            if (depth !== 0) {
+                let x2 = x1 + (Math.cos(angle * deg_to_rad) * depth * 10.0);
+                let y2 = y1 + (Math.sin(angle * deg_to_rad) * depth * 10.0);
+                points = points.concat(generatePointsOnLine(x1, y1, x2, y2, 4));
+                generateTree(x2, y2, angle - branchAngle, depth - 1);
+                generateTree(x2, y2, angle + branchAngle, depth - 1);
+            }
+        }
+
+        function generatePointsOnLine(x1, y1, x2, y2, nPoints) {
+            let pointsOL = [];
+            if (x1 === x2) {
+                let deltaY = (y2 - y1) / nPoints;
+                for (let i = 0; i < nPoints; i++) {
+                    pointsOL.push([x1 + random(), y1 + i * deltaY + random()])
+                }
+            } else {
+                let a = (y2 - y1) / (x2 - x1);
+                let b = -a * x1 + y1;
+                let deltaX = (x2 - x1) / nPoints;
+                for (let i = 0; i < nPoints; i++) {
+                    let x = x1 + i * deltaX;
+                    let y = a * x + b;
+                    pointsOL.push([x + random(), y + random()]);
+                }
+            }
+            return pointsOL;
+        }
+
         datasets.push(points);
     }
 
@@ -443,6 +493,7 @@
 
     /***********X LINE*******************/
     xLineScatterPlot();
+
     function xLineScatterPlot() {
         let randomY = d3.randomUniform(0, svgWidth);
         let points = [];
@@ -455,6 +506,7 @@
 
     /***********Y LINE*******************/
     yLineScatterPlot();
+
     function yLineScatterPlot() {
         let randomX = d3.randomUniform(0, svgWidth);
         let points = [];
@@ -529,7 +581,7 @@
             .attr("cx", d => scaleX(d[0]))
             .attr("cy", d => scaleY(d[1]))
             .attr("r", dataPointRadius)
-            .attr("fill", "black")
+            .attr("fill", pointColor)
             // .attr("fill", d => {
             //     return d.outliagScore < 0 ? inlierColor(d.outliagScore) : outlierColor(d.outliagScore);
             // })

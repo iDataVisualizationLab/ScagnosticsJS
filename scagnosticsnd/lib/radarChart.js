@@ -103,6 +103,10 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .attr("height", cfg.h + cfg.margin.top + cfg.margin.bottom)
         .attr("class", "radar");
 
+    //Draw content bound
+    if(cfg.drawContentBound){
+        cfg.drawContentBound(svg, cfg);
+    }
     //Append a g element
     let g = svg.append("g")
         .attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + (cfg.h/2 + cfg.margin.top) + ")");
@@ -132,8 +136,10 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .append("circle")
         .attr("class", "gridCircle")
         .attr("r", d => radius / cfg.levels * d)
-        .style("fill", "#CDCDCD")
-        .style("stroke", "#CDCDCD")
+        // .style("fill", "#CDCDCD")
+        // .style("stroke", "#CDCDCD")
+        .style("fill", "#a1a1a1")
+        .style("stroke", "#a1a1a1")
         .style("fill-opacity", cfg.opacityCircles)
         .style("filter" , "url(#glow)");
 
@@ -145,7 +151,7 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .attr("x", 4)
         .attr("y", d => -d * radius / cfg.levels)
         .attr("dy", "0.4em")
-        .style("font-size", "10px")
+        .style("font-size", "14px")
         .attr("fill", "#737373")
         .text(d => Format(maxValue * d / cfg.levels) + cfg.unit);
 
@@ -191,7 +197,8 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .angle((d,i) => i * angleSlice);
 
     if(cfg.roundStrokes) {
-        radarLine.curve(d3.curveCardinalClosed)
+        // radarLine.curve(d3.curveCardinalClosed)
+        radarLine.curve(d3.curveCatmullRomClosed)
     }
 
     //Create a wrapper for the blobs

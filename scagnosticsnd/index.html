@@ -70,7 +70,7 @@
         let points = [];
         let dim = 10;
         //100 data points
-        for (let i = 0; i < 85; i++) {
+        for (let i = 0; i < 100; i++) {
             //each point of 10 dimensions
             let point = [];
             for (let j = 0; j < dim; j++) {
@@ -79,9 +79,10 @@
             points.push(point);
         }
         //Push outlying point(s)
-        d3.range(dim).forEach((d, i) => {
-            points.push(d3.range(dim).map((d, j) => i === j ? 15 + random() : 0.5 + random()));
-        });
+        points.push([0.5, 0.5, 0.5, 2, 2, 2, .5, .5, 2, 2]);
+        points.push([2, 2, 2, 2, 2, .5, .5, .5, .5, .5]);
+        points.push([2, 2, .5, .5, 2, 2, 2, .5, .5, .5]);
+
         datasets.push(points);
     }
 
@@ -117,26 +118,48 @@
         datasets.push(points);
     }
 
-    /***********CLUMPY 2 CLUSTERS*******************/
+    /***********CLUMPY 3 CLUSTERS*******************/
     clumpyScatterPlot();
 
     function clumpyScatterPlot() {
         let dim = 10;
-        let cluster1 = d3.range(50).map(() => {
+        let random = function () {
+            return 2 * Math.random();
+        }
+        let cluster1 = d3.range(40).map(() => {
                 let point = [];
                 for (let j = 0; j < dim; j++) {
-                    point.push(random());
+                    if (j < 4) {
+                        point.push(10 + random());
+                    } else {
+                        point.push(random());
+                    }
                 }
                 return point;
             }),
-            cluster2 = d3.range(50).map(() => {
+            cluster2 = d3.range(40).map(() => {
                 let point = [];
                 for (let j = 0; j < dim; j++) {
-                    point.push(10 + random());
+                    if (j >= 3 && j <= 6) {
+                        point.push(10 + random());
+                    } else {
+                        point.push(random());
+                    }
                 }
                 return point;
             }),
-            points = cluster1.concat(cluster2);
+            cluster3 = d3.range(40).map(() => {
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    if (j >= 6 && j <= 9) {
+                        point.push(10 + random());
+                    } else {
+                        point.push(random());
+                    }
+                }
+                return point;
+            }),
+            points = cluster1.concat(cluster2).concat(cluster3);
         datasets.push(points);
     }
 
@@ -169,7 +192,7 @@
         for (let i = 1; i <= 100; i++) {
             let point = [];
             for (let j = 1; j <= dim; j++) {
-                point.push(Math.sin(i+2*j));
+                point.push(Math.sin(i + 2 * j));
             }
             points.push(point);
         }
@@ -180,29 +203,41 @@
     monotonicScatterPlot();
 
     function monotonicScatterPlot() {
+        // let points = [];
+        // let dim = 10;
+        // //Big odd small even
+        // for (let i = 1; i <= 50; i++) {
+        //     let point = [];
+        //     for (let j = 0; j < dim; j++) {
+        //         if (j % 2 === 0) {
+        //             point.push(i);
+        //         } else {
+        //             point.push(100 - i)
+        //         }
+        //     }
+        //     points.push(point);
+        // }
+        //
+        // for (let i = 1; i <= 50; i++) {
+        //     let point = [];
+        //     for (let j = 0; j < dim; j++) {
+        //         if (i % 2 === 1) {
+        //             point.push(i);
+        //         } else {
+        //             point.push(100 - i)
+        //         }
+        //     }
+        //     points.push(point);
+        // }
+        //
+        // datasets.push(points);
+
         let points = [];
         let dim = 10;
-        //Big odd small even
         for (let i = 1; i <= 50; i++) {
             let point = [];
             for (let j = 0; j < dim; j++) {
-                if (j % 2 === 0) {
-                    point.push(i);
-                } else {
-                    point.push(100 - i)
-                }
-            }
-            points.push(point);
-        }
-
-        for (let i = 1; i <= 50; i++) {
-            let point = [];
-            for (let j = 0; j < dim; j++) {
-                if (i % 2 === 1) {
-                    point.push(i);
-                } else {
-                    point.push(100 - i)
-                }
+                point.push(i % 30);
             }
             points.push(point);
         }
@@ -255,12 +290,13 @@
         drawRadarChart(".radarChart", radarData);
     }
 
+
     function drawRadarChart(theDiv, radarData) {
         let margin = {top: 50, right: 80, bottom: 50, left: 80},
             width = Math.min(700, window.innerWidth / 4) - margin.left - margin.right,
             height = Math.min(width, window.innerHeight - margin.top - margin.bottom);
         const radarChartOptions = {
-            w: 290,				//Width of the circle
+            w: 300,				//Width of the circle
             h: 350,				//Height of the circle
             margin: margin, //The margins of the SVG
             levels: 3,				//How many levels or inner circles should there be drawn
@@ -270,13 +306,14 @@
             opacityArea: 0.35, 	//The opacity of the area of the blob
             dotRadius: 2, 			//The size of the colored circles of each blog
             opacityCircles: 0.1, 	//The opacity of the circles of each blob
-            strokeWidth: 1, 		//The width of the stroke around each blob
-            strokeOpacity: 0.3,
+            strokeWidth: 1.5, 		//The width of the stroke around each blob
+            strokeOpacity: 0.7,
             roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
             color: pointColor,
             format: '.1',
             unit: '',
-            legend: false
+            legend: false,
+            drawContentBound: drawContentBound
         };
 
         // Draw the chart, get a reference the created svg element :
@@ -286,6 +323,12 @@
         function pointColor(d) {
             return 'steelblue';
         }
+    }
+
+    function drawContentBound(svg, options) {
+        let x = options.margin.left;
+        let y = options.margin.top;
+        svg.append("rect").attr("x", x - 30).attr("y", y - 5).attr("width", 360).attr("height", 360).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
     }
 
     function displayScagScores(scag, msgContainer) {
