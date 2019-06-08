@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scagnostics/treefractal.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/convex.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/polyhedra.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics3d/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics3d/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/build/js/scagnosticsnd.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/build/js/scagnosticsnd.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/src/scripts/scagnosticsnd.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/scagnosticsnd.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/manifest.mf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/nbproject/build-impl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/nbproject/genfiles.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/nbproject/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/nbproject/project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaApplication1/src/javaapplication1/JavaApplication1.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/scagnostics/node_modules/" />
     <ignored path="$PROJECT_DIR$/scagnostics3d/node_modules/" />
@@ -28,7 +24,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.37885663">
+    <splitter split-orientation="horizontal" split-proportion="0.50589836">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
@@ -44,11 +40,29 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/scagnosticsnd/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+                <state relative-caret-position="134">
+                  <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Scagnostics_java/src/Scagnostics.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="266">
+                  <caret line="367" column="26" selection-start-line="367" selection-start-column="20" selection-end-line="367" selection-end-column="26" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Scagnostics_java/src/GraphMeasures.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="361">
+                  <caret line="691" column="42" selection-start-line="691" selection-start-column="42" selection-end-line="691" selection-end-column="42" />
                 </state>
               </provider>
             </entry>
@@ -73,15 +87,6 @@
                   <folding>
                     <element signature="e#0#50#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/leaderbinner.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="247">
-                  <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
                 </state>
               </provider>
             </entry>
@@ -207,8 +212,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>debugger</find>
-      <find>path</find>
       <find>sparse</find>
       <find>filter</find>
       <find>mouseover</find>
@@ -237,6 +240,8 @@
       <find>CLUMPY</find>
       <find>cur</find>
       <find>SKINNY DATA</find>
+      <find>Sparse</find>
+      <find>computeSparsenessMeasure</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/scagnostics/src/scripts/modules</dir>
@@ -308,28 +313,13 @@
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="Scagnostics_java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="Scagnostics_java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -414,7 +404,7 @@
       <workItem from="1558654208622" duration="10737000" />
       <workItem from="1559084471904" duration="12338000" />
       <workItem from="1559165294826" duration="20000" />
-      <workItem from="1559766931389" duration="13758000" />
+      <workItem from="1559766931389" duration="14846000" />
     </task>
     <task id="LOCAL-00001" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
       <created>1555628089560</created>
@@ -556,15 +546,21 @@
       <option name="project" value="LOCAL" />
       <updated>1559264075775</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Updating datasets for the nD show-cases">
+      <created>1560023300534</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1560023300534</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="157330000" />
+    <option name="totallyTimeSpent" value="158418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="23" width="2541" height="1417" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11804722" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -579,7 +575,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32925898" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.5126051" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3391902" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -624,27 +620,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="82" selection-start-column="16" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/stringy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="7" lean-forward="true" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics/node_modules/d3-delaunay/src/delaunay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/convex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1001,10 +976,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/JavaApplication1/src/javaapplication1/JavaApplication1.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+        <state relative-caret-position="134">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scagnostics_java/src/Scagnostics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="367" column="26" selection-start-line="367" selection-start-column="20" selection-end-line="367" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scagnostics_java/src/GraphMeasures.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="691" column="42" selection-start-line="691" selection-start-column="42" selection-end-line="691" selection-end-column="42" />
         </state>
       </provider>
     </entry>
