@@ -288,18 +288,35 @@
     sparseScatterPlot();
 
     function sparseScatterPlot() {
-        let cornerPoints = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]];
+        // let cornerPoints = [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1], [0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]];
+        // let points = [];
+        // cornerPoints.forEach(p => {
+        //     //Top left points
+        //     let randomX = d3.randomNormal(p[0] * svgWidth / 4, 5),
+        //         randomY = d3.randomNormal(p[1] * svgHeight / 4, 5),
+        //         randomZ = d3.randomNormal(p[2] * svgHeight / 4, 5);
+        //     d3.range(20).map(function () {
+        //         points.push([randomX(), randomY(), randomZ()]);
+        //     });
+        // });
+        // datasets.push(points);
+
+        let cornerPoints = [[0, 1, 0], [0, 0, 1], [1, 0, 0], [1, 1, 1]];
         let points = [];
         cornerPoints.forEach(p => {
             //Top left points
-            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 5),
-                randomY = d3.randomNormal(p[1] * svgHeight / 4, 5),
-                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 5);
-            d3.range(20).map(function () {
+            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 1),
+                randomY = d3.randomNormal(p[1] * svgHeight / 4, 1),
+                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 1);
+            // let randomX = d3.randomNormal(p[0] * svgWidth / 4, 5),
+            //     randomY = d3.randomNormal(p[1] * svgHeight / 4, 5),
+            //     randomZ = d3.randomNormal(p[2] * svgHeight / 4, 5);
+            d3.range(7).map(function () {
                 points.push([randomX(), randomY(), randomZ()]);
             });
         });
         datasets.push(points);
+
     }
 
     /***********STRIATED data*******************/
@@ -559,8 +576,10 @@
         };
         let origPointsOptions = {
             'stroke': pointColor,
-            'fill': pointColor,
-            'opacity': dataPointOpacity,
+            // 'fill': pointColor,
+            'fill': 'none',
+            // 'opacity': dataPointOpacity,
+            'opacity': 1,
             'r': dataPointRadius
         };
         let binsOptions = {
@@ -571,7 +590,7 @@
             // 'r': 3
         };
         let graphLineOptions = {'stroke': 'black', 'stroke-width': 1, 'opacity': 1.0};
-        let mstLineOptions = {'stroke': 'black', 'stroke-width': 3};
+        let mstLineOptions = {'stroke': 'green', 'stroke-width': 2};
         let noOutlyingMstLineOptions = {'stroke': 'green', 'stroke-width': 3};
         let outlyingLineOptions = {'stroke': 'red', 'stroke-width': 3};
         let v2CornersOptions = {

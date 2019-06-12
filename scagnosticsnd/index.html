@@ -35,7 +35,7 @@
         <option value="skewed">Skewed scatter plot</option>
         <option value="clumpy">Clumpy scatter plot</option>
         <option value="sparse">Sparse scatter plot</option>
-        <!--        <option value="striated">Striated scatter plot</option>-->
+        <option value="striated">Striated scatter plot</option>
         <!--        <option value="convex">Convex scatter plot</option>-->
         <!--        <option value="skinny">Skinny scatter plot</option>-->
         <option value="stringy">Stringy scatter plot</option>
@@ -167,19 +167,108 @@
     sparseScatterPlot();
 
     function sparseScatterPlot() {
+        // let points = [];
+        // let dim = 10;
+        // for (let i = 0; i < 100; i++) {
+        //     let point = [];
+        //     for (let j = 0; j < dim; j++) {
+        //         if (random() > 0.5) {
+        //             point.push(30 + random());
+        //         } else {
+        //             point.push(random());
+        //         }
+        //     }
+        //     points.push(point);
+        // }
+        // datasets.push(points);
+
         let points = [];
-        let dim = 10;
-        for (let i = 0; i < 100; i++) {
+        let dim = 9;
+        //Extreme of each coordinates
+        //Cluster 1
+        for (let i = 0; i < 8; i++) {
             let point = [];
             for (let j = 0; j < dim; j++) {
-                if (random() > 0.5) {
-                    point.push(30 + random());
+                if (j < dim / 3) {
+                    point.push(10 + random());
                 } else {
                     point.push(random());
                 }
             }
             points.push(point);
         }
+        //Cluster 2
+        for (let i = 0; i < 8; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j >= dim / 3 && j < 2 * dim / 3) {
+                    point.push(10 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            points.push(point);
+        }
+
+        //Cluster 3
+        for (let i = 0; i < 8; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j >= 2 * dim / 3 && j < dim) {
+                    point.push(10 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            points.push(point);
+        }
+
+        //Cluster 4
+        for (let i = 0; i < 6; i++) {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                point.push(10 + random());
+            }
+            points.push(point);
+        }
+
+        datasets.push(points);
+    }
+
+    /***********STRIATED data*******************/
+    striatedScatterPlot();
+
+    function striatedScatterPlot() {
+        let dim = 10;
+        let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
+        let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
+        let noise = d3.randomUniform(-0.001, 0.001);
+        // let noise = ()=>0;
+        let plane1 = d3.range(50).map(() => {
+            let yr = d3.randomUniform(0, 1);
+            let zr = d3.randomUniform(0, 1);
+            let y = yr();
+            let z = zr();
+            let x = x1(y, z);
+            let point = [x+noise(), y+noise(), z+noise()];
+            for (let i = 0; i < dim - 3; i++) {
+                point.push(noise());
+            }
+            return point;
+        });
+        let plane2 = d3.range(50).map(() => {
+            let yr = d3.randomUniform(0, 1);
+            let zr = d3.randomUniform(0, 1);
+            let y = yr();
+            let z = zr();
+            let x = x2(y, z);
+            let point = [x + noise(), y + noise(), z + noise()];
+            for (let i = 0; i < dim - 3; i++) {
+                point.push(noise());
+            }
+            return point;
+        });
+        let points = plane1.concat(plane2);
         datasets.push(points);
     }
 

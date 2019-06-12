@@ -7,7 +7,7 @@ import {Skewed} from "./modules/skewed";
 import {Sparse} from "./modules/sparse";
 import {Clumpy} from "./modules/clumpy";
 // import {Striated} from "./modules/striated";
-import {Convex} from "./modules/convex";
+// import {Convex} from "./modules/convex";
 // import {Skinny} from "./modules/skinny";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";

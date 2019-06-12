@@ -13,6 +13,7 @@ export class Sparse {
     score() {
         let allLengths = this.tree.links.map(l=>l.weight),
             q90 = quantile(allLengths, .9);
-        return q90;
+        let n = this.tree.links[0].source.length;
+        return q90/Math.sqrt(Math.floor(2*n/3));
     }
 }
