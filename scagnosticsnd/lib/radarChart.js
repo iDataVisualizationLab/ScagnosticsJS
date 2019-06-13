@@ -136,10 +136,10 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .append("circle")
         .attr("class", "gridCircle")
         .attr("r", d => radius / cfg.levels * d)
-        // .style("fill", "#CDCDCD")
-        // .style("stroke", "#CDCDCD")
-        .style("fill", "#a1a1a1")
-        .style("stroke", "#a1a1a1")
+        .style("fill", "#CDCDCD")
+        .style("stroke", "#CDCDCD")
+        // .style("fill", "#a1a1a1")
+        // .style("stroke", "#a1a1a1")
         .style("fill-opacity", cfg.opacityCircles)
         .style("filter" , "url(#glow)");
 
@@ -237,10 +237,10 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
         .attr("class", "radarStroke")
         .attr("d", function(d,i) { return radarLine(d.axes); })
         .style("stroke-width", cfg.strokeWidth + "px")
-        .style("stroke", (d,i) => cfg.color(i))
+        .style("stroke", (d,i) => cfg.color(d, i))
         .style("opacity", cfg.strokeOpacity)
         .style("fill", "none")
-        // .style("filter" , "url(#glow)")
+        .style("filter" , "url(#glow)")
         .on('mouseover', function(d, i) {
             //Dim all blobs
             parent.selectAll(".radarStroke")
@@ -260,7 +260,7 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
             parent.selectAll(".radarStroke")
                 .transition().duration(200)
                 .style("opacity", cfg.strokeOpacity)
-                .style("stroke", (d, i)=>cfg.color(i));
+                .style("stroke", (d, i)=>cfg.color(d, i));
                 // .style('filter', "url(#glow)");
         });
 

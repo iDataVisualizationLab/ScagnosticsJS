@@ -183,7 +183,7 @@
         // datasets.push(points);
 
         let points = [];
-        let dim = 9;
+        let dim = 10;
         //Extreme of each coordinates
         //Cluster 1
         for (let i = 0; i < 8; i++) {
@@ -195,6 +195,7 @@
                     point.push(random());
                 }
             }
+            point.data = 'green';
             points.push(point);
         }
         //Cluster 2
@@ -207,6 +208,7 @@
                     point.push(random());
                 }
             }
+            point.data = 'blue';
             points.push(point);
         }
 
@@ -220,6 +222,7 @@
                     point.push(random());
                 }
             }
+            point.data = 'black';
             points.push(point);
         }
 
@@ -229,6 +232,7 @@
             for (let j = 0; j < dim; j++) {
                 point.push(10 + random());
             }
+            point.data = 'red';
             points.push(point);
         }
 
@@ -388,16 +392,16 @@
             w: 300,				//Width of the circle
             h: 350,				//Height of the circle
             margin: margin, //The margins of the SVG
-            levels: 3,				//How many levels or inner circles should there be drawn
+            levels: 5,				//How many levels or inner circles should there be drawn
             maxValue: 1, 			//What is the value that the biggest circle will represent
             labelFactor: 1.15, 	//How much farther than the radius of the outer circle should the labels be placed
             wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
             opacityArea: 0.35, 	//The opacity of the area of the blob
             dotRadius: 2, 			//The size of the colored circles of each blog
             opacityCircles: 0.1, 	//The opacity of the circles of each blob
-            strokeWidth: 1.5, 		//The width of the stroke around each blob
+            strokeWidth: 1, 		//The widthue of the stroke around each blob
             strokeOpacity: 0.7,
-            roundStrokes: true,	//If true the area and stroke will follow a round path (cardinal-closed)
+            roundStrokes: tr,	//If true the area and stroke will follow a round path (cardinal-closed)
             color: pointColor,
             format: '.1',
             unit: '',
@@ -409,15 +413,15 @@
         let svg_radar = RadarChart(theDiv, radarData, radarChartOptions);
         return svg_radar;
 
-        function pointColor(d) {
-            return 'steelblue';
+        function pointColor(d, i) {
+            return (d.data && d.data.data)?d.data.data:'steelblue';
         }
     }
 
     function drawContentBound(svg, options) {
-        let x = options.margin.left;
-        let y = options.margin.top;
-        svg.append("rect").attr("x", x - 30).attr("y", y - 5).attr("width", 360).attr("height", 360).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
+        // let x = options.margin.left;
+        // let y = options.margin.top;
+        // svg.append("rect").attr("x", x - 30).attr("y", y - 5).attr("width", 360).attr("height", 360).attr("stroke", "black").attr("stroke-width", 1).attr("fill", "#ddd");
     }
 
     function displayScagScores(scag, msgContainer) {
