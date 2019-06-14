@@ -250,11 +250,11 @@ You may use default scagnostics options or you can optionally pass an `options` 
 #### Sparse score
 * `scag.sparseScore` returns the scagnostics sparse score.
 #### Striated score
-* `scag.striatedScore` returns the scagnostics striated score.
+* `scag.striatedScore` returns `undefined` in this current version.
 #### Convex score
-* `scag.convexScore` returns the scagnostics convex score.
+* `scag.convexScore` returns `undefined` in this current version.
 #### Skinny score
-* `scag.skinnyScore` returns the scagnostics stringy score.
+* `scag.skinnyScore` returns `undefined` in this current version.
 #### Stringy score
 * `scag.stringyScore` returns the scagnostics stringy score.
 #### Monotonic score
