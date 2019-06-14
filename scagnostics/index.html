@@ -131,46 +131,89 @@
              style="overflow: visible; margin-top:0px;"></svg>
         <svg id="scagsvg"
              style="overflow: visible; margin-top:0px;"></svg>
-        <svg id="leaveoutsvg"
-             style="overflow: visible; margin-top:0px;"></svg>
     </div>
 
 </div>
 <div class="more">
-    <button class="mdl-button mdl-js-button mdl-button--fab" data-upgraded=",MaterialButton">
-        <i class="material-icons">keyboard_arrow_down</i>
-    </button>
+    <a href="#scagResults">
+        <button class="mdl-button mdl-js-button mdl-button--fab" data-upgraded=",MaterialButton">
+            <i class="material-icons">keyboard_arrow_down</i>
+        </button>
+    </a>
 </div>
 <article id="article-text">
     <div class="page">
-        <h2>Scagnostics results</h2>
-        <p>Some text here</p>
+        <h2><a name="scagResults">Scagnostics results</a></h2>
+        <p>Calculation infomation: Bin size: <span id="scagBinSizeMsg1"></span>x<span id="scagBinSizeMsg2"></span> bins,
+            num of bins: <span id="scagBinsLengthMsg"></span>,
+            outlying edge cut point: <span id="outlyingUpperBoundMsg"></span></p>
         <div id="msg"></div>
-        <table class="highlight">
+        <table class="highlight" style="margin-top: 3px;margin-bottom: 3px;">
             <thead>
             <tr>
+                <th>No.</th>
                 <th>Name</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
+                <th>Score</th>
+                <th>Note</th>
             </tr>
             </thead>
-
             <tbody>
             <tr>
-                <td>Alvin</td>
-                <td>Eclair</td>
-                <td>$0.87</td>
+                <td>1.</td>
+                <td>Outlying score</td>
+                <td><span id="outlyingScoreMsg"></span></td>
+                <td></td>
             </tr>
             <tr>
-                <td>Alan</td>
-                <td>Jellybean</td>
-                <td>$3.76</td>
+                <td>2.</td>
+                <td>Skewed score</td>
+                <td><span id="skewedScoreMsg"></span></td>
+                <td></td>
             </tr>
             <tr>
-                <td>Jonathan</td>
-                <td>Lollipop</td>
-                <td>$7.00</td>
+                <td>3.</td>
+                <td>Sparse score</td>
+                <td><span id="sparseScoreMsg"></span></td>
+                <td></td>
             </tr>
+            <tr>
+                <td>4.</td>
+                <td>Clumpy score</td>
+                <td><span id="clumpyScoreMsg"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5.</td>
+                <td>Striated score</td>
+                <td><span id="striatedScoreMsg"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>6.</td>
+                <td>Convex score</td>
+                <td><span id="convexScoreMsg"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>7.</td>
+                <td>Skinny score</td>
+                <td><span id="skinnyScoreMsg"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>8.</td>
+                <td>Stringy score</td>
+                <td><span id="stringyScoreMsg"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>9.</td>
+                <td>Monotonic score</td>
+                <td><span id="monotonicScoreMsg"></span></td>
+                <td></td>
+            </tr>
+
+
             </tbody>
         </table>
     </div>

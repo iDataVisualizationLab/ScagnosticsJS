@@ -24,7 +24,7 @@ function createControlButtons(theContainer, theOptions) {
 
 createControlButtons("controlButtons", optionsBinLeader);
 //Display variables
-let dataPointRadius = 6;
+let dataPointRadius = 3;
 let pointColor = 'steelblue';
 let dataPointOpacity = 0.9;
 let binOpacity = 0.8;
@@ -44,8 +44,8 @@ let convexHull = null;//path
 let concaveHull = null;//path
 let v1s = null;//circle
 
-let svgWidth = 500;
-let svgHeight = 520;
+let svgWidth = 300;
+let svgHeight = 320;
 let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
     normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
     // leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),
@@ -65,23 +65,23 @@ const cos = Math.cos;
 const sin = Math.sin;
 
 //<editor-fold desc="This section is for generation of the graphics for the paper only">
-d3.tsv("../data/faithful.tsv", (error, rawData) => {
-    if (error) throw error;
-    let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
-    //Assign original points to the data.
-    points.forEach(p => {
-        if (!p.data) {
-            p.data = {};
-        }
-        p.data.originalPoint = [p[0], p[1]];
-    });
-    let scag = scagnostics(points, {binType: "hexagon", startBinGridSize: 10});
-
-    drawContentBound(normalizedsvg);
-    drawContentBound(scagsvg);
-    drawNormalizedData(scag);
-    draw(scag);
-});
+// d3.tsv("../data/faithful.tsv", (error, rawData) => {
+//     if (error) throw error;
+//     let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
+//     //Assign original points to the data.
+//     points.forEach(p => {
+//         if (!p.data) {
+//             p.data = {};
+//         }
+//         p.data.originalPoint = [p[0], p[1]];
+//     });
+//     let scag = scagnostics(points, {binType: "hexagon", startBinGridSize: 10});
+//
+//     drawContentBound(normalizedsvg);
+//     drawContentBound(scagsvg);
+//     drawNormalizedData(scag);
+//     draw(scag);
+// });
 //</editor-fold>
 
 /***********OUTLYING DATA*******************/
@@ -320,7 +320,7 @@ function yLineScatterPlot() {
     datasets.push(points);
 }
 
-// changeDataset(document.getElementById("scagnostics"));
+changeDataset(document.getElementById("scagnostics"));
 //Toggle some displays
 toggleDisplay(bins);
 toggleDisplay(triangulations);
@@ -428,30 +428,20 @@ function toggleDisplay(g) {
 }
 
 
-function displayScagScores(scag, msgContainer) {
-    let msg = "Scagnostics";
-    //Binning
-    msg += "<br/>0. Bin size: " + scag.binSize + "x" + scag.binSize + " bins" + ", num of bins: " + scag.bins.length;
-    //Outlying
-    msg += "<br/>1. Outlying score: " + scag.outlyingScore + ", outlying edge cut point: " + scag.outlyingUpperBound;
-    //Skewed
-    msg += "<br/>2. Skewed score: " + scag.skewedScore;
-    //Sparse
-    msg += "<br/>3. Sparse score: " + scag.sparseScore;
-    //Clumpy
-    msg += "<br/>4. Clumpy score: " + scag.clumpyScore;
-    //Striated
-    msg += "<br/>5. Striated score: " + scag.striatedScore;
-    //Convex
-    msg += "<br/>6. Convex score: " + scag.convexScore;
-    //Skinny
-    msg += "<br/>7. Skinny score: " + scag.skinnyScore;
-    //Stringy
-    msg += "<br/>8. Stringy score: " + scag.stringyScore;
-    //Monotonic
-    msg += "<br/>9. Monotonic score: " + scag.monotonicScore;
-    //Set the scagnostics message
-    d3.select("#" + msgContainer).html(msg);
+function displayScagScores(scag) {
+    d3.select('#scagBinSizeMsg1').html(scag.binSize);
+    d3.select('#scagBinSizeMsg2').html(scag.binSize);
+    d3.select('#scagBinsLengthMsg').html(scag.bins.length);
+    d3.select('#outlyingUpperBoundMsg').html(scag.outlyingUpperBound);
+    d3.select('#outlyingScoreMsg').html(scag.outlyingScore);
+    d3.select('#skewedScoreMsg').html(scag.skewedScore);
+    d3.select('#sparseScoreMsg').html(scag.sparseScore);
+    d3.select('#clumpyScoreMsg').html(scag.clumpyScore);
+    d3.select('#striatedScoreMsg').html(scag.striatedScore);
+    d3.select('#convexScoreMsg').html(scag.convexScore);
+    d3.select('#skinnyScoreMsg').html(scag.skinnyScore);
+    d3.select('#stringyScoreMsg').html(scag.stringyScore);
+    d3.select('#monotonicScoreMsg').html(scag.monotonicScore);
 }
 
 function animateNodes(selection, time, fromOpacity, toOpacity, onEnd) {
@@ -739,8 +729,7 @@ function draw(scag) {
         .attr("opacity", 10e-6)
         .style("display", "none");
     //Scagnostics messages
-    let msgContainer = "msg";
-    displayScagScores(scag, msgContainer);
+    displayScagScores(scag);
 }
 
 function drawLeaveOut(outliag) {
