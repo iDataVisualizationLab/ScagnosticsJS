@@ -7,16 +7,15 @@ body {
     font-family: "Helvetica", "Arial", sans-serif;
     background-color: #f7f7f7;
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    line-height: 20px;
+    line-height: 10px;
     width: 100%;
-    min-height: 100%;
     display: block;
 }
 
 .page {
-    width: 1400px;
+    width: 1500px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -318,4 +317,7 @@ article {
     box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
     border-top: 1px solid rgba(0, 0, 0, 0.08);
 
+}
+td, th{
+    padding: 10px;
 }

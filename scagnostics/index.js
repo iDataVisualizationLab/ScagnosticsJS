@@ -44,8 +44,8 @@ let convexHull = null;//path
 let concaveHull = null;//path
 let v1s = null;//circle
 
-let svgWidth = 300;
-let svgHeight = 320;
+let svgWidth = 350;
+let svgHeight = 370;
 let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight),
     normalizedsvg = d3.select("#normalizedsvg").attr("width", svgWidth).attr("height", svgHeight),
     // leaveoutsvg = d3.select("#leaveoutsvg").attr("width", svgWidth).attr("height", svgHeight),

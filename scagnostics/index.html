@@ -122,7 +122,6 @@
                 </select>
             </div>
         </div>
-        <div id="controlButtons"></div>
     </div>
 </div>
 <div class="page" id="main-part">
@@ -132,23 +131,11 @@
         <svg id="scagsvg"
              style="overflow: visible; margin-top:0px;"></svg>
     </div>
-
-</div>
-<div class="more">
-    <a href="#scagResults">
-        <button class="mdl-button mdl-js-button mdl-button--fab" data-upgraded=",MaterialButton">
-            <i class="material-icons">keyboard_arrow_down</i>
-        </button>
-    </a>
-</div>
-<article id="article-text">
-    <div class="page">
-        <h5><a name="scagResults">Scagnostics results</a></h5>
+    <div>
         <p>Calculation infomation: Bin size: <span id="scagBinSizeMsg1"></span>x<span id="scagBinSizeMsg2"></span> bins,
             num of bins: <span id="scagBinsLengthMsg"></span>,
             outlying edge cut point: <span id="outlyingUpperBoundMsg"></span></p>
-        <div id="msg"></div>
-        <table class="highlight" style="margin-top: 3px;margin-bottom: 3px;">
+        <table class="highlight" style="width: 600px">
             <thead>
             <tr>
                 <th>No.</th>
@@ -205,6 +192,19 @@
 
             </tbody>
         </table>
+    </div>
+</div>
+<div class="more">
+    <a href="#scagResults">
+        <button class="mdl-button mdl-js-button mdl-button--fab" data-upgraded=",MaterialButton">
+            <i class="material-icons">keyboard_arrow_down</i>
+        </button>
+    </a>
+</div>
+<article id="article-text">
+    <div class="page">
+        <h5><a name="scagResults">Computation stages</a></h5>
+        <div id="controlButtons"></div>
     </div>
 </article>
 <script src="index.js"></script>
