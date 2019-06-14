@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/playground.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnostics/template.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Scagnostics2018.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Scagnostics2018.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -99,8 +96,8 @@
       <change beforePath="$PROJECT_DIR$/data/faithful2.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/data/faithful2.tsv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/flowers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/flowers.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/prices.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/prices.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/d3.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/d3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/node_modules/@types/estree/index.d.ts" afterDir="false" />
@@ -1711,6 +1708,7 @@
       <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/modules/stringy.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/modules/stringy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/outliagnostics.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/outliagnostics.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnostics3d/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics3d/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics3d/node_modules/rollup/bin/rollup" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics3d/node_modules/rollup/bin/rollup" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnostics3d/src/scripts/modules/stringy.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics3d/src/scripts/modules/stringy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/bin/acorn" afterDir="false" />
@@ -1731,11 +1729,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics3d/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="293" column="32" lean-forward="true" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
+            <state relative-caret-position="2984">
+              <caret line="459" column="47" selection-start-line="459" selection-start-column="47" selection-end-line="459" selection-end-column="47" />
               <folding>
                 <element signature="n#style#0;n#svg#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -1743,11 +1741,51 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/playground.css">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="185" column="21" lean-forward="true" selection-start-line="185" selection-start-column="21" selection-end-line="185" selection-end-column="21" />
+            <state relative-caret-position="574">
+              <caret line="113" column="85" selection-start-line="113" selection-start-column="85" selection-end-line="113" selection-end-column="85" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="395" column="55" selection-start-line="395" selection-start-column="55" selection-end-line="395" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="259" column="33" lean-forward="true" selection-start-line="259" selection-start-column="33" selection-end-line="259" selection-end-column="33" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#622#1592#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/striated.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="814">
+              <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/polyhedra.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -1755,55 +1793,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scagnostics/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2166">
-              <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+            <state>
+              <caret line="178" column="7" selection-start-line="178" selection-start-column="7" selection-end-line="178" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/modules/striated.js">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/sparse.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="65" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="65" />
+            <state relative-caret-position="374">
+              <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/index.js">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/scagnosticsnd.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="414" column="65" lean-forward="true" selection-start-line="414" selection-start-column="65" selection-end-line="414" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/flowers.csv">
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-          </provider>
-          <provider selected="true" editor-type-id="csv-text-editor">
-            <state relative-caret-position="-1731" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/faithful.tsv">
-          <provider editor-type-id="csv-table-editor">
-            <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-          </provider>
-          <provider selected="true" editor-type-id="csv-text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/scagnostics/template.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="6" lean-forward="true" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            <state relative-caret-position="3432">
+              <caret line="164" column="23" selection-start-line="164" selection-start-column="23" selection-end-line="164" selection-end-column="23" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/kruskal-mst.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3740">
+              <caret line="172" column="19" selection-start-line="172" selection-start-column="19" selection-end-line="172" selection-end-column="19" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1822,9 +1845,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>left</find>
-      <find>stroke</find>
-      <find>monotonic</find>
       <find>contentBound</find>
       <find>text</find>
       <find>scale</find>
@@ -1852,6 +1872,9 @@
       <find>blue</find>
       <find>toggleDisplay</find>
       <find>Sparse</find>
+      <find>striated</find>
+      <find>bound</find>
+      <find>Striated</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/scagnostics/src/scripts/modules</dir>
@@ -1894,8 +1917,6 @@
         <option value="$PROJECT_DIR$/scagnosticsnd/node_modules/convex-hull/ch.js" />
         <option value="$PROJECT_DIR$/scagnostics3d/src/scripts/modules/sparse.js" />
         <option value="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/polyhedra.js" />
-        <option value="$PROJECT_DIR$/scagnostics3d/index.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/scagnosticsnd/src/scripts/scagnosticsnd.js" />
         <option value="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/sparse.js" />
         <option value="$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js" />
@@ -1904,6 +1925,8 @@
         <option value="$PROJECT_DIR$/css/playground.css" />
         <option value="$PROJECT_DIR$/scagnostics/index.html" />
         <option value="$PROJECT_DIR$/scagnostics/index.js" />
+        <option value="$PROJECT_DIR$/scagnostics3d/index.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -1918,7 +1941,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1929,22 +1951,45 @@
             <path>
               <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
-              <item name="scagnostics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
               <item name="scagnostics3d" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2196,16 +2241,24 @@
       <option name="project" value="LOCAL" />
       <updated>1560396889903</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Commit before changing name">
+      <created>1560463123560</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1560463123560</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="195016000" />
+    <option name="totallyTimeSpent" value="198004000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="28" width="2541" height="1417" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28931573" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11754069" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -2217,7 +2270,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.80366695" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.80304676" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3391902" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -2252,7 +2305,8 @@
     <MESSAGE value="Updating datasets for the 3d show-cases&#10;1. Done for outlying&#10;2. Done for skewed&#10;Will check and update others." />
     <MESSAGE value="Updating datasets for the nD show-cases" />
     <MESSAGE value="Updated documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated documentation" />
+    <MESSAGE value="Commit before changing name" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit before changing name" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -2445,7 +2499,7 @@
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/striated.js" />
     <entry file="file://$PROJECT_DIR$/scagnostics/src/scripts/scagnostics.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
+        <state relative-caret-position="1716">
           <caret line="93" column="36" selection-start-line="93" selection-start-column="36" selection-end-line="93" selection-end-column="36" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
@@ -2455,7 +2509,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/kruskal-mst.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
+        <state relative-caret-position="3740">
           <caret line="172" column="19" selection-start-line="172" selection-start-column="19" selection-end-line="172" selection-end-column="19" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -2464,50 +2518,35 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/treefractal.html" />
-    <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/outlying.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics3d/node_modules/convex-hull/ch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="21" selection-start-line="4" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/polyhedra.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+        <state relative-caret-position="286">
+          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/convex.js" />
     <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/striated.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
+        <state relative-caret-position="814">
           <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/scagnosticsnd.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+        <state relative-caret-position="3432">
+          <caret line="164" column="23" selection-start-line="164" selection-start-column="23" selection-end-line="164" selection-end-column="23" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
-            <element signature="e#504#546#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/modules/sparse.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+        <state relative-caret-position="374">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -2520,35 +2559,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/sparse.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="308">
+          <caret line="14" selection-start-line="11" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="989">
-          <caret line="152" column="28" lean-forward="true" selection-start-line="152" selection-start-column="28" selection-end-line="152" selection-end-column="28" />
+        <state relative-caret-position="269">
+          <caret line="259" column="33" lean-forward="true" selection-start-line="259" selection-start-column="33" selection-end-line="259" selection-end-column="33" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#622#1592#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5968">
-          <caret line="942" column="69" selection-start-line="942" selection-start-column="69" selection-end-line="942" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/convex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="54" column="28" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2562,8 +2584,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2166">
-          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+        <state>
+          <caret line="178" column="7" selection-start-line="178" selection-start-column="7" selection-end-line="178" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -2600,12 +2622,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scagnosticsnd/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="170" column="24" lean-forward="true" selection-start-line="170" selection-start-column="24" selection-end-line="170" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="67">
+          <caret line="395" column="55" selection-start-line="395" selection-start-column="55" selection-end-line="395" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -2616,13 +2634,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/outlying.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics3d/src/scripts/modules/convex.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scagnostics3d/node_modules/convex-hull/ch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="21" selection-start-line="4" selection-end-line="11" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scagnostics3d/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="293" column="32" lean-forward="true" selection-start-line="293" selection-start-column="32" selection-end-line="293" selection-end-column="32" />
+        <state relative-caret-position="2984">
+          <caret line="459" column="47" selection-start-line="459" selection-start-column="47" selection-end-line="459" selection-end-column="47" />
           <folding>
             <element signature="n#style#0;n#svg#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="113" column="85" selection-start-line="113" selection-start-column="85" selection-end-line="113" selection-end-column="85" />
         </state>
       </provider>
     </entry>

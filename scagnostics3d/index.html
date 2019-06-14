@@ -305,9 +305,9 @@
         let points = [];
         cornerPoints.forEach(p => {
             //Top left points
-            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 1),
-                randomY = d3.randomNormal(p[1] * svgHeight / 4, 1),
-                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 1);
+            let randomX = d3.randomNormal(p[0] * svgWidth / 4, 2),
+                randomY = d3.randomNormal(p[1] * svgHeight / 4, 2),
+                randomZ = d3.randomNormal(p[2] * svgHeight / 4, 2);
             // let randomX = d3.randomNormal(p[0] * svgWidth / 4, 5),
             //     randomY = d3.randomNormal(p[1] * svgHeight / 4, 5),
             //     randomZ = d3.randomNormal(p[2] * svgHeight / 4, 5);
@@ -319,7 +319,7 @@
 
     }
 
-    /***********STRIATED data*******************/
+    /***********STRIATED DATA*******************/
     striatedScatterPlot();
 
     function striatedScatterPlot() {
@@ -345,6 +345,33 @@
         });
         let points = plane1.concat(plane2);
         datasets.push(points);
+
+        // //THE FOLLOWING IS FOR THE PAPER'S GRAPHIC ONLY
+        // let x1 = t=>1+t, y1 = t=>3-1.3*t, z1 = t=>1-t;
+        // let x2 = t=>-100-t, y2 = t=>-100+1.3*t, z2 = t=>-10+t;
+        // let x3 = t=>-50-t, y3 = t=>-50+1.3*t, z3 = t=>-5+t;
+        // let x4 = t=>30+t, y4 = t=>30-1.3*t, z4 = t=>5-t;
+        // let noise = d3.randomUniform(-2, 2);
+        // let line1 = d3.range(50).map(()=>{
+        //     let t = d3.randomUniform(10, 50)();
+        //     return [x1(t), y1(t)+noise(), z1(t)];
+        // });
+        // let line2 = d3.range(50).map(()=>{
+        //     let s = d3.randomUniform(10, 50)();
+        //     return [x2(s), y2(s)+noise(), z2(s)];
+        // });
+        // let line3 = d3.range(50).map(()=>{
+        //     let s = d3.randomUniform(10, 50)();
+        //     return [x3(s), y3(s)+noise(), z3(s)];
+        // });
+        //
+        // let line4 = d3.range(50).map(()=>{
+        //     let s = d3.randomUniform(10, 50)();
+        //     return [x4(s), y4(s)+noise(), z4(s)];
+        // });
+        //
+        // let points = line1.concat(line2).concat(line3).concat(line4);
+        // datasets.push(points);
     }
 
 
@@ -430,6 +457,13 @@
         }
         ;
         datasets.push(points);
+        // let noise = () => Math.random() / 50;
+        // let points = [];
+        // for (let x = 0; x < 150; x++) {
+        //     points.push([x + noise(), Math.sin(x * Math.PI / 30) + noise(), Math.cos(x * Math.PI / 30) + noise()])
+        // }
+        // ;
+        // datasets.push(points);
     }
 
     /***********Monotonic Data*******************/
@@ -458,7 +492,7 @@
     function draw(points) {
         //Clean the svg if it has some data
         scagsvg.selectAll("*").remove();
-        drawContentBound(scagsvg);
+        // drawContentBound(scagsvg);
 
         scag = scagnostics3d(points, scagOptions);
 
@@ -576,9 +610,9 @@
         };
         let origPointsOptions = {
             'stroke': pointColor,
-            // 'fill': pointColor,
-            'fill': 'none',
-            // 'opacity': dataPointOpacity,
+            'fill': pointColor,
+            // 'fill': 'none',
+            'opacity': dataPointOpacity,
             'opacity': 1,
             'r': dataPointRadius
         };
