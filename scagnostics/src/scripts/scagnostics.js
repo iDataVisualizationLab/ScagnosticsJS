@@ -20,7 +20,7 @@ import {delaunayFromPoints} from "./modules/delaunay";
      * initialize a scagnostic object
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @param options   Scagnostics options {binType,startBinGridSize, isNormalized, isBinned, outlyingUpperBound, minBins, maxBins}
-     * @returns {*[][]}
+     * @return scag Scagnostics object with scores and intermediate computation results.
      */
     window.scagnostics = function (inputPoints, options = {}) {
         let binType = options.binType,
