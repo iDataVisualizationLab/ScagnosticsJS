@@ -13,11 +13,11 @@ nD: https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/
 ## [2D Version](#2d-version)
 ### Installation
 #### Download
-You can download `scagnostics.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js)
+You can download `scagnostics.js` from [here](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics/build/js/scagnostics.min.js)
 #### CDN
 You can add `scagnostics.js` to your web page using this code snippet:
 ```html
-<script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics/build/js/scagnostics.min.js"></script>
+<script type="text/javascript" src="https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics/build/js/scagnostics.min.js"></script>
 ``` 
 ### Creating new scagnostics object
 You will need to pass an array of 2D scatter plot points as `[[x1, y1], [x2, y2], [x3, y3], [x4, y4],...[xn, yn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
@@ -91,11 +91,11 @@ You may use default scagnostics options or you can optionally pass an `options` 
 ## [3D Version](#3d-version)
 ### Installation
 #### Download
-You can download `scagnostics3d.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js)
+You can download `scagnostics3d.js` from [here](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/build/js/scagnostics3d.min.js)
 #### CDN
 You can add `scagnostics3d.js` to your web page using this code snippet:
 ```html
-<script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnostics3d/build/js/scagnostics3d.min.js"></script>
+<script type="text/javascript" src="https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/build/js/scagnostics3d.min.js"></script>
 ``` 
 ### Creating new scagnostics3d object
 You will need to pass an array of 3D scatter plot points as `[[x1, y1, z1], [x2, y2, z2], [x3, y3, z3], [x4, y4, z4],...[xn, yn, zn]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
@@ -167,11 +167,11 @@ You may use default scagnostics options or you can optionally pass an `options` 
 ## [nD Version](#nd-version)
 ### Installation
 #### Download
-You can download `scagnosticsnd.js` from [here](https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/build/js/scagnosticsnd.min.js)
+You can download `scagnosticsnd.js` from [here](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/build/js/scagnosticsnd.min.js)
 #### CDN
 You can add `scagnosticsnd.js` to your web page using this code snippet:
 ```html
-<script type="text/javascript" src="https://idatavisualizationlab.github.io/Scagnostics2018/scagnosticsnd/build/js/scagnosticsnd.min.js"></script>
+<script type="text/javascript" src="https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/build/js/scagnosticsnd.min.js"></script>
 ``` 
 ### Creating new scagnosticsnd object
 You will need to pass an array of nD scatter plot points as `[[x1, y1, z1, ...], [x2, y2, z2, ...], [x3, y3, z3, ...], [x4, y4, z4, ...], ... [xn, yn, zn, ...]]`. If you would like to pass some data (say `ids` of the points) then you may pass them as `data` attribute of the point. This `data` field will then be passed into the result after normalization or binning, so you could use this to get back the original point.
@@ -241,6 +241,21 @@ You may use default scagnostics options or you can optionally pass an `options` 
 * `scag.normalizedPoints` returns an array of nD points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
 #### Binning information
 * `scag.bins` will return all the `bins`. A `bin` contains an array of points belonging to that bin and `x`, `y`, `z`, ... attributes for the location (center) of the bin.
-
 #### Outlying score
 * `scag.outlyingScore` returns the scagnostics outlying score.
+#### Skewed score
+* `scag.skewedScore` returns the scagnostics skewed score.
+#### Clumpy score
+* `scag.clumpyScore` returns the scagnostics clumpy score.
+#### Sparse score
+* `scag.sparseScore` returns the scagnostics sparse score.
+#### Striated score
+* `scag.striatedScore` returns the scagnostics striated score.
+#### Convex score
+* `scag.convexScore` returns the scagnostics convex score.
+#### Skinny score
+* `scag.skinnyScore` returns the scagnostics stringy score.
+#### Stringy score
+* `scag.stringyScore` returns the scagnostics stringy score.
+#### Monotonic score
+* `scag.monotonicScore` returns the scagnostics monotonic score.
