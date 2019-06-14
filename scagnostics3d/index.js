@@ -800,8 +800,6 @@ function draw(points) {
 }
 
 function displayScagScores(scag) {
-    d3.select('#scagBinSizeMsg1').html(scag.binSize);
-    d3.select('#scagBinSizeMsg2').html(scag.binSize);
     d3.select('#scagBinsLengthMsg').html(scag.bins.length);
     d3.select('#outlyingUpperBoundMsg').html(scag.outlyingUpperBound);
     d3.select('#outlyingScoreMsg').html(scag.outlyingScore);
