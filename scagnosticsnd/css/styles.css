@@ -1,0 +1,9 @@
+.radarChart{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    fill: #242424;
+    text-align: left;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+    cursor: default;
+}
