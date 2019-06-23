@@ -36,7 +36,7 @@ import {Monotonic} from "./modules/monotonic";
         }
 
         let binType = options.binType;
-        /******This section is about the outlying score and outlying score results******/
+        /******This section isouasdtly about the outlying score and outlying score results******/
         let outlyingUpperBound = options.outlyingUpperBound;
         let outlyingCoefficient = options.outlyingCoefficient;
 
@@ -70,39 +70,39 @@ import {Monotonic} from "./modules/monotonic";
                 maxNumOfBins = maxBins;
             }
             //Don't do the binning if the unique set of values are less than min number. Just return the unique set.
-            let uniqueKeys = _.uniq(normalizedPoints.map(p => p.join(',')));
-            let groups = _.groupBy(normalizedPoints, p => p.join(','));
-            if (uniqueKeys.length < minNumOfBins) {
-                uniqueKeys.forEach(key => {
-                    let bin = groups[key];
-                    //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
-                    bin.site = bin[0].slice();
-                    bins.push(bin);
-                });
-            } else {
-                do {
-                    //Start with binSize x binSize x binSize... bins, and then increase it as binSize = binSize * incrementA + incrementB or binSize = binSize * decrementA + decrementB.
-                    if (binSize === null) {
-                        binSize = startBinGridSize;
-                    } else if (bins.length > maxNumOfBins) {
-                        binSize = binSize * decrementA + decrementB;
-                    } else if (bins.length < minNumOfBins) {
-                        binSize = binSize * incrementA + incrementB;
-                    }
-                    if (binType === "hexagon") {
-                        // // This section uses hexagon binning
-                        // let shortDiagonal = 1/binSize;
-                        // binRadius = Math.sqrt(3)*shortDiagonal/2;
-                        // binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
-                        // bins = binner.hexbin(normalizedPoints);
-                    } else if (!binType || binType === "leader") {
-                        // This section uses leader binner
-                        binRadius = Math.sqrt(dims * Math.pow(1 / (binSize * 2), 2));
-                        binner = new LeaderBinner(normalizedPoints, binRadius);
-                        bins = binner.leaders;
-                    }
-                } while (bins.length > maxNumOfBins || bins.length < minNumOfBins);
-            }
+            // let uniqueKeys = _.uniq(normalizedPoints.map(p => p.join(',')));
+            // let groups = _.groupBy(normalizedPoints, p => p.join(','));
+            // if (uniqueKeys.length < minNumOfBins) {
+            //     uniqueKeys.forEach(key => {
+            //         let bin = groups[key];
+            //         //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
+            //         bin.site = bin[0].slice();
+            //         bins.push(bin);
+            //     });
+            // } else {
+            do {
+                //Start with binSize x binSize x binSize... bins, and then increase it as binSize = binSize * incrementA + incrementB or binSize = binSize * decrementA + decrementB.
+                if (binSize === null) {
+                    binSize = startBinGridSize;
+                } else if (bins.length > maxNumOfBins) {
+                    binSize = binSize * decrementA + decrementB;
+                } else if (bins.length < minNumOfBins) {
+                    binSize = binSize * incrementA + incrementB;
+                }
+                if (binType === "hexagon") {
+                    // // This section uses hexagon binning
+                    // let shortDiagonal = 1/binSize;
+                    // binRadius = Math.sqrt(3)*shortDiagonal/2;
+                    // binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
+                    // bins = binner.hexbin(normalizedPoints);
+                } else if (!binType || binType === "leader") {
+                    // This section uses leader binner
+                    binRadius = Math.sqrt(dims * Math.pow(1 / (binSize * 2), 2));
+                    binner = new LeaderBinner(normalizedPoints, binRadius);
+                    bins = binner.leaders;
+                }
+            } while (bins.length > maxNumOfBins || bins.length < minNumOfBins);
+            // }
             sites = bins.map(d => d.site); //=>sites are the set of centers of all bins
             /******This section is about the binning and binning results******/
             outputValue("binner", binner);
@@ -129,7 +129,8 @@ import {Monotonic} from "./modules/monotonic";
             //TODO: Need to check if outlying links are really connected to outlying points
         let outlying = new Outlying(mstree, {
                 outlyingUpperBound: outlyingUpperBound,
-                outlyingCoefficient: outlyingCoefficient});
+                outlyingCoefficient: outlyingCoefficient
+            });
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
         let outlyingLinks = outlying.links();

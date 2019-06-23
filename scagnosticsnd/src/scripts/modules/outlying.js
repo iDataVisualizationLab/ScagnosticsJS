@@ -16,7 +16,7 @@ export class Outlying {
         this.outlyingCoefficient = outlyingCoefficient ? outlyingCoefficient : 1.5;
         //Calculate the upper bound if it is not provided.
         if (!upperBound) {
-            upperBound = findUpperBound(this.tree, 1.5);
+            upperBound = findUpperBound(this.tree, outlyingCoefficient);
             //Save it for displaying purpose.
             this.upperBound = upperBound;
         }
