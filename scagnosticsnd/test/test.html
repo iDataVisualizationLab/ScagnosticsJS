@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../build/js/outliagnosticsnd.min.js"></script>
+    <script src="../lib/d3.js"></script>
+</head>
+<body>
+    <script>
+        const random = Math.random;
+        let datasets = [];
+        outlyingScatterPlot();
+
+        function outlyingScatterPlot() {
+            let points = [];
+            let dim = 10;
+            //100 data points
+            for (let i = 0; i < 100; i++) {
+                //each point of 10 dimensions
+                let point = [];
+                for (let j = 0; j < dim; j++) {
+                    point.push(random());
+                }
+                points.push(point);
+            }
+            //Push outlying point(s)
+            points.push([0.5, 0.5, 0.5, 2, 2, 2, .5, .5, 2, 2]);
+            points.push([2, 2, 2, 2, 2, .5, .5, .5, .5, .5]);
+            points.push([2, 2, .5, .5, 2, 2, 2, .5, .5, .5]);
+
+            datasets.push(points);
+        }
+        skewedScatterPlot();
+
+        function skewedScatterPlot() {
+
+            let dim = 10;
+            let cluster1 = d3.range(60).map(() => {
+                    let point = [];
+                    for (let j = 0; j < dim; j++) {
+                        point.push(random());
+                    }
+                    return point;
+                }),
+                cluster2 = d3.range(10).map(() => {
+                    let point = [];
+                    for (let j = 0; j < dim; j++) {
+                        point.push(5 + 3 * random());
+                    }
+                    return point;
+                }),
+
+                cluster3 = d3.range(20).map(() => {
+                    let point = [];
+                    for (let j = 0; j < dim; j++) {
+                        point.push(10 + 5 * random());
+                    }
+                    return point;
+                }),
+                points = cluster1.concat(cluster2).concat(cluster3);
+            datasets.push(points);
+        }
+        let scagOptions = {
+            startBinGridSize: 30,
+            minBins: 30,
+            maxBins: 100,
+            outlyingCoefficient: 1.5,
+            incrementA: 1,
+            incrementB: 5,
+            decrementA: 0.9,
+            decrementB: 0,
+            distanceWeights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        };
+        let outliag1 = new outliagnosticsnd(datasets[0], scagOptions);
+        let outliag2 = new outliagnosticsnd(datasets[1]);
+        debugger;
+        console.log(outliag1);
+        console.log(outliag2);
+    </script>
+</body>
+</html>

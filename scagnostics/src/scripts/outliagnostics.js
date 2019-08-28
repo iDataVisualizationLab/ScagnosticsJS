@@ -7,13 +7,17 @@ import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
 import _ from "underscore";
 // import {Binner} from './modules/binner';
-(function(window){
+if (!window) {
+    window = self;
+}
+(function (window) {
     /**
      * initialize a scagnostic object
      * @param inputPoints   {*[][]} set of points from the scatter plot
      * @returns {*[][]}
      */
-    window.outliagnostics = function(inputPoints, options={}) {
+    window.outliagnostics = function (inputPoints, options = {}) {
+        let thisInstance = this;
         let binType = options.binType,
             startBinGridSize = options.startBinGridSize,
             isNormalized = options.isNormalized,
@@ -25,37 +29,37 @@ import _ from "underscore";
         let points = inputPoints.slice(0);
         let normalizedPoints = points;
         /******This section is about normalizing the data******/
-        if(!isNormalized){
+        if (!isNormalized) {
             let normalizer = new Normalizer(points);
-                normalizedPoints = normalizer.normalizedPoints;
+            normalizedPoints = normalizer.normalizedPoints;
         }
         /******This section is about finding number of bins and binners******/
         let sites = null;
         let bins = null;
 
-        if(!isBinned){//Only do the binning if needed.
+        if (!isBinned) {//Only do the binning if needed.
             let binSize = null;
             let binner = null;
             let binRadius = 0;
-            if(!startBinGridSize){
+            if (!startBinGridSize) {
                 startBinGridSize = 40;
             }
             bins = [];
             //Default bin range
             let minNumOfBins = 50;
             let maxNumOfBins = 250;
-            if(minBins){
-                minNumOfBins =minBins;
+            if (minBins) {
+                minNumOfBins = minBins;
             }
-            if(maxBins){
+            if (maxBins) {
                 maxNumOfBins = maxBins;
             }
 
             //Don't do the binning if the unique set of values are less than 50. Just return the unique set.
-            let uniqueKeys = _.uniq(normalizedPoints.map(p=>p.join(',')));
-            let groups = _.groupBy(normalizedPoints, p=>p.join(','));
-            if(uniqueKeys.length<minNumOfBins){
-                uniqueKeys.forEach(key=>{
+            let uniqueKeys = _.uniq(normalizedPoints.map(p => p.join(',')));
+            let groups = _.groupBy(normalizedPoints, p => p.join(','));
+            if (uniqueKeys.length < minNumOfBins) {
+                uniqueKeys.forEach(key => {
                     let bin = groups[key];
                     //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
                     bin.x = bin[0][0];
@@ -63,42 +67,42 @@ import _ from "underscore";
                     bin.binRadius = 0;
                     bins.push(bin);
                 });
-            }else{
-                do{
+            } else {
+                do {
                     //Start with 40x40 bins, and divided by 2 every time there are more than maxNumberofBins none empty cells, increase 5 (+5) if less than minNumberOfBins
-                    if(binSize===null){
+                    if (binSize === null) {
                         binSize = startBinGridSize;
-                    }else if(bins.length>maxNumOfBins){
-                        binSize = binSize/2;
-                    }else if(bins.length<minNumOfBins){
+                    } else if (bins.length > maxNumOfBins) {
+                        binSize = binSize / 2;
+                    } else if (bins.length < minNumOfBins) {
                         binSize = binSize + 5;
                     }
-                    if(binType==="hexagon"){
+                    if (binType === "hexagon") {
                         // This section uses hexagon binning
-                        let shortDiagonal = 1/binSize;
-                        binRadius = Math.sqrt(3)*shortDiagonal/2;
+                        let shortDiagonal = 1 / binSize;
+                        binRadius = Math.sqrt(3) * shortDiagonal / 2;
                         binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
                         bins = binner.hexbin(normalizedPoints);
-                    }else if(!binType || binType==="leader"){
+                    } else if (!binType || binType === "leader") {
                         // This section uses leader binner
-                        binRadius = 1/(binSize*2);
+                        binRadius = 1 / (binSize * 2);
                         binner = new LeaderBinner(normalizedPoints, binRadius);
                         bins = binner.leaders;
                     }
-                }while(bins.length > maxNumOfBins || bins.length < minNumOfBins);
+                } while (bins.length > maxNumOfBins || bins.length < minNumOfBins);
             }
             sites = bins.map(d => [d.x, d.y]); //=>sites are the set of centers of all bins
             outputValue("bins", bins);
             outputValue("binSize", binSize);
-        }else{
+        } else {
             sites = normalizedPoints;
         }
 
         /******This section is about the triangulating and triangulating results******/
-        //Triangulation calculation
+            //Triangulation calculation
         let delaunay = Delaunay.from(sites);
         delaunay.points = sites;
-        delaunay.triangleCoordinates = function(){
+        delaunay.triangleCoordinates = function () {
             let triangles = this.triangles;
             let tc = [];
             for (let i = 0; i < triangles.length; i += 3) {
@@ -112,7 +116,7 @@ import _ from "underscore";
         }
         let triangleCoordinates = delaunay.triangleCoordinates();
         /******This section is about the spanning tree and spanning tree results******/
-        //Spanning tree calculation
+            //Spanning tree calculation
         let graph = createGraph(triangleCoordinates);
         let mstree = mst(graph);
         outputValue("mst", mstree);
@@ -129,11 +133,11 @@ import _ from "underscore";
         outputValue("outlyingPoints", outlyingPoints);
         outputValue("noOutlyingTree", noOutlyingTree);
 
-        return window.outliagnostics;
-        function outputValue(name, value){
-            window.outliagnostics[name] = value;
-        }
+        return this;
 
+        function outputValue(name, value) {
+            thisInstance[name] = value;
+        }
     };
 
 })(window);
