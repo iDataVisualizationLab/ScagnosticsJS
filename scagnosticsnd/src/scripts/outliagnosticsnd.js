@@ -12,7 +12,7 @@ import {Clumpy} from "./modules/clumpy";
 import {Stringy} from "./modules/stringy";
 import {Monotonic} from "./modules/monotonic";
 
-if (!window) window = self;
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 (function (window) {
     /**
      * initialize a outliagnosticsnd object
@@ -20,7 +20,7 @@ if (!window) window = self;
      * @returns {*[][]}
      */
     window.outliagnosticsnd = function (inputPoints, options = {}) {
-        let thisInstance = this;
+        let result = {};
         let dims = inputPoints[0].length;
         //Clone it to avoid modifying it.
         let points = inputPoints.map(e => e.slice());
@@ -71,17 +71,7 @@ if (!window) window = self;
             if (maxBins) {
                 maxNumOfBins = maxBins;
             }
-            //Don't do the binning if the unique set of values are less than min number. Just return the unique set.
-            // let uniqueKeys = _.uniq(normalizedPoints.map(p => p.join(',')));
-            // let groups = _.groupBy(normalizedPoints, p => p.join(','));
-            // if (uniqueKeys.length < minNumOfBins) {
-            //     uniqueKeys.forEach(key => {
-            //         let bin = groups[key];
-            //         //Take the coordinate of the first point in the group to be the bin leader (they should have the same points actually=> so just take the first one.
-            //         bin.site = bin[0].slice();
-            //         bins.push(bin);
-            //     });
-            // } else {
+
             do {
                 //Start with binSize x binSize x binSize... bins, and then increase it as binSize = binSize * incrementA + incrementB or binSize = binSize * decrementA + decrementB.
                 if (binSize === null) {
@@ -124,8 +114,8 @@ if (!window) window = self;
         let graph = createGraph(tetrahedraCoordinates, weights);
         let mstree = mst(graph);
         //Assigning the output values
-        outputValue("graph", graph);
-        outputValue("mst", mstree);
+        // outputValue("graph", graph);
+        // outputValue("mst", mstree);
 
         /******This section is about the outlying score and outlying score results******/
             //TODO: Need to check if outlying links are really connected to outlying points
@@ -135,31 +125,15 @@ if (!window) window = self;
             });
         let outlyingScore = outlying.score();
         outlyingUpperBound = outlying.upperBound;
-        let outlyingLinks = outlying.links();
-        let outlyingSites = outlying.points().map(p => p.join(','));
-        let outlyingBins = bins.filter(b => outlyingSites.indexOf(b.site.join(',')) >= 0);
-
         //Add outlying points from the bin to it.
-        let outlyingPoints = [];
-        outlying.points().forEach(p => {
-            bins.forEach(b => {
-                if (equalPoints(p, b.site)) {
-                    outlyingPoints = outlyingPoints.concat(b);
-                }
-            });
-
-        });
-        outputValue("outlyingBins", outlyingBins);
         outputValue("outlyingScore", outlyingScore);
         outputValue("outlyingUpperBound", outlyingUpperBound);
-        outputValue("outlyingLinks", outlyingLinks);
-        outputValue("outlyingPoints", outlyingPoints);
 
-        return thisInstance;
+        return result;
 
         function outputValue(name, value) {
-            thisInstance[name] = value;
+            result[name] = value;
         }
     };
 
-})(window);
+})(commonjsGlobal);

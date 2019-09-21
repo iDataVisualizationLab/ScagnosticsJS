@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="Updated options for outlying options.">
-      <change afterPath="$PROJECT_DIR$/scagnosticsnd/build/js/outliagnosticsnd.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/outliagnosticsnd.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scagnosticsnd/test/test.html" afterDir="false" />
+    <list default="true" id="9468a298-17ce-40d1-8b36-575e869a2bf1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scagnosticsnd/build/js/ndleaderbin.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/ndleaderbin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnostics/src/scripts/outliagnostics.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnostics/src/scripts/outliagnostics.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/inspector.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/inspector.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/@types/node/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnosticsnd/build/js/outliagnosticsnd.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/build/js/outliagnosticsnd.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/lib/radarChart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/bin/acorn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/acorn.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/bin.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/dist/bin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/acorn/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/bin/rollup" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.browser.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.browser.es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.browser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.es.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.es.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/dist/rollup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/node_modules/rollup/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scagnosticsnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scagnosticsnd/rollup.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/rollup.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scagnosticsnd/src/scripts/outliagnosticsnd.js" beforeDir="false" afterPath="$PROJECT_DIR$/scagnosticsnd/src/scripts/outliagnosticsnd.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scagnosticsnd/src/scripts/outliagnosticsnd.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2287">
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -51,26 +44,62 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="8fc01c0d-9a4b-40b1-9eae-38ff1662707c" />
-  </component>
   <component name="ProjectId" id="1Q3sNSdS4jbZtALBQpOtpgxHB6P" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Scagnostics2018" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scagnostics2018" type="462c0819:PsiDirectoryNode" />
+              <item name="scagnosticsnd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scagnosticsnd/src/scripts" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scagnosticsnd/src/scripts" />
+      <recent name="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/scagnosticsnd/build" />
       <recent name="$PROJECT_DIR$/scagnostics" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/scagnosticsnd/src/scripts/modules" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -89,9 +118,6 @@
     <configuration name="index.html (2)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/scagnostics/index.html">
       <method v="2" />
     </configuration>
-    <configuration name="index.html (3)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/index.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
     <configuration name="index.html (4)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/scagnosticsnd/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -101,20 +127,23 @@
     <configuration name="template.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Scagnostics2018/scagnostics/template.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/scagnosticsnd">
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="JavaScript Debug.index.html (2)" />
-      <item itemvalue="JavaScript Debug.index.html (3)" />
       <item itemvalue="JavaScript Debug.index.html (4)" />
       <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="JavaScript Debug.template.html" />
+      <item itemvalue="Node.js.index.js" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.index.html (4)" />
+        <item itemvalue="Node.js.index.js" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html (2)" />
         <item itemvalue="JavaScript Debug.template.html" />
-        <item itemvalue="JavaScript Debug.index.html (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +172,13 @@
       <workItem from="1562801511607" duration="1332000" />
       <workItem from="1562967280185" duration="639000" />
       <workItem from="1564530182895" duration="212000" />
-      <workItem from="1567010576049" duration="3459000" />
+      <workItem from="1567010576049" duration="5021000" />
+      <workItem from="1567018312663" duration="2521000" />
+      <workItem from="1567089651887" duration="598000" />
+      <workItem from="1567111595081" duration="616000" />
+      <workItem from="1567189050355" duration="2314000" />
+      <workItem from="1567874986246" duration="6772000" />
+      <workItem from="1568091199340" duration="2510000" />
     </task>
     <task id="LOCAL-00001" summary="Updated convex/concave related scores (Convex, Skinny) calculation.">
       <created>1555628089560</created>
@@ -418,8 +453,40 @@
       <option name="project" value="LOCAL" />
       <updated>1561328368508</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Updated options for outlying options.">
+      <created>1567016398274</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1567016398274</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="609000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24954791" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -439,7 +506,29 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>

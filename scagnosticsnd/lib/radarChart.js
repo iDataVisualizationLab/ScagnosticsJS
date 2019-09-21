@@ -232,7 +232,6 @@ const RadarChart = function RadarChart(parent_selector, data, options) {
     //     });
 
     //Create the outlines
-
     blobWrapper.append("path")
         .attr("class", "radarStroke")
         .attr("d", function(d,i) { return radarLine(d.axes); })
