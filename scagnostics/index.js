@@ -1,4 +1,5 @@
-let binType = "leader";
+// let binType = "leader";
+let binType = "hexagon";
 var startBinGridSize = 20;
 let animateTime = 20;
 /*This is for the tooltip*/
@@ -339,7 +340,7 @@ function changeDataset(evt) {
     // //process outliag score
     // outliagProcessor = new SingleOutliagProcessor(scag.normalizedPoints);
     // outliagProcessor.processOutliagData();
-    let scag = scagnostics(points, options);
+    let scag = new scagnostics(points, options);
     update(scag);
 }
 

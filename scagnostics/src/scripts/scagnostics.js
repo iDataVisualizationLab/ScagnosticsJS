@@ -15,6 +15,9 @@ import {Binner} from "./modules/binner";
 import _ from "underscore";
 import {delaunayFromPoints} from "./modules/delaunay";
 
+if (!window) {
+    window = self;
+}
 (function (window) {
     /**
      * initialize a scagnostic object
@@ -23,6 +26,7 @@ import {delaunayFromPoints} from "./modules/delaunay";
      * @return scag Scagnostics object with scores and intermediate computation results.
      */
     window.scagnostics = function (inputPoints, options = {}) {
+        let thisInstance = this;
         let binType = options.binType,
             startBinGridSize = options.startBinGridSize,
             isNormalized = options.isNormalized,
@@ -194,10 +198,10 @@ import {delaunayFromPoints} from "./modules/delaunay";
         let monotonicScore = monotonic.score();
         outputValue("monotonicScore", monotonicScore);
 
-        return window.scagnostics;
+        return this;
 
         function outputValue(name, value) {
-            window.scagnostics[name] = value;
+            thisInstance[name] = value;
         }
     };
 
