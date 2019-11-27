@@ -3,11 +3,11 @@ There are [2D](#2d-version), [3D](#3d-version), and [nD](#nd-version) versions o
 ## Scagnostics playgrounds (online demos)
 You can use these playground pages to explore the underlying scagnostics calculation processes and the visualizations of their intermediate results. They contain exemplar scatterplots for each of the 9 scagnostics (outlying, skewed, clumpy, sparse, striated, convex, skinny, stringy, and monotonic) features for you to explore:
  
-2D: https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics
+2D: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics)
 
-3D: https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/
+3D: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/)
 
-nD: https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/
+nD: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/)
 
 
 ## [2D Version](#2d-version)

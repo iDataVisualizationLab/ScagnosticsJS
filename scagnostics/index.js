@@ -267,6 +267,7 @@ function skinnyScatterPlot() {
     }
 
     datasets.push(points);
+
 }
 
 /***********STRINGY DATA*******************/
