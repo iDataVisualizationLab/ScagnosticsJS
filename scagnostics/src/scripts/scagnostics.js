@@ -14,6 +14,7 @@ import {LeaderBinner} from "./modules/leaderbinner";
 import {Binner} from "./modules/binner";
 import _ from "underscore";
 import {delaunayFromPoints} from "./modules/delaunay";
+import {RectangularBinner} from "./modules/rectangularbinner";
 
 if (!window) {
     window = self;
@@ -92,7 +93,14 @@ if (!window) {
                         binRadius = Math.sqrt(3) * shortDiagonal / 2;
                         binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
                         bins = binner.hexbin(normalizedPoints);
-                    } else if (!binType || binType === "leader") {
+                    }else if(binType === "rectangular"){
+                        // This section uses hexagon binning
+                        let binWidth = 1 / binSize;
+                        binRadius = binWidth;
+                        binner = new RectangularBinner(normalizedPoints, binSize);
+                        bins = binner.rectangles();
+                    }
+                    else if (!binType || binType === "leader") {
                         // This section uses leader binner
                         binRadius = 1 / (binSize * 2);
                         binner = new LeaderBinner(normalizedPoints, binRadius);

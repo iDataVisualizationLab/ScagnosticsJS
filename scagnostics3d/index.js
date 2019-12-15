@@ -1,16 +1,3 @@
-let scag = null;
-let datasets = [];
-let svgWidth = 400;
-let svgHeight = 400;
-let duration = 1000;
-let dataPointRadius = 4;
-let dataPointOpacity = 0.9;
-let pointColor = 'steelblue';
-let binOpacity = 0.8,
-    margins = {left: 5, top: 5, right: 5, bottom: 5},
-    padding = 5,
-    contentWidth = svgWidth - margins.left - margins.right - 2 * padding,
-    contentHeight = svgHeight - margins.top - margins.bottom - 2 * padding;
 let scagsvg = d3.select("#scagsvg").attr("width", svgWidth).attr("height", svgHeight);
 
 function drawContentBound(svg) {
@@ -23,28 +10,7 @@ function drawContentBound(svg) {
 }
 
 //<editor-fold desc="section about animating the display">
-let origPoints = null;
-let bins = null;
-let triangulations = null;//line
-let mst = null;//line
-let outlyingLinks = null;//line
-let outlyingPoints = null;//circle
-let noOutlyingTree = null;//path
-let noOutlyingPoints = null;//circle
-let runtGraph = null;
-let v2Corners = null;//circle
-let obtuseV2Corners = null;//path
-let noOutlyingTriangulations = null;//path
-let convexHull = null;//path
-let concaveHull = null;//path
-let v1s = null;//circle
-let animateTime = 10;
-//Choose one scag options for all data points.
-let scagOptions = {
-    startBinGridSize: 10,
-    minBins: 10,
-    maxBins: 250
-}
+
 
 function selectElements() {
     origPoints = scagsvg.selectAll('circle.origPoints');
@@ -187,18 +153,15 @@ let cube3d = d3._3d()
 
 //</editor-fold>
 
-const random = Math.random;
-const pi = Math.PI;
-const sin = Math.sin;
-const cos = Math.cos;
+
 
 /***********OUTLYING DATA*******************/
 outlyingScatterPlot();
 
 function outlyingScatterPlot() {
-    let randomX = d3.randomNormal(contentWidth / 3, 50),
-        randomY = d3.randomNormal(contentHeight / 3, 50),
-        randomZ = d3.randomNormal(contentHeight / 3, 50),
+    let randomX = d3.randomNormal(contentWidth / 30, 20),
+        randomY = d3.randomNormal(contentHeight / 30, 20),
+        randomZ = d3.randomNormal(contentHeight / 30, 20),
         points = d3.range(100).map(function () {
             return [randomX(), randomY(), randomZ()];
         });
@@ -231,25 +194,7 @@ function skewedScatterPlot() {
 }
 
 
-/***********CLUMPY DATA*******************/
-clumpyScatterPlot();
 
-function clumpyScatterPlot() {
-    let randomX = muy => d3.randomNormal(muy, 7),
-        randomY = muy => d3.randomNormal(muy, 7),
-        randomZ = muy => d3.randomNormal(muy, 7),
-        cluster1 = d3.range(200).map(function () {
-            return [randomX(contentHeight / 3)() + 10 * random(), randomY(contentHeight / 3)() + 10 * random(), randomZ(contentHeight / 3)() + 10 * random()];
-        }),
-        cluster2 = d3.range(50).map(function () {
-            return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
-        }),
-        cluster3 = d3.range(50).map(function () {
-            return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(contentHeight / 3)()];
-        }),
-        points = cluster1.concat(cluster2).concat(cluster3);
-    datasets.push(points);
-}
 
 
 /***********SPARSE DATA*******************/
@@ -285,6 +230,26 @@ function sparseScatterPlot() {
     });
     datasets.push(points);
 
+}
+
+/***********CLUMPY DATA*******************/
+clumpyScatterPlot();
+
+function clumpyScatterPlot() {
+    let randomX = muy => d3.randomNormal(muy, 7),
+        randomY = muy => d3.randomNormal(muy, 7),
+        randomZ = muy => d3.randomNormal(muy, 7),
+        cluster1 = d3.range(200).map(function () {
+            return [randomX(contentHeight / 3)() + 10 * random(), randomY(contentHeight / 3)() + 10 * random(), randomZ(contentHeight / 3)() + 10 * random()];
+        }),
+        cluster2 = d3.range(50).map(function () {
+            return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(2 * contentHeight / 3)()];
+        }),
+        cluster3 = d3.range(50).map(function () {
+            return [randomX(2 * contentHeight / 3)(), randomY(2 * contentHeight / 3)(), randomZ(contentHeight / 3)()];
+        }),
+        points = cluster1.concat(cluster2).concat(cluster3);
+    datasets.push(points);
 }
 
 /***********STRIATED DATA*******************/
@@ -438,7 +403,7 @@ function stringyScatterPlot() {
 monotonicScatterPlot();
 
 function monotonicScatterPlot() {
-    let noise = d3.randomUniform(-2, 2);
+    let noise = d3.randomUniform(-5, 5);
     let points = d3.range(150).map((x) => {
         return [x + noise(), 150 - x + noise(), x + noise()];
     });

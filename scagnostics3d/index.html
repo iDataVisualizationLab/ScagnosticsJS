@@ -21,6 +21,8 @@
     <script src="lib/d3.js"></script>
     <script src="lib/d3-3d.min.js"></script>
     <script src="build/js/scagnostics3d.min.js"></script>
+    <script src="globalVariables.js"></script>
+    <script src="generateDataFunctions.js"></script>
 </head>
 <body>
 <header>
@@ -34,8 +36,8 @@
                 <select id="scagnostics" onchange="changeDataset(this);">
                     <option value="outlying">Outlying scatter plot</option>
                     <option value="skewed">Skewed scatter plot</option>
-                    <option value="clumpy">Clumpy scatter plot</option>
                     <option value="sparse">Sparse scatter plot</option>
+                    <option value="clumpy">Clumpy scatter plot</option>
                     <option value="striated">Striated scatter plot</option>
                     <option value="convex">Convex scatter plot</option>
                     <option value="skinny">Skinny scatter plot</option>

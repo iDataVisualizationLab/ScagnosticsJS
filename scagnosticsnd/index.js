@@ -17,7 +17,7 @@ function outlyingScatterPlot() {
     let points = [];
     let dim = 10;
     //100 data points
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 30; i++) {
         //each point of 10 dimensions
         let point = [];
         for (let j = 0; j < dim; j++) {
@@ -29,7 +29,6 @@ function outlyingScatterPlot() {
     points.push([0.5, 0.5, 0.5, 2, 2, 2, .5, .5, 2, 2]);
     points.push([2, 2, 2, 2, 2, .5, .5, .5, .5, .5]);
     points.push([2, 2, .5, .5, 2, 2, 2, .5, .5, .5]);
-
     datasets.push(points);
 }
 
@@ -58,51 +57,6 @@ function skewedScatterPlot() {
             let point = [];
             for (let j = 0; j < dim; j++) {
                 point.push(10 + 5 * random());
-            }
-            return point;
-        }),
-        points = cluster1.concat(cluster2).concat(cluster3);
-    datasets.push(points);
-}
-
-/***********CLUMPY 3 CLUSTERS*******************/
-clumpyScatterPlot();
-
-function clumpyScatterPlot() {
-    let dim = 10;
-    let random = function () {
-        return 2 * Math.random();
-    }
-    let cluster1 = d3.range(40).map(() => {
-            let point = [];
-            for (let j = 0; j < dim; j++) {
-                if (j < 4) {
-                    point.push(10 + random());
-                } else {
-                    point.push(random());
-                }
-            }
-            return point;
-        }),
-        cluster2 = d3.range(40).map(() => {
-            let point = [];
-            for (let j = 0; j < dim; j++) {
-                if (j >= 3 && j <= 6) {
-                    point.push(10 + random());
-                } else {
-                    point.push(random());
-                }
-            }
-            return point;
-        }),
-        cluster3 = d3.range(40).map(() => {
-            let point = [];
-            for (let j = 0; j < dim; j++) {
-                if (j >= 6 && j <= 9) {
-                    point.push(10 + random());
-                } else {
-                    point.push(random());
-                }
             }
             return point;
         }),
@@ -186,42 +140,87 @@ function sparseScatterPlot() {
     datasets.push(points);
 }
 
-/***********STRIATED data*******************/
-striatedScatterPlot();
+/***********CLUMPY 3 CLUSTERS*******************/
+clumpyScatterPlot();
 
-function striatedScatterPlot() {
+function clumpyScatterPlot() {
     let dim = 10;
-    let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
-    let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
-    let noise = d3.randomUniform(-0.001, 0.001);
-    // let noise = ()=>0;
-    let plane1 = d3.range(50).map(() => {
-        let yr = d3.randomUniform(0, 1);
-        let zr = d3.randomUniform(0, 1);
-        let y = yr();
-        let z = zr();
-        let x = x1(y, z);
-        let point = [x+noise(), y+noise(), z+noise()];
-        for (let i = 0; i < dim - 3; i++) {
-            point.push(noise());
-        }
-        return point;
-    });
-    let plane2 = d3.range(50).map(() => {
-        let yr = d3.randomUniform(0, 1);
-        let zr = d3.randomUniform(0, 1);
-        let y = yr();
-        let z = zr();
-        let x = x2(y, z);
-        let point = [x + noise(), y + noise(), z + noise()];
-        for (let i = 0; i < dim - 3; i++) {
-            point.push(noise());
-        }
-        return point;
-    });
-    let points = plane1.concat(plane2);
+    let random = function () {
+        return 2 * Math.random();
+    }
+    let cluster1 = d3.range(40).map(() => {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j < 4) {
+                    point.push(10 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            return point;
+        }),
+        cluster2 = d3.range(40).map(() => {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j >= 3 && j <= 6) {
+                    point.push(10 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            return point;
+        }),
+        cluster3 = d3.range(40).map(() => {
+            let point = [];
+            for (let j = 0; j < dim; j++) {
+                if (j >= 6 && j <= 9) {
+                    point.push(10 + random());
+                } else {
+                    point.push(random());
+                }
+            }
+            return point;
+        }),
+        points = cluster1.concat(cluster2).concat(cluster3);
     datasets.push(points);
 }
+
+// /***********STRIATED data*******************/
+// striatedScatterPlot();
+//
+// function striatedScatterPlot() {
+//     let dim = 10;
+//     let x1 = (y1, z1) => 2 * y1 + 3 * z1 - 5;
+//     let x2 = (y2, z2) => 2 * y2 + 3 * z2 + 5;
+//     let noise = d3.randomUniform(-0.001, 0.001);
+//     // let noise = ()=>0;
+//     let plane1 = d3.range(50).map(() => {
+//         let yr = d3.randomUniform(0, 1);
+//         let zr = d3.randomUniform(0, 1);
+//         let y = yr();
+//         let z = zr();
+//         let x = x1(y, z);
+//         let point = [x+noise(), y+noise(), z+noise()];
+//         for (let i = 0; i < dim - 3; i++) {
+//             point.push(noise());
+//         }
+//         return point;
+//     });
+//     let plane2 = d3.range(50).map(() => {
+//         let yr = d3.randomUniform(0, 1);
+//         let zr = d3.randomUniform(0, 1);
+//         let y = yr();
+//         let z = zr();
+//         let x = x2(y, z);
+//         let point = [x + noise(), y + noise(), z + noise()];
+//         for (let i = 0; i < dim - 3; i++) {
+//             point.push(noise());
+//         }
+//         return point;
+//     });
+//     let points = plane1.concat(plane2);
+//     datasets.push(points);
+// }
 
 /***********STRINGY DATA*******************/
 stringyScatterPlot();
@@ -361,7 +360,7 @@ function drawRadarChart(theDiv, radarData) {
     return svg_radar;
 
     function pointColor(d, i) {
-        return (d.data && d.data.data)?d.data.data:'steelblue';
+        return (d.data && d.data.data) ? d.data.data : 'black';
     }
 }
 

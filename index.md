@@ -9,6 +9,9 @@ You can use these playground pages to explore the underlying scagnostics calcula
 
 nD: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/)
 
+## Scagnostics measures and the exemplar plots they target
+![](supplementarydocuments/scagreaction.png)
+Figure 1: Scagnostics measures and exemplar plots that they target for 2D (a), 3D (b), and nD (c).
 
 ## [2D Version](#2d-version)
 ### Installation

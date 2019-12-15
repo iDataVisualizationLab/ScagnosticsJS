@@ -1,11 +1,9 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonJS from 'rollup-plugin-commonjs'
 export default {
-    input: 'src/scripts/scagnostics.js',
-    // input: 'src/scripts/outliagnostics.js',
+    input: 'src/scripts/scagnosticsml.js',
     output:{
-        file:'build/js/scagnostics.min.js',
-        // file:'build/js/outliagnostics.min.js',
+        file:'build/js/scagnosticsml.min.js',
         format: 'iife',
         sourcemap: 'inline',
     },

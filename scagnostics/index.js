@@ -1,6 +1,7 @@
-// let binType = "leader";
-let binType = "hexagon";
-var startBinGridSize = 20;
+let binType = "leader";
+// let binType = "hexagon";
+// let binType = "rectangular";
+var startBinGridSize = 40;
 let animateTime = 20;
 /*This is for the tooltip*/
 var div = d3.select("body").append("div")
@@ -26,7 +27,7 @@ function createControlButtons(theContainer, theOptions) {
 createControlButtons("controlButtons", optionsBinLeader);
 //Display variables
 let dataPointRadius = 3;
-let pointColor = 'steelblue';
+let pointColor = 'black';
 let dataPointOpacity = 0.9;
 let binOpacity = 0.8;
 let origPoints = null;
@@ -65,9 +66,10 @@ const pi = Math.PI;
 const cos = Math.cos;
 const sin = Math.sin;
 
-//<editor-fold desc="This section is for generation of the graphics for the paper only">
+// <editor-fold desc="This section is for generation of the graphics for the paper only">
 // d3.tsv("../data/faithful.tsv", (error, rawData) => {
 //     if (error) throw error;
+//     debugger
 //     let points = rawData.map(d => [+d["eruptions"], +d["waiting"]]);
 //     //Assign original points to the data.
 //     points.forEach(p => {
@@ -76,21 +78,46 @@ const sin = Math.sin;
 //         }
 //         p.data.originalPoint = [p[0], p[1]];
 //     });
-//     let scag = scagnostics(points, {binType: "hexagon", startBinGridSize: 10});
+//     let scag = new scagnostics(points, {binType: "hexagon", startBinGridSize: 10});
 //
 //     drawContentBound(normalizedsvg);
 //     drawContentBound(scagsvg);
 //     drawNormalizedData(scag);
 //     draw(scag);
 // });
-//</editor-fold>
 
+// d3.json("../data/UnemploymentRate.json", (error, rawData) => {
+//     if (error) throw error;
+//     let origPoints = rawData.YearsData[3].s0.map((_, i)=>[rawData.YearsData[5].s0[i], rawData.YearsData[5].s1[i]]);
+//     //Now add data.
+//     let points = [];
+//     origPoints.forEach(point=>{
+//         points.push(point);
+//         for (let i = 0; i < 3; i++) {
+//             points.push([point[0] + d3.randomNormal(point[0], 0.1)(), point[1] + d3.randomNormal(point[1], 0.1)()]);
+//         }
+//     });
+//
+//     //Filter NAN
+//     points = points.filter(d=>typeof d[0] === "number" && typeof d[1] === "number");
+//
+//     let scag = new scagnostics(points, {binType: binType, startBinGridSize: startBinGridSize});
+//
+//     drawContentBound(normalizedsvg);
+//     drawContentBound(scagsvg);
+//     drawNormalizedData(scag);
+//     draw(scag);
+// });
+// </editor-fold>
+
+
+//<editor-fold desc="Typical data">
 /***********OUTLYING DATA*******************/
 outlyingScatterPlot();
 
 function outlyingScatterPlot() {
-    let randomX = d3.randomNormal(svgWidth / 2, 50),
-        randomY = d3.randomNormal(svgHeight / 2, 50),
+    let randomX = d3.randomNormal(svgWidth / 20, 20),
+        randomY = d3.randomNormal(svgHeight / 20, 20),
         points = d3.range(300).map(function () {
             return [randomX(), randomY()];
         });
@@ -115,6 +142,39 @@ function skewedScatterPlot() {
             });
         }
     }
+    datasets.push(points);
+}
+
+/***********SPARSED DATA*******************/
+sparsedScatterPlot();
+
+function sparsedScatterPlot() {
+    let points = [];
+    //Top left points
+    let randomX = d3.randomNormal(svgWidth / 4, 3),
+        randomY = d3.randomNormal(svgHeight / 4, 3);
+    d3.range(20).map(function () {
+        points.push([randomX(), randomY()]);
+    });
+    //Top right
+    randomX = d3.randomNormal(3 * svgWidth / 4, 3),
+        randomY = d3.randomNormal(svgHeight / 4, 3);
+    d3.range(20).map(function () {
+        points.push([randomX(), randomY()]);
+    });
+    //Bottom left
+    randomX = d3.randomNormal(svgWidth / 4, 3);
+    randomY = d3.randomNormal(3 * svgHeight / 4, 3);
+    d3.range(20).map(function () {
+        points.push([randomX(), randomY()]);
+    });
+
+    //Bottom right
+    randomX = d3.randomNormal(3 * svgWidth / 4, 3);
+    randomY = d3.randomNormal(3 * svgHeight / 4, 3);
+    d3.range(20).map(function () {
+        points.push([randomX(), randomY()]);
+    });
     datasets.push(points);
 }
 
@@ -162,38 +222,7 @@ function clumpyScatterPlot() {
     datasets.push(points);
 }
 
-/***********SPARSED DATA*******************/
-sparsedScatterPlot();
 
-function sparsedScatterPlot() {
-    let points = [];
-    //Top left points
-    let randomX = d3.randomNormal(svgWidth / 4, 3),
-        randomY = d3.randomNormal(svgHeight / 4, 3);
-    d3.range(20).map(function () {
-        points.push([randomX(), randomY()]);
-    });
-    //Top right
-    randomX = d3.randomNormal(3 * svgWidth / 4, 3),
-        randomY = d3.randomNormal(svgHeight / 4, 3);
-    d3.range(20).map(function () {
-        points.push([randomX(), randomY()]);
-    });
-    //Bottom left
-    randomX = d3.randomNormal(svgWidth / 4, 3);
-    randomY = d3.randomNormal(3 * svgHeight / 4, 3);
-    d3.range(20).map(function () {
-        points.push([randomX(), randomY()]);
-    });
-
-    //Bottom right
-    randomX = d3.randomNormal(3 * svgWidth / 4, 3);
-    randomY = d3.randomNormal(3 * svgHeight / 4, 3);
-    d3.range(20).map(function () {
-        points.push([randomX(), randomY()]);
-    });
-    datasets.push(points);
-}
 
 /***********STRIATED DATA*******************/
 striatedScatterPlot();
@@ -321,6 +350,7 @@ function yLineScatterPlot() {
     });
     datasets.push(points);
 }
+//</editor-fold>
 
 changeDataset(document.getElementById("scagnostics"));
 //Toggle some displays
