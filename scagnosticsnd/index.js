@@ -8,7 +8,7 @@ let dataPointRadius = 2;
 let dataPointOpacity = 0.9;
 let binOpacity = 0.8;
 let size = 500;
-
+let lineColor = 'steelblue';
 const random = Math.random;
 /***********OUTLYING DATA*******************/
 outlyingScatterPlot();
@@ -360,7 +360,7 @@ function drawRadarChart(theDiv, radarData) {
     return svg_radar;
 
     function pointColor(d, i) {
-        return (d.data && d.data.data) ? d.data.data : 'black';
+        return (d.data && d.data.data) ? d.data.data : lineColor;
     }
 }
 
