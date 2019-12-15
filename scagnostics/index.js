@@ -27,7 +27,8 @@ function createControlButtons(theContainer, theOptions) {
 createControlButtons("controlButtons", optionsBinLeader);
 //Display variables
 let dataPointRadius = 3;
-let pointColor = 'black';
+// let pointColor = 'black';
+let pointColor = 'steelblue';
 let dataPointOpacity = 0.9;
 let binOpacity = 0.8;
 let origPoints = null;

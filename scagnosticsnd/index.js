@@ -17,7 +17,7 @@ function outlyingScatterPlot() {
     let points = [];
     let dim = 10;
     //100 data points
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 100; i++) {
         //each point of 10 dimensions
         let point = [];
         for (let j = 0; j < dim; j++) {

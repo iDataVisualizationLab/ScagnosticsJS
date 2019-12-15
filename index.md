@@ -5,9 +5,9 @@ You can use these playground pages to explore the underlying scagnostics calcula
  
 2D: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics)
 
-3D: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d/)
+3D: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnostics3d)
 
-nD: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd/)
+nD: [https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd](https://idatavisualizationlab.github.io/ScagnosticsJS/scagnosticsnd)
 
 ## Scagnostics measures and the exemplar plots they target
 ![](supplementarydocuments/scagreaction.png)
