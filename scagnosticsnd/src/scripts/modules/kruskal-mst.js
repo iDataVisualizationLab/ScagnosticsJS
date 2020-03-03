@@ -92,9 +92,11 @@ export function createGraph(tetrahedra, weights) {
     //Creating nodes
     tetrahedra.forEach(t => {
         t.forEach(id => {
-            if (!idExists(graph.nodes, id)) {
-                graph.nodes.push(makeNode(id));
-            }
+            // TODO: Check this because this may not be needed since the tetrahedra here are just simly points (not the triangles like in the 2D, 3D case)
+            // if (!idExists(graph.nodes, id)) {
+            //
+            // }
+            graph.nodes.push(makeNode(id));
         });
     });
 
@@ -108,9 +110,11 @@ export function createGraph(tetrahedra, weights) {
                 let id2 = p2;
                 let dist = distance(p1, p2, weights);
                 let link = makeLink(id1, id2, dist);
-                if (!linkExists(graph.links, link)) {
-                    graph.links.push(link);
-                }
+                // TODO: Check this because this may not be needed since the tetrahedra here are just simly points (not the triangles like in the 2D, 3D case)
+                // if (!linkExists(graph.links, link)) {
+                //     graph.links.push(link);
+                // }
+                graph.links.push(link);
             }
         }
     });

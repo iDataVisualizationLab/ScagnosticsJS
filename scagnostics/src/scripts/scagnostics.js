@@ -58,7 +58,7 @@ if (!window) {
             bins = [];
             //Default number of bins
             let minNumOfBins = 50;
-            let maxNumOfBins = 250;
+            let maxNumOfBins = 500;
             if (minBins) {
                 minNumOfBins = minBins;
             }
@@ -90,17 +90,17 @@ if (!window) {
                     if (binType === "hexagon") {
                         // This section uses hexagon binning
                         let shortDiagonal = 1 / binSize;
-                        binRadius = Math.sqrt(3) * shortDiagonal / 2;
+                        binRadius = shortDiagonal / Math.sqrt(2);
+                        // binRadius = shortDiagonal / (2 * Math.sin(Math.PI / 3));
                         binner = new Binner().radius(binRadius).extent([[0, 0], [1, 1]]);//extent from [0, 0] to [1, 1] since we already normalized data.
                         bins = binner.hexbin(normalizedPoints);
-                    }else if(binType === "rectangular"){
+                    } else if (binType === "rectangular") {
                         // This section uses hexagon binning
                         let binWidth = 1 / binSize;
                         binRadius = binWidth;
                         binner = new RectangularBinner(normalizedPoints, binSize);
                         bins = binner.rectangles();
-                    }
-                    else if (!binType || binType === "leader") {
+                    } else if (!binType || binType === "leader") {
                         // This section uses leader binner
                         binRadius = 1 / (binSize * 2);
                         binner = new LeaderBinner(normalizedPoints, binRadius);
