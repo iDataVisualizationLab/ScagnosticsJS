@@ -1,6 +1,7 @@
 # ScagnosticsJS API Reference
 The paper: [ScagnosticsJS: Visual Features for the Web](https://diglib.eg.org/bitstream/handle/10.2312/egs20201022/077-080.pdf)
-References:
+<br/>
+<b>References:</b>
 <br/>
 <code> 
 @inproceedings {s.20201022,
