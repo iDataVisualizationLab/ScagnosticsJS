@@ -62,7 +62,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         points.push([x+Math.random()/100, y+Math.random()/100]);
     }
     //Create scagnostics object
-    let scag = scagnostics(points); 
+    let scag = new scagnostics(points); 
 ```
 #### Sample code with `options`
 ```javascript
@@ -83,7 +83,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         minBins: 50,
         maxBins: 250
     };
-    let scag = scagnostics(points, options); 
+    let scag = new scagnostics(points, options); 
 ```
 #### Normalized points
 * `scag.normalizedPoints` returns an array of 2D points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
@@ -139,7 +139,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
             points.push([x + noise(), Math.sin(x * Math.PI / 20) + noise(), Math.cos(x * Math.PI / 20) + noise()])
         };
     //Create scagnostics object
-    let scag = scagnostics3d(points); 
+    let scag = new scagnostics3d(points); 
 ```
 #### Sample code with `options`
 ```javascript
@@ -159,7 +159,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         minBins: 30,
         maxBins: 200
     };
-    let scag = scagnostics3d(points, options); 
+    let scag = new scagnostics3d(points, options); 
 ```
 #### Normalized points
 * `scag.normalizedPoints` returns an array of 3d points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
@@ -228,7 +228,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         points.push(point);
     }
     //Create scagnostics object
-    let scag = scagnosticsnd(points); 
+    let scag = new scagnosticsnd(points); 
 ```
 #### Sample code with `options`
 ```javascript
@@ -256,7 +256,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         decrementB: 0,
         distanceWeights: [0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5]
     };
-    let scag = scagnostics3d(points, options); 
+    let scag = new scagnostics3d(points, options); 
 ```
 #### Normalized points
 * `scag.normalizedPoints` returns an array of nD points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
