@@ -1,4 +1,5 @@
 # ScagnosticsJS API Reference
+There are [2D](#2d-version), [3D](#3d-version), and [nD](#nd-version) versions of the ScagnosticsJS library correspondingly. <br/><br/>
 The paper: [ScagnosticsJS: Visual Features for the Web](https://diglib.eg.org/bitstream/handle/10.2312/egs20201022/077-080.pdf)
 <br/>
 <b>References:</b>
@@ -17,7 +18,10 @@ DOI = {10.2312/egs.20201022}
 }
 </code>
 <br/>
-There are [2D](#2d-version), [3D](#3d-version), and [nD](#nd-version) versions of the ScagnosticsJS library correspondingly.
+<b>The presentation at The Eurographics 2020 conference:</b> <br/>
+[![conference presentation](https://img.youtube.com/vi/wrKAKacRsMU/0.jpg)](https://www.youtube.com/watch?v=wrKAKacRsMU)
+<br/>
+
 ## Scagnostics playgrounds (online demos)
 You can use these playground pages to explore the underlying scagnostics calculation processes and the visualizations of their intermediate results. They contain exemplar scatterplots for each of the 9 scagnostics (outlying, skewed, clumpy, sparse, striated, convex, skinny, stringy, and monotonic) features for you to explore:
  
