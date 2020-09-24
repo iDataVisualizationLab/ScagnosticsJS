@@ -8,7 +8,7 @@ The paper: [ScagnosticsJS: Visual Features for the Web](https://diglib.eg.org/bi
 @inproceedings {s.20201022,
 booktitle = {Eurographics 2020 - Short Papers},
 editor = {Wilkie, Alexander and Banterle, Francesco},
-title = {{ScagnosticsJS: Extended Scatterplot Visual Features for the Web}},
+title = {\{ScagnosticsJS: Extended Scatterplot Visual Features for the Web\}},
 author = {Pham, Vung and Dang, Tommy},
 year = {2020},
 publisher = {The Eurographics Association},
