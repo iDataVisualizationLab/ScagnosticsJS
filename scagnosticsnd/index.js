@@ -138,6 +138,62 @@ function sparseScatterPlot() {
     }
 
     datasets.push(points);
+
+    // let points = [];
+    // let dim = 16;
+    // //Extreme of each coordinates
+    // //Cluster 1
+    // for (let i = 0; i < 8; i++) {
+    //     let point = [];
+    //     for (let j = 0; j < dim; j++) {
+    //         if (j < dim / 3) {
+    //             point.push(10 + random());
+    //         } else {
+    //             point.push(random());
+    //         }
+    //     }
+    //     point.data = 'green';
+    //     points.push(point);
+    // }
+    // //Cluster 2
+    // for (let i = 0; i < 8; i++) {
+    //     let point = [];
+    //     for (let j = 0; j < dim; j++) {
+    //         if (j >= dim / 3 && j < 2 * dim / 3) {
+    //             point.push(10 + random());
+    //         } else {
+    //             point.push(random());
+    //         }
+    //     }
+    //     point.data = 'blue';
+    //     points.push(point);
+    // }
+    //
+    // //Cluster 3
+    // for (let i = 0; i < 8; i++) {
+    //     let point = [];
+    //     for (let j = 0; j < dim; j++) {
+    //         if (j >= 2 * dim / 3 && j < dim) {
+    //             point.push(10 + random());
+    //         } else {
+    //             point.push(random());
+    //         }
+    //     }
+    //     point.data = 'black';
+    //     points.push(point);
+    // }
+    //
+    // //Cluster 4
+    // for (let i = 0; i < 6; i++) {
+    //     let point = [];
+    //     for (let j = 0; j < dim; j++) {
+    //         point.push(10 + random());
+    //     }
+    //     point.data = 'red';
+    //     points.push(point);
+    // }
+    //
+    // datasets.push(points);
 }
 
 /***********CLUMPY 3 CLUSTERS*******************/
@@ -303,7 +359,8 @@ function draw(points) {
         incrementB: 5,
         decrementA: 0.9,
         decrementB: 0,
-        distanceWeights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        // distanceWeights: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+
     };
     // let scagOptions = {};
     scag = scagnosticsnd(points, scagOptions);
