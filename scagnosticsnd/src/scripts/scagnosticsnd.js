@@ -110,7 +110,14 @@ import {Monotonic} from "./modules/monotonic";
             outputValue("binSize", binSize);
             outputValue("binRadius", binRadius)
         } else {
+            //reconstruct bins information as normalized points
             sites = normalizedPoints;
+            bins = sites.map(s => {
+                return [[...s]];
+            });
+            bins.forEach((b, i) => {
+                b.site = [...normalizedPoints[i]]
+            });
         }
 
         outputValue("binnedSites", sites);
