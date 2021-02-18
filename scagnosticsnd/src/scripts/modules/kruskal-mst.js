@@ -12,6 +12,11 @@ import _ from "underscore";
 export function pairNodeLinks(links) {
     let nestedByNodes = {};
     links.forEach(l => {
+        if(!l.source.join){
+            debugger
+            console.log(l);
+            console.log(links);
+        }
         let sourceKey = l.source.join(',');
         if (!nestedByNodes[sourceKey]) {
             nestedByNodes[sourceKey] = [];

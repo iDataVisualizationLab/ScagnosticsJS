@@ -59,7 +59,7 @@ export class Outlying {
             let diff = _.difference(outlyingPointsStr, v2OrGreaterStr);
             if (diff.length < outlyingPointsStr.length) {
                 //Means there is outlying node(s) with degree 2 or higher (so we should rebuild the tree)
-                let graph = createGraph(noOutlyingTree.nodes.map(n => n.id), weights)
+                let graph = createGraph([noOutlyingTree.nodes.map(n => n.id)], weights)
                 noOutlyingTree = mst(graph);
             }
             return noOutlyingTree;

@@ -260,7 +260,7 @@ You may use default scagnostics options or you can optionally pass an `options` 
         decrementB: 0,
         distanceWeights: [0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 0.5]
     };
-    let scag = new scagnostics3d(points, options); 
+    let scag = new scagnosticsnd(points, options); 
 ```
 #### Normalized points
 * `scag.normalizedPoints` returns an array of nD points after normalized to the range `[0, 1]`. Each point will contain a `data` field that passed from the original point (if you assigned one), so you could use to get back the information from the original point.
